@@ -1,0 +1,179 @@
+@use 'flightstrip.style-variables.scss' as var;
+
+.strip {
+    width: calc(100% - 4px);
+    aspect-ratio: 3.6;
+    margin-bottom: 10px;
+
+    &.inbound {
+
+        background-color: var.$fsInboundBackground;
+        border: var.$fsInboundBorder;
+        color: var.$fsInboundTextColor;
+
+        .placeholder {
+            color: var.$fsInboundPlaceholder
+        }
+
+        input {
+            background-color: var.$fsInboundInputBackground;
+            color: var.$fsInboundInputText;
+            border: 0px;
+            border-radius: 0px;
+            height: var.$fsInputHeight;
+            text-align: center;
+            font-size: max(min(var.$fsInputMaxFontSize, var.$fsInputFontSize), 0.1rem);
+            width: 87%;
+
+            &:hover {
+                outline: var.$fsInboundInputHover;
+            }
+
+            &:focus {
+                outline: var.$fsInboundInputFocus;
+            }
+        }
+
+        label {
+            font-size: max(min(var.$fsInputMaxFontSize, var.$fsInputFontSize), 0.1rem);
+        }
+    }
+
+    &.outbound {
+        background-color: var.$fsOutboundBackground;
+        border: var.$fsOutboundBorder;
+        color: var.$fsOutboundTextColor;
+
+        .placeholder {
+            color: var.$fsOutboundPlaceholder
+        }
+
+        input {
+            background-color: var.$fsOutboundInputBackground;
+            color: var.$fsOutboundInputText;
+            border: 0px;
+            border-radius: 0px;
+            height: var.$fsInputHeight;
+            text-align: center;
+            font-size: max(min(var.$fsInputMaxFontSize, var.$fsInputFontSize), 0.1rem);
+            width: 87%;
+
+            &:hover {
+                outline: var.$fsOutboundInputHover;
+            }
+
+            &:focus {
+                outline: var.$fsOutboundInputFocus;
+            }
+        }
+
+        label {
+            font-size: max(min(var.$fsInputMaxFontSize, var.$fsInputFontSize), 0.1rem);
+        }
+    }
+
+    &.vfr {
+        background-color: var.$fsVfrBackground;
+        border: var.$fsVfrBorder;
+        color: var.$fsVfrTextColor;
+
+        .placeholder {
+            color: var.$fsVfrPlaceholder
+        }
+
+        input {
+            background-color: var.$fsVfrInputBackground;
+            color: var.$fsVfrInputText;
+            border: 0px;
+            border-radius: 0px;
+            height: var.$fsInputHeight;
+            text-align: center;
+            font-size: max(min(var.$fsInputMaxFontSize, var.$fsInputFontSize), 0.1rem);
+            width: 87%;
+
+            &:hover {
+                outline: var.$fsVfrInputHover;
+            }
+
+            &:focus {
+                outline: var.$fsVfrInputFocus;
+            }
+        }
+
+        label {
+            font-size: max(min(var.$fsInputMaxFontSize, var.$fsInputFontSize), 0.1rem);
+        }
+    }
+}
+
+
+.content-container {
+    margin: 0.2em;
+    height: calc(100% - 0.4em);
+}
+
+.flex-container {
+    display: flex;
+    height: 75%;
+}
+
+.right-side {
+    width: 75%;
+    height: 100% !important;
+}
+
+.bottom {
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.free-text {
+    width: 98% !important;
+}
+
+.small-inputs {
+    width: 36% !important;
+}
+
+.double-cell {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100% !important;
+}
+
+.sid {
+    width: 94% !important;
+}
+
+.left-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    margin-left: 0.6%;
+    width: 24.4%;
+    height: 95%;
+    margin-top: 0.7%;
+}
+
+.callsign {
+    height: 32% !important;
+    font-size: max(min(2em, 1vw), 0.1rem) !important;
+    width: 92% !important;
+}
+
+.airline {
+    height: 20% !important;
+}
+
+.squawk {
+    align-self: flex-start;
+    //margin-right: 4.5%;
+    width: 92% !important;
+    height: 23.5% !important;
+
+}

@@ -1,0 +1,13 @@
+<div class="header">
+    <h2>Departure</h2>
+    <div class="buttons">
+        <app-column-button icon="arrow-up-right" (click)="addOutboundFlightstrip()"></app-column-button>
+        <app-column-button icon="arrow-down-right" (click)="addInboundFlightstrip()"></app-column-button>
+        <app-column-button icon="repeat" (click)="addVfrFlightstrip()"></app-column-button>
+    </div>
+</div>
+<div cdkDropList class="container" [cdkDropListData]="strips" (cdkDropListDropped)="drop($event)"
+    (keydown)="onKeyPress($event)" [tabindex]="tabIndex" (mouseenter)="onMouseEnter($event)"
+    (mouseleave)="onMouseLeave($event)">
+    <app-flightstrip *ngFor="let strip of strips" cdkDrag [cdkDragData]="strip" [fs]="strip"></app-flightstrip>
+</div>

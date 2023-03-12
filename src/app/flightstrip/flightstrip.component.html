@@ -1,0 +1,38 @@
+<div class="strip"
+    [ngClass]="{'outbound': fs.type === 'outbound','inbound': fs.type === 'inbound','vfr': fs.type === 'vfr'}">
+    <div class="content-container">
+        <div class="flex-container">
+            <div class="left-side">
+                
+                <input type="text" class="callsign" placeholder="Callsign">
+                <label class="airline">Airline</label>
+                <input type="text" placeholder="Squawk" class="squawk">
+                
+               
+
+            </div>
+            <!--<div class="right-side">-->
+            <mat-grid-list cols="8" rowHeight="33.333%" class="right-side">
+                <mat-grid-tile [colspan]="2" [rowspan]="1"><input type="text" placeholder="Dep"></mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1"><input type="text" placeholder="Aircraft"></mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1"><input type="text" placeholder="Altitude"></mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1"><input type="text" placeholder="Gate"></mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1"><input type="text" placeholder="Arr"></mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                    <div class="double-cell">
+                        <input type="text" placeholder="W" class="small-inputs">
+                        <input type="text" placeholder="FR" class="small-inputs">
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1"><input type="text" placeholder="Aircraft"></mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1"><input type="text" placeholder="Info"></mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1"><input type="text" placeholder="Runway"></mat-grid-tile>
+                <mat-grid-tile [colspan]="4" [rowspan]="1"><input type="text" placeholder="SID/STAR"
+                        class="sid"></mat-grid-tile>
+            </mat-grid-list>
+        </div>
+        <div class="bottom">
+            <input type="text" class="free-text" placeholder="Free Text">
+        </div>
+    </div>
+</div>
