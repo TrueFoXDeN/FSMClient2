@@ -1,6 +1,6 @@
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, Input } from '@angular/core';
-import { Flightstrip } from '../flightstrip/flightstrip.model';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Flightstrip} from '../flightstrip/flightstrip.model';
 
 @Component({
   selector: 'app-column',
@@ -9,16 +9,19 @@ import { Flightstrip } from '../flightstrip/flightstrip.model';
 })
 export class ColumnComponent {
   @Input() tabIndex = 0
+  @Output() submittedValue = new EventEmitter<void>();
   public strips: Flightstrip[] = []
 
   addInboundFlightstrip() {
     let fs = new Flightstrip(this.generateRandomString(), "inbound");
     this.strips.push(fs)
   }
+
   addOutboundFlightstrip() {
     let fs = new Flightstrip(this.generateRandomString(), "outbound");
     this.strips.push(fs)
   }
+
   addVfrFlightstrip() {
     let fs = new Flightstrip(this.generateRandomString(), "vfr");
     this.strips.push(fs)
@@ -58,12 +61,10 @@ export class ColumnComponent {
   }
 
   onMouseEnter(event: any) {
-    console.log(event)
     event.target.focus()
-    console.log("Entered Column " + this.tabIndex)
   }
 
-  onMouseLeave(event: any) {
-    console.log("Left Column " + this.tabIndex)
+  onMouseLeave(_event: any) {
+    this.submittedValue.emit();
   }
 }

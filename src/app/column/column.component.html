@@ -8,6 +8,6 @@
 </div>
 <div cdkDropList class="container" [cdkDropListData]="strips" (cdkDropListDropped)="drop($event)"
     (keydown)="onKeyPress($event)" [tabindex]="tabIndex" (mouseenter)="onMouseEnter($event)"
-    (mouseleave)="onMouseLeave($event)">
+    (mouseleave)="onMouseLeave($event)" [blurOn]="submittedValue">
     <app-flightstrip *ngFor="let strip of strips" cdkDrag [cdkDragData]="strip" [fs]="strip"></app-flightstrip>
 </div>
