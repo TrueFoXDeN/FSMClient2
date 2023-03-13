@@ -67,4 +67,21 @@ export class ColumnComponent {
   onMouseLeave(_event: any) {
     this.submittedValue.emit();
   }
+
+  onHeaderDoubleClick() {
+    console.log("Double click")
+  }
+
+  getDragDelay() {
+    let screenWidth = window.innerWidth;
+    if (screenWidth <= 1080) {
+      return 100;
+    } else {
+      return 0;
+    }
+  }
+
+  getWindowWidth() {
+    return window.innerWidth;
+  }
 }
