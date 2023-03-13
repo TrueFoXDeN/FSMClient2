@@ -1,6 +1,6 @@
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Flightstrip} from '../flightstrip/flightstrip.model';
+import {Flightstrip, stripType} from '../flightstrip/flightstrip.model';
 
 @Component({
   selector: 'app-column',
@@ -13,17 +13,17 @@ export class ColumnComponent {
   public strips: Flightstrip[] = []
 
   addInboundFlightstrip() {
-    let fs = new Flightstrip(this.generateRandomString(), "inbound");
+    let fs = new Flightstrip(this.generateRandomString(), stripType.INBOUND);
     this.strips.push(fs)
   }
 
   addOutboundFlightstrip() {
-    let fs = new Flightstrip(this.generateRandomString(), "outbound");
+    let fs = new Flightstrip(this.generateRandomString(), stripType.OUTBOUND);
     this.strips.push(fs)
   }
 
   addVfrFlightstrip() {
-    let fs = new Flightstrip(this.generateRandomString(), "vfr");
+    let fs = new Flightstrip(this.generateRandomString(), stripType.VFR);
     this.strips.push(fs)
   }
 

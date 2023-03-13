@@ -17,6 +17,7 @@ import {IconsModule} from './icons/icons.module';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {ColumnButtonsComponent} from './column/column-button/column-button.component';
 import {BlurOnDirective} from "./directives/blur-on.directive";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {BlurOnDirective} from "./directives/blur-on.directive";
     MatGridListModule,
     ScrollingModule,
     MatSidenavModule,
-    IconsModule
+    IconsModule,
+    FormsModule
 
   ],
   providers: [],
