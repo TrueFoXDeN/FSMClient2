@@ -18,6 +18,8 @@ import {SidebarComponent} from './sidebar/sidebar.component';
 import {ColumnButtonsComponent} from './column/column-button/column-button.component';
 import {BlurOnDirective} from "./directives/blur-on.directive";
 import {FormsModule} from "@angular/forms";
+import { ColumnContainerComponent } from './column-container/column-container.component';
+import {MaxHeightDirective} from "./directives/max-height.directive";
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import {FormsModule} from "@angular/forms";
     SidebarButtonComponent,
     SidebarComponent,
     ColumnButtonsComponent,
-    BlurOnDirective
+    BlurOnDirective,
+    ColumnContainerComponent,
+    MaxHeightDirective
   ],
   imports: [
     BrowserModule,

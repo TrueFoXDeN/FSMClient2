@@ -1,6 +1,7 @@
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Flightstrip, stripType} from '../flightstrip/flightstrip.model';
+import {ColumnModel} from "./column.model";
 
 @Component({
   selector: 'app-column',
@@ -8,9 +9,16 @@ import {Flightstrip, stripType} from '../flightstrip/flightstrip.model';
   styleUrls: ['./column.component.scss']
 })
 export class ColumnComponent {
-  @Input() tabIndex = 0
+  @Input("tabIndex") tabIndex = 0
+  @Input("name") name = ""
+  @Input("model") dataModel! : ColumnModel;
+
   @Output() submittedValue = new EventEmitter<void>();
   public strips: Flightstrip[] = []
+constructor() {
+
+}
+
 
   addInboundFlightstrip() {
     let fs = new Flightstrip(this.generateRandomString(), stripType.INBOUND);
