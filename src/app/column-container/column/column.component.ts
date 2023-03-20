@@ -1,6 +1,6 @@
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Flightstrip, stripType} from '../flightstrip-container/flightstrip/flightstrip.model';
+import {Flightstrip, stripType} from '../../flightstrip-container/flightstrip/flightstrip.model';
 import {ColumnModel} from "./column.model";
 
 @Component({

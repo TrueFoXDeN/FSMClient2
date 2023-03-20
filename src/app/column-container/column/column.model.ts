@@ -1,4 +1,4 @@
-import {Flightstrip} from "../flightstrip-container/flightstrip/flightstrip.model";
+import {Flightstrip} from "../../flightstrip-container/flightstrip/flightstrip.model";
 
 export class ColumnModel {
   id: string = ""

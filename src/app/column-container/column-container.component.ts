@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ColumnModel} from "../column/column.model";
+import {ColumnModel} from "./column/column.model";
 
 @Component({
   selector: 'app-column-container',
