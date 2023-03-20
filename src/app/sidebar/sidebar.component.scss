@@ -1,13 +1,23 @@
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    padding-right: 15%;
-    padding-left: 15%;
-    background-color: #272E33;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-right: 15%;
+  padding-left: 15%;
+  background-color: #272E33;
+  height: calc(100% - 7px);
+  padding-top: 7px;
+  justify-content: space-between;
+  touch-action: none;
 }
 
-.network-icon {  
-    width: 80%;
-    aspect-ratio: 1;
+.icon-button {
+  width: 100%;
+
+  aspect-ratio: 1;
 }
+
+.bottom-buttons {
+  padding-bottom: 10px;
+}
+
+

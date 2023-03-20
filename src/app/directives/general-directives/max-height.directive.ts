@@ -1,5 +1,5 @@
 import {Directive, ElementRef, Input, OnInit} from "@angular/core";
-import {CustomStyles} from "../customStyles";
+import {CustomStyles} from "../../customStyles";
 
 @Directive({
   selector: '[appMaxHeight]'

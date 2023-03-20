@@ -1,12 +1,12 @@
 import {Directive, DoCheck, ElementRef, Input, OnInit} from "@angular/core";
 import {CustomStyles} from "../../customStyles";
-import {stripType} from "../../flightstrip/flightstrip.model";
+import {stripType} from "../../flightstrip-container/flightstrip/flightstrip.model";
 
 @Directive({
-  selector: '[FlightStripInput]'
+  selector: '[flightStripInput]'
 })
 export class FlightStripInput implements OnInit, DoCheck {
-  @Input("FlightStripInput") type!: stripType
+  @Input("flightStripInput") type!: stripType
 
   constructor(private elementRef: ElementRef, private cS: CustomStyles) {
   }
@@ -19,7 +19,7 @@ export class FlightStripInput implements OnInit, DoCheck {
   }
 
   updateStyle() {
-
+        this.elementRef.nativeElement.style.fontSize = `${10 * this.cS.multiplier}pt`
     switch (this.type) {
       case stripType.INBOUND:
         //this.elementRef.nativeElement.setAttribute("placeholder", "color").color = this.cS.style.fsTextColorPlaceholderInbound;

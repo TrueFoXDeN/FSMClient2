@@ -1,6 +1,6 @@
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Flightstrip, stripType} from '../flightstrip/flightstrip.model';
+import {Flightstrip, stripType} from '../flightstrip-container/flightstrip/flightstrip.model';
 import {ColumnModel} from "./column.model";
 
 @Component({
@@ -11,13 +11,14 @@ import {ColumnModel} from "./column.model";
 export class ColumnComponent {
   @Input("tabIndex") tabIndex = 0
   @Input("name") name = ""
-  @Input("model") dataModel! : ColumnModel;
+  @Input("model") columnModel!: ColumnModel;
 
   @Output() submittedValue = new EventEmitter<void>();
   public strips: Flightstrip[] = []
-constructor() {
 
-}
+  constructor() {
+
+  }
 
 
   addInboundFlightstrip() {
@@ -81,12 +82,7 @@ constructor() {
   }
 
   getDragDelay() {
-    let screenWidth = window.innerWidth;
-    if (screenWidth <= 1080) {
-      return 100;
-    } else {
-      return 0;
-    }
+    return 500;
   }
 
   getWindowWidth() {

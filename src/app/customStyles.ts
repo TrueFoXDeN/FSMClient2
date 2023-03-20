@@ -1,5 +1,5 @@
 export class CustomStyles {
-  public multiplier = 0.7;
+  public multiplier = 1.0;
   public style = {
     "name": "Dark",
     "font": "#FFFFFF",
