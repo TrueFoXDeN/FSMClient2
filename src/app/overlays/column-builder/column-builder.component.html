@@ -1,23 +1,38 @@
 <div class="window">
-  <button (click)="addItem()">Add New</button>
-  <gridster [options]="options">
-    <gridster-item [item]="item" *ngFor="let item of dashboard">
-      <div class="button-holder">
-        <div class="gridster-item-content" *ngIf="item?.['hasContent']">
-          <div class="stuff">
-            <img src="..logo.png">
+  <div class="content">
+    <gridster [options]="options" class="gridBackground">
+      <gridster-item [item]="item" *ngFor="let item of dashboard">
+        <div class="columnContent">
+          <div class="header flex-container" columnHeaderHeight>
+            <div class="gridster-item-content flex-container header-text"><input type="text" class="input"
+                                                                                 placeholder="Name..."></div>
+          </div>
+          <div class="body flex-container">
+            <app-column-builder-button icon="trash" class="delete-button"
+                                       (click)="removeItem($event, item)" matTooltip="Delete Column"
+                                       matTooltipPosition="above"></app-column-builder-button>
           </div>
         </div>
-        <div class="item-buttons" *ngIf="item?.['hasContent']">
-          <button class="remove-button" (mousedown)="removeItem($event, item)" (touchstart)="removeItem($event, item)">
-            delete
-          </button>
-        </div>
-        <label *ngIf="!item?.['hasContent']">{{ item?.['label'] }}</label>
-        <button *ngIf="!item?.['hasContent']" (mousedown)="removeItem($event, item)" (touchstart)="removeItem($event, item)">
-          delete
-        </button>
+      </gridster-item>
+    </gridster>
+
+
+    <div class="button-footer">
+      <div class="left">
+        <app-column-builder-button icon="plus" (click)="addItem()" class="footer-buttons" matTooltip="Add Column"
+                                   matTooltipPosition="above"></app-column-builder-button>
       </div>
-    </gridster-item>
-  </gridster>
+      <div class="right">
+        <app-column-builder-button icon="upload" class="footer-buttons" matTooltip="Export"
+                                   matTooltipPosition="above"></app-column-builder-button>
+        <app-column-builder-button icon="download" class="footer-buttons" matTooltip="Import"
+                                   matTooltipPosition="above"></app-column-builder-button>
+        <app-column-builder-button icon="save" class="footer-buttons" matTooltip="Save & Exit"
+                                   matTooltipPosition="above"></app-column-builder-button>
+        <app-column-builder-button icon="X" class="footer-buttons" matTooltip="Discard"
+                                   matTooltipPosition="above"></app-column-builder-button>
+      </div>
+
+    </div>
+  </div>
 </div>

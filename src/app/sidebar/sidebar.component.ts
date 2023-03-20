@@ -21,6 +21,7 @@ export class SidebarComponent implements  OnInit{
       height: '800px',
       width: '1200px',
       panelClass: 'my-dialog',
+      disableClose: true
     });
   }
 

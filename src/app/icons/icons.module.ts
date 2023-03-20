@@ -13,7 +13,16 @@ import {
   Users,
   Wifi,
   Search,
-  BarChart2
+  BarChart2,
+  Trash,
+  Trash2,
+  XCircle,
+  PlusCircle,
+  Plus,
+  Save,
+  Upload,
+  Download,
+  X
 } from 'angular-feather/icons';
 
 // Select some icons (use an object, not an array)
@@ -29,7 +38,17 @@ const icons = {
   Users,
   Wifi,
   Search,
-  BarChart2
+  BarChart2,
+  Trash,
+  Trash2,
+  XCircle,
+  PlusCircle,
+  Plus,
+  Save,
+  Upload,
+  Download,
+  X
+
 };
 
 @NgModule({

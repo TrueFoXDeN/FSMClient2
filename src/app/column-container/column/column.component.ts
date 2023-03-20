@@ -17,7 +17,6 @@ export class ColumnComponent {
   public strips: Flightstrip[] = []
 
   constructor() {
-
   }
 
 

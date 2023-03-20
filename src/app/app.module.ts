@@ -38,6 +38,9 @@ import {ColumnBuilderComponent} from './overlays/column-builder/column-builder.c
 import {DialogModule} from '@angular/cdk/dialog';
 import {ColumnStructure} from "./column-structure";
 import {GridsterModule} from "angular-gridster2";
+import {
+  ColumnBuilderButtonComponent
+} from "./overlays/column-builder/column-builder-button/column-builder-button.component";
 
 @NgModule({
   declarations: [
@@ -63,6 +66,7 @@ import {GridsterModule} from "angular-gridster2";
     FlightstripContainerComponent,
     FlightstripCompactComponent,
     ColumnBuilderComponent,
+    ColumnBuilderButtonComponent
 
 
   ],
