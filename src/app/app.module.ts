@@ -37,6 +37,7 @@ import {FlightstripCompactComponent} from './flightstrip-container/flightstrip-c
 import {ColumnBuilderComponent} from './overlays/column-builder/column-builder.component';
 import {DialogModule} from '@angular/cdk/dialog';
 import {ColumnStructure} from "./column-structure";
+import {GridsterModule} from "angular-gridster2";
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import {ColumnStructure} from "./column-structure";
     FlightstripCompactComponent,
     ColumnBuilderComponent,
 
+
   ],
   imports: [
     BrowserModule,
@@ -76,7 +78,8 @@ import {ColumnStructure} from "./column-structure";
     FormsModule,
     MatTooltipModule,
     MatSnackBarModule,
-    DialogModule
+    DialogModule,
+    GridsterModule
 
   ],
   providers: [CustomStyles, ColumnStructure],

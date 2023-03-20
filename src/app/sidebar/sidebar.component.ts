@@ -18,8 +18,8 @@ export class SidebarComponent implements  OnInit{
 
   openColumnbuilder() {
     const dialogRef = this.dialog.open(ColumnBuilderComponent, {
-      height: '400px',
-      width: '600px',
+      height: '800px',
+      width: '1200px',
       panelClass: 'my-dialog',
     });
   }
