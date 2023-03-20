@@ -34,6 +34,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { FlightstripContainerComponent } from './flightstrip-container/flightstrip-container.component';
 import { FlightstripCompactComponent } from './flightstrip-container/flightstrip-compact/flightstrip-compact.component';
+import { ColumnBuilderComponent } from './overlays/column-builder/column-builder.component';
+import {DialogModule} from '@angular/cdk/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +58,8 @@ import { FlightstripCompactComponent } from './flightstrip-container/flightstrip
     FlightStripCallsign,
     FlightStripAirline,
     FlightstripContainerComponent,
-    FlightstripCompactComponent
+    FlightstripCompactComponent,
+    ColumnBuilderComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +72,8 @@ import { FlightstripCompactComponent } from './flightstrip-container/flightstrip
     IconsModule,
     FormsModule,
     MatTooltipModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    DialogModule
 
   ],
   providers: [CustomStyles],

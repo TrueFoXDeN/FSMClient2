@@ -14,7 +14,7 @@ export class SidebarComponent {
   constructor(private customStyle: CustomStyles, private _snackBar: MatSnackBar) {
   }
 
-  onClick() {
+  openColumnbuilder() {
   }
 
   onZoomIn() {

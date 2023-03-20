@@ -7,6 +7,7 @@ import {Flightstrip} from "./flightstrip/flightstrip.model";
   styleUrls: ['./flightstrip-container.component.scss']
 })
 export class FlightstripContainerComponent {
+  @Input("stripModel") stripModel!: Flightstrip
 
   constructor() {
 
