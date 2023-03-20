@@ -1,20 +1,27 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CustomStyles} from "../customStyles";
 import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
+import {Dialog, DIALOG_DATA} from '@angular/cdk/dialog';
+import {ColumnBuilderComponent} from "../overlays/column-builder/column-builder.component";
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent {
+export class SidebarComponent implements  OnInit{
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  constructor(private customStyle: CustomStyles, private _snackBar: MatSnackBar) {
+  constructor(private customStyle: CustomStyles, private _snackBar: MatSnackBar,public dialog: Dialog) {
   }
 
   openColumnbuilder() {
+    const dialogRef = this.dialog.open(ColumnBuilderComponent, {
+      height: '400px',
+      width: '600px',
+      panelClass: 'my-dialog',
+    });
   }
 
   onZoomIn() {
@@ -38,5 +45,9 @@ export class SidebarComponent {
         duration: 1500,
       });
     }
+  }
+
+  ngOnInit(): void {
+    this.openColumnbuilder();
   }
 }

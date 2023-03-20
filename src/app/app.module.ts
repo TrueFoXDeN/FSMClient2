@@ -32,10 +32,12 @@ import {FlightStripCallsign} from "./directives/flightstrip-directives/flightStr
 import {FlightStripAirline} from "./directives/flightstrip-directives/flightStripAirline.directive";
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { FlightstripContainerComponent } from './flightstrip-container/flightstrip-container.component';
-import { FlightstripCompactComponent } from './flightstrip-container/flightstrip-compact/flightstrip-compact.component';
-import { ColumnBuilderComponent } from './overlays/column-builder/column-builder.component';
+import {FlightstripContainerComponent} from './flightstrip-container/flightstrip-container.component';
+import {FlightstripCompactComponent} from './flightstrip-container/flightstrip-compact/flightstrip-compact.component';
+import {ColumnBuilderComponent} from './overlays/column-builder/column-builder.component';
 import {DialogModule} from '@angular/cdk/dialog';
+import {ColumnStructure} from "./column-structure";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +61,8 @@ import {DialogModule} from '@angular/cdk/dialog';
     FlightStripAirline,
     FlightstripContainerComponent,
     FlightstripCompactComponent,
-    ColumnBuilderComponent
+    ColumnBuilderComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,7 @@ import {DialogModule} from '@angular/cdk/dialog';
     DialogModule
 
   ],
-  providers: [CustomStyles],
+  providers: [CustomStyles, ColumnStructure],
   bootstrap: [AppComponent]
 })
 export class AppModule {
