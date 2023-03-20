@@ -1,11 +1,11 @@
-import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Flightstrip, statusArrival, statusDeparture, statusVfr, stripType} from './flightstrip.model';
 
 
 @Component({
   selector: 'app-flightstrip',
   templateUrl: './flightstrip.component.html',
-  styleUrls: ['../../app-theme.scss', './flightstrip.component.scss']
+  styleUrls: ['../../../app-theme.scss', './flightstrip.component.scss']
 })
 export class FlightstripComponent implements OnInit, AfterViewInit {
 

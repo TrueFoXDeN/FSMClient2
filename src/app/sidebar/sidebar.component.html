@@ -1,5 +1,28 @@
 <div class="sidebar">
-  <app-sidebar-button icon="columns" (click)="onClick()"></app-sidebar-button>
-  <app-sidebar-button icon="zoom-in"></app-sidebar-button>
-  <app-sidebar-button icon="zoom-out"></app-sidebar-button>
+  <div class="top-buttons">
+    <app-sidebar-button icon="columns" (click)="onClick()" class="icon-button"
+                        matTooltip="Columns" matTooltipPosition="right"></app-sidebar-button>
+
+    <app-sidebar-button icon="users" class="icon-button" matTooltip="Multiplayer"
+                        matTooltipPosition="right"></app-sidebar-button>
+    <app-sidebar-button icon="wifi" class="icon-button" matTooltip="Networks"
+                        matTooltipPosition="right"></app-sidebar-button>
+    <app-sidebar-button icon="search" class="icon-button" matTooltip="Search Callsign"
+                        matTooltipPosition="right"></app-sidebar-button>
+  </div>
+
+  <div class="bottom-buttons">
+    <app-sidebar-button icon="zoom-in" (click)="onZoomIn()" class="icon-button" matTooltip="Zoom in"
+                        matTooltipPosition="right"></app-sidebar-button>
+    <app-sidebar-button icon="zoom-out" (click)="onZoomOut()" class="icon-button" matTooltip="Zoom out"
+                        matTooltipPosition="right"></app-sidebar-button>
+    <app-sidebar-button icon="bar-chart-2" class="icon-button" matTooltip="Statistics"
+                        matTooltipPosition="right"></app-sidebar-button>
+    <app-sidebar-button icon="sliders" class="icon-button" matTooltip="Themes"
+                                                  matTooltipPosition="right"></app-sidebar-button>
+    <app-sidebar-button icon="settings" class="icon-button" matTooltip="Settings"
+                        matTooltipPosition="right"></app-sidebar-button>
+
+  </div>
+
 </div>
