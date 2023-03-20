@@ -1,11 +1,16 @@
-.body{
-    display: flex;
-    height: 100%;
-    width: 100%;
+@use './global-values.scss' as style;
+.body {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: #272E33;
 }
- .sidebar{
-    width: 2.75%;
- }
- .content{
-    width: 97.25%;
- }
+
+.sidebar {
+  width: calc(60px * #{style.$scale});
+}
+
+.content {
+  width: auto;
+  height: 100%;
+}

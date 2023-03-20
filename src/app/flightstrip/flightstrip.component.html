@@ -1,45 +1,55 @@
 <div class="strip"
-     [ngClass]="{'outbound': fs.type === stripType.OUTBOUND ,'inbound': fs.type === stripType.INBOUND,'vfr': fs.type === stripType.VFR}">
+     [ngClass]="{'outbound': fs.type === stripType.OUTBOUND ,'inbound': fs.type === stripType.INBOUND,'vfr': fs.type === stripType.VFR}"
+     [FlightStripContainer]="fs.type">
   <div class="content-container">
     <div class="flex-container">
       <div class="left-side">
-
-        <input type="text" class="callsign" placeholder="Callsign">
+        <input type="text" class="callsign" placeholder="Callsign" [FlightStripInput]="fs.type">
         <label class="airline">Airline</label>
-        <input type="text" placeholder="Squawk" class="squawk">
-
-
+        <input type="text" placeholder="Squawk" class="squawk" [FlightStripInput]="fs.type">
       </div>
       <!--<div class="right-side">-->
       <mat-grid-list cols="8" rowHeight="33.333%" class="right-side">
-        <mat-grid-tile [colspan]="2" [rowspan]="1"><input type="text" placeholder="Dep" [(ngModel)]="fs.departureIcao">
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <input type="text" placeholder="Dep" [(ngModel)]="fs.departureIcao" [FlightStripInput]="fs.type">
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="2" [rowspan]="1"><input type="text" placeholder="Aircraft" [(ngModel)]="fs.aircraft">
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <input type="text" placeholder="Aircraft" [(ngModel)]="fs.aircraft" [FlightStripInput]="fs.type">
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="2" [rowspan]="1"><input type="text" placeholder="Altitude" [(ngModel)]="fs.altitude">
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <input type="text" placeholder="Altitude" [(ngModel)]="fs.altitude" [FlightStripInput]="fs.type">
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="2" [rowspan]="1"><input type="text" placeholder="Gate" [(ngModel)]="fs.gate">
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <input type="text" placeholder="Gate" [(ngModel)]="fs.gate" [FlightStripInput]="fs.type">
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="2" [rowspan]="1"><input type="text" placeholder="Arr" [(ngModel)]="fs.arrivalIcao">
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <input type="text" placeholder="Arr" [(ngModel)]="fs.arrivalIcao" [FlightStripInput]="fs.type">
         </mat-grid-tile>
         <mat-grid-tile [colspan]="2" [rowspan]="1">
           <div class="double-cell">
-            <input type="text" placeholder="W" class="small-inputs" [(ngModel)]="fs.wakeCategory">
-            <input type="text" placeholder="FR" class="small-inputs" [(ngModel)]="fs.flightrule">
+            <input type="text" placeholder="W" class="small-inputs" [(ngModel)]="fs.wakeCategory"
+                   [FlightStripInput]="fs.type">
+            <input type="text" placeholder="FR" class="small-inputs" [(ngModel)]="fs.flightrule"
+                   [FlightStripInput]="fs.type">
           </div>
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="2" [rowspan]="1"><input type="text" placeholder="Status"
-                                                          value="{{status[fs.status]}}"></mat-grid-tile>
-        <mat-grid-tile [colspan]="2" [rowspan]="1"><input type="text" placeholder="Info" [(ngModel)]="fs.info">
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <input type="text" placeholder="Status" value="{{status[fs.status]}}" [FlightStripInput]="fs.type">
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="2" [rowspan]="1"><input type="text" placeholder="Runway" [(ngModel)]="fs.runway">
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <input type="text" placeholder="Info" [(ngModel)]="fs.info" [FlightStripInput]="fs.type">
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="4" [rowspan]="1"><input type="text" placeholder="SID/STAR"
-                                                          class="sid" [(ngModel)]="fs.sidStar"></mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <input type="text" placeholder="Runway" [(ngModel)]="fs.runway" [FlightStripInput]="fs.type">
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4" [rowspan]="1">
+          <input type="text" placeholder="SID/STAR" class="sid" [(ngModel)]="fs.sidStar" [FlightStripInput]="fs.type">
+        </mat-grid-tile>
       </mat-grid-list>
     </div>
     <div class="bottom">
-      <input type="text" class="free-text" placeholder="Free Text" [(ngModel)]="fs.freeText">
+      <input type="text" class="free-text" placeholder="Free Text" [(ngModel)]="fs.freeText"
+             [FlightStripInput]="fs.type">
     </div>
   </div>
 </div>

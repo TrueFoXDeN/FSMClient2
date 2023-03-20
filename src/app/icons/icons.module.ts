@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { FeatherModule } from 'angular-feather';
-import { ArrowDownRight, ArrowUpRight, Repeat } from 'angular-feather/icons';
+import { ArrowDownRight, ArrowUpRight, Repeat, Columns, ZoomIn, ZoomOut } from 'angular-feather/icons';
 
 // Select some icons (use an object, not an array)
 const icons = {
   ArrowDownRight,
   ArrowUpRight,
-  Repeat
+  Repeat,
+  Columns,
+  ZoomIn,
+  ZoomOut
 };
 
 @NgModule({

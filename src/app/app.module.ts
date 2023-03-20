@@ -18,8 +18,12 @@ import {SidebarComponent} from './sidebar/sidebar.component';
 import {ColumnButtonsComponent} from './column/column-button/column-button.component';
 import {BlurOnDirective} from "./directives/blur-on.directive";
 import {FormsModule} from "@angular/forms";
-import { ColumnContainerComponent } from './column-container/column-container.component';
+import {ColumnContainerComponent} from './column-container/column-container.component';
 import {MaxHeightDirective} from "./directives/max-height.directive";
+import {BodyBackground} from "./directives/general-styles/bodyBackground.directive";
+import {FlightStripContainer} from "./directives/flightstrip-directives/flightStripContainer.directive";
+import {CustomStyles} from "./customStyles";
+import {FlightStripInput} from "./directives/flightstrip-directives/flightStripInput.directive";
 
 @NgModule({
   declarations: [
@@ -32,7 +36,10 @@ import {MaxHeightDirective} from "./directives/max-height.directive";
     ColumnButtonsComponent,
     BlurOnDirective,
     ColumnContainerComponent,
-    MaxHeightDirective
+    MaxHeightDirective,
+    BodyBackground,
+    FlightStripContainer,
+    FlightStripInput
   ],
   imports: [
     BrowserModule,
@@ -46,7 +53,7 @@ import {MaxHeightDirective} from "./directives/max-height.directive";
     FormsModule
 
   ],
-  providers: [],
+  providers: [CustomStyles],
   bootstrap: [AppComponent]
 })
 export class AppModule {
