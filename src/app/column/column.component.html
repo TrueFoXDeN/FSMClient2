@@ -1,10 +1,12 @@
-<div class="content" columnWidth>
+<div class="content" columnWidth columnColor>
   <div class="header" columnHeaderHeight>
-    <h2 columnHeaderFont>{{name}}</h2>
+    <h2 columnHeaderFont columnColor>{{name}}</h2>
     <div class="buttons">
-      <app-column-button icon="airplane-take-off" (click)="addOutboundFlightstrip()"></app-column-button>
-      <app-column-button icon="airplane-landing" (click)="addInboundFlightstrip()"></app-column-button>
-      <app-column-button icon="aircraft" (click)="addVfrFlightstrip()"></app-column-button>
+      <app-column-button icon="airplane-take-off" (click)="addOutboundFlightstrip()"
+                         columnButtonColor></app-column-button>
+      <app-column-button icon="airplane-landing" (click)="addInboundFlightstrip()"
+                         columnButtonColor></app-column-button>
+      <app-column-button icon="aircraft" (click)="addVfrFlightstrip()" columnButtonColor></app-column-button>
     </div>
   </div>
 

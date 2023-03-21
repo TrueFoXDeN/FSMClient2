@@ -1,5 +1,5 @@
 <div cdkDropListGroup class="container">
-  <gridster [options]="options" class="gridBackground">
+  <gridster [options]="options" class="gridBackground" mainContainer>
     <gridster-item [item]="item" *ngFor="let item of dashboard">
       <app-column name="{{item?.['name']}}"></app-column>
     </gridster-item>

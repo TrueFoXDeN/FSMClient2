@@ -2,9 +2,17 @@ export class CustomStyles {
   public multiplier = 1.0;
   public style = {
     "name": "Dark",
-    "font": "#FFFFFF",
-    "appBackground": "#272E33",
-    "columnBackground": "#1E2124",
+    "sidebar": "#3C3F41",
+    "sidebarButton": "#313335",
+    "iconColor" : "#FFFFFF",
+    "iconColorSuccess" : "#00FF00",
+    "iconColorError" : "#FF0000",
+    "fontColor": "#ffffff",
+    "appBackground": "#313335",
+    "columnBackground": "#2B2B2B",
+    "columnButtonBackground" : "#313335",
+    "columnButtonFontColor" : "#ff0000",
+    "appInput" : "#ff0000",
     "columnHover": "#1F2F3e",
     "button": "#1E2124",
     "buttonBorder": "#FFFFFF",
@@ -33,10 +41,6 @@ export class CustomStyles {
     "fsTextColorPlaceholderVfr": "#808080",
     "fsTextboxBackgroundVfr": "#472A4D",
     "fsTextboxBorderColorVfr": "#BD37BF",
-
-
-
-
 
     "delete": "#FF0000",
     "fsDragHighlight": "#FFFFFF"

@@ -6,7 +6,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {HorizontalScrollComponent} from './main-container/horizontal-scroll.component';
-import {ColumnComponent} from './column-container/column/column.component';
+import {ColumnComponent} from './column/column.component';
 import {FlightstripComponent} from './flightstrip-container/flightstrip/flightstrip.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -15,10 +15,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {SidebarButtonComponent} from './sidebar/sidebar-button/sidebar-button.component';
 import {IconsModule} from './icons/icons.module';
 import {SidebarComponent} from './sidebar/sidebar.component';
-import {ColumnButtonsComponent} from './column-container/column/column-button/column-button.component';
+import {ColumnButtonsComponent} from './column/column-button/column-button.component';
 import {BlurOnDirective} from "./directives/general-directives/blur-on.directive";
 import {FormsModule} from "@angular/forms";
-import {ColumnContainerComponent} from './column-container/column-container.component';
 import {MaxHeightDirective} from "./directives/general-directives/max-height.directive";
 import {BodyBackground} from "./directives/general-directives/bodyBackground.directive";
 import {FlightStripContainer} from "./directives/flightstrip-directives/flightStripContainer.directive";
@@ -43,6 +42,12 @@ import {
 } from "./overlays/column-builder/column-builder-button/column-builder-button.component";
 import {Util} from "./util";
 import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
+import {Sidebar} from "./directives/sidebar-directives/sidebar.directive";
+import {SidebarButton} from "./directives/sidebar-directives/sidebarButton.directive";
+import {MainContainer} from "./directives/general-directives/mainContainer.directive";
+import {ColumnColor} from "./directives/column-directives/columnColor.directive";
+import {ColumnButtonColor} from "./directives/column-directives/columnButtonColor.directive";
+import {AppInput} from "./directives/general-directives/appInput.directive";
 
 @NgModule({
   declarations: [
@@ -54,7 +59,6 @@ import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
     SidebarComponent,
     ColumnButtonsComponent,
     BlurOnDirective,
-    ColumnContainerComponent,
     MaxHeightDirective,
     BodyBackground,
     FlightStripContainer,
@@ -69,9 +73,12 @@ import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
     FlightstripCompactComponent,
     ColumnBuilderComponent,
     ColumnBuilderButtonComponent,
-
-
-
+    Sidebar,
+    SidebarButton,
+    MainContainer,
+    ColumnColor,
+    ColumnButtonColor,
+    AppInput
   ],
   imports: [
     BrowserModule,
