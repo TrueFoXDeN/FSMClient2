@@ -57,6 +57,5 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.openColumnbuilder()
   }
 }

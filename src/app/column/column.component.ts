@@ -79,7 +79,7 @@ export class ColumnComponent {
   }
 
   getDragDelay() {
-    return 500;
+    return 10;
   }
 
   getWindowWidth() {
