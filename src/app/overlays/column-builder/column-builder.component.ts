@@ -9,6 +9,7 @@ import {
   PushDirections,
   Resizable,
 } from "angular-gridster2";
+import {Util} from "../../util";
 
 
 interface Safe extends GridsterConfig {
@@ -28,7 +29,7 @@ export class ColumnBuilderComponent implements OnInit{
   options: Safe;
   dashboard: Array<GridsterItem>;
 
-  constructor() {
+  constructor(private util : Util) {
     this.options = {
       gridType: GridType.Fit,
       compactType: CompactType.None,
@@ -105,7 +106,10 @@ export class ColumnBuilderComponent implements OnInit{
   }
 
   addItem(): void {
-    this.dashboard.push({ x: 0, y: 0, cols: 1, rows: 4 });
+    let uuid = this.util.generateUUID();
+    console.log(uuid);
+    console.log(this.dashboard)
+    this.dashboard.push({ x: 0, y: 0, cols: 1, rows: 4, uuid : uuid, name : "" });
   }
 
 

@@ -5,7 +5,10 @@
         <div class="columnContent">
           <div class="header flex-container" columnHeaderHeight>
             <div class="gridster-item-content flex-container header-text"><input type="text" class="input"
-                                                                                 placeholder="Name..."></div>
+                                                                                 placeholder="Name..."
+                                                                                 [ngModel]="item?.['name']"
+                                                                                 (ngModelChange)="item['name']=$event">
+            </div>
           </div>
           <div class="body flex-container">
             <app-column-builder-button icon="trash" class="delete-button"

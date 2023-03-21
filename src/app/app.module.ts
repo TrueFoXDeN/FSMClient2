@@ -41,6 +41,7 @@ import {GridsterModule} from "angular-gridster2";
 import {
   ColumnBuilderButtonComponent
 } from "./overlays/column-builder/column-builder-button/column-builder-button.component";
+import {Util} from "./util";
 
 @NgModule({
   declarations: [
@@ -86,7 +87,7 @@ import {
     GridsterModule
 
   ],
-  providers: [CustomStyles, ColumnStructure],
+  providers: [CustomStyles, ColumnStructure, Util],
   bootstrap: [AppComponent]
 })
 export class AppModule {
