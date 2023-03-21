@@ -9,13 +9,13 @@
   justify-content: center;
   cursor: pointer;
   user-select: none;
-  margin-bottom: 7px;
+  //margin-bottom: 10px;
   //margin-top: 5px;
   //margin-bottom: 5px;
 }
 
 :host:hover {
-  background-color: #36393b;
+  outline: 2px solid #565656;
   box-shadow: none;
 }
 

@@ -16,6 +16,7 @@ $fsInputMaxFontSize: 1.8em;
     height: $fsInputHeight;
     text-align: center;
     font-size: max(min(#{$fsInputMaxFontSize}, #{$fsInputFontSize}), 0.1rem);
+    font-family: Roboto Mono, sans-serif;
     width: 87%;
 
     &:hover {

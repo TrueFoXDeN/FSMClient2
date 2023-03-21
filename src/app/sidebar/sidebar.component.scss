@@ -4,9 +4,10 @@
   padding-right: 15%;
   padding-left: 15%;
   height: calc(100% - 7px);
-  padding-top: 7px;
+  padding-top: 10px;
   justify-content: space-between;
   touch-action: none;
+
 }
 
 .icon-button {
@@ -14,9 +15,16 @@
 
   aspect-ratio: 1;
 }
-
+.top-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
 .bottom-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   padding-bottom: 10px;
 }
 

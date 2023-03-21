@@ -95,25 +95,17 @@ export class HorizontalScrollComponent implements OnInit, OnChanges, DoCheck {
   }
 
 
-  ngOnInit()
-    :
-    void {
+  ngOnInit(): void {
     this.dashboard = this.colStructure.columnStructure;
     console.log(environment.appVersion)
   }
 
-  ngOnChanges(changes
-                :
-                SimpleChanges
-  ):
-    void {
+  ngOnChanges(changes: SimpleChanges): void {
   }
 
-  ngDoCheck()
-    :
-    void {
+  ngDoCheck(): void {
     this.dashboard = this.colStructure.columnStructure;
-    console.log("Called")
+    // console.log("Called")
     this.options = {
       ...this.options,
       fixedColWidth: 400 * this.styles.multiplier
