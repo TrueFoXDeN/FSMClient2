@@ -9,9 +9,7 @@ import {ColumnModel} from "./column.model";
   styleUrls: ['./column.component.scss']
 })
 export class ColumnComponent {
-  @Input("tabIndex") tabIndex = 0
   @Input("name") name = ""
-  @Input("model") columnModel!: ColumnModel;
 
   @Output() submittedValue = new EventEmitter<void>();
   public strips: Flightstrip[] = []

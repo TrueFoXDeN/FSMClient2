@@ -1,15 +1,17 @@
-
 .window {
   height: 100%;
   width: 100%;
   background-color: #272E33;
   border: 2px solid #848484;
+  box-sizing: border-box;
   outline: none;
+  overflow: hidden;
 }
 
 .gridBackground {
   background-color: #272E33;
   flex-grow: 1;
+  box-shadow: 0 5px 5px rgba(0,0,0,0.2);
 }
 
 
@@ -75,10 +77,9 @@
   align-items: center;
   width: 100%;
   height: 80px;
-
   background-color: #272E33;
   box-sizing: border-box;
-  border-top: 2px solid white;
+  //border-top: 2px solid #4d4d4d;
 }
 
 .left {

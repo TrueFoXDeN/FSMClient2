@@ -1,6 +1,6 @@
-<div class="content">
+<div class="content" columnWidth>
   <div class="header" columnHeaderHeight>
-    <h2 columnHeaderFont>{{columnModel.name}}</h2>
+    <h2 columnHeaderFont>{{name}}</h2>
     <div class="buttons">
       <app-column-button icon="airplane-take-off" (click)="addOutboundFlightstrip()"></app-column-button>
       <app-column-button icon="airplane-landing" (click)="addInboundFlightstrip()"></app-column-button>
@@ -9,7 +9,7 @@
   </div>
 
   <div cdkDropList class="container" [cdkDropListData]="strips" (cdkDropListDropped)="drop($event)"
-       (keydown)="onKeyPress($event)" [tabindex]="tabIndex" (mouseenter)="onMouseEnter($event)"
+       (keydown)="onKeyPress($event)" [tabindex]="0" (mouseenter)="onMouseEnter($event)"
        (mouseleave)="onMouseLeave($event)" [blurOn]="submittedValue">
     <app-flightstrip-container *ngFor="let strip of strips" cdkDrag [cdkDragData]="strip" [stripModel]="strip"
                                [cdkDragStartDelay]="getDragDelay()"></app-flightstrip-container>

@@ -1,41 +1,18 @@
+import {GridsterItem} from "angular-gridster2";
+
 export class ColumnStructure {
 
-  public columnStructure = [
+  public columnStructure: Array<GridsterItem> = [
     {
-      xPosition: 0,
-      columns: [
-        {
-          "name": "Ground",
-          "id": "AHFBhdj-hf764Hjdf",
-          "yPosition": 0,
-          "relativeSize": 0.4
-        },
-        {
-          "name": "Tower",
-          "id": "AHFBhdj-hf764Hjdf",
-          "yPosition": 1,
-          "relativeSize": 0.3
-        },
-      ]
-    },
-    {
-      xPosition: 1,
-      columns: [
-        {
-          "name": "Departue",
-          "id": "AHFBhdj-hf764Hjdf",
-          "yPosition": 0,
-          "relativeSize": 0.4
-        },
-        {
-          "name": "Center",
-          "id": "AHFBhdj-hf764Hjdf",
-          "yPosition": 1,
-          "relativeSize": 0.3
-        },
-      ]
+      "x": 0,
+      "y": 0,
+      "cols": 1,
+      "rows": 10,
+      "uuid": "e25c82b3-62ed-452c-bf99-6ebfc60d3575",
+      "name": "GND"
     }
   ]
+
   constructor() {
   }
 

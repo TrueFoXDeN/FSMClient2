@@ -42,6 +42,7 @@ import {
   ColumnBuilderButtonComponent
 } from "./overlays/column-builder/column-builder-button/column-builder-button.component";
 import {Util} from "./util";
+import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import {Util} from "./util";
     FlightstripContainerComponent,
     FlightstripCompactComponent,
     ColumnBuilderComponent,
-    ColumnBuilderButtonComponent
+    ColumnBuilderButtonComponent,
+
 
 
   ],
@@ -84,11 +86,18 @@ import {Util} from "./util";
     MatTooltipModule,
     MatSnackBarModule,
     DialogModule,
-    GridsterModule
+    GridsterModule,
+    MatDialogModule
 
   ],
-  providers: [CustomStyles, ColumnStructure, Util],
-  bootstrap: [AppComponent]
+  providers: [
+    CustomStyles,
+    ColumnStructure,
+    Util,
+    Util,
+    {provide: MatDialogRef, useValue:{}}
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }

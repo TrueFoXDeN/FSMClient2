@@ -1,4 +1,4 @@
-import {Component, OnInit, VERSION} from '@angular/core';
+import {Component, Inject, OnInit, VERSION} from '@angular/core';
 import {
   CompactType,
   DisplayGrid,
@@ -10,6 +10,8 @@ import {
   Resizable,
 } from "angular-gridster2";
 import {Util} from "../../util";
+import {ColumnStructure} from "../../column-structure";
+import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from "@angular/material/dialog";
 
 
 interface Safe extends GridsterConfig {
@@ -17,6 +19,7 @@ interface Safe extends GridsterConfig {
   resizable: Resizable;
   pushDirections: PushDirections;
 }
+
 @Component({
   selector: 'app-column-builder',
   templateUrl: './column-builder.component.html',
@@ -24,12 +27,17 @@ interface Safe extends GridsterConfig {
 })
 
 
-export class ColumnBuilderComponent implements OnInit{
+export class ColumnBuilderComponent implements OnInit {
   name = "Angular " + VERSION.major;
   options: Safe;
   dashboard: Array<GridsterItem>;
+  currentData: any
 
-  constructor(private util : Util) {
+  constructor(private util: Util, public dialogRef: MatDialogRef<ColumnBuilderComponent>,
+              @Inject(MAT_DIALOG_DATA) data: any) {
+    this.currentData = data
+    this.dashboard = data.columnData;
+    console.log(this.dashboard)
     this.options = {
       gridType: GridType.Fit,
       compactType: CompactType.None,
@@ -72,26 +80,27 @@ export class ColumnBuilderComponent implements OnInit{
         enabled: true,
       },
       resizable: {
-        enabled: true,
+        enabled : true,
+        handles: {
+          s: true, e: false, n: true, w: false, se: true, ne: true, sw: true, nw: true
+        }
       },
       swap: false,
       pushItems: true,
       disablePushOnDrag: false,
       disablePushOnResize: false,
-      pushDirections: { north: true, east: true, south: true, west: true },
-      pushResizeItems: false,
+      pushDirections: {north: true, east: true, south: true, west: true},
+      pushResizeItems: true,
       displayGrid: DisplayGrid.None,
       disableWindowResize: false,
       disableWarnings: false,
       scrollToNewItems: false,
-  }
-
-    this.dashboard = [];
+    }
   }
 
   ngOnInit(): void {
-
-    }
+    this.dashboard = this.currentData.columnData;
+  }
 
   changedOptions(): void {
     if (this.options.api && this.options.api.optionsChanged) {
@@ -105,13 +114,25 @@ export class ColumnBuilderComponent implements OnInit{
     this.dashboard.splice(this.dashboard.indexOf(item), 1);
   }
 
-  addItem(): void {
+  addItem($event: MouseEvent | TouchEvent): void {
+    $event.preventDefault();
+    $event.stopPropagation();
     let uuid = this.util.generateUUID();
     console.log(uuid);
     console.log(this.dashboard)
-    this.dashboard.push({ x: 0, y: 0, cols: 1, rows: 4, uuid : uuid, name : "" });
+
+    this.dashboard = this.dashboard || [];
+    this.dashboard.push({x: 0, y: 0, cols: 1, rows: 4, uuid: uuid, name: ""});
   }
 
+  saveAndClose() {
+    console.log(this.dialogRef)
+    this.dialogRef.close(this.dashboard)
+  }
+
+  closeWithoutSaving() {
+    this.dialogRef.close()
+  }
 
 
 }
