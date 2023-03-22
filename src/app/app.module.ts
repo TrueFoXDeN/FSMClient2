@@ -35,7 +35,7 @@ import {FlightstripContainerComponent} from './flightstrip-container/flightstrip
 import {FlightstripCompactComponent} from './flightstrip-container/flightstrip-compact/flightstrip-compact.component';
 import {ColumnBuilderComponent} from './overlays/column-builder/column-builder.component';
 import {DialogModule} from '@angular/cdk/dialog';
-import {ColumnStructure} from "./column-structure";
+import {Data} from "./data";
 import {GridsterModule} from "angular-gridster2";
 import {
   ColumnBuilderButtonComponent
@@ -99,7 +99,7 @@ import {AppInput} from "./directives/general-directives/appInput.directive";
   ],
   providers: [
     CustomStyles,
-    ColumnStructure,
+    Data,
     Util,
     Util,
     {provide: MatDialogRef, useValue:{}}

@@ -10,7 +10,7 @@ import {
   PushDirections,
   Resizable,
 } from "angular-gridster2";
-import {ColumnStructure} from "../column-structure";
+import {Data} from "../data";
 import {CustomStyles} from "../customStyles";
 
 interface Safe extends GridsterConfig {
@@ -30,7 +30,7 @@ export class HorizontalScrollComponent implements OnInit, OnChanges, DoCheck {
   options: Safe;
   dashboard: Array<GridsterItem>;
 
-  constructor(private colStructure: ColumnStructure, private styles: CustomStyles) {
+  constructor(private colStructure: Data, private styles: CustomStyles) {
     this.options = {
       gridType: GridType.HorizontalFixed,
       compactType: CompactType.None,

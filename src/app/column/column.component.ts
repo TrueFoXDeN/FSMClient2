@@ -2,6 +2,8 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Flightstrip, stripType} from '../flightstrip-container/flightstrip/flightstrip.model';
 import {ColumnModel} from "./column.model";
+import {Data} from "../data";
+import {Util} from "../util";
 
 @Component({
   selector: 'app-column',
@@ -10,27 +12,27 @@ import {ColumnModel} from "./column.model";
 })
 export class ColumnComponent {
   @Input("name") name = ""
-
+  @Input("uuid") uuid = ""
   @Output() submittedValue = new EventEmitter<void>();
   public strips: Flightstrip[] = []
 
-  constructor() {
+  constructor(public data: Data, private util: Util) {
   }
 
 
   addInboundFlightstrip() {
-    let fs = new Flightstrip(this.generateRandomString(), stripType.INBOUND);
-    this.strips.push(fs)
+    let fs = new Flightstrip(this.util.generateUUID(), stripType.INBOUND);
+    this.data.flightstripData?.[`${this.uuid}`]?.['flightstrips'].push(fs);
   }
 
   addOutboundFlightstrip() {
-    let fs = new Flightstrip(this.generateRandomString(), stripType.OUTBOUND);
-    this.strips.push(fs)
+    let fs = new Flightstrip(this.util.generateUUID(), stripType.OUTBOUND);
+    this.data.flightstripData?.[`${this.uuid}`]?.['flightstrips'].push(fs);
   }
 
   addVfrFlightstrip() {
-    let fs = new Flightstrip(this.generateRandomString(), stripType.VFR);
-    this.strips.push(fs)
+    let fs = new Flightstrip(this.util.generateUUID(), stripType.VFR);
+    this.data.flightstripData?.[`${this.uuid}`]?.['flightstrips'].push(fs);
   }
 
   generateRandomString() {
@@ -52,7 +54,6 @@ export class ColumnComponent {
   }
 
   onKeyPress(event: any) {
-    console.log(event)
     switch (event.key) {
       case "i":
         this.addInboundFlightstrip();

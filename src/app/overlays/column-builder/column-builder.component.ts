@@ -10,7 +10,7 @@ import {
   Resizable,
 } from "angular-gridster2";
 import {Util} from "../../util";
-import {ColumnStructure} from "../../column-structure";
+import {Data} from "../../data";
 import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from "@angular/material/dialog";
 
 
@@ -37,7 +37,6 @@ export class ColumnBuilderComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) data: any) {
     this.currentData = data
     this.dashboard = data.columnData;
-    console.log(this.dashboard)
     this.options = {
       gridType: GridType.Fit,
       compactType: CompactType.None,
@@ -118,11 +117,8 @@ export class ColumnBuilderComponent implements OnInit {
     $event.preventDefault();
     $event.stopPropagation();
     let uuid = this.util.generateUUID();
-    console.log(uuid);
-    console.log(this.dashboard)
-
     this.dashboard = this.dashboard || [];
-    this.dashboard.push({x: 0, y: 0, cols: 1, rows: 4, uuid: uuid, name: ""});
+    this.dashboard.push({x: 0, y: 0, cols: 1, rows: 9, uuid: uuid, name: ""});
   }
 
   saveAndClose() {

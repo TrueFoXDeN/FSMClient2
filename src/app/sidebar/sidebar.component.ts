@@ -4,7 +4,7 @@ import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition}
 import {Dialog, DIALOG_DATA} from '@angular/cdk/dialog';
 import {ColumnBuilderComponent} from "../overlays/column-builder/column-builder.component";
 import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
-import {ColumnStructure} from "../column-structure";
+import {Data} from "../data";
 
 @Component({
   selector: 'app-sidebar',
@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  constructor(private customStyle: CustomStyles, private _snackBar: MatSnackBar, public dialog: MatDialog, private colStructure: ColumnStructure) {
+  constructor(private customStyle: CustomStyles, private _snackBar: MatSnackBar, public dialog: MatDialog, private globalData: Data) {
   }
 
   openColumnbuilder() {
@@ -25,12 +25,22 @@ export class SidebarComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.panelClass = 'custom-dialog-container',
       dialogConfig.data = {
-        columnData: JSON.parse(JSON.stringify(this.colStructure.columnStructure))
+        columnData: JSON.parse(JSON.stringify(this.globalData.columnStructure))
       }
     const dialogRef = this.dialog.open(ColumnBuilderComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(
-      data => data != null ? this.colStructure.columnStructure = data : null
-    );
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data != null) {
+        this.globalData.columnStructure = data;
+      }
+      this.globalData.columnStructure.forEach((column) => {
+        if (typeof (this.globalData.flightstripData[column?.['uuid']]) == "undefined") {
+          console.log(`Neue Column: ${column?.['name']}`)
+          this.globalData.flightstripData[column?.['uuid']] = {name: column?.['name'], flightstrips: []}
+        }
+      });
+      console.log(this.globalData.flightstripData)
+    });
+
   }
 
   onZoomIn() {
@@ -54,6 +64,10 @@ export class SidebarComponent implements OnInit {
         duration: 1500,
       });
     }
+  }
+
+  searchCallsign() {
+    console.log(this.globalData.flightstripData)
   }
 
   ngOnInit(): void {

@@ -12,12 +12,10 @@
   <div cdkDropList class="drag-list" [cdkDropListData]="strips" (cdkDropListDropped)="drop($event)"
        (keydown)="onKeyPress($event)" [tabindex]="0" (mouseenter)="onMouseEnter($event)"
        (mouseleave)="onMouseLeave($event)" [blurOn]="submittedValue">
-    <div *ngFor="let strip of strips" cdkDrag [cdkDragData]="strip"
+    <div *ngFor="let strip of data.flightstripData?.[uuid]?.['flightstrips']" cdkDrag [cdkDragData]="strip"
          [cdkDragStartDelay]="getDragDelay()" class="drag-item">
-      <app-flightstrip-container [stripModel]="strip"></app-flightstrip-container>
+            <app-flightstrip-container [stripModel]="strip"></app-flightstrip-container>
     </div>
-
   </div>
-
 </div>
 
