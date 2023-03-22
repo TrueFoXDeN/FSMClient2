@@ -1,4 +1,5 @@
 export class Flightstrip {
+  public columnId = "";
   public id: string = "";
   public type: stripType
   public callsign: string = "";
@@ -18,8 +19,9 @@ export class Flightstrip {
   public freeText: string = "";
 
 
-  constructor(identifier: string, type: stripType) {
+  constructor(identifier: string, type: stripType, columnId: string) {
     this.id = identifier;
+    this.columnId = columnId
     this.type = type;
     switch (type) {
       case stripType.INBOUND:

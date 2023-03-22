@@ -79,7 +79,7 @@ export class ColumnBuilderComponent implements OnInit {
         enabled: true,
       },
       resizable: {
-        enabled : true,
+        enabled: true,
         handles: {
           s: true, e: false, n: true, w: false, se: true, ne: true, sw: true, nw: true
         }
@@ -128,6 +128,18 @@ export class ColumnBuilderComponent implements OnInit {
 
   closeWithoutSaving() {
     this.dialogRef.close()
+  }
+
+  saveConfig() {
+    let data = {"columnData": this.dashboard}
+    localStorage.setItem("columnConfig", JSON.stringify(data))
+  }
+
+  loadConfig() {
+    if (typeof (localStorage.getItem("columnConfig")) != "undefined") {
+      let data = JSON.parse(localStorage.getItem("columnConfig") || '{}')
+      this.dashboard = data.columnData
+    }
   }
 
 

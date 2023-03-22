@@ -4,9 +4,10 @@
   <div class="content-container">
     <div class="flex-container">
       <div class="left-side">
-        <input type="text" class="callsign" placeholder="Callsign" [flightStripInput]="fs.type" callsign>
+        <input type="text" class="callsign" placeholder="Callsign" [flightStripInput]="fs.type" callsign
+                [(ngModel)]="fs.callsign">
         <label class="airline" airline>Airline</label>
-        <input type="text" placeholder="Squawk" class="squawk" [flightStripInput]="fs.type">
+        <input type="text" placeholder="Squawk" class="squawk" [flightStripInput]="fs.type" [(ngModel)]="fs.squawk">
       </div>
       <!--<div class="right-side">-->
       <mat-grid-list cols="8" rowHeight="33.333%" class="right-side">

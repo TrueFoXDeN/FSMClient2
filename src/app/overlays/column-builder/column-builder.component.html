@@ -8,7 +8,7 @@
                                                                                  placeholder="Name..."
                                                                                  [ngModel]="item?.['name']"
                                                                                  (ngModelChange)="item['name']=$event"
-            appInput>
+                                                                                 appInput>
             </div>
           </div>
           <div class="body flex-container">
@@ -28,13 +28,17 @@
       </div>
       <div class="right">
         <app-column-builder-button icon="upload" class="footer-buttons" matTooltip="Export"
-                                   matTooltipPosition="above" sidebarButton></app-column-builder-button>
+                                   matTooltipPosition="above" sidebarButton
+                                   (click)="saveConfig()"></app-column-builder-button>
         <app-column-builder-button icon="download" class="footer-buttons" matTooltip="Import"
-                                   matTooltipPosition="above" sidebarButton></app-column-builder-button>
+                                   matTooltipPosition="above" sidebarButton
+                                   (click)="loadConfig()"></app-column-builder-button>
         <app-column-builder-button icon="save" class="footer-buttons" matTooltip="Save & Exit"
-                                   matTooltipPosition="above" (click)="saveAndClose()" sidebarButton></app-column-builder-button>
+                                   matTooltipPosition="above" (click)="saveAndClose()"
+                                   sidebarButton></app-column-builder-button>
         <app-column-builder-button icon="X" class="footer-buttons" matTooltip="Discard"
-                                   matTooltipPosition="above" (click)="closeWithoutSaving()" sidebarButton></app-column-builder-button>
+                                   matTooltipPosition="above" (click)="closeWithoutSaving()"
+                                   sidebarButton></app-column-builder-button>
       </div>
     </div>
   </div>

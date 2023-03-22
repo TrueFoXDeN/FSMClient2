@@ -21,17 +21,17 @@ export class ColumnComponent {
 
 
   addInboundFlightstrip() {
-    let fs = new Flightstrip(this.util.generateUUID(), stripType.INBOUND);
+    let fs = new Flightstrip(this.util.generateUUID(), stripType.INBOUND, this.uuid);
     this.data.flightstripData?.[`${this.uuid}`]?.['flightstrips'].push(fs);
   }
 
   addOutboundFlightstrip() {
-    let fs = new Flightstrip(this.util.generateUUID(), stripType.OUTBOUND);
+    let fs = new Flightstrip(this.util.generateUUID(), stripType.OUTBOUND, this.uuid);
     this.data.flightstripData?.[`${this.uuid}`]?.['flightstrips'].push(fs);
   }
 
   addVfrFlightstrip() {
-    let fs = new Flightstrip(this.util.generateUUID(), stripType.VFR);
+    let fs = new Flightstrip(this.util.generateUUID(), stripType.VFR, this.uuid);
     this.data.flightstripData?.[`${this.uuid}`]?.['flightstrips'].push(fs);
   }
 
@@ -40,7 +40,7 @@ export class ColumnComponent {
   }
 
 
-  drop(event: CdkDragDrop<Flightstrip[]>) {
+  drop(event: CdkDragDrop<[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {

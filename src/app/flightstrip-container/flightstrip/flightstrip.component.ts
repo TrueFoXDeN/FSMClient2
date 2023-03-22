@@ -1,5 +1,7 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Flightstrip, statusArrival, statusDeparture, statusVfr, stripType} from './flightstrip.model';
+import {Data} from "../../data";
+import {findIndex} from "rxjs";
 
 
 @Component({
@@ -7,13 +9,12 @@ import {Flightstrip, statusArrival, statusDeparture, statusVfr, stripType} from 
   templateUrl: './flightstrip.component.html',
   styleUrls: ['../../../app-theme.scss', './flightstrip.component.scss']
 })
-export class FlightstripComponent implements OnInit, AfterViewInit {
-
+export class FlightstripComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() fs!: Flightstrip;
   status: any;
   stripType = stripType;
 
-  constructor() {
+  constructor(private globalData: Data) {
 
   }
 
@@ -31,9 +32,30 @@ export class FlightstripComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngAfterViewInit(): void {
 
+  ngAfterViewInit(): void {
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+  }
+
+
+  onFocusOut() {
+    // Zur Zeit nicht relevant
+    console.log("Change detected")
+    let flightstripArray = this.globalData.flightstripData?.[this.fs.columnId].flightstrips
+    let indexOfStrip = -1
+    for (let flightstrip of flightstripArray) {
+      if (flightstrip.id == this.fs.id) {
+        console.log("Flightstrip found")
+        indexOfStrip = flightstripArray.indexOf(flightstrip);
+        break;
+      }
+    }
+    if (indexOfStrip != -1) {
+      console.log(this.fs)
+      this.globalData.flightstripData[this.fs.columnId].flightstrips[indexOfStrip] = this.fs;
+    }
+  }
 
 }

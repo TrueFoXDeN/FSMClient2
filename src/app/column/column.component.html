@@ -9,7 +9,7 @@
       <app-column-button icon="aircraft" (click)="addVfrFlightstrip()" columnButtonColor></app-column-button>
     </div>
   </div>
-  <div cdkDropList class="drag-list" [cdkDropListData]="strips" (cdkDropListDropped)="drop($event)"
+  <div cdkDropList class="drag-list" [cdkDropListData]="data.flightstripData?.[uuid]?.['flightstrips']" (cdkDropListDropped)="drop($event)"
        (keydown)="onKeyPress($event)" [tabindex]="0" (mouseenter)="onMouseEnter($event)"
        (mouseleave)="onMouseLeave($event)" [blurOn]="submittedValue">
     <div *ngFor="let strip of data.flightstripData?.[uuid]?.['flightstrips']" cdkDrag [cdkDragData]="strip"
