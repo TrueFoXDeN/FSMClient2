@@ -11,6 +11,7 @@ import {findIndex} from "rxjs";
 })
 export class FlightstripComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() fs!: Flightstrip;
+  @Output("switchToCompact") compactSwitch = new EventEmitter<void>()
   status: any;
   stripType = stripType;
 
@@ -30,6 +31,10 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnChanges {
         this.status = statusVfr
         break;
     }
+  }
+
+  changeToCompactMode() {
+    this.compactSwitch.emit()
   }
 
 
