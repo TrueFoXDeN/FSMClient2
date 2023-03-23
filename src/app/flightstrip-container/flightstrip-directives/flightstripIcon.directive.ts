@@ -3,13 +3,13 @@ import {CustomStyles} from "../../customStyles";
 import {StyleChangerService} from "../../services/style-changer.service";
 import {FlightstripService} from "../flightstrip.service";
 import {iconState} from "../flightstrip.model";
+import {Subject} from "rxjs";
 
 @Directive({
   selector: '[flightstripIcon]'
 })
 export class FlightstripIcon implements OnInit {
   @Input("iconState") iconState: iconState = iconState.INACTIVE
-
   internalState: iconState = iconState.INACTIVE
   squawk: string = ""
 
@@ -20,11 +20,11 @@ export class FlightstripIcon implements OnInit {
     this.fsService.changedTriangleState.subscribe(() => {
       this.setStyle();
     });
-    this.fsService.changedSquawk.subscribe((squawk) => {
-      this.squawk = squawk;
-      this.setStyle()
-    })
 
+  }
+  onSquawkChange(squawk: string) {
+    this.squawk = squawk;
+    this.setStyle()
   }
 
   ngOnInit(): void {

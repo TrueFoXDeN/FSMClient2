@@ -1,8 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Flightstrip, iconState, statusArrival, statusDeparture, statusVfr, stripType} from '../flightstrip.model';
 import {Data} from "../../data";
-import {findIndex} from "rxjs";
+import {findIndex, Subject} from "rxjs";
 import {FlightstripService} from "../flightstrip.service";
+import {FlightStripContainer} from "../flightstrip-directives/flightStripContainer.directive";
+import {FlightstripIcon} from "../flightstrip-directives/flightstripIcon.directive";
 
 
 @Component({
@@ -11,13 +13,18 @@ import {FlightstripService} from "../flightstrip.service";
   styleUrls: ['./flightstrip.component.scss']
 })
 export class FlightstripComponent implements OnInit {
+  @ViewChild(FlightStripContainer) fsContainerDir: any;
+  @ViewChild(FlightstripIcon) fsIconDir: any;
   @Input() fs!: Flightstrip;
   @Output("switchToCompact") compactSwitch = new EventEmitter<void>()
   status: any;
   isMouseMoving: boolean = false;
-  isMouseDown : boolean = false;
+  isMouseDown: boolean = false;
+  changedSquawk: Subject<string>;
 
   constructor(private globalData: Data, private fsService: FlightstripService) {
+    this.changedSquawk = new Subject<string>()
+    console.log(this.changedSquawk)
   }
 
   ngOnInit() {
@@ -51,21 +58,31 @@ export class FlightstripComponent implements OnInit {
   }
 
   onSquawkChange() {
-    this.fsService.changedSquawk.next(this.fs.squawk)
+    this.fsContainerDir.onSquawkChange(this.fs.squawk)
+    this.fsIconDir.onSquawkChange(this.fs.squawk)
   }
 
   onMouseDown() {
     this.isMouseDown = true
     setTimeout(() => {
       if (!this.isMouseMoving && this.isMouseDown) {
-        this.fsService.dragFlightstrip.next(true);
+        this.fsContainerDir.onDragStart()
       }
-    }, this.fsService.dragDelay - 10);
+    }, this.fsService.dragDelay);
     this.isMouseMoving = false;
   }
+
   onMouseUp() {
     this.isMouseDown = false;
-    this.fsService.dragFlightstrip.next(false);
+    this.fsContainerDir.onDragEnd()
+  }
+
+  onInputFocus() {
+    this.fsService.isInputFocused = true;
+  }
+
+  onInputFocusLost() {
+    this.fsService.isInputFocused = false;
   }
 
 

@@ -2,9 +2,9 @@
   <div class="flex-container">
     <div class="flex-row">
       <input type="text" class="box-element" placeholder="Callsign" [flightStripInput]="fs.type"
-             [(ngModel)]="fs.callsign">
+             [(ngModel)]="fs.callsign" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()">
       <input type="text" class="box-element" placeholder="Dep" [(ngModel)]="fs.departureIcao"
-             [flightStripInput]="fs.type">
+             [flightStripInput]="fs.type" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()">
       <input type="text" class="box-element" placeholder="Aircraft" [(ngModel)]="fs.aircraft"
              [flightStripInput]="fs.type">
       <input type="text" class="box-element" placeholder="Altitude" [(ngModel)]="fs.altitude"

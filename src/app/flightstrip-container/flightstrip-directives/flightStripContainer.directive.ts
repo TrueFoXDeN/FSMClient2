@@ -3,6 +3,7 @@ import {CustomStyles} from "../../customStyles";
 import {stripType} from "../flightstrip.model";
 import {StyleChangerService} from "../../services/style-changer.service";
 import {FlightstripService} from "../flightstrip.service";
+import {Subject} from "rxjs";
 
 @Directive({
   selector: '[flightStripContainer]'
@@ -15,22 +16,21 @@ export class FlightStripContainer implements OnInit {
     this.styleChanger.changedColors.subscribe(() => {
       this.updateStyle();
     });
-    this.fsService.changedSquawk.subscribe((squawk) => {
-      this.squawk = squawk;
-      this.updateStyle();
-    });
-    this.fsService.dragFlightstrip.subscribe((state) => {
-      if (state) {
-        setTimeout(() => {
-          this.elementRef.nativeElement.style.borderColor = this.cS.style.fsDragHighlight
-        }, this.fsService.dragDelay);
-      } else {
-        setTimeout(() => {
-          this.updateStyle()
-        }, this.fsService.dragDelay);
-      }
-    })
 
+  }
+
+  onSquawkChange(squawk: string) {
+    this.squawk = squawk;
+    this.updateStyle();
+  }
+
+
+  onDragStart() {
+    this.elementRef.nativeElement.style.borderColor = this.cS.style.fsDragHighlight
+  }
+
+  onDragEnd() {
+    this.updateStyle()
   }
 
   ngOnInit(): void {

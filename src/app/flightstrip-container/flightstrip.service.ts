@@ -6,9 +6,11 @@ import {Subject} from "rxjs";
 })
 export class FlightstripService {
   dragDelay = 100;
+  isInputFocused: boolean = false;
   changedTriangleState = new Subject<void>();
-  changedSquawk = new Subject<string>();
+
   dragFlightstrip = new Subject<boolean>()
+
   constructor() {
   }
 }

@@ -16,7 +16,7 @@ export class ColumnComponent {
   @Output() submittedValue = new EventEmitter<void>();
   public strips: Flightstrip[] = []
 
-  constructor(public data: Data, private util: Util, private fsService : FlightstripService) {
+  constructor(public data: Data, private util: Util, private fsService: FlightstripService) {
   }
 
 
@@ -52,13 +52,19 @@ export class ColumnComponent {
   onKeyPress(event: any) {
     switch (event.key) {
       case "i":
-        this.addInboundFlightstrip();
+        if (!this.fsService.isInputFocused) {
+          this.addInboundFlightstrip();
+        }
         break;
       case "o":
-        this.addOutboundFlightstrip();
+        if (!this.fsService.isInputFocused) {
+          this.addOutboundFlightstrip();
+        }
         break;
       case "v":
-        this.addVfrFlightstrip();
+        if (!this.fsService.isInputFocused) {
+          this.addVfrFlightstrip();
+        }
         break;
     }
   }
@@ -75,7 +81,7 @@ export class ColumnComponent {
     return this.fsService.dragDelay;
   }
 
-  dragEnded(){
+  dragEnded() {
     this.fsService.dragFlightstrip.next(false)
   }
 }
