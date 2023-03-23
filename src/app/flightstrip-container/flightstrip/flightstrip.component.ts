@@ -39,6 +39,14 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
   }
 
+  getSquawkState() {
+    if (this.fs.squawk == "7500") {
+      return "error";
+    } else {
+      return "inactive"
+    }
+  }
+
 
   onFocusOut() {
     // Zur Zeit nicht relevant

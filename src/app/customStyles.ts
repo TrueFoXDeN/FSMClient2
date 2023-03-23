@@ -44,6 +44,8 @@ export class CustomStyles {
     "fsTextboxBackgroundVfr": "#472A4D",
     "fsTextboxBorderColorVfr": "#BD37BF",
 
+
+    "fsEmergencyBorderColor" : "#ff0000",
     "delete": "#FF0000",
     "fsDragHighlight": "#FFFFFF"
   }

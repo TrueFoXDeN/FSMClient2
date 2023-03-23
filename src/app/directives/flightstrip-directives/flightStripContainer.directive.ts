@@ -7,6 +7,7 @@ import {stripType} from "../../flightstrip-container/flightstrip/flightstrip.mod
 })
 export class FlightStripContainer implements OnInit, DoCheck {
   @Input("flightStripContainer") type!: stripType
+  @Input("squawk") squawk: string = ""
 
   constructor(private elementRef: ElementRef, private cS: CustomStyles) {
   }
@@ -38,6 +39,10 @@ export class FlightStripContainer implements OnInit, DoCheck {
         this.elementRef.nativeElement.style.borderColor = this.cS.style.fsBorderColorVfr;
         this.elementRef.nativeElement.style.color = this.cS.style.fsTextColorVfr;
         break;
+    }
+
+    if (this.squawk == "7500" || this.squawk == "7600" || this.squawk == "7700") {
+      this.elementRef.nativeElement.style.borderColor = this.cS.style.fsEmergencyBorderColor;
     }
   }
 
