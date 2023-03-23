@@ -3,16 +3,18 @@ import {CustomStyles} from "../../customStyles";
 import {StyleChangerService} from "../../services/style-changer.service";
 
 @Directive({
-  selector: '[columnHeaderFont]'
+  selector: '[sidebarWidth]'
 })
-export class ColumnHeaderFont implements OnInit {
+export class SidebarWidth implements OnInit {
   constructor(private elementRef: ElementRef, private customStyles: CustomStyles, private styleChanger: StyleChangerService) {
     this.styleChanger.changedSize.subscribe(() => {
-      this.elementRef.nativeElement.style.fontSize = `${20 * this.customStyles.multiplier}pt`;
-    });
+      this.elementRef.nativeElement.style.width = `${60 * this.customStyles.multiplier}px`;
+    })
   }
 
   ngOnInit(): void {
-    this.elementRef.nativeElement.style.fontSize = `${20 * this.customStyles.multiplier}pt`;
+    this.elementRef.nativeElement.style.width = `${60 * this.customStyles.multiplier}px`;
   }
+
+
 }

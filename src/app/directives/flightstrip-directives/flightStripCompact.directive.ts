@@ -1,23 +1,25 @@
-import {Directive, DoCheck, ElementRef, Input, OnInit} from "@angular/core";
+import {Directive, ElementRef, Input, OnInit} from "@angular/core";
 import {CustomStyles} from "../../customStyles";
 import {stripType} from "../../flightstrip-container/flightstrip/flightstrip.model";
+import {StyleChangerService} from "../../services/style-changer.service";
 
 @Directive({
   selector: '[flightStripCompact]'
 })
-export class FlightStripCompact implements OnInit, DoCheck {
+export class FlightStripCompact implements OnInit {
   @Input("flightStripType") type!: stripType
   @Input("flightStripFontSize") fontSize: string = "medium"
 
-  constructor(private elementRef: ElementRef, private cS: CustomStyles) {
+  constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService) {
+    this.styleChanger.changedColors.subscribe(() => {
+      this.updateStyle();
+    })
   }
 
   ngOnInit(): void {
-  }
-
-  ngDoCheck(): void {
     this.updateStyle();
   }
+
 
   updateStyle() {
     switch (this.fontSize) {
