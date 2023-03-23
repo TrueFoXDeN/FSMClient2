@@ -27,7 +27,9 @@ import {
   Headphones,
   Type,
   Archive,
-  ChevronUp
+  ChevronUp,
+  ChevronLeft,
+  ChevronRight
 } from 'angular-feather/icons';
 
 // Select some icons (use an object, not an array)
@@ -57,7 +59,9 @@ const icons = {
   Headphones,
   Type,
   Archive,
-  ChevronUp
+  ChevronUp,
+  ChevronLeft,
+  ChevronRight
 };
 
 @NgModule({

@@ -103,25 +103,52 @@
     margin-left: 5px;
     width: 42%;
 
-    .status {
+    .top-row {
+
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      height: 33%;
+      flex-flow: row;
+      width: 100%;
+
+      .status-row {
+        //height: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: row;
+        width: 75%;
+        height: 100%;
+        gap: 5px;
+
+        .status-button {
+          height: 100%;
+          aspect-ratio: 1;
+        }
+      }
     }
+
+    //.status {
+    //  //display: flex;
+    //  //justify-content: center;
+    //  //align-items: center;
+    //  height: 20%;
+    //}
 
     .route {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 33%
+      //justify-content: center;
+      //align-items: center;
+      text-align: justify;
+      height: 40%
     }
 
     .freeText {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 33%
+      //display: flex;
+      //justify-content: center;
+      //align-items: center;
+      text-align: justify;
+      height: 40%
     }
   }
 
