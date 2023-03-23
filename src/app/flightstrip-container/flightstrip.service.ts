@@ -7,6 +7,7 @@ import {Subject} from "rxjs";
 export class FlightstripService {
 
   changedTriangleState = new Subject<void>();
+  changedSquawk = new Subject<string>();
 
   constructor() {
   }

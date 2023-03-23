@@ -19,13 +19,13 @@ import {ColumnButtonsComponent} from './column/column-button/column-button.compo
 import {BlurOnDirective} from "./directives/general-directives/blur-on.directive";
 import {FormsModule} from "@angular/forms";
 import {BodyBackground} from "./directives/general-directives/bodyBackground.directive";
-import {FlightStripContainer} from "./directives/flightstrip-directives/flightStripContainer.directive";
+import {FlightStripContainer} from "./flightstrip-container/flightstrip-directives/flightStripContainer.directive";
 import {CustomStyles} from "./customStyles";
-import {FlightStripInput} from "./directives/flightstrip-directives/flightStripInput.directive";
-import {SidebarWidth} from "./directives/sidebar-directives/sidebarWidth.directive";
-import {ColumnWidth} from "./directives/column-directives/columnWidth.directive";
-import {ColumnHeaderHeight} from "./directives/column-directives/columnHeaderHeight.directive";
-import {ColumnHeaderFont} from "./directives/column-directives/columnHeaderFont.directive";
+import {FlightStripInput} from "./flightstrip-container/flightstrip-directives/flightStripInput.directive";
+import {SidebarWidth} from "./sidebar/sidebar-directives/sidebarWidth.directive";
+import {ColumnWidth} from "./column/column-directives/columnWidth.directive";
+import {ColumnHeaderHeight} from "./column/column-directives/columnHeaderHeight.directive";
+import {ColumnHeaderFont} from "./column/column-directives/columnHeaderFont.directive";
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {FlightstripContainerComponent} from './flightstrip-container/flightstrip-container.component';
@@ -39,13 +39,13 @@ import {
 } from "./overlays/column-builder/column-builder-button/column-builder-button.component";
 import {Util} from "./util";
 import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
-import {Sidebar} from "./directives/sidebar-directives/sidebar.directive";
-import {SidebarButton} from "./directives/sidebar-directives/sidebarButton.directive";
+import {Sidebar} from "./sidebar/sidebar-directives/sidebar.directive";
+import {SidebarButton} from "./sidebar/sidebar-directives/sidebarButton.directive";
 import {MainContainer} from "./directives/general-directives/mainContainer.directive";
-import {ColumnColor} from "./directives/column-directives/columnColor.directive";
-import {ColumnButtonColor} from "./directives/column-directives/columnButtonColor.directive";
-import {FlightStripCompact} from "./directives/flightstrip-directives/flightStripCompact.directive";
-import {FlightstripIcon} from "./directives/flightstrip-directives/flightstripIcon.directive";
+import {ColumnColor} from "./column/column-directives/columnColor.directive";
+import {ColumnButtonColor} from "./column/column-directives/columnButtonColor.directive";
+import {FlightStripCompact} from "./flightstrip-container/flightstrip-directives/flightStripCompact.directive";
+import {FlightstripIcon} from "./flightstrip-container/flightstrip-directives/flightstripIcon.directive";
 import {
   FlightstripButtonComponent
 } from "./flightstrip-container/flightstrip/flightstrip-button/flightstrip-button.component";

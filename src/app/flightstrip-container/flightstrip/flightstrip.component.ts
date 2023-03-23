@@ -47,7 +47,10 @@ export class FlightstripComponent implements OnInit {
     }
     this.fs.triangleIconState = state;
     this.fsService.changedTriangleState.next();
+  }
 
+  onSquawkChange() {
+    this.fsService.changedSquawk.next(this.fs.squawk)
   }
 
 

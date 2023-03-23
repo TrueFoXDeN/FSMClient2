@@ -1,19 +1,24 @@
 import {Directive, ElementRef, Input, OnInit} from "@angular/core";
 import {CustomStyles} from "../../customStyles";
-import {stripType} from "../../flightstrip-container/flightstrip.model";
+import {stripType} from "../flightstrip.model";
 import {StyleChangerService} from "../../services/style-changer.service";
+import {FlightstripService} from "../flightstrip.service";
 
 @Directive({
   selector: '[flightStripContainer]'
 })
 export class FlightStripContainer implements OnInit {
   @Input("flightStripContainer") type!: stripType
-  @Input("squawk") squawk: string = ""
+  squawk: string = ""
 
-  constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService) {
+  constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService, private fsService: FlightstripService) {
     this.styleChanger.changedColors.subscribe(() => {
       this.updateStyle();
     });
+    this.fsService.changedSquawk.subscribe((squawk) => {
+      this.squawk = squawk;
+      this.updateStyle();
+    })
   }
 
   ngOnInit(): void {

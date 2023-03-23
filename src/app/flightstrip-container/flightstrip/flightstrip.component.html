@@ -1,4 +1,4 @@
-<div class="strip" [flightStripContainer]="fs.type" [squawk]="fs.squawk">
+<div class="strip" [flightStripContainer]="fs.type">
   <div class="flex-container">
     <div class="flex-row">
       <input type="text" class="box-element" placeholder="Callsign" [flightStripInput]="fs.type"
@@ -11,7 +11,7 @@
              [flightStripInput]="fs.type">
       <div class="box-element icon-container">
         <i-feather name="alert-triangle" class="icon" flightstripIcon [iconState]="fs.triangleIconState"
-                   [squawk]="fs.squawk" (click)="cycleTriangleState()"></i-feather>
+                   (click)="cycleTriangleState()"></i-feather>
         <i-feather name="headphones" class="icon"></i-feather>
         <app-flightstrip-button icon="archive" class="button"></app-flightstrip-button>
       </div>
@@ -32,7 +32,8 @@
       <input type="text" class="box-element" placeholder="Gate" [(ngModel)]="fs.gate" [flightStripInput]="fs.type">
     </div>
     <div class="flex-row">
-      <input type="text" class="box-element" placeholder="Squawk" [flightStripInput]="fs.type" [(ngModel)]="fs.squawk">
+      <input type="text" class="box-element" placeholder="Squawk" [flightStripInput]="fs.type" [(ngModel)]="fs.squawk"
+             (focusout)="onSquawkChange()">
       <input type="text" class="box-element" placeholder="Runway" [(ngModel)]="fs.runway" [flightStripInput]="fs.type">
       <input type="text" class="sid" placeholder="SID/STAR" [(ngModel)]="fs.sidStar" [flightStripInput]="fs.type">
       <input type="text" class="box-element" placeholder="Info" [(ngModel)]="fs.info" [flightStripInput]="fs.type">

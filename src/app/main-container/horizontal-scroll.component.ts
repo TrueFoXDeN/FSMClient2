@@ -1,4 +1,4 @@
-import {Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {environment} from "../../environments/environment";
 import {
   CompactType,
@@ -12,6 +12,7 @@ import {
 } from "angular-gridster2";
 import {Data} from "../data";
 import {CustomStyles} from "../customStyles";
+import {StyleChangerService} from "../services/style-changer.service";
 
 interface Safe extends GridsterConfig {
   draggable: Draggable;
@@ -26,11 +27,11 @@ interface Safe extends GridsterConfig {
 })
 
 
-export class HorizontalScrollComponent implements OnInit, OnChanges, DoCheck {
+export class HorizontalScrollComponent implements OnInit {
   options: Safe;
   dashboard: Array<GridsterItem>;
 
-  constructor(private globalData: Data, private styles: CustomStyles) {
+  constructor(private globalData: Data, private styles: CustomStyles, private styleChanger: StyleChangerService) {
     this.options = {
       gridType: GridType.HorizontalFixed,
       compactType: CompactType.None,
@@ -55,7 +56,7 @@ export class HorizontalScrollComponent implements OnInit, OnChanges, DoCheck {
       minItemArea: 1,
       defaultItemCols: 4,
       defaultItemRows: 15,
-      fixedColWidth: 400 * this.styles.multiplier,
+      fixedColWidth: 450 * this.styles.multiplier,
       fixedRowHeight: 105,
       keepFixedHeightInMobile: false,
       keepFixedWidthInMobile: false,
@@ -92,6 +93,9 @@ export class HorizontalScrollComponent implements OnInit, OnChanges, DoCheck {
     }
     this.loadConfig()
     this.dashboard = this.globalData.columnStructure;
+    this.styleChanger.changedSize.subscribe(() => {
+      this.changeColumnWidth();
+    });
   }
 
 
@@ -118,15 +122,12 @@ export class HorizontalScrollComponent implements OnInit, OnChanges, DoCheck {
     console.log(environment.appVersion)
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-  }
 
-  ngDoCheck(): void {
+  changeColumnWidth() {
     this.dashboard = this.globalData.columnStructure;
-    // console.log("Called")
     this.options = {
       ...this.options,
-      fixedColWidth: 400 * this.styles.multiplier
+      fixedColWidth: 450 * this.styles.multiplier
     }
   }
 }

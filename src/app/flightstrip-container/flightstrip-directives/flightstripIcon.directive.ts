@@ -1,17 +1,17 @@
 import {Directive, ElementRef, Input, OnInit} from "@angular/core";
 import {CustomStyles} from "../../customStyles";
 import {StyleChangerService} from "../../services/style-changer.service";
-import {FlightstripService} from "../../flightstrip-container/flightstrip.service";
-import {iconState} from "../../flightstrip-container/flightstrip.model";
+import {FlightstripService} from "../flightstrip.service";
+import {iconState} from "../flightstrip.model";
 
 @Directive({
   selector: '[flightstripIcon]'
 })
 export class FlightstripIcon implements OnInit {
   @Input("iconState") iconState: iconState = iconState.INACTIVE
-  @Input("squawk") squawk: string = ""
 
   internalState: iconState = iconState.INACTIVE
+  squawk: string = ""
 
   constructor(private elementRef: ElementRef, private customStyles: CustomStyles, private styleChanger: StyleChangerService, private fsService: FlightstripService) {
     this.styleChanger.changedColors.subscribe(() => {
@@ -20,6 +20,11 @@ export class FlightstripIcon implements OnInit {
     this.fsService.changedTriangleState.subscribe(() => {
       this.setStyle();
     });
+    this.fsService.changedSquawk.subscribe((squawk) => {
+      this.squawk = squawk;
+      this.setStyle()
+    })
+
   }
 
   ngOnInit(): void {
@@ -27,7 +32,6 @@ export class FlightstripIcon implements OnInit {
   }
 
   setStyle() {
-
     if (this.squawk == "7500" || this.squawk == "7600" || this.squawk == "7700") {
       this.internalState = iconState.ERROR;
     } else {

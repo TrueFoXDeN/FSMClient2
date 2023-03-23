@@ -8,12 +8,12 @@ import {StyleChangerService} from "../../services/style-changer.service";
 export class ColumnWidth implements OnInit {
   constructor(private elementRef: ElementRef, private customStyles: CustomStyles, private styleChanger : StyleChangerService) {
     this.styleChanger.changedSize.subscribe(()=>{
-      this.elementRef.nativeElement.style.width = `${400 * this.customStyles.multiplier}px`;
+      this.elementRef.nativeElement.style.width = `${450 * this.customStyles.multiplier}px`;
     });
   }
 
   ngOnInit(): void {
-    this.elementRef.nativeElement.style.width = `${400 * this.customStyles.multiplier}px`;
+    this.elementRef.nativeElement.style.width = `${450 * this.customStyles.multiplier}px`;
   }
 
 
