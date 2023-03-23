@@ -122,7 +122,8 @@ export class ColumnBuilderComponent implements OnInit {
   }
 
   saveAndClose() {
-    console.log(this.dialogRef)
+    let data = {"columnData": this.dashboard}
+    localStorage.setItem("columnConfig", JSON.stringify(data))
     this.dialogRef.close(this.dashboard)
   }
 

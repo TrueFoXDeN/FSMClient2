@@ -22,17 +22,17 @@ export class ColumnComponent {
 
   addInboundFlightstrip() {
     let fs = new Flightstrip(this.util.generateUUID(), stripType.INBOUND, this.uuid);
-    this.data.flightstripData?.[`${this.uuid}`]?.['flightstrips'].push(fs);
+    this.data.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
   }
 
   addOutboundFlightstrip() {
     let fs = new Flightstrip(this.util.generateUUID(), stripType.OUTBOUND, this.uuid);
-    this.data.flightstripData?.[`${this.uuid}`]?.['flightstrips'].push(fs);
+    this.data.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
   }
 
   addVfrFlightstrip() {
     let fs = new Flightstrip(this.util.generateUUID(), stripType.VFR, this.uuid);
-    this.data.flightstripData?.[`${this.uuid}`]?.['flightstrips'].push(fs);
+    this.data.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
   }
 
   generateRandomString() {

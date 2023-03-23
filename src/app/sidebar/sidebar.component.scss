@@ -3,11 +3,11 @@
   flex-direction: column;
   padding-right: 15%;
   padding-left: 15%;
-  height: calc(100% - 7px);
+  height: 100%;
   padding-top: 10px;
   justify-content: space-between;
   touch-action: none;
-
+  box-sizing: border-box;
 }
 
 .icon-button {

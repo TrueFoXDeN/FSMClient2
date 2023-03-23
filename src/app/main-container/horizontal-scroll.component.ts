@@ -30,7 +30,7 @@ export class HorizontalScrollComponent implements OnInit, OnChanges, DoCheck {
   options: Safe;
   dashboard: Array<GridsterItem>;
 
-  constructor(private colStructure: Data, private styles: CustomStyles) {
+  constructor(private globalData: Data, private styles: CustomStyles) {
     this.options = {
       gridType: GridType.HorizontalFixed,
       compactType: CompactType.None,
@@ -89,14 +89,30 @@ export class HorizontalScrollComponent implements OnInit, OnChanges, DoCheck {
       disableWindowResize: false,
       disableWarnings: false,
       scrollToNewItems: false,
-
     }
-    this.dashboard = colStructure.columnStructure;
+    this.loadConfig()
+    this.dashboard = this.globalData.columnStructure;
   }
 
 
+  loadConfig() {
+    if (typeof (localStorage.getItem("columnConfig")) != "undefined") {
+      let data = JSON.parse(localStorage.getItem("columnConfig") || '{}')
+      this.globalData.columnStructure = data.columnData
+    }
+    this.dashboard = this.globalData.columnStructure;
+    this.globalData.columnStructure.forEach((column) => {
+      if (typeof (this.globalData.flightstripData[column?.['uuid']]) == "undefined") {
+        console.log(`Neue Column: ${column?.['name']}`)
+        this.globalData.flightstripData[column?.['uuid']] = {name: column?.['name'], flightstrips: []}
+      }
+    });
+
+  }
+
   ngOnInit(): void {
-    this.dashboard = this.colStructure.columnStructure;
+    this.loadConfig()
+    console.log(this.globalData.columnStructure)
     console.log(environment.appVersion)
   }
 
@@ -104,7 +120,7 @@ export class HorizontalScrollComponent implements OnInit, OnChanges, DoCheck {
   }
 
   ngDoCheck(): void {
-    this.dashboard = this.colStructure.columnStructure;
+    this.dashboard = this.globalData.columnStructure;
     // console.log("Called")
     this.options = {
       ...this.options,

@@ -52,7 +52,6 @@ export class SidebarComponent implements OnInit {
         duration: 1500,
       });
     }
-
   }
 
   onZoomOut() {
