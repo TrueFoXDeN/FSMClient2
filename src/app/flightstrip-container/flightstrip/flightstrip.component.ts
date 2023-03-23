@@ -14,9 +14,10 @@ export class FlightstripComponent implements OnInit {
   @Input() fs!: Flightstrip;
   @Output("switchToCompact") compactSwitch = new EventEmitter<void>()
   status: any;
+  isMouseMoving: boolean = false;
+  isMouseDown : boolean = false;
 
   constructor(private globalData: Data, private fsService: FlightstripService) {
-
   }
 
   ngOnInit() {
@@ -51,6 +52,20 @@ export class FlightstripComponent implements OnInit {
 
   onSquawkChange() {
     this.fsService.changedSquawk.next(this.fs.squawk)
+  }
+
+  onMouseDown() {
+    this.isMouseDown = true
+    setTimeout(() => {
+      if (!this.isMouseMoving && this.isMouseDown) {
+        this.fsService.dragFlightstrip.next(true);
+      }
+    }, this.fsService.dragDelay - 10);
+    this.isMouseMoving = false;
+  }
+  onMouseUp() {
+    this.isMouseDown = false;
+    this.fsService.dragFlightstrip.next(false);
   }
 
 

@@ -18,7 +18,19 @@ export class FlightStripContainer implements OnInit {
     this.fsService.changedSquawk.subscribe((squawk) => {
       this.squawk = squawk;
       this.updateStyle();
+    });
+    this.fsService.dragFlightstrip.subscribe((state) => {
+      if (state) {
+        setTimeout(() => {
+          this.elementRef.nativeElement.style.borderColor = this.cS.style.fsDragHighlight
+        }, this.fsService.dragDelay);
+      } else {
+        setTimeout(() => {
+          this.updateStyle()
+        }, this.fsService.dragDelay);
+      }
     })
+
   }
 
   ngOnInit(): void {
@@ -26,8 +38,8 @@ export class FlightStripContainer implements OnInit {
   }
 
   updateStyle() {
-    this.elementRef.nativeElement.style.borderWidth = this.cS.style.fsBorderWidth;
-    this.elementRef.nativeElement.style.borderStyle = this.cS.style.fsBorderStyle;
+    this.elementRef.nativeElement.style.borderWidth = "2px";
+    this.elementRef.nativeElement.style.borderStyle = "solid";
 
     switch (this.type) {
       case stripType.INBOUND:

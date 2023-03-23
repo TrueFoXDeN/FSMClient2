@@ -5,10 +5,10 @@ import {Subject} from "rxjs";
   providedIn: 'root'
 })
 export class FlightstripService {
-
+  dragDelay = 100;
   changedTriangleState = new Subject<void>();
   changedSquawk = new Subject<string>();
-
+  dragFlightstrip = new Subject<boolean>()
   constructor() {
   }
 }

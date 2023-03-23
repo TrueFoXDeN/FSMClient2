@@ -3,6 +3,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Flightstrip, stripType} from '../flightstrip-container/flightstrip.model';
 import {Data} from "../data";
 import {Util} from "../util";
+import {FlightstripService} from "../flightstrip-container/flightstrip.service";
 
 @Component({
   selector: 'app-column',
@@ -15,7 +16,7 @@ export class ColumnComponent {
   @Output() submittedValue = new EventEmitter<void>();
   public strips: Flightstrip[] = []
 
-  constructor(public data: Data, private util: Util) {
+  constructor(public data: Data, private util: Util, private fsService : FlightstripService) {
   }
 
 
@@ -71,6 +72,10 @@ export class ColumnComponent {
   }
 
   getDragDelay() {
-    return 200;
+    return this.fsService.dragDelay;
+  }
+
+  dragEnded(){
+    this.fsService.dragFlightstrip.next(false)
   }
 }

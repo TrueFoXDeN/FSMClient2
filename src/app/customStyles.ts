@@ -2,27 +2,28 @@ export class CustomStyles {
   public multiplier = 1.0;
   public style = {
     "name": "Dark",
+    //General App settings
     "sidebarBackground": "#313335",
     "sidebarButton": "#2B2B2B",
-    "iconColor" : "#FFFFFF",
-    "iconColorSuccess" : "#00FF00",
-    "iconColorError" : "#ff2f00",
-    "iconColorWarning" : "#ffa600",
-    "iconColorInactive" : "rgba(202,202,202,0.32)",
     "fontColor": "#ffffff",
     "appBackground": "#3C3F41",
-    "columnBackground": "#2B2B2B",
-    "columnButtonBackground" : "#313335",
-    "columnButtonFontColor" : "#ff0000",
     "appInput" : "#3E4044",
-    "columnHover": "#1F2F3e",
     "button": "#1E2124",
     "buttonBorder": "#FFFFFF",
     "textbox": "#424D55",
     "textboxBorder": "#ABADB3",
-    "fsBorderWidth": "2px",
-    "fsBorderStyle": "solid",
-
+    //Icon Colors
+    "iconColor" : "#FFFFFF",
+    "iconColorSuccess" : "#00FF00",
+    "iconColorError" : "#ff2f00",
+    "iconColorWarning" : "#ffa600",
+    "iconColorInactive" : "#CACACA51",
+    //Column Colors
+    "columnBackground": "#2B2B2B",
+    "columnButtonBackground" : "#313335",
+    "columnButtonFontColor" : "#ff0000",
+    "columnHover": "#1F2F3e",
+    //Flightstrip Colors
     "fsBackgroundInbound": "#233927",
     "fsBorderColorInbound": "#3C9E37",
     "fsTextColorInbound": "#FFFFFF",
