@@ -18,6 +18,7 @@ export class Flightstrip {
   public sidStar: string = "";
   public freeText: string = "";
   public route: string = "";
+  public compactMode: boolean = false;
 
 
   constructor(identifier: string, type: stripType, columnId: string) {

@@ -41,7 +41,7 @@
     <div class="flex-row last">
       <input type="text" placeholder="Free Text" [(ngModel)]="fs.freeText" [flightStripInput]="fs.type"
              class="long-text">
-      <app-flightstrip-button icon="chevron-up" class="chevron"></app-flightstrip-button>
+      <app-flightstrip-button icon="chevron-up" class="chevron" (click)="changeToCompactMode()"></app-flightstrip-button>
     </div>
   </div>
 </div>
