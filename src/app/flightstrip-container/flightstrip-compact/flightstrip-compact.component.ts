@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Flightstrip, statusArrival, statusDeparture, statusVfr, stripType} from "../flightstrip.model";
+import {FlightstripService} from "../flightstrip.service";
 
 
 @Component({
@@ -12,6 +13,11 @@ export class FlightstripCompactComponent {
 
   status: any;
   stripType = stripType;
+  isMouseMoving: boolean = false;
+  isMouseDown : boolean = false;
+
+  constructor(private fsService : FlightstripService) {
+  }
   ngOnInit() {
     switch (this.fs.type) {
       case stripType.OUTBOUND:
@@ -52,5 +58,19 @@ export class FlightstripCompactComponent {
     waypoints = waypoints.concat(waypointsRight)
 
     return waypoints.join(" ")
+  }
+
+  onMouseDown() {
+    this.isMouseDown = true
+    setTimeout(() => {
+      if (!this.isMouseMoving && this.isMouseDown) {
+        this.fsService.dragFlightstrip.next(true);
+      }
+    }, this.fsService.dragDelay - 10);
+    this.isMouseMoving = false;
+  }
+  onMouseUp() {
+    this.isMouseDown = false;
+    this.fsService.dragFlightstrip.next(false);
   }
 }

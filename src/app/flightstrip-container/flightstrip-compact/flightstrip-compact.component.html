@@ -1,4 +1,4 @@
-<div class="strip" flightStripCompact [flightStripContainer]="fs.type">
+<div class="strip" flightStripCompact [flightStripContainer]="fs.type" (mousedown)="onMouseDown()" (mouseup)="onMouseUp()" (mousemove)="isMouseMoving = true">
   <div class="cols">
     <div class="col1">
       <span class="callsign" flightStripCompact [flightStripType]="fs.type"
