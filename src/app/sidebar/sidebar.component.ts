@@ -5,6 +5,7 @@ import {ColumnBuilderComponent} from "../overlays/column-builder/column-builder.
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {Data} from "../data";
 import {StyleChangerService} from "../services/style-changer.service";
+import {SnackbarMessageService} from "../services/snackbar-message.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -12,10 +13,10 @@ import {StyleChangerService} from "../services/style-changer.service";
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  constructor(private customStyle: CustomStyles, private _snackBar: MatSnackBar, public dialog: MatDialog, private globalData: Data, private styleChanger: StyleChangerService) {
+
+  constructor(private customStyle: CustomStyles, private _snackBar: MatSnackBar, public dialog: MatDialog,
+              private globalData: Data, private styleChanger: StyleChangerService, private snackService: SnackbarMessageService) {
   }
 
   openColumnbuilder() {
@@ -46,11 +47,7 @@ export class SidebarComponent implements OnInit {
   onZoomIn() {
     if (this.customStyle.multiplier < 2.2) {
       this.customStyle.multiplier += 0.15;
-      this._snackBar.open(`Zoom set to ${Math.round(this.customStyle.multiplier * 100)}%`, "", {
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-        duration: 1500,
-      });
+      this.snackService.showMessage(`Zoom set to ${Math.round(this.customStyle.multiplier * 100)}%`)
       this.styleChanger.changedSize.next();
     }
   }
@@ -58,11 +55,7 @@ export class SidebarComponent implements OnInit {
   onZoomOut() {
     if (this.customStyle.multiplier > 0.7) {
       this.customStyle.multiplier -= 0.15;
-      this._snackBar.open(`Zoom set to ${Math.round(this.customStyle.multiplier * 100)}%`, "", {
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-        duration: 1500,
-      });
+      this.snackService.showMessage(`Zoom set to ${Math.round(this.customStyle.multiplier * 100)}%`)
       this.styleChanger.changedSize.next();
     }
   }
