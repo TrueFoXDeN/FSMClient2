@@ -1,6 +1,6 @@
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Flightstrip, stripType} from '../flightstrip-container/flightstrip/flightstrip.model';
+import {Flightstrip, stripType} from '../flightstrip-container/flightstrip.model';
 import {Data} from "../data";
 import {Util} from "../util";
 
@@ -32,10 +32,6 @@ export class ColumnComponent {
   addVfrFlightstrip() {
     let fs = new Flightstrip(this.util.generateUUID(), stripType.VFR, this.uuid);
     this.data.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
-  }
-
-  generateRandomString() {
-    return Math.random().toString(36).substring(2, 7);
   }
 
 
@@ -74,15 +70,7 @@ export class ColumnComponent {
     this.submittedValue.emit();
   }
 
-  onHeaderDoubleClick() {
-    console.log("Double click")
-  }
-
   getDragDelay() {
     return 200;
-  }
-
-  getWindowWidth() {
-    return window.innerWidth;
   }
 }

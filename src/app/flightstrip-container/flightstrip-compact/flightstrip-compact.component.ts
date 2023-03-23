@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Flightstrip, statusArrival, statusDeparture, statusVfr, stripType} from "../flightstrip/flightstrip.model";
+import {Flightstrip, statusArrival, statusDeparture, statusVfr, stripType} from "../flightstrip.model";
 
 
 @Component({

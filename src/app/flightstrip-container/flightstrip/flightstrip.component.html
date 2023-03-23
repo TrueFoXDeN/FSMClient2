@@ -10,8 +10,8 @@
       <input type="text" class="box-element" placeholder="Altitude" [(ngModel)]="fs.altitude"
              [flightStripInput]="fs.type">
       <div class="box-element icon-container">
-        <i-feather name="alert-triangle" class="icon" flightstripIcon [iconState]="'inactive'"
-                   [squawk]="fs.squawk"></i-feather>
+        <i-feather name="alert-triangle" class="icon" flightstripIcon [iconState]="fs.triangleIconState"
+                   [squawk]="fs.squawk" (click)="cycleTriangleState()"></i-feather>
         <i-feather name="headphones" class="icon"></i-feather>
         <app-flightstrip-button icon="archive" class="button"></app-flightstrip-button>
       </div>

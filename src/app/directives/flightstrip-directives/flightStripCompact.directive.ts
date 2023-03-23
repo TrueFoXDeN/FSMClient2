@@ -1,6 +1,6 @@
 import {Directive, ElementRef, Input, OnInit} from "@angular/core";
 import {CustomStyles} from "../../customStyles";
-import {stripType} from "../../flightstrip-container/flightstrip/flightstrip.model";
+import {stripType} from "../../flightstrip-container/flightstrip.model";
 import {StyleChangerService} from "../../services/style-changer.service";
 
 @Directive({

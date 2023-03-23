@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Flightstrip} from "./flightstrip/flightstrip.model";
+import {Flightstrip} from "./flightstrip.model";
 
 @Component({
   selector: 'app-flightstrip-container',

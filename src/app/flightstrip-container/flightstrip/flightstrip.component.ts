@@ -1,7 +1,8 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Flightstrip, statusArrival, statusDeparture, statusVfr, stripType} from './flightstrip.model';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Flightstrip, iconState, statusArrival, statusDeparture, statusVfr, stripType} from '../flightstrip.model';
 import {Data} from "../../data";
 import {findIndex} from "rxjs";
+import {FlightstripService} from "../flightstrip.service";
 
 
 @Component({
@@ -9,13 +10,12 @@ import {findIndex} from "rxjs";
   templateUrl: './flightstrip.component.html',
   styleUrls: ['./flightstrip.component.scss']
 })
-export class FlightstripComponent implements OnInit, AfterViewInit, OnChanges {
+export class FlightstripComponent implements OnInit {
   @Input() fs!: Flightstrip;
   @Output("switchToCompact") compactSwitch = new EventEmitter<void>()
   status: any;
-  stripType = stripType;
 
-  constructor(private globalData: Data) {
+  constructor(private globalData: Data, private fsService: FlightstripService) {
 
   }
 
@@ -37,38 +37,18 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnChanges {
     this.compactSwitch.emit()
   }
 
-
-  ngAfterViewInit(): void {
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-  }
-
-  getSquawkState() {
-    if (this.fs.squawk == "7500") {
-      return "error";
+  cycleTriangleState() {
+    let enumCount = Object.keys(iconState).length / 2;
+    let state = this.fs.triangleIconState;
+    if (state < enumCount - 1) {
+      state++;
     } else {
-      return "inactive"
+      state = 0;
     }
+    this.fs.triangleIconState = state;
+    this.fsService.changedTriangleState.next();
+
   }
 
-
-  onFocusOut() {
-    // Zur Zeit nicht relevant
-    console.log("Change detected")
-    let flightstripArray = this.globalData.flightstripData?.[this.fs.columnId].flightstrips
-    let indexOfStrip = -1
-    for (let flightstrip of flightstripArray) {
-      if (flightstrip.id == this.fs.id) {
-        console.log("Flightstrip found")
-        indexOfStrip = flightstripArray.indexOf(flightstrip);
-        break;
-      }
-    }
-    if (indexOfStrip != -1) {
-      console.log(this.fs)
-      this.globalData.flightstripData[this.fs.columnId].flightstrips[indexOfStrip] = this.fs;
-    }
-  }
 
 }

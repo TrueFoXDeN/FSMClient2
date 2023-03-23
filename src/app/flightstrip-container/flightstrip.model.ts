@@ -1,7 +1,8 @@
 export class Flightstrip {
   public columnId = "";
   public id: string = "";
-  public type: stripType
+  public type: stripType;
+  public triangleIconState: iconState;
   public callsign: string = "";
   public departureIcao: string = "";
   public arrivalIcao: string = "";
@@ -25,6 +26,7 @@ export class Flightstrip {
     this.id = identifier;
     this.columnId = columnId
     this.type = type;
+    this.triangleIconState = iconState.INACTIVE;
     switch (type) {
       case stripType.INBOUND:
         this.status = statusArrival.ARRIVING
@@ -66,4 +68,12 @@ export enum stripType {
   INBOUND,
   OUTBOUND,
   VFR
+}
+
+export enum iconState {
+  INACTIVE,
+  STANDARD,
+  SUCCESS,
+  WARNING,
+  ERROR
 }
