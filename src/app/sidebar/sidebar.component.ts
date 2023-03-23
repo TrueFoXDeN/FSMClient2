@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {CustomStyles} from "../customStyles";
 import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
-import {Dialog, DIALOG_DATA} from '@angular/cdk/dialog';
 import {ColumnBuilderComponent} from "../overlays/column-builder/column-builder.component";
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {Data} from "../data";
+import {StyleChangerService} from "../services/style-changer.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  constructor(private customStyle: CustomStyles, private _snackBar: MatSnackBar, public dialog: MatDialog, private globalData: Data) {
+  constructor(private customStyle: CustomStyles, private _snackBar: MatSnackBar, public dialog: MatDialog, private globalData: Data, private styleChanger: StyleChangerService) {
   }
 
   openColumnbuilder() {
@@ -23,10 +23,10 @@ export class SidebarComponent implements OnInit {
     dialogConfig.height = '80vh';
     dialogConfig.width = '80vw';
     dialogConfig.disableClose = true;
-    dialogConfig.panelClass = 'custom-dialog-container',
-      dialogConfig.data = {
-        columnData: JSON.parse(JSON.stringify(this.globalData.columnStructure))
-      }
+    dialogConfig.panelClass = 'custom-dialog-container';
+    dialogConfig.data = {
+      columnData: JSON.parse(JSON.stringify(this.globalData.columnStructure))
+    }
     const dialogRef = this.dialog.open(ColumnBuilderComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
       if (data != null) {
@@ -51,6 +51,7 @@ export class SidebarComponent implements OnInit {
         verticalPosition: this.verticalPosition,
         duration: 1500,
       });
+      this.styleChanger.changedSize.next();
     }
   }
 
@@ -62,6 +63,7 @@ export class SidebarComponent implements OnInit {
         verticalPosition: this.verticalPosition,
         duration: 1500,
       });
+      this.styleChanger.changedSize.next();
     }
   }
 

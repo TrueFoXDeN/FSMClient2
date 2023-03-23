@@ -1,21 +1,22 @@
-import {Directive, DoCheck, ElementRef, Input, OnInit} from "@angular/core";
+import {Directive, ElementRef, Input, OnInit} from "@angular/core";
 import {CustomStyles} from "../../customStyles";
 import {stripType} from "../../flightstrip-container/flightstrip/flightstrip.model";
+import {StyleChangerService} from "../../services/style-changer.service";
 
 @Directive({
   selector: '[flightStripContainer]'
 })
-export class FlightStripContainer implements OnInit, DoCheck {
+export class FlightStripContainer implements OnInit {
   @Input("flightStripContainer") type!: stripType
   @Input("squawk") squawk: string = ""
 
-  constructor(private elementRef: ElementRef, private cS: CustomStyles) {
+  constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService) {
+    this.styleChanger.changedColors.subscribe(() => {
+      this.updateStyle();
+    });
   }
 
   ngOnInit(): void {
-  }
-
-  ngDoCheck(): void {
     this.updateStyle();
   }
 
@@ -40,7 +41,6 @@ export class FlightStripContainer implements OnInit, DoCheck {
         this.elementRef.nativeElement.style.color = this.cS.style.fsTextColorVfr;
         break;
     }
-
     if (this.squawk == "7500" || this.squawk == "7600" || this.squawk == "7700") {
       this.elementRef.nativeElement.style.borderColor = this.cS.style.fsEmergencyBorderColor;
     }

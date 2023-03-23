@@ -18,17 +18,14 @@ import {SidebarComponent} from './sidebar/sidebar.component';
 import {ColumnButtonsComponent} from './column/column-button/column-button.component';
 import {BlurOnDirective} from "./directives/general-directives/blur-on.directive";
 import {FormsModule} from "@angular/forms";
-import {MaxHeightDirective} from "./directives/general-directives/max-height.directive";
 import {BodyBackground} from "./directives/general-directives/bodyBackground.directive";
 import {FlightStripContainer} from "./directives/flightstrip-directives/flightStripContainer.directive";
 import {CustomStyles} from "./customStyles";
 import {FlightStripInput} from "./directives/flightstrip-directives/flightStripInput.directive";
-import {SidebarWidth} from "./directives/general-directives/sidebarWidth.directive";
+import {SidebarWidth} from "./directives/sidebar-directives/sidebarWidth.directive";
 import {ColumnWidth} from "./directives/column-directives/columnWidth.directive";
 import {ColumnHeaderHeight} from "./directives/column-directives/columnHeaderHeight.directive";
 import {ColumnHeaderFont} from "./directives/column-directives/columnHeaderFont.directive";
-import {FlightStripCallsign} from "./directives/flightstrip-directives/flightStripCallsign.directive";
-import {FlightStripAirline} from "./directives/flightstrip-directives/flightStripAirline.directive";
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {FlightstripContainerComponent} from './flightstrip-container/flightstrip-container.component';
@@ -47,7 +44,6 @@ import {SidebarButton} from "./directives/sidebar-directives/sidebarButton.direc
 import {MainContainer} from "./directives/general-directives/mainContainer.directive";
 import {ColumnColor} from "./directives/column-directives/columnColor.directive";
 import {ColumnButtonColor} from "./directives/column-directives/columnButtonColor.directive";
-import {AppInput} from "./directives/general-directives/appInput.directive";
 import {FlightStripCompact} from "./directives/flightstrip-directives/flightStripCompact.directive";
 import {FlightstripIcon} from "./directives/flightstrip-directives/flightstripIcon.directive";
 import {
@@ -64,7 +60,6 @@ import {
     SidebarComponent,
     ColumnButtonsComponent,
     BlurOnDirective,
-    MaxHeightDirective,
     BodyBackground,
     FlightStripContainer,
     FlightStripInput,
@@ -72,8 +67,6 @@ import {
     ColumnWidth,
     ColumnHeaderHeight,
     ColumnHeaderFont,
-    FlightStripCallsign,
-    FlightStripAirline,
     FlightstripContainerComponent,
     FlightstripCompactComponent,
     ColumnBuilderComponent,
@@ -83,7 +76,6 @@ import {
     MainContainer,
     ColumnColor,
     ColumnButtonColor,
-    AppInput,
     FlightstripIcon,
     FlightstripButtonComponent,
     FlightStripCompact
@@ -108,7 +100,6 @@ import {
   providers: [
     CustomStyles,
     Data,
-    Util,
     Util,
     {provide: MatDialogRef, useValue:{}}
   ],

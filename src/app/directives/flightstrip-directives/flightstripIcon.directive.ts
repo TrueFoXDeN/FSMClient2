@@ -1,16 +1,20 @@
-import {Directive, DoCheck, ElementRef, Input, OnInit} from "@angular/core";
+import {Directive, ElementRef, Input, OnInit} from "@angular/core";
 import {CustomStyles} from "../../customStyles";
+import {StyleChangerService} from "../../services/style-changer.service";
 
 @Directive({
   selector: '[flightstripIcon]'
 })
-export class FlightstripIcon implements OnInit, DoCheck {
+export class FlightstripIcon implements OnInit {
   @Input("iconState") iconState: string = "inactive"
   @Input("squawk") squawk: string = ""
 
   internalState: string = ""
 
-  constructor(private elementRef: ElementRef, private customStyles: CustomStyles) {
+  constructor(private elementRef: ElementRef, private customStyles: CustomStyles, private styleChanger: StyleChangerService) {
+    this.styleChanger.changedColors.subscribe(() => {
+      this.setStyle();
+    });
   }
 
   ngOnInit(): void {
@@ -39,13 +43,6 @@ export class FlightstripIcon implements OnInit, DoCheck {
       case "error":
         this.elementRef.nativeElement.style.color = this.customStyles.style.iconColorError
         break;
-
     }
   }
-
-  ngDoCheck(): void {
-    this.setStyle()
-  }
-
-
 }

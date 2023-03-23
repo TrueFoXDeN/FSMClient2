@@ -2,7 +2,7 @@ export class CustomStyles {
   public multiplier = 1.0;
   public style = {
     "name": "Dark",
-    "sidebar": "#313335",
+    "sidebarBackground": "#313335",
     "sidebarButton": "#2B2B2B",
     "iconColor" : "#FFFFFF",
     "iconColorSuccess" : "#00FF00",
