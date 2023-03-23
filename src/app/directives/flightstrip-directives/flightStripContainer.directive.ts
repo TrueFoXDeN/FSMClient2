@@ -27,7 +27,6 @@ export class FlightStripContainer implements OnInit, DoCheck {
         this.elementRef.nativeElement.style.background = this.cS.style.fsBackgroundInbound;
         this.elementRef.nativeElement.style.borderColor = this.cS.style.fsBorderColorInbound;
         this.elementRef.nativeElement.style.color = this.cS.style.fsTextColorInbound;
-
         break;
       case stripType.OUTBOUND:
         this.elementRef.nativeElement.style.background = this.cS.style.fsBackgroundOutbound;

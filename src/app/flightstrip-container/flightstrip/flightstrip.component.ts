@@ -7,7 +7,7 @@ import {findIndex} from "rxjs";
 @Component({
   selector: 'app-flightstrip',
   templateUrl: './flightstrip.component.html',
-  styleUrls: ['../../../app-theme.scss', './flightstrip.component.scss']
+  styleUrls: ['./flightstrip.component.scss']
 })
 export class FlightstripComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() fs!: Flightstrip;

@@ -1,107 +1,76 @@
 //General Settings
-$fsInputHeight : 70%;
 $fsInputFontSize: 0.75vw;
 $fsInputMaxFontSize: 1.8em;
 
 .strip {
-  width: calc(100% - 4px);
-  aspect-ratio: 3.6;
-  margin-bottom: 10px;
+  width: 100%;
+  aspect-ratio: 3.0;
+  box-sizing: border-box;
+  padding: 5px 5px 1px;
+}
+
+input {
+  box-sizing: border-box;
+  height: 82%;
+  min-width: 0;
+  border: 0;
+  border-radius: 0;
+  text-align: center;
+  font-family: Roboto Mono, sans-serif;
 
 
-  input {
-    padding: 2px;
-    border: 0;
-    border-radius: 0;
-    height: $fsInputHeight;
-    text-align: center;
-    font-size: max(min(#{$fsInputMaxFontSize}, #{$fsInputFontSize}), 0.1rem);
-    font-family: Roboto Mono, sans-serif;
-    width: 87%;
-
-    &:hover {
-      outline: 1px solid;
-    }
-
-    &:focus {
-      outline: 1px solid;
-    }
+  &:hover {
+    outline: 1px solid;
   }
 
-  label {
-    font-size: max(min(#{$fsInputMaxFontSize}, #{$fsInputFontSize}), 0.1rem);
+  &:focus {
+    outline: 1px solid;
   }
+}
+
+.box-element {
+  width: 19%;
+}
+
+
+.flex-row {
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row;
 
 }
 
 
-.content-container {
-  margin: 0.2em;
-  height: calc(100% - 0.4em);
+.airline{
+  display: flex;
+  justify-content: center;
 }
 
 .flex-container {
+  height: 100%;
   display: flex;
-  height: 75%;
+  flex-flow: column;
 }
 
-.right-side {
-  width: 75%;
-  height: 100% !important;
-}
-
-.bottom {
-  height: 25%;
+.small-content {
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.free-text {
-  width: 98% !important;
+  flex-flow: row;
+  justify-content: space-between;
 }
 
 .small-inputs {
-  width: 36% !important;
+width: 47%;
 }
 
-.double-cell {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 100% !important;
+.long-text {
+  width: 100%;
 }
 
-.sid {
-  width: 94% !important;
+.sid{
+  width: 39% ;
 }
 
-.left-side {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-content: center;
-  align-items: center;
-  margin-left: 0.6%;
-  width: 24.4%;
-  height: 95%;
-  margin-top: 0.7%;
-}
 
-.callsign {
-  height: 32% !important;
-  //font-size: max(min(2em, 1vw), 0.1rem) !important;
-  width: 92% !important;
-}
 
-.airline {
-  height: 20% !important;
-}
-
-.squawk {
-  align-self: flex-start;
-  //margin-right: 4.5%;
-  width: 92% !important;
-  height: 23.5% !important;
-
-}

@@ -1,57 +1,36 @@
-<div class="strip"
-     [ngClass]="{'outbound': fs.type === stripType.OUTBOUND ,'inbound': fs.type === stripType.INBOUND,'vfr': fs.type === stripType.VFR}"
-     [flightStripContainer]="fs.type">
-  <div class="content-container">
-    <div class="flex-container">
-      <div class="left-side">
-        <input type="text" class="callsign" placeholder="Callsign" [flightStripInput]="fs.type" callsign
-                [(ngModel)]="fs.callsign">
-        <label class="airline" airline>Airline</label>
-        <input type="text" placeholder="Squawk" class="squawk" [flightStripInput]="fs.type" [(ngModel)]="fs.squawk">
-      </div>
-      <!--<div class="right-side">-->
-      <mat-grid-list cols="8" rowHeight="33.333%" class="right-side">
-        <mat-grid-tile [colspan]="2" [rowspan]="1">
-          <input type="text" placeholder="Dep" [(ngModel)]="fs.departureIcao" [flightStripInput]="fs.type">
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="2" [rowspan]="1">
-          <input type="text" placeholder="Aircraft" [(ngModel)]="fs.aircraft" [flightStripInput]="fs.type">
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="2" [rowspan]="1">
-          <input type="text" placeholder="Altitude" [(ngModel)]="fs.altitude" [flightStripInput]="fs.type">
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="2" [rowspan]="1">
-          <input type="text" placeholder="Gate" [(ngModel)]="fs.gate" [flightStripInput]="fs.type">
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="2" [rowspan]="1">
-          <input type="text" placeholder="Arr" [(ngModel)]="fs.arrivalIcao" [flightStripInput]="fs.type">
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="2" [rowspan]="1">
-          <div class="double-cell">
-            <input type="text" placeholder="W" class="small-inputs" [(ngModel)]="fs.wakeCategory"
-                   [flightStripInput]="fs.type">
-            <input type="text" placeholder="FR" class="small-inputs" [(ngModel)]="fs.flightrule"
-                   [flightStripInput]="fs.type">
-          </div>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="2" [rowspan]="1">
-          <input type="text" placeholder="Status" value="{{status[fs.status]}}" [flightStripInput]="fs.type">
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="2" [rowspan]="1">
-          <input type="text" placeholder="Info" [(ngModel)]="fs.info" [flightStripInput]="fs.type">
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="2" [rowspan]="1">
-          <input type="text" placeholder="Runway" [(ngModel)]="fs.runway" [flightStripInput]="fs.type">
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="4" [rowspan]="1">
-          <input type="text" placeholder="SID/STAR" class="sid" [(ngModel)]="fs.sidStar" [flightStripInput]="fs.type">
-        </mat-grid-tile>
-      </mat-grid-list>
+<div class="strip" [flightStripContainer]="fs.type">
+  <div class="flex-container">
+    <div class="flex-row">
+      <input type="text" class="box-element" placeholder="Callsign" [flightStripInput]="fs.type" [(ngModel)]="fs.callsign">
+      <input type="text" class="box-element" placeholder="Dep" [(ngModel)]="fs.departureIcao" [flightStripInput]="fs.type">
+      <input type="text" class="box-element" placeholder="Aircraft" [(ngModel)]="fs.aircraft" [flightStripInput]="fs.type">
+      <input type="text" class="box-element" placeholder="Aircraft" [(ngModel)]="fs.aircraft" [flightStripInput]="fs.type">
+      <div class="box-element"></div>
     </div>
-    <div class="bottom">
-      <input type="text" class="free-text" placeholder="Free Text" [(ngModel)]="fs.freeText"
-             [flightStripInput]="fs.type">
-      <button></button>
+    <div class="flex-row">
+      <div class="box-element airline"><span class="airline">Airline</span></div>
+      <input type="text" class="box-element" placeholder="Arr" [(ngModel)]="fs.arrivalIcao" [flightStripInput]="fs.type">
+      <div class="box-element small-content">
+        <input type="text" placeholder="W" class="small-inputs" [(ngModel)]="fs.wakeCategory"
+               [flightStripInput]="fs.type">
+        <input type="text" placeholder="FR" class="small-inputs" [(ngModel)]="fs.flightrule"
+               [flightStripInput]="fs.type">
+      </div>
+      <input type="text" class="box-element" placeholder="Status" value="{{status[fs.status]}}" [flightStripInput]="fs.type">
+      <input type="text" class="box-element" placeholder="Gate" [(ngModel)]="fs.gate" [flightStripInput]="fs.type">
+    </div>
+    <div class="flex-row">
+      <input type="text" class="box-element" placeholder="Squawk" [flightStripInput]="fs.type" [(ngModel)]="fs.squawk">
+      <input type="text" class="box-element" placeholder="Runway" [(ngModel)]="fs.runway" [flightStripInput]="fs.type">
+      <input type="text" class="sid" placeholder="SID/STAR" [(ngModel)]="fs.sidStar" [flightStripInput]="fs.type">
+      <input type="text" class="box-element" placeholder="Info" [(ngModel)]="fs.info" [flightStripInput]="fs.type">
+    </div>
+    <div class="flex-row">
+      <input type="text" placeholder="Route" [(ngModel)]="fs.route" [flightStripInput]="fs.type" class="long-text">
+    </div>
+    <div class="flex-row last">
+      <input type="text" placeholder="Free Text" [(ngModel)]="fs.freeText" [flightStripInput]="fs.type"
+             class="long-text">
     </div>
   </div>
 </div>

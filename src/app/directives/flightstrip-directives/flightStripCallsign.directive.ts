@@ -18,7 +18,7 @@ export class FlightStripCallsign implements OnInit, DoCheck {
   }
 
   updateStyle() {
-    this.elementRef.nativeElement.style.fontSize = `${14 * this.cS.multiplier}pt`;
+    this.elementRef.nativeElement.style.fontSize = `${12 * this.cS.multiplier}pt`;
 
   }
 

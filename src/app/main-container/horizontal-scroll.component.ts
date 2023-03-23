@@ -96,18 +96,21 @@ export class HorizontalScrollComponent implements OnInit, OnChanges, DoCheck {
 
 
   loadConfig() {
-    if (typeof (localStorage.getItem("columnConfig")) != "undefined") {
+    if (localStorage.getItem("columnConfig") !== null) {
       let data = JSON.parse(localStorage.getItem("columnConfig") || '{}')
       this.globalData.columnStructure = data.columnData
+
+    } else {
+      this.globalData.columnStructure = []
     }
     this.dashboard = this.globalData.columnStructure;
+
     this.globalData.columnStructure.forEach((column) => {
-      if (typeof (this.globalData.flightstripData[column?.['uuid']]) == "undefined") {
+      if (this.globalData.flightstripData[column?.['uuid']] !== null) {
         console.log(`Neue Column: ${column?.['name']}`)
         this.globalData.flightstripData[column?.['uuid']] = {name: column?.['name'], flightstrips: []}
       }
     });
-
   }
 
   ngOnInit(): void {

@@ -33,7 +33,7 @@ export class SidebarComponent implements OnInit {
         this.globalData.columnStructure = data;
       }
       this.globalData.columnStructure.forEach((column) => {
-        if (typeof (this.globalData.flightstripData[column?.['uuid']]) == "undefined") {
+        if (this.globalData.flightstripData[column?.['uuid']] !== null) {
           console.log(`Neue Column: ${column?.['name']}`)
           this.globalData.flightstripData[column?.['uuid']] = {name: column?.['name'], flightstrips: []}
         }

@@ -13,10 +13,11 @@ export class Flightstrip {
   public gate: string = "";
   public info: string = "";
   public airline: string = "";
-  public squawk: number = 0;
+  public squawk: string = "";
   public runway: string = "";
   public sidStar: string = "";
   public freeText: string = "";
+  public route: string = "";
 
 
   constructor(identifier: string, type: stripType, columnId: string) {
