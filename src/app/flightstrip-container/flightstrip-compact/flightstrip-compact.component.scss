@@ -1,6 +1,128 @@
-.container {
-  width: 100%;
-  aspect-ratio: 4.0;
-  background-color: red;
+
+.strip {
+  aspect-ratio: 5;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.cols {
+  display: flex;
+  height: 100%;
+
+  .col1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    width: 25%;
+    border-right: 1px solid white;
+
+    .callsign {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40%;
+      font-weight: bold;
+    }
+
+    .airline {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 30%;
+    }
+
+    .aircraft-size {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      height: 30%;
+    }
+  }
+
+  .col2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    width: 13%;
+    border-right: 1px solid white;
+
+    .departure {
+      display: flex;
+      align-items: center;
+      height: 33%;
+    }
+
+    .arrival {
+      display: flex;
+      align-items: center;
+      height: 33%
+    }
+
+    .flightrule {
+      display: flex;
+      align-items: center;
+      height: 33%
+    }
+  }
+
+  .col3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    width: 19%;
+    border-right: 1px solid white;
+
+    .runway {
+      display: flex;
+      align-items: center;
+      height: 33%;
+    }
+
+    .sidStar {
+      display: flex;
+      align-items: center;
+      height: 33%
+    }
+
+    .altitude {
+      display: flex;
+      align-items: center;
+      height: 33%
+    }
+  }
+
+  .col4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    margin-left: 5px;
+    width: 42%;
+
+    .status {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 33%;
+    }
+
+    .route {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 33%
+    }
+
+    .freeText {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 33%
+    }
+  }
 
 }

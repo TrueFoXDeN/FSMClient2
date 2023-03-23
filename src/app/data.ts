@@ -18,14 +18,14 @@ export class Data {
           "altitude": "FL70",
           "gate": "12",
           "info": "Infos",
-          "route": "",
-          "airline": "",
+          "airline": "LUFTHANSA",
           "squawk": "1000",
           "runway": "26L",
           "sidStar": "MARUN5M",
           "freeText": "free text lalal alal ala",
           "type": 1,
-          "status": 0
+          "status": 0,
+          "route":"OBOK2G OBOKA Z28 DIBIR BUDIP RAVLO Y70 OTBED L60 PENIL M144 BAGSO ETARI NATD IRLOK N584B MT J545 YVO Q923 HOCKE Q824 FNT J547 OBK J100 OBH J10 HBU J146 NOOTN Q88 LAKRR Q73 HAKMN ANJLL4"
         }
       ]
     },
@@ -38,10 +38,8 @@ export class Data {
       "flightstrips": []
     }
   }
-  private Route = "OBOK2G OBOKA Z28 DIBIR BUDIP RAVLO Y70 OTBED L60 PENIL M144 BAGSO ETARI NATD IRLOK N584B MT J545 YVO Q923 HOCKE Q824 FNT J547 OBK J100 OBH J10 HBU J146 NOOTN Q88 LAKRR Q73 HAKMN ANJLL4"
 
   constructor() {
   }
-
 
 }

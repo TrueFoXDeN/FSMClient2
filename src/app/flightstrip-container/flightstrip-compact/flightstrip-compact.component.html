@@ -1,1 +1,31 @@
-<div class="container"></div>
+<div class="strip" flightStripCompact [flightStripContainer]="fs.type">
+  <div class="cols">
+    <div class="col1">
+      <span class="callsign" flightStripCompact [flightStripType]="fs.type" [flightStripFontSize]="'large'" >{{fs.callsign}}</span>
+      <span class="airline" flightStripCompact [flightStripType]="fs.type" [flightStripFontSize]="'medium'">{{fs.airline}}</span>
+      <div class="aircraft-size">
+        <span class="aircraft" flightStripCompact [flightStripType]="fs.type" [flightStripFontSize]="'medium'">{{fs.aircraft}}</span>
+        <span class="wake" flightStripCompact [flightStripType]="fs.type" [flightStripFontSize]="'medium'">{{fs.wakeCategory}}</span>
+      </div>
+    </div>
+    <div class="col2">
+      <span class="departure" flightStripCompact [flightStripType]="fs.type" [flightStripFontSize]="'medium'" >{{fs.departureIcao}}</span>
+      <span class="arrival" flightStripCompact [flightStripType]="fs.type" [flightStripFontSize]="'medium'">{{fs.arrivalIcao}}</span>
+      <span class="flightrule" flightStripCompact [flightStripType]="fs.type" [flightStripFontSize]="'medium'">{{fs.flightrule}}</span>
+    </div>
+    <div class="col3">
+      <span class="runway" flightStripCompact [flightStripType]="fs.type" [flightStripFontSize]="'medium'" >{{fs.runway}}</span>
+      <span class="sidStar" flightStripCompact [flightStripType]="fs.type" [flightStripFontSize]="'medium'">{{fs.sidStar}}</span>
+      <span class="altitude" flightStripCompact [flightStripType]="fs.type" [flightStripFontSize]="'medium'">{{fs.altitude}}</span>
+    </div>
+    <div class="col4">
+      <div class="status-row">
+        <span class="status" flightStripCompact [flightStripType]="fs.type" [flightStripFontSize]="'medium'" >{{status[fs.status]}}</span>
+      </div>
+
+      <span class="route" flightStripCompact [flightStripType]="fs.type" [flightStripFontSize]="'small'">{{trimRoute(fs.route)}}</span>
+      <span class="freeText" flightStripCompact [flightStripType]="fs.type" [flightStripFontSize]="'small'">{{fs.freeText}}</span>
+    </div>
+  </div>
+
+</div>

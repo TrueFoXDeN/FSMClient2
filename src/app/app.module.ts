@@ -48,6 +48,7 @@ import {MainContainer} from "./directives/general-directives/mainContainer.direc
 import {ColumnColor} from "./directives/column-directives/columnColor.directive";
 import {ColumnButtonColor} from "./directives/column-directives/columnButtonColor.directive";
 import {AppInput} from "./directives/general-directives/appInput.directive";
+import {FlightStripCompact} from "./directives/flightstrip-directives/flightStripCompact.directive";
 import {FlightstripIcon} from "./directives/flightstrip-directives/flightstripIcon.directive";
 import {
   FlightstripButtonComponent
@@ -84,7 +85,8 @@ import {
     ColumnButtonColor,
     AppInput,
     FlightstripIcon,
-    FlightstripButtonComponent
+    FlightstripButtonComponent,
+    FlightStripCompact
   ],
   imports: [
     BrowserModule,
@@ -100,8 +102,7 @@ import {
     MatSnackBarModule,
     DialogModule,
     GridsterModule,
-    MatDialogModule,
-
+    MatDialogModule
 
   ],
   providers: [
