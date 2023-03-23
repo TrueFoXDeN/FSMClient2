@@ -104,7 +104,6 @@ export class HorizontalScrollComponent implements OnInit, OnChanges, DoCheck {
       this.globalData.columnStructure = []
     }
     this.dashboard = this.globalData.columnStructure;
-
     this.globalData.columnStructure.forEach((column) => {
       if (this.globalData.flightstripData[column?.['uuid']] == null) {
         console.log(`Neue Column: ${column?.['name']}`)

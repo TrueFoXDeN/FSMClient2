@@ -48,7 +48,7 @@ import {MainContainer} from "./directives/general-directives/mainContainer.direc
 import {ColumnColor} from "./directives/column-directives/columnColor.directive";
 import {ColumnButtonColor} from "./directives/column-directives/columnButtonColor.directive";
 import {AppInput} from "./directives/general-directives/appInput.directive";
-import {FlightstripIcon} from "./directives/flightstrip-directives/flightstrip-icon.directive";
+import {FlightstripIcon} from "./directives/flightstrip-directives/flightstripIcon.directive";
 import {
   FlightstripButtonComponent
 } from "./flightstrip-container/flightstrip/flightstrip-button/flightstrip-button.component";
