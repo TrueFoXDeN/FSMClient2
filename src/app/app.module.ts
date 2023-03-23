@@ -48,6 +48,10 @@ import {MainContainer} from "./directives/general-directives/mainContainer.direc
 import {ColumnColor} from "./directives/column-directives/columnColor.directive";
 import {ColumnButtonColor} from "./directives/column-directives/columnButtonColor.directive";
 import {AppInput} from "./directives/general-directives/appInput.directive";
+import {FlightstripIcon} from "./directives/flightstrip-directives/flightstrip-icon.directive";
+import {
+  FlightstripButtonComponent
+} from "./flightstrip-container/flightstrip/flightstrip-button/flightstrip-button.component";
 
 @NgModule({
   declarations: [
@@ -78,7 +82,9 @@ import {AppInput} from "./directives/general-directives/appInput.directive";
     MainContainer,
     ColumnColor,
     ColumnButtonColor,
-    AppInput
+    AppInput,
+    FlightstripIcon,
+    FlightstripButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -94,7 +100,8 @@ import {AppInput} from "./directives/general-directives/appInput.directive";
     MatSnackBarModule,
     DialogModule,
     GridsterModule,
-    MatDialogModule
+    MatDialogModule,
+
 
   ],
   providers: [

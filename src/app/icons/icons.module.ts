@@ -22,7 +22,12 @@ import {
   Save,
   Upload,
   Download,
-  X
+  X,
+  AlertTriangle,
+  Headphones,
+  Type,
+  Archive,
+  ChevronUp
 } from 'angular-feather/icons';
 
 // Select some icons (use an object, not an array)
@@ -47,8 +52,12 @@ const icons = {
   Save,
   Upload,
   Download,
-  X
-
+  X,
+  AlertTriangle,
+  Headphones,
+  Type,
+  Archive,
+  ChevronUp
 };
 
 @NgModule({

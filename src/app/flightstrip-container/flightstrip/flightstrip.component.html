@@ -4,8 +4,12 @@
       <input type="text" class="box-element" placeholder="Callsign" [flightStripInput]="fs.type" [(ngModel)]="fs.callsign">
       <input type="text" class="box-element" placeholder="Dep" [(ngModel)]="fs.departureIcao" [flightStripInput]="fs.type">
       <input type="text" class="box-element" placeholder="Aircraft" [(ngModel)]="fs.aircraft" [flightStripInput]="fs.type">
-      <input type="text" class="box-element" placeholder="Aircraft" [(ngModel)]="fs.aircraft" [flightStripInput]="fs.type">
-      <div class="box-element"></div>
+      <input type="text" class="box-element" placeholder="Altitude" [(ngModel)]="fs.altitude" [flightStripInput]="fs.type">
+      <div class="box-element icon-container">
+        <i-feather name="alert-triangle" class="icon" flightstripIcon [iconState]="'inactive'"></i-feather>
+        <i-feather name="headphones" class="icon"></i-feather>
+        <app-flightstrip-button icon="archive" class="button"></app-flightstrip-button>
+      </div>
     </div>
     <div class="flex-row">
       <div class="box-element airline"><span class="airline">Airline</span></div>
@@ -31,6 +35,7 @@
     <div class="flex-row last">
       <input type="text" placeholder="Free Text" [(ngModel)]="fs.freeText" [flightStripInput]="fs.type"
              class="long-text">
+      <app-flightstrip-button icon="chevron-up" class="chevron"></app-flightstrip-button>
     </div>
   </div>
 </div>

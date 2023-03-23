@@ -39,11 +39,11 @@ input {
   height: 100%;
   display: flex;
   flex-flow: row;
-
+  align-items: center;
 }
 
 
-.airline{
+.airline {
   display: flex;
   justify-content: center;
 }
@@ -61,15 +61,40 @@ input {
 }
 
 .small-inputs {
-width: 47%;
+  width: 47%;
 }
 
 .long-text {
   width: 100%;
 }
 
-.sid{
-  width: 39% ;
+.sid {
+  width: 39%;
+}
+
+.icon-container {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  gap: 13%;
+}
+
+.icon {
+  width: 20%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+}
+
+.button{
+  width: 25%;
+  aspect-ratio: 1;
+}
+
+.chevron{
+  height: 88%;
+  aspect-ratio: 1;
 }
 
 
