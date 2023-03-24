@@ -39,7 +39,7 @@ input {
   height: 100%;
   display: flex;
   flex-flow: row;
-  align-items: center;
+  -webkit-box-align: center;
 }
 
 
@@ -56,8 +56,10 @@ input {
 
 .small-content {
   display: flex;
+  -webkit-box-align: center;
   flex-flow: row;
   justify-content: space-between;
+  height: 100%;
 }
 
 .small-inputs {
@@ -68,15 +70,11 @@ input {
   width: 100%;
 }
 
-.sid {
-  width: 39%;
-}
-
 .icon-container {
   display: flex;
   flex-flow: row;
   justify-content: center;
-  align-items: center;
+  -webkit-box-align: center;
   gap: 13%;
 }
 
@@ -87,14 +85,32 @@ input {
   -webkit-box-align: center;
 }
 
-.button{
+.button {
   width: 100%;
   aspect-ratio: 1;
 }
 
-.chevron{
+.chevron {
   height: 88%;
   aspect-ratio: 1;
+}
+
+.chevron-status{
+  width: 12%;
+  aspect-ratio: 1;
+}
+
+.status-container {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  width: 39%;
+  height: 82%;
+}
+
+.status{
+  width: 70%;
+  height: 100%;
 }
 
 

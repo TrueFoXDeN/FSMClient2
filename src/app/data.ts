@@ -26,6 +26,7 @@ export class Data {
           "type": 1,
           "triangleIconState": 0,
           "status": 0,
+          "compactMode" : false,
           "route":"OBOK2G OBOKA Z28 DIBIR BUDIP RAVLO Y70 OTBED L60 PENIL M144 BAGSO ETARI NATD IRLOK N584B MT J545 YVO Q923 HOCKE Q824 FNT J547 OBK J100 OBH J10 HBU J146 NOOTN Q88 LAKRR Q73 HAKMN ANJLL4"
         }
       ]

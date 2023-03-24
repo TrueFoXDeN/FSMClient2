@@ -6,10 +6,10 @@ import {FlightstripService} from "../flightstrip.service";
 import {Subject} from "rxjs";
 
 @Directive({
-  selector: '[flightStripContainer]'
+  selector: '[flightStrip]'
 })
 export class FlightStripContainer implements OnInit {
-  @Input("flightStripContainer") type!: stripType
+  @Input("flightStrip") type!: stripType
   squawk: string = ""
 
   constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService, private fsService: FlightstripService) {
@@ -24,15 +24,6 @@ export class FlightStripContainer implements OnInit {
     this.updateStyle();
   }
 
-
-  onDragStart() {
-    this.elementRef.nativeElement.style.borderColor = this.cS.style.fsDragHighlight
-  }
-
-  onDragEnd() {
-    this.updateStyle()
-  }
-
   ngOnInit(): void {
     this.updateStyle();
   }
@@ -40,7 +31,6 @@ export class FlightStripContainer implements OnInit {
   updateStyle() {
     this.elementRef.nativeElement.style.borderWidth = "2px";
     this.elementRef.nativeElement.style.borderStyle = "solid";
-
     switch (this.type) {
       case stripType.INBOUND:
         this.elementRef.nativeElement.style.background = this.cS.style.fsBackgroundInbound;

@@ -19,7 +19,7 @@ import {ColumnButtonsComponent} from './column/column-button/column-button.compo
 import {BlurOnDirective} from "./directives/general-directives/blur-on.directive";
 import {FormsModule} from "@angular/forms";
 import {BodyBackground} from "./directives/general-directives/bodyBackground.directive";
-import {FlightStripContainer} from "./flightstrip-container/flightstrip-directives/flightStripContainer.directive";
+import {FlightStripContainer} from "./flightstrip-container/flightstrip-directives/flightStrip.directive";
 import {CustomStyles} from "./customStyles";
 import {FlightStripInput} from "./flightstrip-container/flightstrip-directives/flightStripInput.directive";
 import {SidebarWidth} from "./sidebar/sidebar-directives/sidebarWidth.directive";
@@ -78,7 +78,7 @@ import {
     ColumnButtonColor,
     FlightstripIcon,
     FlightstripButtonComponent,
-    FlightStripCompact
+    FlightStripCompact,
   ],
   imports: [
     BrowserModule,

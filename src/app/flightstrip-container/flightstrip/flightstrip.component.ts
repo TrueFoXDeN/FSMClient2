@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Flightstrip, iconState, statusArrival, statusDeparture, statusVfr, stripType} from '../flightstrip.model';
 import {Data} from "../../data";
 import {findIndex, Subject} from "rxjs";
 import {FlightstripService} from "../flightstrip.service";
-import {FlightStripContainer} from "../flightstrip-directives/flightStripContainer.directive";
+import {FlightStripContainer} from "../flightstrip-directives/flightStrip.directive";
 import {FlightstripIcon} from "../flightstrip-directives/flightstripIcon.directive";
+import {FlightStripInput} from "../flightstrip-directives/flightStripInput.directive";
 
 
 @Component({
@@ -12,19 +13,17 @@ import {FlightstripIcon} from "../flightstrip-directives/flightstripIcon.directi
   templateUrl: './flightstrip.component.html',
   styleUrls: ['./flightstrip.component.scss']
 })
-export class FlightstripComponent implements OnInit {
+export class FlightstripComponent implements OnInit, AfterViewInit {
   @ViewChild(FlightStripContainer) fsContainerDir: any;
   @ViewChild(FlightstripIcon) fsIconDir: any;
+  @ViewChild(FlightStripInput) fsInputDir: any;
   @Input() fs!: Flightstrip;
   @Output("switchToCompact") compactSwitch = new EventEmitter<void>()
   status: any;
-  isMouseMoving: boolean = false;
-  isMouseDown: boolean = false;
-  changedSquawk: Subject<string>;
+
 
   constructor(private globalData: Data, private fsService: FlightstripService) {
-    this.changedSquawk = new Subject<string>()
-    console.log(this.changedSquawk)
+
   }
 
   ngOnInit() {
@@ -39,7 +38,9 @@ export class FlightstripComponent implements OnInit {
         this.status = statusVfr
         break;
     }
+
   }
+
 
   changeToCompactMode() {
     this.compactSwitch.emit()
@@ -62,21 +63,6 @@ export class FlightstripComponent implements OnInit {
     this.fsIconDir.onSquawkChange(this.fs.squawk)
   }
 
-  onMouseDown() {
-    this.isMouseDown = true
-    setTimeout(() => {
-      if (!this.isMouseMoving && this.isMouseDown) {
-        this.fsContainerDir.onDragStart()
-      }
-    }, this.fsService.dragDelay);
-    this.isMouseMoving = false;
-  }
-
-  onMouseUp() {
-    this.isMouseDown = false;
-    this.fsContainerDir.onDragEnd()
-  }
-
   onInputFocus() {
     this.fsService.isInputFocused = true;
   }
@@ -85,5 +71,45 @@ export class FlightstripComponent implements OnInit {
     this.fsService.isInputFocused = false;
   }
 
+  onDrag() {
+    this.fsInputDir.onDrag();
+  }
+
+  ngAfterViewInit(): void {
+    this.onSquawkChange();
+  }
+
+  nextStatus() {
+    this.checkTypeBeforeStatusChange(1)
+  }
+
+  prevStatus() {
+    this.checkTypeBeforeStatusChange(-1)
+  }
+
+  checkTypeBeforeStatusChange(direction: number) {
+    switch (this.fs.type) {
+      case stripType.OUTBOUND:
+        this.setStatus(direction, statusDeparture)
+        break;
+      case stripType.INBOUND:
+        this.setStatus(direction, statusArrival)
+        break;
+      case stripType.VFR:
+        this.setStatus(direction, statusVfr)
+        break;
+    }
+  }
+
+  setStatus(increment: number, object: any) {
+    let enumCount = Object.keys(object).length / 2;
+    let state = this.fs.status;
+    if (state < enumCount - 1 && increment == 1) {
+      state++;
+    } else if (state > 0 && increment == -1) {
+      state--;
+    }
+    this.fs.status = state;
+  }
 
 }

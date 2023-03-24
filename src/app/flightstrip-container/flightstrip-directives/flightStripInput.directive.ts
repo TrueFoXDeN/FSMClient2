@@ -23,6 +23,7 @@ export class FlightStripInput implements OnInit {
   }
 
 
+
   updateStyle() {
     this.elementRef.nativeElement.style.fontSize = `${10 * this.cS.multiplier}pt`
     switch (this.type) {

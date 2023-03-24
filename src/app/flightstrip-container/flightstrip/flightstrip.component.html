@@ -1,4 +1,4 @@
-<div class="strip" [flightStripContainer]="fs.type" (mousedown)="onMouseDown()" (mouseup)="onMouseUp()" (mousemove)="isMouseMoving = true">
+<div class="strip" [flightStrip]="fs.type">
   <div class="flex-container">
     <div class="flex-row">
       <input type="text" class="box-element" placeholder="Callsign" [flightStripInput]="fs.type"
@@ -27,7 +27,7 @@
         <input type="text" placeholder="FR" class="small-inputs" [(ngModel)]="fs.flightrule"
                [flightStripInput]="fs.type">
       </div>
-      <input type="text" class="box-element" placeholder="Status" value="{{status[fs.status]}}"
+      <input type="text" class="box-element" placeholder="SID/STAR" [(ngModel)]="fs.sidStar"
              [flightStripInput]="fs.type">
       <input type="text" class="box-element" placeholder="Gate" [(ngModel)]="fs.gate" [flightStripInput]="fs.type">
     </div>
@@ -35,7 +35,12 @@
       <input type="text" class="box-element" placeholder="Squawk" [flightStripInput]="fs.type" [(ngModel)]="fs.squawk"
              (focusout)="onSquawkChange()">
       <input type="text" class="box-element" placeholder="Runway" [(ngModel)]="fs.runway" [flightStripInput]="fs.type">
-      <input type="text" class="sid" placeholder="SID/STAR" [(ngModel)]="fs.sidStar" [flightStripInput]="fs.type">
+      <div class="status-container box-element">
+        <app-flightstrip-button icon="chevron-left" class="chevron-status" (click)="prevStatus()"></app-flightstrip-button>
+        <input type="text" placeholder="Status" value="{{status[fs.status]}}" [flightStripInput]="fs.type"
+               class="status">
+        <app-flightstrip-button icon="chevron-right" class="chevron-status" (click)="nextStatus()"></app-flightstrip-button>
+      </div>
       <input type="text" class="box-element" placeholder="Info" [(ngModel)]="fs.info" [flightStripInput]="fs.type">
     </div>
     <div class="flex-row">

@@ -15,6 +15,9 @@ export class ColumnComponent {
   @Input("uuid") uuid = ""
   @Output() submittedValue = new EventEmitter<void>();
   public strips: Flightstrip[] = []
+  isMouseMoving: boolean = false;
+  isMouseDown: boolean = false;
+  isDragged = false;
 
   constructor(public data: Data, private util: Util, private fsService: FlightstripService) {
   }
@@ -82,6 +85,25 @@ export class ColumnComponent {
   }
 
   dragEnded() {
-    this.fsService.dragFlightstrip.next(false)
+    this.isDragged = false;
+  }
+
+  onMouseDown() {
+    this.isMouseDown = true
+    setTimeout(() => {
+      if (!this.isMouseMoving && this.isMouseDown) {
+        this.isDragged = true;
+      }
+    }, this.fsService.dragDelay-20);
+    this.isMouseMoving = false;
+  }
+
+  onMouseUp() {
+    this.isMouseDown = false;
+    this.isDragged = false;
+  }
+
+  onMouseMove() {
+    this.isMouseMoving = true
   }
 }
