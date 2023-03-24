@@ -16,7 +16,6 @@ export class FlightStripContainer implements OnInit {
     this.styleChanger.changedColors.subscribe(() => {
       this.updateStyle();
     });
-
   }
 
   onSquawkChange(squawk: string) {
