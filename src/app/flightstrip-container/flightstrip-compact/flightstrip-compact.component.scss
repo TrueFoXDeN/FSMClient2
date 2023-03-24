@@ -15,7 +15,7 @@
     align-items: center;
     flex-flow: column;
     width: 25%;
-    border-right: 1px solid white;
+    //border-right: 1px solid red;
 
     .callsign {
       display: flex;
@@ -47,7 +47,7 @@
     align-items: center;
     flex-flow: column;
     width: 13%;
-    border-right: 1px solid white;
+    //border-right: 1px solid #90a2a9;
 
     .departure {
       display: flex;
@@ -74,7 +74,7 @@
     align-items: center;
     flex-flow: column;
     width: 19%;
-    border-right: 1px solid white;
+    //border-right: 1px solid #90a2a9;
 
     .runway {
       display: flex;
@@ -100,15 +100,47 @@
     justify-content: center;
     align-items: center;
     flex-flow: column;
+    //margin-left: 5px;
+    //margin-left: 5px;
+    //border-right: 1px solid #90a2a9;
+    width: 15%;
+
+    .squawk {
+      display: flex;
+      align-items: center;
+      height: 33%;
+    }
+
+    .gate {
+      display: flex;
+      align-items: center;
+      height: 33%
+    }
+
+    .info {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      height: 33%;
+      padding-left: 2px;
+      padding-right: 2px;
+    }
+  }
+
+  .col5 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
     margin-left: 5px;
     width: 42%;
 
     .top-row {
-
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-flow: row;
+      height: 30%;
       width: 100%;
 
       .status-row {
@@ -122,8 +154,21 @@
         gap: 5px;
 
         .status-button {
-          height: 100%;
+          height: 80%;
           aspect-ratio: 1;
+        }
+      }
+
+      .icons{
+        display: flex;
+        flex-flow: row;
+        justify-content: end;
+        height: 60%;
+        gap: 5px;
+
+        .icon{
+          aspect-ratio: 1;
+          width: 35%;
         }
       }
     }
@@ -140,7 +185,7 @@
       //justify-content: center;
       //align-items: center;
       text-align: justify;
-      height: 40%
+      height: 35%
     }
 
     .freeText {
@@ -148,7 +193,7 @@
       //justify-content: center;
       //align-items: center;
       text-align: justify;
-      height: 40%
+      height: 35%
     }
   }
 

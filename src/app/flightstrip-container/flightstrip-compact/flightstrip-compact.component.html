@@ -1,6 +1,6 @@
 <div class="strip" flightStripCompact [flightStrip]="fs.type" (mousedown)="onMouseDown()" (mouseup)="onMouseUp()" (mousemove)="isMouseMoving = true">
   <div class="cols">
-    <div class="col1">
+    <div class="col1" flightStripCompact [flightStripCompactDivider]="'right'" [flightStripType]="fs.type">
       <span class="callsign" flightStripCompact [flightStripType]="fs.type"
             [flightStripFontSize]="'large'">{{fs.callsign}}</span>
       <span class="airline" flightStripCompact [flightStripType]="fs.type"
@@ -12,7 +12,7 @@
               [flightStripFontSize]="'medium'">{{fs.wakeCategory}}</span>
       </div>
     </div>
-    <div class="col2">
+    <div class="col2" flightStripCompact [flightStripCompactDivider]="'right'" [flightStripType]="fs.type">
       <span class="departure" flightStripCompact [flightStripType]="fs.type"
             [flightStripFontSize]="'medium'">{{fs.departureIcao}}</span>
       <span class="arrival" flightStripCompact [flightStripType]="fs.type"
@@ -20,7 +20,7 @@
       <span class="flightrule" flightStripCompact [flightStripType]="fs.type"
             [flightStripFontSize]="'medium'">{{fs.flightrule}}</span>
     </div>
-    <div class="col3">
+    <div class="col3" flightStripCompact [flightStripCompactDivider]="'right'" [flightStripType]="fs.type">
       <span class="runway" flightStripCompact [flightStripType]="fs.type"
             [flightStripFontSize]="'medium'">{{fs.runway}}</span>
       <span class="sidStar" flightStripCompact [flightStripType]="fs.type"
@@ -28,7 +28,15 @@
       <span class="altitude" flightStripCompact [flightStripType]="fs.type"
             [flightStripFontSize]="'medium'">{{fs.altitude}}</span>
     </div>
-    <div class="col4">
+    <div class="col4" flightStripCompact [flightStripCompactDivider]="'right'" [flightStripType]="fs.type">
+       <span class="squawk" flightStripCompact [flightStripType]="fs.type"
+             [flightStripFontSize]="'medium'">{{fs.squawk}}</span>
+      <span class="gate" flightStripCompact [flightStripType]="fs.type"
+            [flightStripFontSize]="'medium'">{{fs.gate}}</span>
+      <span class="info" flightStripCompact [flightStripType]="fs.type"
+            [flightStripFontSize]="'small'">{{fs.info}}</span>
+    </div>
+    <div class="col5">
       <div class="top-row">
 
         <div class="status-row">
@@ -36,6 +44,10 @@
           <span class="status" flightStripCompact [flightStripType]="fs.type"
                 [flightStripFontSize]="'medium'">{{status[fs.status]}}</span>
           <app-flightstrip-button class="status-button" icon="chevron-right"></app-flightstrip-button>
+        </div>
+        <div class="icons">
+          <i-feather name="alert-triangle" class="icon" flightstripIcon [iconState]="fs.triangleIconState"></i-feather>
+          <i-feather name="headphones" class="icon"></i-feather>
         </div>
       </div>
       <span class="route" flightStripCompact [flightStripType]="fs.type"

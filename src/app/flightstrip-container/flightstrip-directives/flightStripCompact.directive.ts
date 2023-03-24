@@ -10,6 +10,9 @@ export class FlightStripCompact implements OnInit {
   @Input("flightStripType") type!: stripType
   @Input("flightStripFontSize") fontSize: string = "medium"
 
+  @Input("flightStripCompactDivider") divider: string = "none"
+
+
   constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService) {
     this.styleChanger.changedColors.subscribe(() => {
       this.updateStyle();
@@ -34,24 +37,40 @@ export class FlightStripCompact implements OnInit {
         break;
     }
 
+
     switch (this.type) {
       case stripType.INBOUND:
-        //this.elementRef.nativeElement.setAttribute("placeholder", "color").color = this.cS.style.fsTextColorPlaceholderInbound;
-        // this.elementRef.nativeElement.style.background = this.cS.style.fsTextboxBackgroundInbound;
+        this.elementRef.nativeElement.style.background = this.cS.style.fsBackgroundInbound;
         this.elementRef.nativeElement.style.color = this.cS.style.fsTextColorInbound;
-        this.elementRef.nativeElement.style.outlineColor = this.cS.style.fsTextboxBorderColorInbound
+        switch (this.divider){
+          case "none": break;
+          case "right":
+            this.elementRef.nativeElement.style.borderRight = `1px solid ${this.cS.style.fsDividerColorInbound}`;
+            break;
+        }
         break;
       case stripType.OUTBOUND:
-        //this.elementRef.nativeElement.style.placeholder.color = this.cS.style.fsTextColorPlaceholderOutbound;
-        // this.elementRef.nativeElement.style.background = this.cS.style.fsTextboxBackgroundOutbound
+        this.elementRef.nativeElement.style.background = this.cS.style.fsBackgroundOutbound;
         this.elementRef.nativeElement.style.color = this.cS.style.fsTextColorOutbound;
-        this.elementRef.nativeElement.style.outlineColor = this.cS.style.fsTextboxBorderColorOutbound
+
+        switch (this.divider){
+          case "none":  break;
+          case "right":
+            console.log(this.elementRef.nativeElement)
+            console.log("test")
+            this.elementRef.nativeElement.style.borderRight = `1px solid ${this.cS.style.fsDividerColorOutbound}`;
+            break;
+        }
         break;
       case stripType.VFR:
-        //this.elementRef.nativeElement.placeholder.color = this.cS.style.fsTextColorPlaceholderVfr;
-        // this.elementRef.nativeElement.style.background = this.cS.style.fsTextboxBackgroundVfr;
+        this.elementRef.nativeElement.style.background = this.cS.style.fsBackgroundVfr;
         this.elementRef.nativeElement.style.color = this.cS.style.fsTextColorVfr;
-        this.elementRef.nativeElement.style.outlineColor = this.cS.style.fsTextboxBorderColorVfr
+        switch (this.divider){
+          case "none": break;
+          case "right":
+            this.elementRef.nativeElement.style.borderRight = `1px solid ${this.cS.style.fsDividerColorVfr}`;
+            break;
+        }
         break;
     }
   }

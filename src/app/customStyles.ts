@@ -30,6 +30,7 @@ export class CustomStyles {
     "fsTextColorPlaceholderInbound": "#808080",
     "fsTextboxBackgroundInbound": "#2D4732",
     "fsTextboxBorderColorInbound": "#3C9E37",
+    "fsDividerColorInbound":"#6f957f",
 
     "fsBackgroundOutbound": "#223142",
     "fsBorderColorOutbound": "#3674BF",
@@ -37,6 +38,7 @@ export class CustomStyles {
     "fsTextColorPlaceholderOutbound": "#808080",
     "fsTextboxBackgroundOutbound": "#2C3C53",
     "fsTextboxBorderColorOutbound": "#3674BF",
+    "fsDividerColorOutbound":"#90a2a9",
 
     "fsBackgroundVfr": "#3C2542",
     "fsBorderColorVfr": "#BD37BF",
@@ -44,6 +46,7 @@ export class CustomStyles {
     "fsTextColorPlaceholderVfr": "#808080",
     "fsTextboxBackgroundVfr": "#472A4D",
     "fsTextboxBorderColorVfr": "#BD37BF",
+    "fsDividerColorVfr":"#ad88b5",
 
 
     "fsEmergencyBorderColor" : "#ff0000",
