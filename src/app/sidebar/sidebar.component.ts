@@ -6,6 +6,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {Data} from "../data";
 import {StyleChangerService} from "../services/style-changer.service";
 import {SnackbarMessageService} from "../services/snackbar-message.service";
+import {ColumnBuilderService} from "../services/column-builder.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -16,7 +17,8 @@ export class SidebarComponent implements OnInit {
 
 
   constructor(private customStyle: CustomStyles, private _snackBar: MatSnackBar, public dialog: MatDialog,
-              private globalData: Data, private styleChanger: StyleChangerService, private snackService: SnackbarMessageService) {
+              private globalData: Data, private styleChanger: StyleChangerService, private snackService: SnackbarMessageService,
+              private colBuilderService: ColumnBuilderService) {
   }
 
   openColumnbuilder() {
@@ -39,6 +41,7 @@ export class SidebarComponent implements OnInit {
           this.globalData.flightstripData[column?.['uuid']] = {name: column?.['name'], flightstrips: []}
         }
       });
+      this.colBuilderService.columnConfigChanged.next();
       console.log(this.globalData.flightstripData)
     });
 

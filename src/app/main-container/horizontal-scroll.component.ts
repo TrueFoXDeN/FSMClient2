@@ -13,6 +13,7 @@ import {
 import {Data} from "../data";
 import {CustomStyles} from "../customStyles";
 import {StyleChangerService} from "../services/style-changer.service";
+import {ColumnBuilderService} from "../services/column-builder.service";
 
 interface Safe extends GridsterConfig {
   draggable: Draggable;
@@ -31,7 +32,10 @@ export class HorizontalScrollComponent implements OnInit {
   options: Safe;
   dashboard: Array<GridsterItem>;
 
-  constructor(private globalData: Data, private styles: CustomStyles, private styleChanger: StyleChangerService) {
+  constructor(private globalData: Data, private styles: CustomStyles, private styleChanger: StyleChangerService, private columnBuilderService: ColumnBuilderService) {
+    columnBuilderService.columnConfigChanged.subscribe(() => {
+      this.columnConfigChanged();
+    });
     this.options = {
       gridType: GridType.HorizontalFixed,
       compactType: CompactType.None,
@@ -101,12 +105,12 @@ export class HorizontalScrollComponent implements OnInit {
 
   loadConfig() {
     if (localStorage.getItem("columnConfig") !== null) {
+      console.log("Config found")
       let data = JSON.parse(localStorage.getItem("columnConfig") || '{}')
       this.globalData.columnStructure = data.columnData
-
-    } else {
-      this.globalData.columnStructure = []
     }
+    console.log("Current Config:")
+    console.log(this.globalData.columnStructure)
     this.dashboard = this.globalData.columnStructure;
     this.globalData.columnStructure.forEach((column) => {
       if (this.globalData.flightstripData[column?.['uuid']] == null) {
@@ -122,6 +126,10 @@ export class HorizontalScrollComponent implements OnInit {
     console.log(environment.appVersion)
   }
 
+
+  columnConfigChanged() {
+    this.dashboard = this.globalData.columnStructure;
+  }
 
   changeColumnWidth() {
     this.dashboard = this.globalData.columnStructure;

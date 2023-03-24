@@ -34,7 +34,7 @@ export class ColumnBuilderComponent implements OnInit {
   currentData: any
 
   constructor(private util: Util, public dialogRef: MatDialogRef<ColumnBuilderComponent>,
-              @Inject(MAT_DIALOG_DATA) data: any) {
+              @Inject(MAT_DIALOG_DATA) data: any, private globalData : Data) {
     this.currentData = data
     this.dashboard = data.columnData;
     this.options = {
@@ -122,6 +122,7 @@ export class ColumnBuilderComponent implements OnInit {
   }
 
   saveAndClose() {
+    this.globalData.columnStructure = this.dashboard
     let data = {"columnData": this.dashboard}
     localStorage.setItem("columnConfig", JSON.stringify(data))
     this.dialogRef.close(this.dashboard)
