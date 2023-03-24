@@ -49,6 +49,7 @@ import {FlightstripIcon} from "./flightstrip-container/flightstrip-directives/fl
 import {
   FlightstripButtonComponent
 } from "./flightstrip-container/flightstrip/flightstrip-button/flightstrip-button.component";
+import {ColumnBuilderInputDirective} from "./directives/general-directives/columnBuilder.directive";
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import {
     FlightstripIcon,
     FlightstripButtonComponent,
     FlightStripCompact,
+    ColumnBuilderInputDirective
   ],
   imports: [
     BrowserModule,
