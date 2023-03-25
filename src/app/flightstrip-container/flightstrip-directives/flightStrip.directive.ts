@@ -52,5 +52,9 @@ export class FlightStripContainer implements OnInit {
     }
   }
 
+  markForDeleteOperation(){
+    this.elementRef.nativeElement.style.borderColor = this.cS.style.fsDelete
+  }
+
 
 }

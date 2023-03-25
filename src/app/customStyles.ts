@@ -50,7 +50,7 @@ export class CustomStyles {
 
 
     "fsEmergencyBorderColor" : "#ff0000",
-    "delete": "#FF0000",
+    "fsDelete": "#ff6f00",
     "fsDragHighlight": "#FFFFFF"
   }
 

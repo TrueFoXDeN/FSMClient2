@@ -21,7 +21,6 @@ export class FlightstripComponent implements OnInit, AfterViewInit {
   @Output("switchToCompact") compactSwitch = new EventEmitter<void>()
   status: any;
 
-
   constructor(private globalData: Data, private fsService: FlightstripService) {
 
   }
@@ -112,5 +111,24 @@ export class FlightstripComponent implements OnInit, AfterViewInit {
     }
     this.fs.status = state;
   }
+
+  onKeyPress(event: any) {
+    switch (event.key) {
+      case "x":
+        if (!this.fsService.isInputFocused) {
+          this.fsContainerDir.markForDeleteOperation()
+          // let index = this.globalData.flightstripData[this.fs.columnId].flightstrips.indexOf(this.fs)
+          // this.globalData.flightstripData[this.fs.columnId].flightstrips.splice(index, 1)
+
+        }
+        break;
+    }
+  }
+
+  onMouseEnter(event: any) {
+    // console.log("Mouse over fs")
+    event.target.focus()
+  }
+
 
 }

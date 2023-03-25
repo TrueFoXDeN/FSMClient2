@@ -3,10 +3,10 @@
     <h2 columnHeaderFont columnColor>{{name}}</h2>
     <div class="buttons">
       <app-column-button icon="airplane-take-off" (click)="addOutboundFlightstrip()"
+                         columnButtonColor class="button"></app-column-button>
+      <app-column-button icon="airplane-landing" class="button" (click)="addInboundFlightstrip()"
                          columnButtonColor></app-column-button>
-      <app-column-button icon="airplane-landing" (click)="addInboundFlightstrip()"
-                         columnButtonColor></app-column-button>
-      <app-column-button icon="aircraft" (click)="addVfrFlightstrip()" columnButtonColor></app-column-button>
+      <app-column-button icon="aircraft" class="button" (click)="addVfrFlightstrip()" columnButtonColor></app-column-button>
     </div>
   </div>
   <div cdkDropList class="drag-list" [cdkDropListData]="data.flightstripData?.[uuid]?.['flightstrips']"

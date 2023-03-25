@@ -1,4 +1,4 @@
-<div class="strip" [flightStrip]="fs.type">
+<div class="strip" [flightStrip]="fs.type" (keydown)="onKeyPress($event)" (mouseenter)="onMouseEnter($event)" tabindex="0" [cdkContextMenuTriggerFor]="context_menu">
   <div class="flex-container">
     <div class="flex-row">
       <input type="text" class="box-element" placeholder="Callsign" [flightStripInput]="fs.type"
@@ -60,3 +60,12 @@
     </div>
   </div>
 </div>
+
+
+<ng-template #context_menu>
+  <div class="example-menu" cdkMenu>
+    <button class="example-menu-item" cdkMenuItem>Cut</button>
+    <button class="example-menu-item" cdkMenuItem>Copy</button>
+    <button class="example-menu-item" cdkMenuItem>Link</button>
+  </div>
+</ng-template>

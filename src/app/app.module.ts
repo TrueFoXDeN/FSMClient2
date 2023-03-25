@@ -53,6 +53,7 @@ import {ColumnBuilderInputDirective} from "./directives/general-directives/colum
 import { SettingsComponent } from './overlays/settings/settings.component';
 import { ThemeBuilderComponent } from './overlays/theme-builder/theme-builder.component';
 import {SidebarButtonPngComponent} from "./sidebar/sidebar-button-png/sidebar-button-png.component";
+import {CdkMenuModule} from '@angular/cdk/menu';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import {SidebarButtonPngComponent} from "./sidebar/sidebar-button-png/sidebar-bu
     MatSnackBarModule,
     DialogModule,
     GridsterModule,
-    MatDialogModule
+    MatDialogModule,
+    CdkMenuModule
 
   ],
   providers: [

@@ -1,16 +1,16 @@
 <div class="sidebar" sidebar>
   <div class="top-buttons">
+    <app-sidebar-button-png icon="tower" sidebarButton class="icon-button" matTooltip="Controlled Airports"
+                            matTooltipPosition="right"></app-sidebar-button-png>
     <app-sidebar-button icon="columns" (click)="openColumnbuilder()" class="icon-button"
                         matTooltip="Columns" matTooltipPosition="right" sidebarButton></app-sidebar-button>
+    <app-sidebar-button icon="search" class="icon-button" matTooltip="Search Callsign"
+                        matTooltipPosition="right" sidebarButton iconState="standard"
+                        (click)="searchCallsign()"></app-sidebar-button>
     <app-sidebar-button icon="users" class="icon-button" matTooltip="Multiplayer"
                         matTooltipPosition="right" sidebarButton iconState="standard"></app-sidebar-button>
     <app-sidebar-button icon="wifi" class="icon-button" matTooltip="Networks"
                         matTooltipPosition="right" sidebarButton iconState="standard"></app-sidebar-button>
-    <app-sidebar-button icon="search" class="icon-button" matTooltip="Search Callsign"
-                        matTooltipPosition="right" sidebarButton iconState="standard"
-                        (click)="searchCallsign()"></app-sidebar-button>
-    <app-sidebar-button-png icon="tower" sidebarButton class="icon-button" matTooltip="Controlled Airports"
-                            matTooltipPosition="right"></app-sidebar-button-png>
   </div>
 
   <div class="bottom-buttons">
