@@ -55,6 +55,7 @@ export class ColumnComponent {
   onKeyPress(event: any) {
     switch (event.key) {
       case "i":
+        console.log(this.fsService.isInputFocused)
         if (!this.fsService.isInputFocused) {
           this.addInboundFlightstrip();
         }
@@ -94,7 +95,7 @@ export class ColumnComponent {
       if (!this.isMouseMoving && this.isMouseDown) {
         this.isDragged = true;
       }
-    }, this.fsService.dragDelay-20);
+    }, this.fsService.dragDelay - 20);
     this.isMouseMoving = false;
   }
 

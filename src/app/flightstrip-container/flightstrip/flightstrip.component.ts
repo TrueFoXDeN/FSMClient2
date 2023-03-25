@@ -61,6 +61,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit {
   onSquawkChange() {
     this.fsContainerDir.onSquawkChange(this.fs.squawk)
     this.fsIconDir.onSquawkChange(this.fs.squawk)
+    this.onInputFocusLost()
   }
 
   onInputFocus() {
