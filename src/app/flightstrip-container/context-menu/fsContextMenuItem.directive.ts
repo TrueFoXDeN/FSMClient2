@@ -34,7 +34,7 @@ export class FsContextMenuItemDirective implements OnInit {
 
 
   updateSizes() {
-    this.elementRef.nativeElement.style.width = `${145 * this.cS.multiplier}px`;
+    this.elementRef.nativeElement.style.width = `100%`;
   }
 
   updateStyle() {

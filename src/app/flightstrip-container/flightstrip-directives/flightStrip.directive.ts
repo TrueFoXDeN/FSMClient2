@@ -1,6 +1,6 @@
 import {Directive, ElementRef, Input, OnInit} from "@angular/core";
 import {CustomStyles} from "../../customStyles";
-import {stripType} from "../flightstrip.model";
+import {Flightstrip, stripType} from "../flightstrip.model";
 import {StyleChangerService} from "../../services/style-changer.service";
 import {FlightstripService} from "../flightstrip.service";
 import {Subject} from "rxjs";
@@ -9,13 +9,19 @@ import {Subject} from "rxjs";
   selector: '[flightStrip]'
 })
 export class FlightStripContainer implements OnInit {
-  @Input("flightStrip") type!: stripType
+  @Input("flightStrip") fs!: Flightstrip
   squawk: string = ""
 
   constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService, private fsService: FlightstripService) {
     this.styleChanger.changedColors.subscribe(() => {
       this.updateStyle();
     });
+    this.fsService.changedType.subscribe((data) => {
+      if (data.id == this.fs.id) {
+        this.fs.type = data.type;
+        this.updateStyle();
+      }
+    })
   }
 
   onSquawkChange(squawk: string) {
@@ -28,9 +34,11 @@ export class FlightStripContainer implements OnInit {
   }
 
   updateStyle() {
+    //console.log(this.type);
     this.elementRef.nativeElement.style.borderWidth = "2px";
     this.elementRef.nativeElement.style.borderStyle = "solid";
-    switch (this.type) {
+    console.log(`Type in Dir: ${this.fs.type}`)
+    switch (this.fs.type) {
       case stripType.INBOUND:
         this.elementRef.nativeElement.style.background = this.cS.style.fsBackgroundInbound;
         this.elementRef.nativeElement.style.borderColor = this.cS.style.fsBorderColorInbound;
@@ -52,7 +60,7 @@ export class FlightStripContainer implements OnInit {
     }
   }
 
-  markForDeleteOperation(){
+  markForDeleteOperation() {
     this.elementRef.nativeElement.style.borderColor = this.cS.style.fsDelete
   }
 

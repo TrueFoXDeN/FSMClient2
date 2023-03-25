@@ -6,6 +6,7 @@ import {FlightstripService} from "../flightstrip.service";
 import {FlightStripContainer} from "../flightstrip-directives/flightStrip.directive";
 import {FlightstripIcon} from "../flightstrip-directives/flightstripIcon.directive";
 import {FlightStripInput} from "../flightstrip-directives/flightStripInput.directive";
+import {StyleChangerService} from "../../services/style-changer.service";
 
 
 @Component({
@@ -21,11 +22,17 @@ export class FlightstripComponent implements OnInit, AfterViewInit {
   @Output("switchToCompact") compactSwitch = new EventEmitter<void>()
   status: any;
 
-  constructor(private globalData: Data, private fsService: FlightstripService) {
-
+  constructor(private globalData: Data, private fsService: FlightstripService, private styleChanger: StyleChangerService) {
+    this.fsService.changedType.subscribe((data) => {
+      if (data.id == this.fs.id) {
+        this.fs.type = data.type;
+        this.checkStatus();
+        this.fs.status = 0;
+      }
+    })
   }
 
-  ngOnInit() {
+  checkStatus() {
     switch (this.fs.type) {
       case stripType.OUTBOUND:
         this.status = statusDeparture
@@ -37,6 +44,10 @@ export class FlightstripComponent implements OnInit, AfterViewInit {
         this.status = statusVfr
         break;
     }
+  }
+
+  ngOnInit() {
+    this.checkStatus()
 
   }
 
@@ -116,8 +127,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit {
       case "x":
         if (!this.fsService.isInputFocused) {
           this.fsContainerDir.markForDeleteOperation()
-          // let index = this.globalData.flightstripData[this.fs.columnId].flightstrips.indexOf(this.fs)
-          // this.globalData.flightstripData[this.fs.columnId].flightstrips.splice(index, 1)
+
 
         }
         break;
@@ -137,5 +147,14 @@ export class FlightstripComponent implements OnInit, AfterViewInit {
     this.fsContainerDir.updateStyle();
   }
 
+  onTypeChange() {
+    console.log("test")
+    // this.fs.type = newType;
+    this.styleChanger.changedColors.next();
+  }
+
+  testFunction() {
+    console.log("Test message")
+  }
 
 }

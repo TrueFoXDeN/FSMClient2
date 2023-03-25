@@ -1,21 +1,30 @@
 import {Directive, ElementRef, Input, OnInit} from "@angular/core";
 import {CustomStyles} from "../../customStyles";
-import {stripType} from "../flightstrip.model";
+import {Flightstrip, stripType} from "../flightstrip.model";
 import {StyleChangerService} from "../../services/style-changer.service";
+import {FlightStripContainer} from "./flightStrip.directive";
+import {FlightstripService} from "../flightstrip.service";
 
 @Directive({
   selector: '[flightStripInput]'
 })
 export class FlightStripInput implements OnInit {
-  @Input("flightStripInput") type!: stripType
+  @Input("flightStripInput") fs!: Flightstrip
 
-  constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService) {
+  constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService, private fsService : FlightstripService) {
     this.styleChanger.changedColors.subscribe(() => {
       this.updateStyle()
     });
     this.styleChanger.changedSize.subscribe(() => {
       this.updateStyle();
     });
+
+    this.fsService.changedType.subscribe((data) => {
+      if (data.id == this.fs.id) {
+        this.fs.type = data.type;
+        this.updateStyle();
+      }
+    })
   }
 
   ngOnInit(): void {
@@ -26,7 +35,7 @@ export class FlightStripInput implements OnInit {
 
   updateStyle() {
     this.elementRef.nativeElement.style.fontSize = `${10 * this.cS.multiplier}pt`
-    switch (this.type) {
+    switch (this.fs.type) {
       case stripType.INBOUND:
         //this.elementRef.nativeElement.setAttribute("placeholder", "color").color = this.cS.style.fsTextColorPlaceholderInbound;
         this.elementRef.nativeElement.style.background = this.cS.style.fsTextboxBackgroundInbound;
