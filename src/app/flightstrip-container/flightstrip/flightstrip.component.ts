@@ -40,7 +40,6 @@ export class FlightstripComponent implements OnInit, AfterViewInit {
 
   }
 
-
   changeToCompactMode() {
     this.compactSwitch.emit()
   }
@@ -127,7 +126,15 @@ export class FlightstripComponent implements OnInit, AfterViewInit {
 
   onMouseEnter(event: any) {
     // console.log("Mouse over fs")
-    event.target.focus()
+    //event.target.focus()
+  }
+
+  onContextOpened() {
+    this.fsContainerDir.markForDeleteOperation()
+  }
+
+  onContextClosed() {
+    this.fsContainerDir.updateStyle();
   }
 
 

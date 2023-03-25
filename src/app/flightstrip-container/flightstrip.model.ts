@@ -45,8 +45,10 @@ export enum statusDeparture {
   CLEARED,
   PUSH,
   TAXI,
+  HOLDSHORT,
   LINEUP,
-  TAKEOFF
+  TAKEOFF,
+  DEPARTED
 }
 
 export enum statusArrival {
