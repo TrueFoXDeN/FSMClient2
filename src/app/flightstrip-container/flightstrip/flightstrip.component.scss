@@ -71,22 +71,26 @@ input {
 }
 
 .icon-container {
+  height: 82%;
   display: flex;
   flex-flow: row;
-  justify-content: center;
+  justify-content: space-between;
   -webkit-box-align: center;
-  gap: 13%;
+  align-items: center;
+  padding-left: 1%;
+  padding-right: 1%;
+  box-sizing: border-box;
 }
 
 .icon {
-  width: 21%;
+  width: 23%;
   aspect-ratio: 1;
   display: flex;
   -webkit-box-align: center;
 }
 
 .button {
-  width: 80%;
+  height: 100%;
   aspect-ratio: 1;
 }
 

@@ -52,6 +52,7 @@ import {
 import {ColumnBuilderInputDirective} from "./directives/general-directives/columnBuilder.directive";
 import { SettingsComponent } from './overlays/settings/settings.component';
 import { ThemeBuilderComponent } from './overlays/theme-builder/theme-builder.component';
+import {SidebarButtonPngComponent} from "./sidebar/sidebar-button-png/sidebar-button-png.component";
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { ThemeBuilderComponent } from './overlays/theme-builder/theme-builder.co
     FlightStripCompact,
     ColumnBuilderInputDirective,
     SettingsComponent,
-    ThemeBuilderComponent
+    ThemeBuilderComponent,
+    SidebarButtonPngComponent
   ],
   imports: [
     BrowserModule,
