@@ -10,8 +10,10 @@ export class CustomStyles {
     "appInput" : "#3E4044",
     "button": "#1E2124",
     "buttonBorder": "#FFFFFF",
+    "buttonHover" : "#464646",
     "textbox": "#424D55",
     "textboxBorder": "#ABADB3",
+    "contextMenuBackground" : "#525252",
     //Icon Colors
     "iconColor" : "#FFFFFF",
     "iconColorSuccess" : "#00FF00",
@@ -50,7 +52,7 @@ export class CustomStyles {
 
 
     "fsEmergencyBorderColor" : "#ff0000",
-    "fsDelete": "#ff6f00",
+    "fsDelete": "#ffffff",
     "fsDragHighlight": "#FFFFFF"
   }
 

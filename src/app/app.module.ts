@@ -54,6 +54,9 @@ import { SettingsComponent } from './overlays/settings/settings.component';
 import { ThemeBuilderComponent } from './overlays/theme-builder/theme-builder.component';
 import {SidebarButtonPngComponent} from "./sidebar/sidebar-button-png/sidebar-button-png.component";
 import {CdkMenuModule} from '@angular/cdk/menu';
+import { ContextMenuComponent } from './flightstrip-container/context-menu/context-menu.component';
+import {FsContextMenuDirective} from "./flightstrip-container/context-menu/fsContextMenu.directive";
+import {FsContextMenuItemDirective} from "./flightstrip-container/context-menu/fsContextMenuItem.directive";
 
 
 @NgModule({
@@ -88,7 +91,10 @@ import {CdkMenuModule} from '@angular/cdk/menu';
     ColumnBuilderInputDirective,
     SettingsComponent,
     ThemeBuilderComponent,
-    SidebarButtonPngComponent
+    SidebarButtonPngComponent,
+    ContextMenuComponent,
+    FsContextMenuDirective,
+    FsContextMenuItemDirective
   ],
   imports: [
     BrowserModule,
@@ -105,8 +111,7 @@ import {CdkMenuModule} from '@angular/cdk/menu';
     DialogModule,
     GridsterModule,
     MatDialogModule,
-    CdkMenuModule
-
+    CdkMenuModule,
   ],
   providers: [
     CustomStyles,
