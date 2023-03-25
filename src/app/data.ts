@@ -3,7 +3,7 @@ import {GridsterItem} from "angular-gridster2";
 export class Data {
   public columnStructure: Array<GridsterItem> = []
   public flightstripData: any = {
-    /*
+
     "df15497a-1782-4088-b40c-9714e75ac197": {
       "name": "Ground",
       "flightstrips": [
@@ -40,7 +40,7 @@ export class Data {
       "name": "Approach",
       "flightstrips": []
     }
-    */
+
 
   }
 

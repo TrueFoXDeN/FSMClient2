@@ -9,6 +9,8 @@ export class FlightstripButtonComponent {
   @Input() text = ''
   @Input() icon = ''
 
+  @Input() size = '100%'
+
   constructor() { }
 
   ngOnInit(): void {

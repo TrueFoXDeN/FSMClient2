@@ -17,6 +17,9 @@ export class FlightStripCompact implements OnInit {
     this.styleChanger.changedColors.subscribe(() => {
       this.updateStyle();
     })
+    this.styleChanger.changedSize.subscribe(()=>{
+      this.updateStyle()
+    })
   }
 
   ngOnInit(): void {
@@ -56,8 +59,6 @@ export class FlightStripCompact implements OnInit {
         switch (this.divider){
           case "none":  break;
           case "right":
-            console.log(this.elementRef.nativeElement)
-            console.log("test")
             this.elementRef.nativeElement.style.borderRight = `1px solid ${this.cS.style.fsDividerColorOutbound}`;
             break;
         }
