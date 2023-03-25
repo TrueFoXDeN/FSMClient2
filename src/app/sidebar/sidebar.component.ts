@@ -14,8 +14,6 @@ import {ColumnBuilderService} from "../services/column-builder.service";
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-
-
   constructor(private customStyle: CustomStyles, private _snackBar: MatSnackBar, public dialog: MatDialog,
               private globalData: Data, private styleChanger: StyleChangerService, private snackService: SnackbarMessageService,
               private colBuilderService: ColumnBuilderService) {
@@ -36,7 +34,7 @@ export class SidebarComponent implements OnInit {
         this.globalData.columnStructure = data;
       }
       this.globalData.columnStructure.forEach((column) => {
-        if (this.globalData.flightstripData[column?.['uuid']] !== null) {
+        if (this.globalData.flightstripData[column?.['uuid']] == null) {
           console.log(`Neue Column: ${column?.['name']}`)
           this.globalData.flightstripData[column?.['uuid']] = {name: column?.['name'], flightstrips: []}
         }

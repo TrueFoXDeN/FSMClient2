@@ -95,7 +95,6 @@ export class HorizontalScrollComponent implements OnInit {
       disableWarnings: false,
       scrollToNewItems: false,
     }
-    this.loadConfig()
     this.dashboard = this.globalData.columnStructure;
     this.styleChanger.changedSize.subscribe(() => {
       this.changeColumnWidth();
@@ -109,12 +108,9 @@ export class HorizontalScrollComponent implements OnInit {
       let data = JSON.parse(localStorage.getItem("columnConfig") || '{}')
       this.globalData.columnStructure = data.columnData
     }
-    console.log("Current Config:")
-    console.log(this.globalData.columnStructure)
     this.dashboard = this.globalData.columnStructure;
     this.globalData.columnStructure.forEach((column) => {
       if (this.globalData.flightstripData[column?.['uuid']] == null) {
-        console.log(`Neue Column: ${column?.['name']}`)
         this.globalData.flightstripData[column?.['uuid']] = {name: column?.['name'], flightstrips: []}
       }
     });
@@ -122,13 +118,12 @@ export class HorizontalScrollComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadConfig()
-    console.log(this.globalData.columnStructure)
     console.log(environment.appVersion)
   }
 
 
   columnConfigChanged() {
-    this.dashboard = this.globalData.columnStructure;
+    this.loadConfig()
   }
 
   changeColumnWidth() {
