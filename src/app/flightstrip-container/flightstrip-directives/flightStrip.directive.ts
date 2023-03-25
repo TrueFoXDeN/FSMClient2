@@ -21,7 +21,7 @@ export class FlightStripContainer implements OnInit {
         this.fs.type = data.type;
         this.updateStyle();
       }
-    })
+    });
   }
 
   onSquawkChange(squawk: string) {

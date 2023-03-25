@@ -1,6 +1,8 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Flightstrip, statusArrival, statusDeparture, statusVfr, stripType} from "../flightstrip.model";
 import {FlightstripService} from "../flightstrip.service";
+import {FlightStripContainer} from "../flightstrip-directives/flightStrip.directive";
+import {FlightStripCompact} from "../flightstrip-directives/flightStripCompact.directive";
 
 
 @Component({
@@ -10,7 +12,7 @@ import {FlightstripService} from "../flightstrip.service";
 })
 export class FlightstripCompactComponent {
   @Input() fs!: Flightstrip;
-
+  @ViewChild(FlightStripCompact) fsContainerDir: any;
   status: any;
   stripType = stripType;
   isMouseMoving: boolean = false;
@@ -72,5 +74,13 @@ export class FlightstripCompactComponent {
   onMouseUp() {
     this.isMouseDown = false;
     this.fsService.dragFlightstrip.next(false);
+  }
+
+  onContextOpened() {
+    this.fsContainerDir.markForDeleteOperation()
+  }
+
+  onContextClosed() {
+    this.fsContainerDir.updateStyle();
   }
 }

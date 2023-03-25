@@ -1,39 +1,41 @@
-<div class="strip" flightStripCompact [flightStrip]="fs" (mousedown)="onMouseDown()" (mouseup)="onMouseUp()" (mousemove)="isMouseMoving = true">
+<div class="strip" flightStripCompact [flightStrip]="fs" (mousedown)="onMouseDown()"
+     (mouseup)="onMouseUp()" (mousemove)="isMouseMoving = true" [cdkContextMenuTriggerFor]="context_menu"
+     (cdkContextMenuOpened)="onContextOpened()" (cdkContextMenuClosed)="onContextClosed()">
   <div class="cols">
-    <div class="col1" flightStripCompact [flightStripCompactDivider]="'right'" [flightStripType]="fs.type">
-      <span class="callsign" flightStripCompact [flightStripType]="fs.type"
+    <div class="col1" flightStripCompact [flightStripCompactDivider]="'right'" [fsCompact]="fs">
+      <span class="callsign" flightStripCompact [fsCompact]="fs"
             [flightStripFontSize]="'large'">{{fs.callsign}}</span>
-      <span class="airline" flightStripCompact [flightStripType]="fs.type"
+      <span class="airline" flightStripCompact [fsCompact]="fs"
             [flightStripFontSize]="'medium'">{{fs.airline}}</span>
       <div class="aircraft-size">
-        <span class="aircraft" flightStripCompact [flightStripType]="fs.type"
+        <span class="aircraft" flightStripCompact [fsCompact]="fs"
               [flightStripFontSize]="'medium'">{{fs.aircraft}}</span>
-        <span class="wake" flightStripCompact [flightStripType]="fs.type"
+        <span class="wake" flightStripCompact [fsCompact]="fs"
               [flightStripFontSize]="'medium'">{{fs.wakeCategory}}</span>
       </div>
     </div>
-    <div class="col2" flightStripCompact [flightStripCompactDivider]="'right'" [flightStripType]="fs.type">
-      <span class="departure" flightStripCompact [flightStripType]="fs.type"
+    <div class="col2" flightStripCompact [flightStripCompactDivider]="'right'" [fsCompact]="fs">
+      <span class="departure" flightStripCompact [fsCompact]="fs"
             [flightStripFontSize]="'medium'">{{fs.departureIcao}}</span>
-      <span class="arrival" flightStripCompact [flightStripType]="fs.type"
+      <span class="arrival" flightStripCompact [fsCompact]="fs"
             [flightStripFontSize]="'medium'">{{fs.arrivalIcao}}</span>
-      <span class="flightrule" flightStripCompact [flightStripType]="fs.type"
+      <span class="flightrule" flightStripCompact [fsCompact]="fs"
             [flightStripFontSize]="'medium'">{{fs.flightrule}}</span>
     </div>
-    <div class="col3" flightStripCompact [flightStripCompactDivider]="'right'" [flightStripType]="fs.type">
-      <span class="runway" flightStripCompact [flightStripType]="fs.type"
+    <div class="col3" flightStripCompact [flightStripCompactDivider]="'right'" [fsCompact]="fs">
+      <span class="runway" flightStripCompact [fsCompact]="fs"
             [flightStripFontSize]="'medium'">{{fs.runway}}</span>
-      <span class="sidStar" flightStripCompact [flightStripType]="fs.type"
+      <span class="sidStar" flightStripCompact [fsCompact]="fs"
             [flightStripFontSize]="'medium'">{{fs.sidStar}}</span>
-      <span class="altitude" flightStripCompact [flightStripType]="fs.type"
+      <span class="altitude" flightStripCompact [fsCompact]="fs"
             [flightStripFontSize]="'medium'">{{fs.altitude}}</span>
     </div>
-    <div class="col4" flightStripCompact [flightStripCompactDivider]="'right'" [flightStripType]="fs.type">
-       <span class="squawk" flightStripCompact [flightStripType]="fs.type"
+    <div class="col4" flightStripCompact [flightStripCompactDivider]="'right'" [fsCompact]="fs">
+       <span class="squawk" flightStripCompact [fsCompact]="fs"
              [flightStripFontSize]="'medium'">{{fs.squawk}}</span>
-      <span class="gate" flightStripCompact [flightStripType]="fs.type"
+      <span class="gate" flightStripCompact [fsCompact]="fs"
             [flightStripFontSize]="'medium'">{{fs.gate}}</span>
-      <span class="info" flightStripCompact [flightStripType]="fs.type"
+      <span class="info" flightStripCompact [fsCompact]="fs"
             [flightStripFontSize]="'small'">{{fs.info}}</span>
     </div>
     <div class="col5">
@@ -41,7 +43,7 @@
 
         <div class="status-row">
           <app-flightstrip-button class="status-button" icon="chevron-left"></app-flightstrip-button>
-          <span class="status" flightStripCompact [flightStripType]="fs.type"
+          <span class="status" flightStripCompact [fsCompact]="fs"
                 [flightStripFontSize]="'medium'">{{status[fs.status]}}</span>
           <app-flightstrip-button class="status-button" icon="chevron-right"></app-flightstrip-button>
         </div>
@@ -50,11 +52,15 @@
           <i-feather name="headphones" class="icon"></i-feather>
         </div>
       </div>
-      <span class="route" flightStripCompact [flightStripType]="fs.type"
+      <span class="route" flightStripCompact [fsCompact]="fs"
             [flightStripFontSize]="'small'">{{trimRoute(fs.route)}}</span>
-      <span class="freeText" flightStripCompact [flightStripType]="fs.type"
+      <span class="freeText" flightStripCompact [fsCompact]="fs"
             [flightStripFontSize]="'small'">{{fs.freeText}}</span>
     </div>
   </div>
 
 </div>
+
+<ng-template #context_menu>
+  <app-context-menu [fs]="fs" ></app-context-menu>
+</ng-template>
