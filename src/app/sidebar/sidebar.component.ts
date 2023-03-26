@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CustomStyles} from "../customStyles";
-import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
+import {MatSnackBar} from "@angular/material/snack-bar";
 import {ColumnBuilderComponent} from "../overlays/column-builder/column-builder.component";
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {Data} from "../data";
@@ -35,14 +35,11 @@ export class SidebarComponent implements OnInit {
       }
       this.globalData.columnStructure.forEach((column) => {
         if (this.globalData.flightstripData[column?.['uuid']] == null) {
-          console.log(`Neue Column: ${column?.['name']}`)
           this.globalData.flightstripData[column?.['uuid']] = {name: column?.['name'], flightstrips: []}
         }
       });
       this.colBuilderService.columnConfigChanged.next();
-      console.log(this.globalData.flightstripData)
     });
-
   }
 
   onZoomIn() {

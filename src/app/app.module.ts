@@ -22,7 +22,6 @@ import {BodyBackground} from "./directives/general-directives/bodyBackground.dir
 import {FlightStripContainer} from "./flightstrip-container/flightstrip-directives/flightStrip.directive";
 import {CustomStyles} from "./customStyles";
 import {FlightStripInput} from "./flightstrip-container/flightstrip-directives/flightStripInput.directive";
-import {SidebarWidth} from "./sidebar/sidebar-directives/sidebarWidth.directive";
 import {ColumnWidth} from "./column/column-directives/columnWidth.directive";
 import {ColumnHeaderHeight} from "./column/column-directives/columnHeaderHeight.directive";
 import {ColumnHeaderFont} from "./column/column-directives/columnHeaderFont.directive";
@@ -72,7 +71,6 @@ import { HttpClientModule } from '@angular/common/http';
     BodyBackground,
     FlightStripContainer,
     FlightStripInput,
-    SidebarWidth,
     ColumnWidth,
     ColumnHeaderHeight,
     ColumnHeaderFont,

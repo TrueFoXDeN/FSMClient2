@@ -1,22 +1,30 @@
-import {Directive, ElementRef, Input, OnInit} from "@angular/core";
+import {Directive, ElementRef, Input, OnDestroy, OnInit} from "@angular/core";
 import {CustomStyles} from "../../customStyles";
 import {StyleChangerService} from "../../services/style-changer.service";
 
 @Directive({
   selector: '[sidebarButton]'
 })
-export class SidebarButton implements OnInit {
+export class SidebarButton implements OnInit, OnDestroy {
   @Input("iconState") iconState: string = "standard"
+  subscriptionList: any = []
 
   constructor(private elementRef: ElementRef, private customStyles: CustomStyles, private styleChanger: StyleChangerService) {
-    this.styleChanger.changedColors.subscribe(() => {
-      this.updateStyle()
-    });
+    this.subscriptionList.push(this.styleChanger.changedColors.subscribe(() => {
+      this.updateStyle();
+    }));
   }
 
   ngOnInit(): void {
     this.updateStyle()
   }
+
+  ngOnDestroy() {
+    this.subscriptionList.forEach((sub: any) => {
+      sub.unsubscribe();
+    });
+  }
+
   updateStyle() {
     this.elementRef.nativeElement.style.background = this.customStyles.style.sidebarButton
     switch (this.iconState) {

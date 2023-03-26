@@ -15,7 +15,6 @@
     align-items: center;
     flex-flow: column;
     width: 23%;
-    //border-right: 1px solid red;
 
     .callsign {
       display: flex;
@@ -47,7 +46,6 @@
     align-items: center;
     flex-flow: column;
     width: 13%;
-    //border-right: 1px solid #90a2a9;
 
     .departure {
       display: flex;
@@ -74,7 +72,6 @@
     align-items: center;
     flex-flow: column;
     width: 19%;
-    //border-right: 1px solid #90a2a9;
 
     .runway {
       display: flex;
@@ -100,9 +97,6 @@
     justify-content: center;
     align-items: center;
     flex-flow: column;
-    //margin-left: 5px;
-    //margin-left: 5px;
-    //border-right: 1px solid #90a2a9;
     width: 10%;
 
     .squawk {
@@ -144,7 +138,6 @@
       width: 100%;
 
       .status-row {
-        //height: 20%;
         display: flex;
         justify-content: left;
         align-items: center;
@@ -174,25 +167,13 @@
       }
     }
 
-    //.status {
-    //  //display: flex;
-    //  //justify-content: center;
-    //  //align-items: center;
-    //  height: 20%;
-    //}
-
     .route {
       display: flex;
-      //justify-content: center;
-      //align-items: center;
       text-align: justify;
       height: 35%
     }
 
     .freeText {
-      //display: flex;
-      //justify-content: center;
-      //align-items: center;
       text-align: justify;
       height: 35%
     }

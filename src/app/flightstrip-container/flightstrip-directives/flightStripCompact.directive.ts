@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Input, OnInit} from "@angular/core";
+import {Directive, ElementRef, Input, OnDestroy, OnInit} from "@angular/core";
 import {CustomStyles} from "../../customStyles";
 import {Flightstrip, stripType} from "../flightstrip.model";
 import {StyleChangerService} from "../../services/style-changer.service";
@@ -7,32 +7,37 @@ import {FlightstripService} from "../flightstrip.service";
 @Directive({
   selector: '[flightStripCompact]'
 })
-export class FlightStripCompact implements OnInit {
+export class FlightStripCompact implements OnInit, OnDestroy {
   @Input("fsCompact") fs!: Flightstrip
   @Input("flightStripFontSize") fontSize: string = "medium"
 
   @Input("flightStripCompactDivider") divider: string = "none"
-
+  subscriptionList: any = []
 
   constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService, private fsService: FlightstripService) {
-    this.styleChanger.changedColors.subscribe(() => {
+    this.subscriptionList.push(this.styleChanger.changedColors.subscribe(() => {
       this.updateStyle();
-    });
-    this.styleChanger.changedSize.subscribe(() => {
+    }));
+    this.subscriptionList.push(this.styleChanger.changedSize.subscribe(() => {
       this.updateStyle()
-    });
-    this.fsService.changedType.subscribe((data) => {
+    }));
+    this.subscriptionList.push(this.fsService.changedType.subscribe((data) => {
       if (data.id == this.fs.id) {
         this.fs.type = data.type;
         this.updateStyle();
       }
-    });
+    }));
   }
 
   ngOnInit(): void {
     this.updateStyle();
   }
 
+  ngOnDestroy() {
+    this.subscriptionList.forEach((sub: any) => {
+      sub.unsubscribe();
+    });
+  }
 
   updateStyle() {
     switch (this.fontSize) {

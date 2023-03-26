@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {environment} from "../../environments/environment";
 import {
   CompactType,
@@ -28,14 +28,15 @@ interface Safe extends GridsterConfig {
 })
 
 
-export class HorizontalScrollComponent implements OnInit {
+export class HorizontalScrollComponent implements OnInit, OnDestroy {
   options: Safe;
   dashboard: Array<GridsterItem>;
+  subscriptionList: any = []
 
   constructor(private globalData: Data, private styles: CustomStyles, private styleChanger: StyleChangerService, private columnBuilderService: ColumnBuilderService) {
-    columnBuilderService.columnConfigChanged.subscribe(() => {
+    this.subscriptionList.push(columnBuilderService.columnConfigChanged.subscribe(() => {
       this.columnConfigChanged();
-    });
+    }));
     this.options = {
       gridType: GridType.HorizontalFixed,
       compactType: CompactType.None,
@@ -104,7 +105,6 @@ export class HorizontalScrollComponent implements OnInit {
 
   loadConfig() {
     if (localStorage.getItem("columnConfig") !== null) {
-      console.log("Config found")
       let data = JSON.parse(localStorage.getItem("columnConfig") || '{}')
       this.globalData.columnStructure = data.columnData
     }
@@ -119,6 +119,12 @@ export class HorizontalScrollComponent implements OnInit {
   ngOnInit(): void {
     this.loadConfig()
     console.log(environment.appVersion)
+  }
+
+  ngOnDestroy() {
+    this.subscriptionList.forEach((sub: any) => {
+      sub.unsubscribe();
+    });
   }
 
 

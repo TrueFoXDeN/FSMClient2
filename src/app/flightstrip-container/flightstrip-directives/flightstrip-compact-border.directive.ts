@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Input} from '@angular/core';
+import {Directive, ElementRef, Input, OnDestroy} from '@angular/core';
 import {CustomStyles} from "../../customStyles";
 import {StyleChangerService} from "../../services/style-changer.service";
 import {FlightstripService} from "../flightstrip.service";
@@ -7,26 +7,34 @@ import {Flightstrip, stripType} from "../flightstrip.model";
 @Directive({
   selector: '[appFlightstripCompactBorder]'
 })
-export class FlightstripCompactBorderDirective {
+export class FlightstripCompactBorderDirective implements OnDestroy {
   @Input("appFlightstripCompactBorder") fs!: Flightstrip
-  constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService, private fsService: FlightstripService) {
-    this.styleChanger.changedColors.subscribe(() => {
-      this.updateStyle();
-    });
+  subscriptionList: any = []
 
-    this.fsService.changedType.subscribe((data) => {
+  constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService, private fsService: FlightstripService) {
+    this.subscriptionList.push(this.styleChanger.changedColors.subscribe(() => {
+      this.updateStyle();
+    }));
+
+    this.subscriptionList.push(this.fsService.changedType.subscribe((data) => {
       if (data.id == this.fs.id) {
         this.fs.type = data.type;
         this.updateStyle();
       }
-    });
+    }));
   }
 
   ngOnInit(): void {
     this.updateStyle();
   }
 
-  updateStyle(){
+  ngOnDestroy() {
+    this.subscriptionList.forEach((sub: any) => {
+      sub.unsubscribe();
+    });
+  }
+
+  updateStyle() {
     this.elementRef.nativeElement.style.borderWidth = "2px";
     this.elementRef.nativeElement.style.borderStyle = "solid";
     console.log(`Type in Dir: ${this.fs.type}`)

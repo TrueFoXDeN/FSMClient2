@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Input, OnInit} from "@angular/core";
+import {Directive, ElementRef, Input, OnDestroy, OnInit} from "@angular/core";
 import {CustomStyles} from "../../customStyles";
 import {Flightstrip, stripType} from "../flightstrip.model";
 import {StyleChangerService} from "../../services/style-changer.service";
@@ -8,20 +8,22 @@ import {Subject} from "rxjs";
 @Directive({
   selector: '[flightStrip]'
 })
-export class FlightStripContainer implements OnInit {
+export class FlightStripContainer implements OnInit, OnDestroy {
   @Input("flightStrip") fs!: Flightstrip
   squawk: string = ""
 
+  subscriptionList: any = []
+
   constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService, private fsService: FlightstripService) {
-    this.styleChanger.changedColors.subscribe(() => {
+    this.subscriptionList.push(this.styleChanger.changedColors.subscribe(() => {
       this.updateStyle();
-    });
-    this.fsService.changedType.subscribe((data) => {
+    }));
+    this.subscriptionList.push(this.fsService.changedType.subscribe((data) => {
       if (data.id == this.fs.id) {
         this.fs.type = data.type;
         this.updateStyle();
       }
-    });
+    }));
   }
 
   onSquawkChange(squawk: string) {
@@ -31,6 +33,12 @@ export class FlightStripContainer implements OnInit {
 
   ngOnInit(): void {
     this.updateStyle();
+  }
+
+  ngOnDestroy() {
+    this.subscriptionList.forEach((sub: any) => {
+      sub.unsubscribe();
+    });
   }
 
   updateStyle() {
