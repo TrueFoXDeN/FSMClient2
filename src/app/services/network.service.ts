@@ -6,15 +6,15 @@ import {interval, Subject} from "rxjs";
 })
 export class NetworkService {
   private isNetworkFetchActive = true;
-  private usedNetwork = networkType.IVAO
-  private oneSecNetworkInterval = interval(1000);
-  oneSecNetworkEmitter = new Subject<void>()
+  private usedNetwork = networkType.VATSIM
+  private oneSecInterval = interval(1000);
+  networkEmitter = new Subject<void>()
 
 
   constructor() {
-    this.oneSecNetworkInterval.subscribe(() => {
+    this.oneSecInterval.subscribe(() => {
       if (this.isNetworkFetchActive) {
-        this.oneSecNetworkEmitter.next();
+        this.networkEmitter.next();
       }
     });
   }
@@ -22,12 +22,16 @@ export class NetworkService {
   getNetwork() {
     switch (this.usedNetwork) {
       case networkType.VATSIM:
-        return "vastsim";
+        return "vatsim";
       case networkType.POSCON:
         return "poscon";
       case networkType.IVAO:
         return "ivao"
     }
+  }
+
+  setNetwork(network: networkType) {
+    this.usedNetwork = network;
   }
 
 }

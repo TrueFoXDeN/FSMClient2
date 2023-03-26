@@ -9,6 +9,7 @@ import {StyleChangerService} from "../../services/style-changer.service";
 import {MatMenuTrigger} from "@angular/material/menu";
 import {HttpClient} from '@angular/common/http';
 import {NetworkService, networkType} from "../../services/network.service";
+import {environment} from "../../../environments/environment";
 
 
 @Component({
@@ -25,6 +26,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output("switchToCompact") compactSwitch = new EventEmitter<void>()
   subscriptionHandles: any = [];
   status: any;
+  baseURL = environment.baseURL
 
   constructor(private globalData: Data, private fsService: FlightstripService, private styleChanger: StyleChangerService,
               private http: HttpClient, private networkService: NetworkService) {
@@ -35,7 +37,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
         this.fs.status = 0;
       }
     }))
-    this.subscriptionHandles.push(this.networkService.oneSecNetworkEmitter.subscribe(() => {
+    this.subscriptionHandles.push(this.networkService.networkEmitter.subscribe(() => {
       this.onCheckCallsignTrigger()
     }))
   }
@@ -44,8 +46,6 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscriptionHandles.forEach((subscription: any) => {
       subscription.unsubscribe();
     })
-    // this.fsService.changedType.unsubscribe();
-    // this.networkService.oneSecNetworkEmitter.unsubscribe();
   }
 
 
@@ -150,7 +150,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   onCheckCallsignTrigger() {
     let network = this.networkService.getNetwork();
     if (!this.fs.infosPulled && this.fs.callsign != "") {
-      this.http.get(`http://192.168.178.20/${network}/callsign/` + this.fs.callsign).subscribe({
+      this.http.get(`${this.baseURL}/${network}/callsign/` + this.fs.callsign).subscribe({
         next: (response: any) => {
           if (response.success) {
             this.fs.callsign = response.callsign
@@ -167,7 +167,6 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
         error: (err) => {
         }
       });
-
     }
   }
 
