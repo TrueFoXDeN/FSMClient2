@@ -57,6 +57,7 @@ import {CdkMenuModule} from '@angular/cdk/menu';
 import { ContextMenuComponent } from './flightstrip-container/context-menu/context-menu.component';
 import {FsContextMenuDirective} from "./flightstrip-container/context-menu/fsContextMenu.directive";
 import {FsContextMenuItemDirective} from "./flightstrip-container/context-menu/fsContextMenuItem.directive";
+import { FlightstripCompactBorderDirective } from './flightstrip-container/flightstrip-directives/flightstrip-compact-border.directive';
 
 
 @NgModule({
@@ -94,7 +95,8 @@ import {FsContextMenuItemDirective} from "./flightstrip-container/context-menu/f
     SidebarButtonPngComponent,
     ContextMenuComponent,
     FsContextMenuDirective,
-    FsContextMenuItemDirective
+    FsContextMenuItemDirective,
+    FlightstripCompactBorderDirective
   ],
   imports: [
     BrowserModule,

@@ -37,7 +37,6 @@ export class FlightStripContainer implements OnInit {
     //console.log(this.type);
     this.elementRef.nativeElement.style.borderWidth = "2px";
     this.elementRef.nativeElement.style.borderStyle = "solid";
-    console.log(`Type in Dir: ${this.fs.type}`)
     switch (this.fs.type) {
       case stripType.INBOUND:
         this.elementRef.nativeElement.style.background = this.cS.style.fsBackgroundInbound;

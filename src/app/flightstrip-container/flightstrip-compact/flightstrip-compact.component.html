@@ -1,4 +1,4 @@
-<div class="strip" flightStripCompact [flightStrip]="fs" (mousedown)="onMouseDown()"
+<div class="strip" flightStripCompact [fsCompact]="fs" [appFlightstripCompactBorder]="fs" (mousedown)="onMouseDown()"
      (mouseup)="onMouseUp()" (mousemove)="isMouseMoving = true" [cdkContextMenuTriggerFor]="context_menu"
      (cdkContextMenuOpened)="onContextOpened()" (cdkContextMenuClosed)="onContextClosed()">
   <div class="cols">

@@ -6,7 +6,8 @@
                          columnButtonColor class="button"></app-column-button>
       <app-column-button icon="airplane-landing" class="button" (click)="addInboundFlightstrip()"
                          columnButtonColor></app-column-button>
-      <app-column-button icon="aircraft" class="button" (click)="addVfrFlightstrip()" columnButtonColor></app-column-button>
+      <app-column-button icon="aircraft" class="button" (click)="addVfrFlightstrip()"
+                         columnButtonColor></app-column-button>
     </div>
   </div>
   <div cdkDropList class="drag-list" [cdkDropListData]="data.flightstripData?.[uuid]?.['flightstrips']"
@@ -16,7 +17,7 @@
     <div *ngFor="let strip of data.flightstripData?.[uuid]?.['flightstrips']" cdkDrag [cdkDragData]="strip"
          [cdkDragStartDelay]="getDragDelay()" class="drag-item" (cdkDragEnded)="dragEnded()"
          (mousedown)="onMouseDown()" (mouseup)="onMouseUp()" (mousemove)="onMouseMove()">
-      <app-flightstrip-container [stripModel]="strip"> </app-flightstrip-container>
+      <app-flightstrip-container [stripModel]="strip" [colID]="uuid"></app-flightstrip-container>
     </div>
   </div>
 </div>

@@ -17,7 +17,7 @@ export class FlightStripCompact implements OnInit {
   constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService, private fsService: FlightstripService) {
     this.styleChanger.changedColors.subscribe(() => {
       this.updateStyle();
-    })
+    });
     this.styleChanger.changedSize.subscribe(() => {
       this.updateStyle()
     });
