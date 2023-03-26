@@ -15,7 +15,8 @@
         <i-feather name="alert-triangle" class="icon" flightstripIcon [iconState]="fs.triangleIconState"
                    (click)="cycleTriangleState()"></i-feather>
         <i-feather name="headphones" class="icon"></i-feather>
-        <app-flightstrip-button icon="archive" class="button" size="70%"></app-flightstrip-button>
+        <app-flightstrip-button icon="archive" class="button" size="70%" [cdkMenuTriggerFor]="context_menu">
+        </app-flightstrip-button>
       </div>
     </div>
     <div class="flex-row">

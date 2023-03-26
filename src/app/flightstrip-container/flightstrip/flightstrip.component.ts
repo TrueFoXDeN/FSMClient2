@@ -7,6 +7,7 @@ import {FlightStripContainer} from "../flightstrip-directives/flightStrip.direct
 import {FlightstripIcon} from "../flightstrip-directives/flightstripIcon.directive";
 import {FlightStripInput} from "../flightstrip-directives/flightStripInput.directive";
 import {StyleChangerService} from "../../services/style-changer.service";
+import {MatMenuTrigger} from "@angular/material/menu";
 
 
 @Component({
@@ -18,6 +19,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit {
   @ViewChild(FlightStripContainer) fsContainerDir: any;
   @ViewChild(FlightstripIcon) fsIconDir: any;
   @ViewChild(FlightStripInput) fsInputDir: any;
+  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
   @Input() fs!: Flightstrip;
   @Output("switchToCompact") compactSwitch = new EventEmitter<void>()
   status: any;
@@ -155,6 +157,9 @@ export class FlightstripComponent implements OnInit, AfterViewInit {
 
   testFunction() {
     console.log("Test message")
+  }
+
+  openArchive() {
   }
 
 }

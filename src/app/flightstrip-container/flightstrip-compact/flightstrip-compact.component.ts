@@ -3,6 +3,7 @@ import {Flightstrip, statusArrival, statusDeparture, statusVfr, stripType} from 
 import {FlightstripService} from "../flightstrip.service";
 import {FlightStripContainer} from "../flightstrip-directives/flightStrip.directive";
 import {FlightStripCompact} from "../flightstrip-directives/flightStripCompact.directive";
+import {FlightstripCompactBorderDirective} from "../flightstrip-directives/flightstrip-compact-border.directive";
 
 
 @Component({
@@ -13,13 +14,15 @@ import {FlightStripCompact} from "../flightstrip-directives/flightStripCompact.d
 export class FlightstripCompactComponent {
   @Input() fs!: Flightstrip;
   @ViewChild(FlightStripCompact) fsContainerDir: any;
+  @ViewChild(FlightstripCompactBorderDirective) fsCompactBorder: any;
   status: any;
   stripType = stripType;
   isMouseMoving: boolean = false;
-  isMouseDown : boolean = false;
+  isMouseDown: boolean = false;
 
-  constructor(private fsService : FlightstripService) {
+  constructor(private fsService: FlightstripService) {
   }
+
   ngOnInit() {
     switch (this.fs.type) {
       case stripType.OUTBOUND:
@@ -33,6 +36,7 @@ export class FlightstripCompactComponent {
         break;
     }
   }
+
   trimRoute(route: string): string {
     if (route === undefined || route === null) {
       return "";
@@ -41,20 +45,20 @@ export class FlightstripCompactComponent {
     let waypoints = route.split(" ")
     let charCount = 0
 
-    waypoints.forEach((x)=>{
+    waypoints.forEach((x) => {
       charCount += x.length;
     })
 
-    while (charCount > 25){
-      charCount -= waypoints[Math.floor(waypoints.length/2)].length + 1
+    while (charCount > 25) {
+      charCount -= waypoints[Math.floor(waypoints.length / 2)].length + 1
 
-      let waypointsLeft = waypoints.slice(0,Math.floor(waypoints.length/2))
-      let waypointsRight = waypoints.slice(Math.floor(waypoints.length/2+1),waypoints.length+1)
+      let waypointsLeft = waypoints.slice(0, Math.floor(waypoints.length / 2))
+      let waypointsRight = waypoints.slice(Math.floor(waypoints.length / 2 + 1), waypoints.length + 1)
       waypoints = waypointsLeft.concat(waypointsRight)
     }
 
-    let waypointsLeft = waypoints.slice(0,Math.floor(waypoints.length/2))
-    let waypointsRight = waypoints.slice(Math.floor(waypoints.length/2+1),waypoints.length+1)
+    let waypointsLeft = waypoints.slice(0, Math.floor(waypoints.length / 2))
+    let waypointsRight = waypoints.slice(Math.floor(waypoints.length / 2 + 1), waypoints.length + 1)
 
     waypoints = waypointsLeft.concat(["..."])
     waypoints = waypoints.concat(waypointsRight)
@@ -71,6 +75,7 @@ export class FlightstripCompactComponent {
     }, this.fsService.dragDelay - 10);
     this.isMouseMoving = false;
   }
+
   onMouseUp() {
     this.isMouseDown = false;
     this.fsService.dragFlightstrip.next(false);
@@ -81,6 +86,6 @@ export class FlightstripCompactComponent {
   }
 
   onContextClosed() {
-    this.fsContainerDir.updateStyle();
+    this.fsCompactBorder.updateStyle();
   }
 }
