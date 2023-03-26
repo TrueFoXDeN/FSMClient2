@@ -136,10 +136,6 @@ export class FlightstripComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onMouseEnter(event: any) {
-    // console.log("Mouse over fs")
-    //event.target.focus()
-  }
 
   onContextOpened() {
     this.fsContainerDir.markForDeleteOperation()
@@ -148,18 +144,4 @@ export class FlightstripComponent implements OnInit, AfterViewInit {
   onContextClosed() {
     this.fsContainerDir.updateStyle();
   }
-
-  onTypeChange() {
-    console.log("test")
-    // this.fs.type = newType;
-    this.styleChanger.changedColors.next();
-  }
-
-  testFunction() {
-    console.log("Test message")
-  }
-
-  openArchive() {
-  }
-
 }
