@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@angular/core';
 import {Flightstrip, statusArrival, statusDeparture, statusVfr, stripType} from "../flightstrip.model";
 import {FlightstripService} from "../flightstrip.service";
 import {FlightStripContainer} from "../flightstrip-directives/flightStrip.directive";
@@ -15,10 +15,15 @@ export class FlightstripCompactComponent {
   @Input() fs!: Flightstrip;
   @ViewChild(FlightStripCompact) fsContainerDir: any;
   @ViewChild(FlightstripCompactBorderDirective) fsCompactBorder: any;
+  @ViewChild('menutrigger') menutrigger!: ElementRef;
   status: any;
   stripType = stripType;
   isMouseMoving: boolean = false;
   isMouseDown: boolean = false;
+  isTouchCanceled = false;
+  isTouchEnded = false;
+  isTouchMoved = false;
+
 
   constructor(private fsService: FlightstripService) {
   }
@@ -87,5 +92,24 @@ export class FlightstripCompactComponent {
 
   onContextClosed() {
     this.fsCompactBorder.updateStyle();
+  }
+
+  onTouchStart() {
+    this.isTouchEnded = false;
+    this.isTouchCanceled = false;
+    this.isTouchMoved = false;
+    setTimeout(() => {
+      if (!this.isTouchEnded && !this.isTouchCanceled && !this.isTouchMoved) {
+        console.log("Clicked");
+      }
+    }, 1000);
+  }
+
+  onTouchMove() {
+    this.isTouchMoved = true;
+  }
+
+  onTouchEnd() {
+    this.isTouchEnded = true;
   }
 }

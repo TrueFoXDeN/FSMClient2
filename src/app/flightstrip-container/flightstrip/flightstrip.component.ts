@@ -123,20 +123,6 @@ export class FlightstripComponent implements OnInit, AfterViewInit {
     }
     this.fs.status = state;
   }
-
-  onKeyPress(event: any) {
-    switch (event.key) {
-      case "x":
-        if (!this.fsService.isInputFocused) {
-          this.fsContainerDir.markForDeleteOperation()
-
-
-        }
-        break;
-    }
-  }
-
-
   onContextOpened() {
     this.fsContainerDir.markForDeleteOperation()
   }
