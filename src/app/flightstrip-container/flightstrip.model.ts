@@ -20,6 +20,7 @@ export class Flightstrip {
   public freeText: string = "";
   public route: string = "";
   public compactMode: boolean = false;
+  public infosPulled = false;
 
 
   constructor(identifier: string, type: stripType, columnId: string) {

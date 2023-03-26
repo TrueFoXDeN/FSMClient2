@@ -1,13 +1,14 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {Flightstrip, iconState, statusArrival, statusDeparture, statusVfr, stripType} from '../flightstrip.model';
 import {Data} from "../../data";
-import {findIndex, Subject} from "rxjs";
 import {FlightstripService} from "../flightstrip.service";
 import {FlightStripContainer} from "../flightstrip-directives/flightStrip.directive";
 import {FlightstripIcon} from "../flightstrip-directives/flightstripIcon.directive";
 import {FlightStripInput} from "../flightstrip-directives/flightStripInput.directive";
 import {StyleChangerService} from "../../services/style-changer.service";
 import {MatMenuTrigger} from "@angular/material/menu";
+import {HttpClient} from '@angular/common/http';
+import {NetworkService, networkType} from "../../services/network.service";
 
 
 @Component({
@@ -15,24 +16,38 @@ import {MatMenuTrigger} from "@angular/material/menu";
   templateUrl: './flightstrip.component.html',
   styleUrls: ['./flightstrip.component.scss']
 })
-export class FlightstripComponent implements OnInit, AfterViewInit {
+export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(FlightStripContainer) fsContainerDir: any;
   @ViewChild(FlightstripIcon) fsIconDir: any;
   @ViewChild(FlightStripInput) fsInputDir: any;
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
   @Input() fs!: Flightstrip;
   @Output("switchToCompact") compactSwitch = new EventEmitter<void>()
+  subscriptionHandles: any = [];
   status: any;
 
-  constructor(private globalData: Data, private fsService: FlightstripService, private styleChanger: StyleChangerService) {
-    this.fsService.changedType.subscribe((data) => {
+  constructor(private globalData: Data, private fsService: FlightstripService, private styleChanger: StyleChangerService,
+              private http: HttpClient, private networkService: NetworkService) {
+    this.subscriptionHandles.push(this.fsService.changedType.subscribe((data) => {
       if (data.id == this.fs.id) {
         this.fs.type = data.type;
         this.checkStatus();
         this.fs.status = 0;
       }
-    })
+    }))
+    this.subscriptionHandles.push(this.networkService.oneSecNetworkEmitter.subscribe(() => {
+      this.onCheckCallsignTrigger()
+    }))
   }
+
+  ngOnDestroy(): void {
+    this.subscriptionHandles.forEach((subscription: any) => {
+      subscription.unsubscribe();
+    })
+    // this.fsService.changedType.unsubscribe();
+    // this.networkService.oneSecNetworkEmitter.unsubscribe();
+  }
+
 
   checkStatus() {
     switch (this.fs.type) {
@@ -123,6 +138,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit {
     }
     this.fs.status = state;
   }
+
   onContextOpened() {
     this.fsContainerDir.markForDeleteOperation()
   }
@@ -130,4 +146,30 @@ export class FlightstripComponent implements OnInit, AfterViewInit {
   onContextClosed() {
     this.fsContainerDir.updateStyle();
   }
+
+  onCheckCallsignTrigger() {
+    let network = this.networkService.getNetwork();
+    if (!this.fs.infosPulled && this.fs.callsign != "") {
+      this.http.get(`http://192.168.178.20/${network}/callsign/` + this.fs.callsign).subscribe({
+        next: (response: any) => {
+          if (response.success) {
+            this.fs.callsign = response.callsign
+            this.fs.squawk = response.squawk
+            this.fs.departureIcao = response.departure
+            this.fs.arrivalIcao = response.arrival
+            this.fs.aircraft = response.aircraft
+            this.fs.wakeCategory = response.wake
+            this.fs.flightrule = response.flightrule
+            this.fs.route = response.route
+            this.fs.infosPulled = true;
+          }
+        },
+        error: (err) => {
+        }
+      });
+
+    }
+  }
+
+
 }

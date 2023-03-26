@@ -58,7 +58,7 @@ import { ContextMenuComponent } from './flightstrip-container/context-menu/conte
 import {FsContextMenuDirective} from "./flightstrip-container/context-menu/fsContextMenu.directive";
 import {FsContextMenuItemDirective} from "./flightstrip-container/context-menu/fsContextMenuItem.directive";
 import { FlightstripCompactBorderDirective } from './flightstrip-container/flightstrip-directives/flightstrip-compact-border.directive';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -113,6 +113,7 @@ import { FlightstripCompactBorderDirective } from './flightstrip-container/fligh
     GridsterModule,
     MatDialogModule,
     CdkMenuModule,
+    HttpClientModule
   ],
   providers: [
     CustomStyles,

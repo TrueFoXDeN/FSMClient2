@@ -75,7 +75,8 @@
               "browserTarget": "fsm-demo:build:production"
             },
             "development": {
-              "browserTarget": "fsm-demo:build:development"
+              "browserTarget": "fsm-demo:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
