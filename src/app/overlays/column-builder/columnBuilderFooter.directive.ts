@@ -3,19 +3,20 @@ import {CustomStyles} from "../../customStyles";
 import {StyleChangerService} from "../../services/style-changer.service";
 
 @Directive({
-  selector: '[columnHeaderHeight]'
+  selector: '[columnBuilderFooter]'
 })
-export class ColumnHeaderHeight implements OnInit, OnDestroy {
+export class ColumnBuilderFooterDirective implements OnInit, OnDestroy {
   subscriptionList: any = []
 
   constructor(private elementRef: ElementRef, private customStyles: CustomStyles, private styleChanger: StyleChangerService) {
-    this.subscriptionList.push(this.styleChanger.changedSize.subscribe(() => {
-      this.elementRef.nativeElement.style.height = `${70 * this.customStyles.multiplier}px`;
+    this.subscriptionList.push(this.styleChanger.changedColors.subscribe(() => {
+      this.elementRef.nativeElement.style.background = this.customStyles.style.sidebarBackground
     }));
+
   }
 
   ngOnInit(): void {
-    this.elementRef.nativeElement.style.height = `${70 * this.customStyles.multiplier}px`;
+    this.elementRef.nativeElement.style.background = this.customStyles.style.sidebarBackground
   }
 
   ngOnDestroy() {
@@ -23,4 +24,5 @@ export class ColumnHeaderHeight implements OnInit, OnDestroy {
       sub.unsubscribe();
     });
   }
+
 }

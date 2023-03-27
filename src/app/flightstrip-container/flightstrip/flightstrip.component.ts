@@ -1,11 +1,15 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {Flightstrip, iconState, statusArrival, statusDeparture, statusVfr, stripType} from '../flightstrip.model';
 import {Data} from "../../data";
-import {findIndex, Subject} from "rxjs";
 import {FlightstripService} from "../flightstrip.service";
 import {FlightStripContainer} from "../flightstrip-directives/flightStrip.directive";
 import {FlightstripIcon} from "../flightstrip-directives/flightstripIcon.directive";
 import {FlightStripInput} from "../flightstrip-directives/flightStripInput.directive";
+import {StyleChangerService} from "../../services/style-changer.service";
+import {MatMenuTrigger} from "@angular/material/menu";
+import {HttpClient} from '@angular/common/http';
+import {NetworkService, networkType} from "../../services/network.service";
+import {environment} from "../../../environments/environment";
 
 
 @Component({
@@ -13,19 +17,39 @@ import {FlightStripInput} from "../flightstrip-directives/flightStripInput.direc
   templateUrl: './flightstrip.component.html',
   styleUrls: ['./flightstrip.component.scss']
 })
-export class FlightstripComponent implements OnInit, AfterViewInit {
+export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(FlightStripContainer) fsContainerDir: any;
   @ViewChild(FlightstripIcon) fsIconDir: any;
   @ViewChild(FlightStripInput) fsInputDir: any;
+  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
   @Input() fs!: Flightstrip;
   @Output("switchToCompact") compactSwitch = new EventEmitter<void>()
+  subscriptionHandles: any = [];
   status: any;
+  baseURL = environment.baseURL
 
-  constructor(private globalData: Data, private fsService: FlightstripService) {
-
+  constructor(private globalData: Data, private fsService: FlightstripService, private styleChanger: StyleChangerService,
+              private http: HttpClient, private networkService: NetworkService) {
+    this.subscriptionHandles.push(this.fsService.changedType.subscribe((data) => {
+      if (data.id == this.fs.id) {
+        this.fs.type = data.type;
+        this.checkStatus();
+        this.fs.status = 0;
+      }
+    }))
+    this.subscriptionHandles.push(this.networkService.networkEmitter.subscribe(() => {
+      this.onCheckCallsignTrigger()
+    }))
   }
 
-  ngOnInit() {
+  ngOnDestroy(): void {
+    this.subscriptionHandles.forEach((subscription: any) => {
+      subscription.unsubscribe();
+    })
+  }
+
+
+  checkStatus() {
     switch (this.fs.type) {
       case stripType.OUTBOUND:
         this.status = statusDeparture
@@ -37,6 +61,10 @@ export class FlightstripComponent implements OnInit, AfterViewInit {
         this.status = statusVfr
         break;
     }
+  }
+
+  ngOnInit() {
+    this.checkStatus()
 
   }
 
@@ -111,30 +139,35 @@ export class FlightstripComponent implements OnInit, AfterViewInit {
     this.fs.status = state;
   }
 
-  onKeyPress(event: any) {
-    switch (event.key) {
-      case "x":
-        if (!this.fsService.isInputFocused) {
-          this.fsContainerDir.markForDeleteOperation()
-          // let index = this.globalData.flightstripData[this.fs.columnId].flightstrips.indexOf(this.fs)
-          // this.globalData.flightstripData[this.fs.columnId].flightstrips.splice(index, 1)
-
-        }
-        break;
-    }
-  }
-
-  onMouseEnter(event: any) {
-    // console.log("Mouse over fs")
-    //event.target.focus()
-  }
-
   onContextOpened() {
     this.fsContainerDir.markForDeleteOperation()
   }
 
   onContextClosed() {
     this.fsContainerDir.updateStyle();
+  }
+
+  onCheckCallsignTrigger() {
+    let network = this.networkService.getNetwork();
+    if (!this.fs.infosPulled && this.fs.callsign != "") {
+      this.http.get(`${this.baseURL}/${network}/callsign/` + this.fs.callsign).subscribe({
+        next: (response: any) => {
+          if (response.success) {
+            this.fs.callsign = response.callsign
+            this.fs.squawk = response.squawk
+            this.fs.departureIcao = response.departure
+            this.fs.arrivalIcao = response.arrival
+            this.fs.aircraft = response.aircraft
+            this.fs.wakeCategory = response.wake
+            this.fs.flightrule = response.flightrule
+            this.fs.route = response.route
+            this.fs.infosPulled = true;
+          }
+        },
+        error: (err) => {
+        }
+      });
+    }
   }
 
 

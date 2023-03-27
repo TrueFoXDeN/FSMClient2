@@ -1,73 +1,76 @@
-<div class="strip" [flightStrip]="fs.type" (keydown)="onKeyPress($event)" (mouseenter)="onMouseEnter($event)"
-     tabindex="0" [cdkContextMenuTriggerFor]="context_menu" (cdkContextMenuOpened)="onContextOpened()"
-(cdkContextMenuClosed)="onContextClosed()">
+<div class="strip"
+     [flightStrip]="fs" tabindex="0"
+     [cdkContextMenuTriggerFor]="context_menu"
+     (cdkContextMenuOpened)="onContextOpened()"
+     (cdkContextMenuClosed)="onContextClosed()">
   <div class="flex-container">
     <div class="flex-row">
-      <input type="text" class="box-element" placeholder="Callsign" [flightStripInput]="fs.type"
+      <input type="text" class="box-element" placeholder="Callsign" [flightStripInput]="fs"
              [(ngModel)]="fs.callsign" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
              (ngModelChange)="fs.callsign = $event.toUpperCase()">
       <input type="text" class="box-element" placeholder="Dep" [(ngModel)]="fs.departureIcao"
-             [flightStripInput]="fs.type" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
+             [flightStripInput]="fs" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
              (ngModelChange)="fs.departureIcao = $event.toUpperCase()">
       <input type="text" class="box-element" placeholder="Aircraft" [(ngModel)]="fs.aircraft"
-             [flightStripInput]="fs.type" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
+             [flightStripInput]="fs" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
              (ngModelChange)="fs.aircraft = $event.toUpperCase()">
       <input type="text" class="box-element" placeholder="Altitude" [(ngModel)]="fs.altitude"
-             [flightStripInput]="fs.type" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
+             [flightStripInput]="fs" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
              (ngModelChange)="fs.altitude = $event.toUpperCase()">
       <div class="box-element icon-container">
         <i-feather name="alert-triangle" class="icon" flightstripIcon [iconState]="fs.triangleIconState"
                    (click)="cycleTriangleState()"></i-feather>
         <i-feather name="headphones" class="icon"></i-feather>
-        <app-flightstrip-button icon="archive" class="button" size="70%"></app-flightstrip-button>
+        <app-flightstrip-button icon="archive" class="button" size="70%" [cdkMenuTriggerFor]="context_menu">
+        </app-flightstrip-button>
       </div>
     </div>
     <div class="flex-row">
       <input type="text" class="box-element" placeholder="Airline" [(ngModel)]="fs.airline"
-             [flightStripInput]="fs.type" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
+             [flightStripInput]="fs" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
              (ngModelChange)="fs.airline = $event.toUpperCase()">
       <input type="text" class="box-element" placeholder="Arr" [(ngModel)]="fs.arrivalIcao"
-             [flightStripInput]="fs.type" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
+             [flightStripInput]="fs" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
              (ngModelChange)="fs.arrivalIcao = $event.toUpperCase()">
       <div class="box-element small-content">
         <input type="text" placeholder="W" class="small-inputs" [(ngModel)]="fs.wakeCategory"
-               [flightStripInput]="fs.type" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
+               [flightStripInput]="fs" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
                (ngModelChange)="fs.wakeCategory = $event.toUpperCase()">
         <input type="text" placeholder="FR" class="small-inputs" [(ngModel)]="fs.flightrule"
-               [flightStripInput]="fs.type" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
+               [flightStripInput]="fs" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
                (ngModelChange)="fs.flightrule = $event.toUpperCase()">
       </div>
       <input type="text" class="box-element" placeholder="SID/STAR" [(ngModel)]="fs.sidStar"
-             [flightStripInput]="fs.type" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
+             [flightStripInput]="fs" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
              (ngModelChange)="fs.sidStar = $event.toUpperCase()">
       <input type="text" class="box-element" placeholder="Gate" [(ngModel)]="fs.gate" [flightStripInput]="fs.type"
              (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
              (ngModelChange)="fs.gate = $event.toUpperCase()">
     </div>
     <div class="flex-row">
-      <input type="text" class="box-element" placeholder="Squawk" [flightStripInput]="fs.type" [(ngModel)]="fs.squawk"
+      <input type="text" class="box-element" placeholder="Squawk" [flightStripInput]="fs" [(ngModel)]="fs.squawk"
              (focusout)="onSquawkChange()" (focusin)="onInputFocus()">
-      <input type="text" class="box-element" placeholder="Runway" [(ngModel)]="fs.runway" [flightStripInput]="fs.type"
+      <input type="text" class="box-element" placeholder="Runway" [(ngModel)]="fs.runway" [flightStripInput]="fs"
              (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
              (ngModelChange)="fs.runway = $event.toUpperCase()">
       <div class="status-container box-element">
         <app-flightstrip-button icon="chevron-left" class="chevron-status"
                                 (click)="prevStatus()"></app-flightstrip-button>
-        <input type="text" placeholder="Status" value="{{status[fs.status]}}" [flightStripInput]="fs.type"
+        <input type="text" placeholder="Status" value="{{status[fs.status]}}" [flightStripInput]="fs"
                class="status" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()">
         <app-flightstrip-button icon="chevron-right" class="chevron-status"
                                 (click)="nextStatus()"></app-flightstrip-button>
       </div>
-      <input type="text" class="box-element" placeholder="Info" [(ngModel)]="fs.info" [flightStripInput]="fs.type"
+      <input type="text" class="box-element" placeholder="Info" [(ngModel)]="fs.info" [flightStripInput]="fs"
              (focusin)="onInputFocus()" (focusout)="onInputFocusLost()">
     </div>
     <div class="flex-row">
-      <input type="text" placeholder="Route" [(ngModel)]="fs.route" [flightStripInput]="fs.type" class="long-text"
+      <input type="text" placeholder="Route" [(ngModel)]="fs.route" [flightStripInput]="fs" class="long-text"
              (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
              (ngModelChange)="fs.route = $event.toUpperCase()">
     </div>
     <div class="flex-row last">
-      <input type="text" placeholder="Free Text" [(ngModel)]="fs.freeText" [flightStripInput]="fs.type"
+      <input type="text" placeholder="Free Text" [(ngModel)]="fs.freeText" [flightStripInput]="fs"
              class="long-text" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()">
       <app-flightstrip-button icon="chevron-up" class="chevron"
                               (click)="changeToCompactMode()"></app-flightstrip-button>
@@ -77,5 +80,5 @@
 
 
 <ng-template #context_menu>
-  <app-context-menu></app-context-menu>
+  <app-context-menu [fs]="fs"></app-context-menu>
 </ng-template>

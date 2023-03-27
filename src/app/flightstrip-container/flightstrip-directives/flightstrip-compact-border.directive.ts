@@ -1,34 +1,27 @@
-import {Directive, ElementRef, Input, OnDestroy, OnInit} from "@angular/core";
+import {Directive, ElementRef, Input, OnDestroy} from '@angular/core';
 import {CustomStyles} from "../../customStyles";
-import {Flightstrip, stripType} from "../flightstrip.model";
 import {StyleChangerService} from "../../services/style-changer.service";
 import {FlightstripService} from "../flightstrip.service";
-import {Subject} from "rxjs";
+import {Flightstrip, stripType} from "../flightstrip.model";
 
 @Directive({
-  selector: '[flightStrip]'
+  selector: '[appFlightstripCompactBorder]'
 })
-export class FlightStripContainer implements OnInit, OnDestroy {
-  @Input("flightStrip") fs!: Flightstrip
-  squawk: string = ""
-
+export class FlightstripCompactBorderDirective implements OnDestroy {
+  @Input("appFlightstripCompactBorder") fs!: Flightstrip
   subscriptionList: any = []
 
   constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService, private fsService: FlightstripService) {
     this.subscriptionList.push(this.styleChanger.changedColors.subscribe(() => {
       this.updateStyle();
     }));
+
     this.subscriptionList.push(this.fsService.changedType.subscribe((data) => {
       if (data.id == this.fs.id) {
         this.fs.type = data.type;
         this.updateStyle();
       }
     }));
-  }
-
-  onSquawkChange(squawk: string) {
-    this.squawk = squawk;
-    this.updateStyle();
   }
 
   ngOnInit(): void {
@@ -42,9 +35,9 @@ export class FlightStripContainer implements OnInit, OnDestroy {
   }
 
   updateStyle() {
-    //console.log(this.type);
     this.elementRef.nativeElement.style.borderWidth = "2px";
     this.elementRef.nativeElement.style.borderStyle = "solid";
+    console.log(`Type in Dir: ${this.fs.type}`)
     switch (this.fs.type) {
       case stripType.INBOUND:
         this.elementRef.nativeElement.style.background = this.cS.style.fsBackgroundInbound;
@@ -62,14 +55,8 @@ export class FlightStripContainer implements OnInit, OnDestroy {
         this.elementRef.nativeElement.style.color = this.cS.style.fsTextColorVfr;
         break;
     }
-    if (this.squawk == "7500" || this.squawk == "7600" || this.squawk == "7700") {
+    if (this.fs.squawk == "7500" || this.fs.squawk == "7600" || this.fs.squawk == "7700") {
       this.elementRef.nativeElement.style.borderColor = this.cS.style.fsEmergencyBorderColor;
     }
   }
-
-  markForDeleteOperation() {
-    this.elementRef.nativeElement.style.borderColor = this.cS.style.fsDelete
-  }
-
-
 }

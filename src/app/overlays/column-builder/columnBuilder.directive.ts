@@ -1,19 +1,28 @@
-import {Directive, ElementRef, OnInit} from "@angular/core";
+import {Directive, ElementRef, OnDestroy, OnInit} from "@angular/core";
 import {CustomStyles} from "../../customStyles";
 import {StyleChangerService} from "../../services/style-changer.service";
 
 @Directive({
   selector: '[columnBuilderInput]'
 })
-export class ColumnBuilderInputDirective implements OnInit {
+export class ColumnBuilderInputDirective implements OnInit, OnDestroy {
+  subscriptionList: any = []
+
   constructor(private elementRef: ElementRef, private customStyles: CustomStyles, private styleChanger: StyleChangerService) {
-    this.styleChanger.changedColors.subscribe(() => {
+    this.subscriptionList.push(this.styleChanger.changedColors.subscribe(() => {
       this.elementRef.nativeElement.style.background = this.customStyles.style.appInput
-    })
+    }));
+
   }
 
   ngOnInit(): void {
     this.elementRef.nativeElement.style.background = this.customStyles.style.appInput
+  }
+
+  ngOnDestroy() {
+    this.subscriptionList.forEach((sub: any) => {
+      sub.unsubscribe();
+    });
   }
 
 }

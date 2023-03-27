@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Input, OnInit} from "@angular/core";
+import {Directive, ElementRef, Input, OnDestroy, OnInit} from "@angular/core";
 import {CustomStyles} from "../../customStyles";
 import {StyleChangerService} from "../../services/style-changer.service";
 import {FlightstripService} from "../flightstrip.service";
@@ -8,20 +8,23 @@ import {Subject} from "rxjs";
 @Directive({
   selector: '[flightstripIcon]'
 })
-export class FlightstripIcon implements OnInit {
+export class FlightstripIcon implements OnInit, OnDestroy {
   @Input("iconState") iconState: iconState = iconState.INACTIVE
-  internalState: iconState = iconState.INACTIVE
-  squawk: string = ""
+  private internalState: iconState = iconState.INACTIVE
+  private squawk: string = ""
+
+  subscriptionList: any = []
 
   constructor(private elementRef: ElementRef, private customStyles: CustomStyles, private styleChanger: StyleChangerService, private fsService: FlightstripService) {
-    this.styleChanger.changedColors.subscribe(() => {
+    this.subscriptionList.push(this.styleChanger.changedColors.subscribe(() => {
       this.setStyle();
-    });
-    this.fsService.changedTriangleState.subscribe(() => {
+    }));
+    this.subscriptionList.push(this.fsService.changedTriangleState.subscribe(() => {
       this.setStyle();
-    });
+    }));
 
   }
+
   onSquawkChange(squawk: string) {
     this.squawk = squawk;
     this.setStyle()
@@ -29,6 +32,12 @@ export class FlightstripIcon implements OnInit {
 
   ngOnInit(): void {
     this.setStyle()
+  }
+
+  ngOnDestroy() {
+    this.subscriptionList.forEach((sub: any) => {
+      sub.unsubscribe();
+    });
   }
 
   setStyle() {

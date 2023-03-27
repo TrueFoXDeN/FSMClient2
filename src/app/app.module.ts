@@ -22,7 +22,6 @@ import {BodyBackground} from "./directives/general-directives/bodyBackground.dir
 import {FlightStripContainer} from "./flightstrip-container/flightstrip-directives/flightStrip.directive";
 import {CustomStyles} from "./customStyles";
 import {FlightStripInput} from "./flightstrip-container/flightstrip-directives/flightStripInput.directive";
-import {SidebarWidth} from "./sidebar/sidebar-directives/sidebarWidth.directive";
 import {ColumnWidth} from "./column/column-directives/columnWidth.directive";
 import {ColumnHeaderHeight} from "./column/column-directives/columnHeaderHeight.directive";
 import {ColumnHeaderFont} from "./column/column-directives/columnHeaderFont.directive";
@@ -49,7 +48,7 @@ import {FlightstripIcon} from "./flightstrip-container/flightstrip-directives/fl
 import {
   FlightstripButtonComponent
 } from "./flightstrip-container/flightstrip/flightstrip-button/flightstrip-button.component";
-import {ColumnBuilderInputDirective} from "./directives/general-directives/columnBuilder.directive";
+import {ColumnBuilderInputDirective} from "./overlays/column-builder/columnBuilder.directive";
 import { SettingsComponent } from './overlays/settings/settings.component';
 import { ThemeBuilderComponent } from './overlays/theme-builder/theme-builder.component';
 import {SidebarButtonPngComponent} from "./sidebar/sidebar-button-png/sidebar-button-png.component";
@@ -57,8 +56,9 @@ import {CdkMenuModule} from '@angular/cdk/menu';
 import { ContextMenuComponent } from './flightstrip-container/context-menu/context-menu.component';
 import {FsContextMenuDirective} from "./flightstrip-container/context-menu/fsContextMenu.directive";
 import {FsContextMenuItemDirective} from "./flightstrip-container/context-menu/fsContextMenuItem.directive";
-
-
+import { FlightstripCompactBorderDirective } from './flightstrip-container/flightstrip-directives/flightstrip-compact-border.directive';
+import { HttpClientModule } from '@angular/common/http';
+import {ColumnBuilderFooterDirective} from "./overlays/column-builder/columnBuilderFooter.directive";
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +72,6 @@ import {FsContextMenuItemDirective} from "./flightstrip-container/context-menu/f
     BodyBackground,
     FlightStripContainer,
     FlightStripInput,
-    SidebarWidth,
     ColumnWidth,
     ColumnHeaderHeight,
     ColumnHeaderFont,
@@ -94,7 +93,9 @@ import {FsContextMenuItemDirective} from "./flightstrip-container/context-menu/f
     SidebarButtonPngComponent,
     ContextMenuComponent,
     FsContextMenuDirective,
-    FsContextMenuItemDirective
+    FsContextMenuItemDirective,
+    FlightstripCompactBorderDirective,
+    ColumnBuilderFooterDirective
   ],
   imports: [
     BrowserModule,
@@ -112,6 +113,7 @@ import {FsContextMenuItemDirective} from "./flightstrip-container/context-menu/f
     GridsterModule,
     MatDialogModule,
     CdkMenuModule,
+    HttpClientModule
   ],
   providers: [
     CustomStyles,

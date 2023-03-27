@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Flightstrip} from "./flightstrip.model";
 
 @Component({
@@ -6,11 +6,19 @@ import {Flightstrip} from "./flightstrip.model";
   templateUrl: './flightstrip-container.component.html',
   styleUrls: ['./flightstrip-container.component.scss']
 })
-export class FlightstripContainerComponent {
+export class FlightstripContainerComponent implements OnInit {
   @Input("stripModel") stripModel!: Flightstrip
+  @Input("colID") columnId!: string;
 
   constructor() {
 
   }
+
+  ngOnInit(): void {
+    if (this.stripModel.columnId != this.columnId) {
+      this.stripModel.columnId = this.columnId
+    }
+  }
+
 
 }
