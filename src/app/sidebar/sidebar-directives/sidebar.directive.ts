@@ -15,7 +15,9 @@ export class Sidebar implements OnInit, OnDestroy {
       }));
     this.subscriptionList.push(
       this.styleChanger.changedSize.subscribe(() => {
+        console.log(this.elementRef.nativeElement.style.width);
         this.elementRef.nativeElement.style.width = `${60 * this.customStyles.multiplier}px`;
+        console.log(this.elementRef.nativeElement.style.width);
       }));
   }
 

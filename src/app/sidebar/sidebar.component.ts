@@ -67,7 +67,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     const dialogConfig = new MatDialogConfig()
     dialogConfig.height = '80vh';
     dialogConfig.width = '80vw';
-    dialogConfig.disableClose = true;
     dialogConfig.panelClass = 'custom-dialog-container';
     dialogConfig.data = {
       columnData: JSON.parse(JSON.stringify(this.globalData.columnStructure))
@@ -88,8 +87,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   openNetworkMenu() {
     const dialogConfig = new MatDialogConfig()
-    dialogConfig.height = '40%';
-    dialogConfig.width = '40vw';
+    dialogConfig.height = '50vh';
+    dialogConfig.width = '50vw';
     dialogConfig.panelClass = 'custom-dialog-container';
     const dialogRef = this.dialog.open(NetworkMenuComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {

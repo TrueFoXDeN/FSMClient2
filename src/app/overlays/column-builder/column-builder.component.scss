@@ -8,12 +8,13 @@
 
 .gridBackground {
   flex-grow: 1;
+  box-sizing: border-box;
 }
 
 
 .content {
+
   height: 100%;
-  padding: 2px;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
