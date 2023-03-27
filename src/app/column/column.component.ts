@@ -92,12 +92,14 @@ export class ColumnComponent {
     this.fsService.dragChange.next({id: fsId, dragEnabled : false})
   }
 
-  onMouseDown(fsId: string) {
+  onMouseDown(fsId: string, event : any) {
     this.isMouseDown = true
     setTimeout(() => {
-      if (!this.isMouseMoving && this.isMouseDown) {
-        this.fsService.dragChange.next({id: fsId, dragEnabled : true})
-        this.isDragable = true;
+      if(event.button == 0){
+        if (!this.isMouseMoving && this.isMouseDown) {
+          this.fsService.dragChange.next({id: fsId, dragEnabled : true})
+          this.isDragable = true;
+        }
       }
     }, this.fsService.dragDelay - 20);
     this.isMouseMoving = false;
