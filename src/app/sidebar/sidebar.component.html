@@ -10,7 +10,8 @@
     <app-sidebar-button icon="users" class="icon-button" matTooltip="Multiplayer"
                         matTooltipPosition="right" sidebarButton iconState="standard"></app-sidebar-button>
     <app-sidebar-button icon="wifi" class="icon-button" matTooltip="Networks"
-                        matTooltipPosition="right" sidebarButton iconState="standard"></app-sidebar-button>
+                        matTooltipPosition="right" sidebarButton [iconState]="networkIcon"
+                        (click)="openNetworkMenu()"></app-sidebar-button>
   </div>
 
   <div class="bottom-buttons">
@@ -24,7 +25,5 @@
                         matTooltipPosition="right" sidebarButton iconState="standard"></app-sidebar-button>
     <app-sidebar-button icon="settings" class="icon-button" matTooltip="Settings"
                         matTooltipPosition="right" sidebarButton iconState="standard"></app-sidebar-button>
-
   </div>
-
 </div>

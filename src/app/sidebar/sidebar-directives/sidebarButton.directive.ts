@@ -1,21 +1,26 @@
-import {Directive, ElementRef, Input, OnDestroy, OnInit} from "@angular/core";
+import {Directive, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from "@angular/core";
 import {CustomStyles} from "../../customStyles";
 import {StyleChangerService} from "../../services/style-changer.service";
+import {iconState} from "../../flightstrip-container/flightstrip.model";
+import {NetworkService} from "../../services/network.service";
 
 @Directive({
   selector: '[sidebarButton]'
 })
-export class SidebarButton implements OnInit, OnDestroy {
-  @Input("iconState") iconState: string = "standard"
+export class SidebarButton implements OnInit, OnDestroy, OnChanges {
+  @Input("iconState") iconState: any = "standard"
   subscriptionList: any = []
+  internalIconState = "standard";
 
-  constructor(private elementRef: ElementRef, private customStyles: CustomStyles, private styleChanger: StyleChangerService) {
+  constructor(private elementRef: ElementRef, private customStyles: CustomStyles, private styleChanger: StyleChangerService,
+              private networkService: NetworkService) {
     this.subscriptionList.push(this.styleChanger.changedColors.subscribe(() => {
       this.updateStyle();
     }));
   }
 
   ngOnInit(): void {
+    this.internalIconState = this.iconState;
     this.updateStyle()
   }
 
@@ -27,7 +32,7 @@ export class SidebarButton implements OnInit, OnDestroy {
 
   updateStyle() {
     this.elementRef.nativeElement.style.background = this.customStyles.style.sidebarButton
-    switch (this.iconState) {
+    switch (this.internalIconState) {
       case "standard":
         this.elementRef.nativeElement.style.color = this.customStyles.style.iconColor
         break;
@@ -38,6 +43,13 @@ export class SidebarButton implements OnInit, OnDestroy {
         this.elementRef.nativeElement.style.color = this.customStyles.style.iconColorError
         break;
 
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes["iconState"]) {
+      this.internalIconState = this.iconState
+      this.updateStyle()
     }
   }
 }
