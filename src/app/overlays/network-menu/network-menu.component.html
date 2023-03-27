@@ -1,0 +1,63 @@
+<div class="window" networkMenu>
+  <div class="flex-row">
+    <div class="flex-column">
+      <div class="logo-header">
+        <img src="assets/ivao_white.png" class="image">
+      </div>
+      <div class="network-info">
+        <div class="network-info-content">
+          <span class="network-info-description">Pilots:</span>
+          <span class="network-info-value">{{ivaoPilots}}</span>
+        </div>
+        <div class="network-info-content">
+          <span class="network-info-description">Controllers:</span>
+          <span class="network-info-value">{{ivaoControllers}}</span>
+        </div>
+      </div>
+      <div class="button-container">
+        <button class="button" networkMenuButton (click)="changeNetworkConnection('ivao')"
+                [disabled]="!ivaoButtonEnabled">{{ivaoButtonText}}</button>
+      </div>
+    </div>
+    <div class="flex-column middle-element">
+      <div class="logo-header">
+        <img src="assets/vatsim_white.png" class="image">
+      </div>
+      <div class="network-info">
+        <div class="network-info-content">
+          <span class="network-info-description">Pilots:</span>
+          <span class="network-info-value">{{vatsimPilots}}</span>
+        </div>
+        <div class="network-info-content">
+          <span class="network-info-description">Controllers:</span>
+          <span class="network-info-value">{{vatsimControllers}}</span>
+        </div>
+      </div>
+      <div class="button-container">
+        <button class="button" networkMenuButton (click)="changeNetworkConnection('vatsim')"
+                [disabled]="!vatsimButtonEnabled">{{vatsimButtonText}}</button>
+      </div>
+    </div>
+    <div class="flex-column">
+      <div class="logo-header">
+        <img src="assets/poscon_white.png" class="image">
+      </div>
+      <div class="network-info">
+        <div class="network-info-content">
+          <span class="network-info-description">Pilots:</span>
+          <span class="network-info-value">{{posconPilots}}</span>
+        </div>
+        <div class="network-info-content">
+          <span class="network-info-description">Controllers:</span>
+          <span class="network-info-value">{{posconControllers}}</span>
+        </div>
+      </div>
+      <div class="button-container">
+        <button class="button" networkMenuButton (click)="changeNetworkConnection('poscon')"
+                [disabled]="!posconButtonEnabled">{{posconButtonText}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -59,6 +59,10 @@ import {FsContextMenuItemDirective} from "./flightstrip-container/context-menu/f
 import { FlightstripCompactBorderDirective } from './flightstrip-container/flightstrip-directives/flightstrip-compact-border.directive';
 import { HttpClientModule } from '@angular/common/http';
 import {ColumnBuilderFooterDirective} from "./overlays/column-builder/columnBuilderFooter.directive";
+import { NetworkMenuComponent } from './overlays/network-menu/network-menu.component';
+import {NetworkMenuDirective} from "./overlays/network-menu/networkMenu.directive";
+import {MatMenuModule} from '@angular/material/menu';
+import {NetworkMenuButtonDirective} from "./overlays/network-menu/networkMenuButton.directive";
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,7 +99,10 @@ import {ColumnBuilderFooterDirective} from "./overlays/column-builder/columnBuil
     FsContextMenuDirective,
     FsContextMenuItemDirective,
     FlightstripCompactBorderDirective,
-    ColumnBuilderFooterDirective
+    ColumnBuilderFooterDirective,
+    NetworkMenuComponent,
+    NetworkMenuDirective,
+    NetworkMenuButtonDirective
   ],
   imports: [
     BrowserModule,
@@ -113,7 +120,8 @@ import {ColumnBuilderFooterDirective} from "./overlays/column-builder/columnBuil
     GridsterModule,
     MatDialogModule,
     CdkMenuModule,
-    HttpClientModule
+    HttpClientModule,
+    MatMenuModule
   ],
   providers: [
     CustomStyles,
