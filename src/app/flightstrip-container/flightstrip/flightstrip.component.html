@@ -43,7 +43,7 @@
       <input type="text" class="box-element" placeholder="SID/STAR" [(ngModel)]="fs.sidStar"
              [flightStripInput]="fs" (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
              (ngModelChange)="fs.sidStar = $event.toUpperCase()">
-      <input type="text" class="box-element" placeholder="Gate" [(ngModel)]="fs.gate" [flightStripInput]="fs.type"
+      <input type="text" class="box-element" placeholder="Gate" [(ngModel)]="fs.gate" [flightStripInput]="fs"
              (focusin)="onInputFocus()" (focusout)="onInputFocusLost()"
              (ngModelChange)="fs.gate = $event.toUpperCase()">
     </div>
