@@ -48,7 +48,7 @@ import {FlightstripIcon} from "./flightstrip-container/flightstrip-directives/fl
 import {
   FlightstripButtonComponent
 } from "./flightstrip-container/flightstrip/flightstrip-button/flightstrip-button.component";
-import {ColumnBuilderInputDirective} from "./directives/general-directives/columnBuilder.directive";
+import {ColumnBuilderInputDirective} from "./overlays/column-builder/columnBuilder.directive";
 import { SettingsComponent } from './overlays/settings/settings.component';
 import { ThemeBuilderComponent } from './overlays/theme-builder/theme-builder.component';
 import {SidebarButtonPngComponent} from "./sidebar/sidebar-button-png/sidebar-button-png.component";
@@ -58,6 +58,7 @@ import {FsContextMenuDirective} from "./flightstrip-container/context-menu/fsCon
 import {FsContextMenuItemDirective} from "./flightstrip-container/context-menu/fsContextMenuItem.directive";
 import { FlightstripCompactBorderDirective } from './flightstrip-container/flightstrip-directives/flightstrip-compact-border.directive';
 import { HttpClientModule } from '@angular/common/http';
+import {ColumnBuilderFooterDirective} from "./overlays/column-builder/columnBuilderFooter.directive";
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,7 +94,8 @@ import { HttpClientModule } from '@angular/common/http';
     ContextMenuComponent,
     FsContextMenuDirective,
     FsContextMenuItemDirective,
-    FlightstripCompactBorderDirective
+    FlightstripCompactBorderDirective,
+    ColumnBuilderFooterDirective
   ],
   imports: [
     BrowserModule,
