@@ -2,6 +2,7 @@
 .strip {
   aspect-ratio: 5;
   //margin-bottom: 10px;
+  user-select: none;
 }
 
 .cols {
@@ -177,5 +178,8 @@
       height: 35%
     }
   }
+}
+.disabled{
+  opacity: 0.6;
 
 }

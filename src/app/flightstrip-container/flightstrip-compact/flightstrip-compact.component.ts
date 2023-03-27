@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, Output, TemplateRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnDestroy, Output, TemplateRef, ViewChild} from '@angular/core';
 import {Flightstrip, statusArrival, statusDeparture, statusVfr, stripType} from "../flightstrip.model";
 import {FlightstripService} from "../flightstrip.service";
 import {FlightStripContainer} from "../flightstrip-directives/flightStrip.directive";
@@ -11,7 +11,7 @@ import {FlightstripCompactBorderDirective} from "../flightstrip-directives/fligh
   templateUrl: './flightstrip-compact.component.html',
   styleUrls: ['./flightstrip-compact.component.scss']
 })
-export class FlightstripCompactComponent {
+export class FlightstripCompactComponent implements OnDestroy {
   @Input() fs!: Flightstrip;
   @ViewChild(FlightStripCompact) fsContainerDir: any;
   @ViewChild(FlightstripCompactBorderDirective) fsCompactBorder: any;
@@ -23,9 +23,21 @@ export class FlightstripCompactComponent {
   isTouchCanceled = false;
   isTouchEnded = false;
   isTouchMoved = false;
-
+  inputsDisabled = false;
+  subscriptionHandles: any = [];
 
   constructor(private fsService: FlightstripService) {
+    this.subscriptionHandles.push(this.fsService.dragChange.subscribe((data) => {
+      if (data.id == this.fs.id) {
+        this.inputsDisabled = data.dragEnabled;
+      }
+    }));
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptionHandles.forEach((subscription: any) => {
+      subscription.unsubscribe();
+    })
   }
 
   ngOnInit() {

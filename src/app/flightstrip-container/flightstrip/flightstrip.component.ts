@@ -1,4 +1,15 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {Flightstrip, iconState, statusArrival, statusDeparture, statusVfr, stripType} from '../flightstrip.model';
 import {Data} from "../../data";
 import {FlightstripService} from "../flightstrip.service";
@@ -23,10 +34,13 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(FlightStripInput) fsInputDir: any;
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
   @Input() fs!: Flightstrip;
+  @Input("isDragable") private isDragable = false;
   @Output("switchToCompact") compactSwitch = new EventEmitter<void>()
   subscriptionHandles: any = [];
   status: any;
   baseURL = environment.baseURL
+
+  inputsDisabled = false;
 
   constructor(private globalData: Data, private fsService: FlightstripService, private styleChanger: StyleChangerService,
               private http: HttpClient, private networkService: NetworkService) {
@@ -40,6 +54,11 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscriptionHandles.push(this.networkService.networkEmitter.subscribe(() => {
       this.onCheckCallsignTrigger()
     }))
+    this.subscriptionHandles.push(this.fsService.dragChange.subscribe((data) => {
+      if (data.id == this.fs.id) {
+        this.inputsDisabled = data.dragEnabled;
+      }
+    }));
   }
 
   ngOnDestroy(): void {
@@ -65,7 +84,6 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.checkStatus()
-
   }
 
   changeToCompactMode() {
@@ -96,10 +114,6 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onInputFocusLost() {
     this.fsService.isInputFocused = false;
-  }
-
-  onDrag() {
-    this.fsInputDir.onDrag();
   }
 
   ngAfterViewInit(): void {

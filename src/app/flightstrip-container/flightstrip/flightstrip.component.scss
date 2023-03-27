@@ -41,6 +41,10 @@ input {
   -webkit-box-align: center;
 }
 
+:disabled{
+  opacity: 0.6;
+  user-select: none;
+}
 
 .airline {
   display: flex;

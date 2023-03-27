@@ -15,8 +15,10 @@
        (keydown)="onKeyPress($event)" [tabindex]="0" (mouseenter)="onMouseEnter($event)"
        (mouseleave)="onMouseLeave($event)" [blurOn]="submittedValue">
     <div *ngFor="let strip of data.flightstripData?.[uuid]?.['flightstrips']" cdkDrag [cdkDragData]="strip"
-         [cdkDragStartDelay]="getDragDelay()" class="drag-item" (cdkDragEnded)="dragEnded()"
-         (mousedown)="onMouseDown()" (mouseup)="onMouseUp()" (mousemove)="onMouseMove()">
+         [cdkDragStartDelay]="getDragDelay()" class="drag-item" (cdkDragEnded)="dragEnded(strip.id)"
+         (mousedown)="onMouseDown(strip.id)" (mouseup)="onMouseUp(strip.id)" (mousemove)="onMouseMove(strip.id)"
+         (touchstart)="onMouseDown(strip.id)" (touchend)="onMouseUp(strip.id)" (touchmove)="onMouseMove(strip.id)"
+    >
       <app-flightstrip-container [stripModel]="strip" [colID]="uuid"></app-flightstrip-container>
     </div>
   </div>

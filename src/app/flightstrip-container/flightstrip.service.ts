@@ -12,6 +12,8 @@ export class FlightstripService {
 
   dragFlightstrip = new Subject<boolean>()
   changedType = new Subject<{type : stripType, id : string}>()
+  dragChange = new Subject<{ id : string, dragEnabled : boolean }>()
+
 
   constructor() {
   }

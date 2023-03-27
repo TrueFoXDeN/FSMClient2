@@ -1,9 +1,10 @@
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, QueryList, ViewChild} from '@angular/core';
 import {Flightstrip, stripType} from '../flightstrip-container/flightstrip.model';
 import {Data} from "../data";
 import {Util} from "../util";
 import {FlightstripService} from "../flightstrip-container/flightstrip.service";
+import {FlightstripContainerComponent} from "../flightstrip-container/flightstrip-container.component";
 
 @Component({
   selector: 'app-column',
@@ -14,10 +15,11 @@ export class ColumnComponent {
   @Input("name") name = ""
   @Input("uuid") uuid = ""
   @Output() submittedValue = new EventEmitter<void>();
+  @ViewChild(FlightstripContainerComponent) fsContainer!: QueryList<FlightstripContainerComponent>;
   public strips: Flightstrip[] = []
   isMouseMoving: boolean = false;
   isMouseDown: boolean = false;
-  isDragged = false;
+  isDragable = false;
 
   constructor(public data: Data, private util: Util, private fsService: FlightstripService) {
   }
@@ -85,26 +87,31 @@ export class ColumnComponent {
     return this.fsService.dragDelay;
   }
 
-  dragEnded() {
-    this.isDragged = false;
+  dragEnded(fsId: string) {
+    this.isDragable = false;
+    this.fsService.dragChange.next({id: fsId, dragEnabled : false})
   }
 
-  onMouseDown() {
+  onMouseDown(fsId: string) {
     this.isMouseDown = true
     setTimeout(() => {
       if (!this.isMouseMoving && this.isMouseDown) {
-        this.isDragged = true;
+        this.fsService.dragChange.next({id: fsId, dragEnabled : true})
+        this.isDragable = true;
       }
     }, this.fsService.dragDelay - 20);
     this.isMouseMoving = false;
   }
 
-  onMouseUp() {
+  onMouseUp(fsId: string) {
     this.isMouseDown = false;
-    this.isDragged = false;
+    this.isDragable = false;
+    this.fsService.dragChange.next({id: fsId, dragEnabled : false})
   }
 
-  onMouseMove() {
-    this.isMouseMoving = true
+  onMouseMove(fsId: string) {
+    if (!this.isMouseMoving) {
+      this.isMouseMoving = true
+    }
   }
 }

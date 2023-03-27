@@ -4,39 +4,39 @@
   <div class="cols">
     <div class="col1" flightStripCompact [flightStripCompactDivider]="'right'" [fsCompact]="fs">
       <span class="callsign" flightStripCompact [fsCompact]="fs"
-            [flightStripFontSize]="'large'">{{fs.callsign}}</span>
+            [flightStripFontSize]="'large'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.callsign}}</span>
       <span class="airline" flightStripCompact [fsCompact]="fs"
-            [flightStripFontSize]="'medium'">{{fs.airline}}</span>
+            [flightStripFontSize]="'medium'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.airline}}</span>
       <div class="aircraft-size">
         <span class="aircraft" flightStripCompact [fsCompact]="fs"
-              [flightStripFontSize]="'medium'">{{fs.aircraft}}</span>
+              [flightStripFontSize]="'medium'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.aircraft}}</span>
         <span class="wake" flightStripCompact [fsCompact]="fs"
-              [flightStripFontSize]="'medium'">{{fs.wakeCategory}}</span>
+              [flightStripFontSize]="'medium'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.wakeCategory}}</span>
       </div>
     </div>
     <div class="col2" flightStripCompact [flightStripCompactDivider]="'right'" [fsCompact]="fs">
       <span class="departure" flightStripCompact [fsCompact]="fs"
-            [flightStripFontSize]="'medium'">{{fs.departureIcao}}</span>
+            [flightStripFontSize]="'medium'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.departureIcao}}</span>
       <span class="arrival" flightStripCompact [fsCompact]="fs"
-            [flightStripFontSize]="'medium'">{{fs.arrivalIcao}}</span>
+            [flightStripFontSize]="'medium'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.arrivalIcao}}</span>
       <span class="flightrule" flightStripCompact [fsCompact]="fs"
-            [flightStripFontSize]="'medium'">{{fs.flightrule}}</span>
+            [flightStripFontSize]="'medium'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.flightrule}}</span>
     </div>
     <div class="col3" flightStripCompact [flightStripCompactDivider]="'right'" [fsCompact]="fs">
       <span class="runway" flightStripCompact [fsCompact]="fs"
-            [flightStripFontSize]="'medium'">{{fs.runway}}</span>
+            [flightStripFontSize]="'medium'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.runway}}</span>
       <span class="sidStar" flightStripCompact [fsCompact]="fs"
-            [flightStripFontSize]="'medium'">{{fs.sidStar}}</span>
+            [flightStripFontSize]="'medium'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.sidStar}}</span>
       <span class="altitude" flightStripCompact [fsCompact]="fs"
-            [flightStripFontSize]="'medium'">{{fs.altitude}}</span>
+            [flightStripFontSize]="'medium'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.altitude}}</span>
     </div>
     <div class="col4" flightStripCompact [flightStripCompactDivider]="'right'" [fsCompact]="fs">
        <span class="squawk" flightStripCompact [fsCompact]="fs"
-             [flightStripFontSize]="'medium'">{{fs.squawk}}</span>
+             [flightStripFontSize]="'medium'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.squawk}}</span>
       <span class="gate" flightStripCompact [fsCompact]="fs"
-            [flightStripFontSize]="'medium'">{{fs.gate}}</span>
+            [flightStripFontSize]="'medium'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.gate}}</span>
       <span class="info" flightStripCompact [fsCompact]="fs"
-            [flightStripFontSize]="'small'">{{fs.info}}</span>
+            [flightStripFontSize]="'small'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.info}}</span>
     </div>
     <div class="col5">
       <div class="top-row">
@@ -44,18 +44,19 @@
         <div class="status-row">
           <app-flightstrip-button class="status-button" icon="chevron-left"></app-flightstrip-button>
           <span class="status" flightStripCompact [fsCompact]="fs"
-                [flightStripFontSize]="'medium'">{{status[fs.status]}}</span>
+                [flightStripFontSize]="'medium'" [ngClass]="{'disabled' : inputsDisabled}">{{status[fs.status]}}</span>
           <app-flightstrip-button class="status-button" icon="chevron-right"></app-flightstrip-button>
         </div>
         <div class="icons">
-          <i-feather name="alert-triangle" class="icon" flightstripIcon [iconState]="fs.triangleIconState"></i-feather>
+          <i-feather name="alert-triangle" class="icon" flightstripIcon [iconState]="fs.triangleIconState"
+                     [ngClass]="{'disabled' : inputsDisabled}"></i-feather>
           <i-feather name="headphones" class="icon"></i-feather>
         </div>
       </div>
       <span class="route" flightStripCompact [fsCompact]="fs"
-            [flightStripFontSize]="'small'">{{trimRoute(fs.route)}}</span>
+            [flightStripFontSize]="'small'" [ngClass]="{'disabled' : inputsDisabled}">{{trimRoute(fs.route)}}</span>
       <span class="freeText" flightStripCompact [fsCompact]="fs"
-            [flightStripFontSize]="'small'">{{fs.freeText}}</span>
+            [flightStripFontSize]="'small'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.freeText}}</span>
     </div>
   </div>
 
