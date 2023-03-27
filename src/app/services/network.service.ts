@@ -25,13 +25,13 @@ export class NetworkService {
   startNetworkConnection() {
     this.isNetworkFetchActive = true;
     this.changedNetworkEmitter.next({active: true, network: this.usedNetwork})
-    this.messageService.showMessage(`Network connected: ${networkType[this.usedNetwork]}`)
+    this.messageService.showMessage(`Network connected: ${networkType[this.usedNetwork]}`, "success")
   }
 
   stopNetworkConnection() {
     this.isNetworkFetchActive = false;
     this.changedNetworkEmitter.next({active: false, network: this.usedNetwork})
-    this.messageService.showMessage("Network disconnected")
+    this.messageService.showMessage("Network disconnected", "warning")
   }
 
   getIsNetworkFetchActive() {

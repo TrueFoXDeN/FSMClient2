@@ -49,20 +49,23 @@ import {
   FlightstripButtonComponent
 } from "./flightstrip-container/flightstrip/flightstrip-button/flightstrip-button.component";
 import {ColumnBuilderInputDirective} from "./overlays/column-builder/columnBuilder.directive";
-import { SettingsComponent } from './overlays/settings/settings.component';
-import { ThemeBuilderComponent } from './overlays/theme-builder/theme-builder.component';
+import {SettingsComponent} from './overlays/settings/settings.component';
+import {ThemeBuilderComponent} from './overlays/theme-builder/theme-builder.component';
 import {SidebarButtonPngComponent} from "./sidebar/sidebar-button-png/sidebar-button-png.component";
 import {CdkMenuModule} from '@angular/cdk/menu';
-import { ContextMenuComponent } from './flightstrip-container/context-menu/context-menu.component';
+import {ContextMenuComponent} from './flightstrip-container/context-menu/context-menu.component';
 import {FsContextMenuDirective} from "./flightstrip-container/context-menu/fsContextMenu.directive";
 import {FsContextMenuItemDirective} from "./flightstrip-container/context-menu/fsContextMenuItem.directive";
-import { FlightstripCompactBorderDirective } from './flightstrip-container/flightstrip-directives/flightstrip-compact-border.directive';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  FlightstripCompactBorderDirective
+} from './flightstrip-container/flightstrip-directives/flightstrip-compact-border.directive';
+import {HttpClientModule} from '@angular/common/http';
 import {ColumnBuilderFooterDirective} from "./overlays/column-builder/columnBuilderFooter.directive";
-import { NetworkMenuComponent } from './overlays/network-menu/network-menu.component';
+import {NetworkMenuComponent} from './overlays/network-menu/network-menu.component';
 import {NetworkMenuDirective} from "./overlays/network-menu/networkMenu.directive";
 import {MatMenuModule} from '@angular/material/menu';
 import {NetworkMenuButtonDirective} from "./overlays/network-menu/networkMenuButton.directive";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -127,7 +130,7 @@ import {NetworkMenuButtonDirective} from "./overlays/network-menu/networkMenuBut
     CustomStyles,
     Data,
     Util,
-    {provide: MatDialogRef, useValue:{}}
+    {provide: MatDialogRef, useValue: {}}
   ],
   bootstrap: [AppComponent],
 })

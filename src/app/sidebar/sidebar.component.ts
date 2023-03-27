@@ -43,7 +43,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   onZoomIn() {
     if (this.customStyle.multiplier < 2.2) {
       this.customStyle.multiplier += 0.15;
-      this.snackService.showMessage(`Zoom set to ${Math.round(this.customStyle.multiplier * 100)}%`)
+      this.snackService.showMessage(`Zoom set to ${Math.round(this.customStyle.multiplier * 100)}%`, "standard")
       this.styleChanger.changedSize.next();
     }
   }
@@ -51,7 +51,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   onZoomOut() {
     if (this.customStyle.multiplier > 0.7) {
       this.customStyle.multiplier -= 0.15;
-      this.snackService.showMessage(`Zoom set to ${Math.round(this.customStyle.multiplier * 100)}%`)
+      this.snackService.showMessage(`Zoom set to ${Math.round(this.customStyle.multiplier * 100)}%`, "standard")
       this.styleChanger.changedSize.next();
     }
   }
