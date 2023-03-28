@@ -1,9 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {HorizontalScrollComponent} from './main-container/horizontal-scroll.component';
 import {ColumnComponent} from './column/column.component';
@@ -65,7 +63,26 @@ import {NetworkMenuComponent} from './overlays/network-menu/network-menu.compone
 import {NetworkMenuDirective} from "./overlays/network-menu/networkMenu.directive";
 import {MatMenuModule} from '@angular/material/menu';
 import {NetworkMenuButtonDirective} from "./overlays/network-menu/networkMenuButton.directive";
-
+import { ProfileSettingsComponent } from './overlays/profile-settings/profile-settings.component';
+import {ProfileSettingsDirective} from "./overlays/profile-settings/profileSettings.directive";
+import {MatSelectModule} from '@angular/material/select';
+import { DropdownComponent } from './dropdown/dropdown.component';
+import {DropdownDirective} from "./dropdown/dropdown.directive";
+import {DropdownItemDirective} from "./dropdown/dropdownItem.directive";
+import {NgSelectModule} from "@ng-select/ng-select";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatIconModule} from "@angular/material/icon";
+import {DropdownIconDirective} from "./dropdown/dropdownIcon.directive";
+import {ProfileSettingsInputDirective} from "./overlays/profile-settings/profileSettingsInput.directive";
+import {
+  ProfileSettingsInputContainerDirective
+} from "./overlays/profile-settings/profileSettingsInputContainer.directive";
+import {
+  ProfileSettingsSaveButtonComponent
+} from "./overlays/profile-settings/profile-settings-save-button/profile-settings-save-button.component";
+import {
+  ProfileSettingsSaveButtonDirective
+} from "./overlays/profile-settings/profile-settings-save-button/profileSettingsSaveButton.directive";
 @NgModule({
   declarations: [
     AppComponent,
@@ -105,7 +122,17 @@ import {NetworkMenuButtonDirective} from "./overlays/network-menu/networkMenuBut
     ColumnBuilderFooterDirective,
     NetworkMenuComponent,
     NetworkMenuDirective,
-    NetworkMenuButtonDirective
+    NetworkMenuButtonDirective,
+    ProfileSettingsComponent,
+    ProfileSettingsDirective,
+    DropdownComponent,
+    DropdownDirective,
+    DropdownItemDirective,
+    DropdownIconDirective,
+    ProfileSettingsInputDirective,
+    ProfileSettingsInputContainerDirective,
+    ProfileSettingsSaveButtonComponent,
+    ProfileSettingsSaveButtonDirective
   ],
   imports: [
     BrowserModule,
@@ -124,7 +151,11 @@ import {NetworkMenuButtonDirective} from "./overlays/network-menu/networkMenuBut
     MatDialogModule,
     CdkMenuModule,
     HttpClientModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSelectModule,
+    NgSelectModule,
+    MatChipsModule,
+    MatIconModule
   ],
   providers: [
     CustomStyles,

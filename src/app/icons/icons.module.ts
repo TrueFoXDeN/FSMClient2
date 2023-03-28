@@ -29,7 +29,8 @@ import {
   Archive,
   ChevronUp,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  ChevronDown
 } from 'angular-feather/icons';
 
 // Select some icons (use an object, not an array)
@@ -61,7 +62,8 @@ const icons = {
   Archive,
   ChevronUp,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  ChevronDown
 };
 
 @NgModule({

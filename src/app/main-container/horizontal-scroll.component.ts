@@ -32,7 +32,6 @@ export class HorizontalScrollComponent implements OnInit, OnDestroy {
   options: Safe;
   dashboard: Array<GridsterItem>;
   subscriptionList: any = []
-
   constructor(private globalData: Data, private styles: CustomStyles, private styleChanger: StyleChangerService, private columnBuilderService: ColumnBuilderService) {
     this.subscriptionList.push(columnBuilderService.columnConfigChanged.subscribe(() => {
       this.columnConfigChanged();
