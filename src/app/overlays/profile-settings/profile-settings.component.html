@@ -1,0 +1,27 @@
+<div class="window" profileSettings>
+  <div class="flex-column">
+    <div class="header" profileSettings [header]="true">
+      <span>Profile Settings</span>
+    </div>
+    <div class="flex-row">
+      <app-dropdown [options]="profiles"></app-dropdown>
+    </div>
+    <div class="flex-row">
+      <div class="input-container">
+        <input type="text" class="new-profile-input" appProfileInput placeholder="New profile">
+        <div class="save-button-container">
+          <app-profile-settings-button icon="save" appProfileSaveButton></app-profile-settings-button>
+        </div>
+      </div>
+    </div>
+    <div class="flex-row button-container">
+      <div class="button">
+        <span>Delete</span>
+      </div>
+      <div class="button">
+        <span>Apply</span>
+      </div>
+    </div>
+  </div>
+</div>
+

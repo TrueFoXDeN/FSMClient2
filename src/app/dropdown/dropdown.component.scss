@@ -1,0 +1,89 @@
+.dropdown {
+  outline: none;
+  margin: 0;
+  border: none;
+  flex-grow: 1;
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.input-field {
+  outline: none;
+  border: none;
+  width: 80%;
+  margin: 0;
+  box-sizing: border-box;
+  padding-left: 10px;
+}
+
+.icon-container {
+  flex-grow: 1;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  -webkit-box-align: center;
+  cursor: pointer;
+  //padding-right: 5px;
+
+  align-items: stretch;
+}
+
+
+.icon {
+  align-self: center;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.item-container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 0 5px 5px 0;
+  z-index: 5;
+}
+
+.item {
+  cursor: pointer;
+  padding-left: 10px;
+}
+
+.first-item {
+  border-top: 1px solid;
+}
+
+.last-item {
+  border-radius: 0 0 5px 5px;
+}
+
+.opening {
+  transform: rotate(180deg);
+  transform-origin: center center;
+  transition: transform 0.4s ease;
+}
+
+.closing {
+  transform: rotate(0deg);
+  transform-origin: center center;
+  transition: transform 0.4s ease;
+}
+
+
+
+
+
+
+

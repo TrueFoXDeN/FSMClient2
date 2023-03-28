@@ -10,6 +10,7 @@ import {ColumnBuilderService} from "../services/column-builder.service";
 import {NetworkMenuComponent} from "../overlays/network-menu/network-menu.component";
 import {NetworkService} from "../services/network.service";
 import {SidebarButton} from "./sidebar-directives/sidebarButton.directive";
+import {ProfileSettingsComponent} from "../overlays/profile-settings/profile-settings.component";
 
 @Component({
   selector: 'app-sidebar',
@@ -96,6 +97,18 @@ export class SidebarComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  openProfileSettings(){
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.height = `${300 * this.customStyle.multiplier}px`;
+    dialogConfig.width = `${300 * this.customStyle.multiplier}px`;
+    dialogConfig.panelClass = 'custom-dialog-container';
+    const dialogRef = this.dialog.open(ProfileSettingsComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data != null) {
+      }
+    });
+}
 
 
 }

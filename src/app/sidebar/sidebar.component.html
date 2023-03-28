@@ -1,7 +1,7 @@
 <div class="sidebar">
   <div class="top-buttons">
-    <app-sidebar-button-png icon="tower" sidebarButton class="icon-button" matTooltip="Controlled Airports"
-                            matTooltipPosition="right"></app-sidebar-button-png>
+    <app-sidebar-button-png icon="tower" sidebarButton class="icon-button" matTooltip="Profile Settings"
+                            matTooltipPosition="right" (click)="openProfileSettings()"></app-sidebar-button-png>
     <app-sidebar-button icon="columns" (click)="openColumnbuilder()" class="icon-button"
                         matTooltip="Columns" matTooltipPosition="right" sidebarButton></app-sidebar-button>
     <app-sidebar-button icon="search" class="icon-button" matTooltip="Search Callsign"
