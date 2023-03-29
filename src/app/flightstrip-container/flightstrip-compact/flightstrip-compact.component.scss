@@ -138,14 +138,14 @@
       width: 100%;
 
       .status-row {
+        box-sizing: border-box;
         display: flex;
-        justify-content: left;
+        justify-content: space-between;
         align-items: center;
         flex-flow: row;
-        width: 75%;
+        width: 70%;
         height: 100%;
         gap: 5px;
-
         .status-button {
           height: 60%;
           aspect-ratio: 1;
@@ -158,11 +158,12 @@
         justify-content: end;
         width: 25%;
         height: 60%;
-        gap: 3px;
+        gap: 0.4em;
+        padding-right: 0.4em;
 
         .icon{
           aspect-ratio: 1;
-          width: 50%;
+          width: 41%;
         }
       }
     }
