@@ -3,11 +3,9 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
   OnDestroy,
   OnInit,
   Output,
-  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import {Flightstrip, iconState, statusArrival, statusDeparture, statusVfr, stripType} from '../flightstrip.model';
@@ -18,9 +16,6 @@ import {FlightstripIcon} from "../flightstrip-directives/flightstripIcon.directi
 import {FlightStripInput} from "../flightstrip-directives/flightStripInput.directive";
 import {StyleChangerService} from "../../services/style-changer.service";
 import {MatMenuTrigger} from "@angular/material/menu";
-import {HttpClient} from '@angular/common/http';
-import {NetworkService, networkType} from "../../services/network.service";
-import {environment} from "../../../environments/environment";
 
 
 @Component({
@@ -40,12 +35,11 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output("prevStatus") prevStatusEvent = new EventEmitter<void>()
   subscriptionHandles: any = [];
   status: any;
-  baseURL = environment.baseURL
 
   inputsDisabled = false;
 
   constructor(private globalData: Data, private fsService: FlightstripService, private styleChanger: StyleChangerService,
-              private http: HttpClient, private networkService: NetworkService) {
+              ) {
     this.subscriptionHandles.push(this.fsService.changedType.subscribe((data) => {
       if (data.id == this.fs.id) {
         this.fs.type = data.type;
@@ -53,9 +47,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
         this.fs.status = 0;
       }
     }))
-    this.subscriptionHandles.push(this.networkService.networkEmitter.subscribe(() => {
-      this.onCheckCallsignTrigger()
-    }))
+
     this.subscriptionHandles.push(this.fsService.dragChange.subscribe((data) => {
       if (data.id == this.fs.id) {
         this.inputsDisabled = data.dragEnabled;
@@ -122,15 +114,13 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
     this.onSquawkChange();
   }
 
-  nextStatus(){
+  nextStatus() {
     this.nextStatusEvent.emit();
   }
 
-  prevStatus(){
+  prevStatus() {
     this.prevStatusEvent.emit();
   }
-
-
 
 
   onContextOpened() {
@@ -140,29 +130,5 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   onContextClosed() {
     this.fsContainerDir.updateStyle();
   }
-
-  onCheckCallsignTrigger() {
-    let network = this.networkService.getNetwork();
-    if (!this.fs.infosPulled && this.fs.callsign != "") {
-      this.http.get(`${this.baseURL}/${network}/callsign/` + this.fs.callsign).subscribe({
-        next: (response: any) => {
-          if (response.success) {
-            this.fs.callsign = response.callsign
-            this.fs.squawk = response.squawk
-            this.fs.departureIcao = response.departure
-            this.fs.arrivalIcao = response.arrival
-            this.fs.aircraft = response.aircraft
-            this.fs.wakeCategory = response.wake
-            this.fs.flightrule = response.flightrule
-            this.fs.route = response.route
-            this.fs.infosPulled = true;
-          }
-        },
-        error: (err) => {
-        }
-      });
-    }
-  }
-
 
 }

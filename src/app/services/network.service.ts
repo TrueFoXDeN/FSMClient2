@@ -8,13 +8,13 @@ import {SnackbarMessageService} from "./snackbar-message.service";
 export class NetworkService {
   private isNetworkFetchActive = false;
   private usedNetwork = networkType.VATSIM
-  private oneSecInterval = interval(1000);
+  private fiveSecInterval = interval(5000);
   networkEmitter = new Subject<void>()
 
   changedNetworkEmitter = new Subject<any>()
 
   constructor(private messageService : SnackbarMessageService) {
-    this.oneSecInterval.subscribe(() => {
+    this.fiveSecInterval.subscribe(() => {
       if (this.isNetworkFetchActive) {
         this.networkEmitter.next();
       }

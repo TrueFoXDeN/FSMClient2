@@ -135,7 +135,7 @@ import {CookieService} from "ngx-cookie-service";
     ProfileSettingsInputContainerDirective,
     ProfileSettingsSaveButtonComponent,
     ProfileSettingsSaveButtonDirective,
-    ProfileSettingsFooterButtonDirective
+    ProfileSettingsFooterButtonDirective,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,8 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit} from '@angular/core';
 import {Flightstrip, statusArrival, statusDeparture, statusVfr, stripType} from "./flightstrip.model";
+import {HttpClient} from "@angular/common/http";
+import {NetworkService} from "../services/network.service";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-flightstrip-container',
@@ -9,14 +12,20 @@ import {Flightstrip, statusArrival, statusDeparture, statusVfr, stripType} from 
 export class FlightstripContainerComponent implements OnInit, OnDestroy {
   @Input("stripModel") stripModel!: Flightstrip
   @Input("colID") columnId!: string;
+  subscriptionHandles: any = [];
+  baseURL = environment.baseURL
 
-  constructor() {
-
+  constructor(private http: HttpClient, private networkService: NetworkService) {
+    this.subscriptionHandles.push(this.networkService.networkEmitter.subscribe(() => {
+      this.onCheckCallsignTrigger()
+    }))
   }
 
   ngOnDestroy(): void {
-        throw new Error('Method not implemented.');
-    }
+    this.subscriptionHandles.forEach((sub: any) => {
+      sub.unsubscribe();
+    });
+  }
 
   ngOnInit(): void {
     if (this.stripModel.columnId != this.columnId) {
@@ -56,6 +65,30 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
       state--;
     }
     this.stripModel.status = state;
+  }
+
+
+  onCheckCallsignTrigger() {
+    let network = this.networkService.getNetwork();
+    if (!this.stripModel.infosPulled && this.stripModel.callsign != "") {
+      this.http.get(`${this.baseURL}/${network}/callsign/` + this.stripModel.callsign).subscribe({
+        next: (response: any) => {
+          if (response.success) {
+            this.stripModel.callsign = response.callsign
+            this.stripModel.squawk = response.squawk
+            this.stripModel.departureIcao = response.departure
+            this.stripModel.arrivalIcao = response.arrival
+            this.stripModel.aircraft = response.aircraft
+            this.stripModel.wakeCategory = response.wake
+            this.stripModel.flightrule = response.flightrule
+            this.stripModel.route = response.route
+            this.stripModel.infosPulled = true;
+          }
+        },
+        error: (err) => {
+        }
+      });
+    }
   }
 
 
