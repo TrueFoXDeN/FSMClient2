@@ -15,7 +15,7 @@ export class SnackbarMessageService {
     this._snackBar.open(message, "", {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
-      duration: 1600,
+      duration: 1800,
       panelClass: [`${severity}-snackbar`]
     });
   }

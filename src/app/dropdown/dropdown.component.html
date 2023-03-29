@@ -1,10 +1,9 @@
-<div class="dropdown" appDropdown>
-  <div class="input-container">
+<div class="dropdown" appDropdown (click)="onIconClick()">
+  <div class="input-container" >
     <input type="text" class="input-field" appDropdownIcon placeholder="Select a profile..."
-           [(ngModel)]="selectedOption">
+           [(ngModel)]="selectedOption.name" [readOnly]="true">
     <div class="icon-container" [ngClass]="{'opening': showDropDown, 'closing': closing}">
-      <i-feather name="chevron-down" class="icon" (click)="onIconClick()"
-                  appDropdownIcon></i-feather>
+      <i-feather name="chevron-down" class="icon" ></i-feather>
     </div>
   </div>
 </div>
@@ -12,7 +11,7 @@
     [ngStyle]="{'display': (showDropDown) ? 'block' : 'none'}">
   <li *ngFor="let option of options, let last = last, let first = first;"
       [ngClass]="{'last-item': (last),'first-item': (first)}" appDropdownItem class="item"
-      (click)="onItemClick(option.value)">{{option.name}}</li>
+      (click)="onItemClick(option)">{{option.name}}</li>
 </ul>
 
 

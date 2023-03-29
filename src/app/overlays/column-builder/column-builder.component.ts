@@ -122,9 +122,9 @@ export class ColumnBuilderComponent implements OnInit {
   }
 
   saveAndClose() {
-    this.globalData.columnStructure = this.dashboard
+    this.globalData.profileData[this.globalData.currentProfileID].columnStructure = this.dashboard
     let data = {"columnData": this.dashboard}
-    localStorage.setItem("columnConfig", JSON.stringify(data))
+    localStorage.setItem("profileStructure", JSON.stringify(this.globalData.profileData))
     this.dialogRef.close(this.dashboard)
   }
 

@@ -32,7 +32,6 @@ export class DropdownIconDirective implements OnInit, OnDestroy {
   }
 
   updateSizes() {
-    this.elementRef.nativeElement.style.lineHeight = `${35* this.cS.multiplier}px`;
     this.elementRef.nativeElement.style.fontSize = `${12 * this.cS.multiplier}pt`;
   }
 

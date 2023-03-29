@@ -24,7 +24,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   constructor(private customStyle: CustomStyles, private _snackBar: MatSnackBar, public dialog: MatDialog,
               private globalData: Data, private styleChanger: StyleChangerService, private snackService: SnackbarMessageService,
-              private colBuilderService: ColumnBuilderService, private networkService: NetworkService) {
+              private colBuilderService: ColumnBuilderService, private networkService: NetworkService,
+              private columnBuilderService: ColumnBuilderService) {
     this.subscriptionList.push(this.networkService.changedNetworkEmitter.subscribe((data) => {
       if (data.active) {
         this.networkIcon = "success";
@@ -70,14 +71,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
     dialogConfig.width = '80vw';
     dialogConfig.panelClass = 'custom-dialog-container';
     dialogConfig.data = {
-      columnData: JSON.parse(JSON.stringify(this.globalData.columnStructure))
+      columnData: JSON.parse(JSON.stringify(this.globalData.profileData[this.globalData.currentProfileID].columnStructure))
     }
     const dialogRef = this.dialog.open(ColumnBuilderComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
       if (data != null) {
-        this.globalData.columnStructure = data;
+        this.globalData.profileData[this.globalData.currentProfileID].columnStructure = data;
       }
-      this.globalData.columnStructure.forEach((column) => {
+      this.globalData.profileData[this.globalData.currentProfileID].columnStructure.forEach((column : any) => {
         if (this.globalData.flightstripData[column?.['uuid']] == null) {
           this.globalData.flightstripData[column?.['uuid']] = {name: column?.['name'], flightstrips: []}
         }
@@ -98,17 +99,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
     });
   }
 
-  openProfileSettings(){
+  openProfileSettings() {
     const dialogConfig = new MatDialogConfig()
-    dialogConfig.height = `${300 * this.customStyle.multiplier}px`;
-    dialogConfig.width = `${300 * this.customStyle.multiplier}px`;
+    dialogConfig.height = `${350 * this.customStyle.multiplier}px`;
+    dialogConfig.width = `${350 * this.customStyle.multiplier}px`;
     dialogConfig.panelClass = 'custom-dialog-container';
     const dialogRef = this.dialog.open(ProfileSettingsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
-      if (data != null) {
-      }
+      this.columnBuilderService.columnConfigChanged.next()
+      console.log(`Using profile "${this.globalData.currentProfile.name}"`)
     });
-}
+  }
 
 
 }

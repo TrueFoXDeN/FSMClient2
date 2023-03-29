@@ -83,6 +83,8 @@ import {
 import {
   ProfileSettingsSaveButtonDirective
 } from "./overlays/profile-settings/profile-settings-save-button/profileSettingsSaveButton.directive";
+import {ProfileSettingsFooterButtonDirective} from "./overlays/profile-settings/profileSettingsFooterButton.directive";
+import {CookieService} from "ngx-cookie-service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -132,7 +134,8 @@ import {
     ProfileSettingsInputDirective,
     ProfileSettingsInputContainerDirective,
     ProfileSettingsSaveButtonComponent,
-    ProfileSettingsSaveButtonDirective
+    ProfileSettingsSaveButtonDirective,
+    ProfileSettingsFooterButtonDirective
   ],
   imports: [
     BrowserModule,
@@ -161,7 +164,8 @@ import {
     CustomStyles,
     Data,
     Util,
-    {provide: MatDialogRef, useValue: {}}
+    {provide: MatDialogRef, useValue: {}},
+    CookieService
   ],
   bootstrap: [AppComponent],
 })

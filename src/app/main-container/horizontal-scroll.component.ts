@@ -95,7 +95,7 @@ export class HorizontalScrollComponent implements OnInit, OnDestroy {
       disableWarnings: false,
       scrollToNewItems: false,
     }
-    this.dashboard = this.globalData.columnStructure;
+    this.dashboard = this.globalData.profileData[this.globalData.currentProfileID].columnStructure;
     this.styleChanger.changedSize.subscribe(() => {
       this.changeColumnWidth();
     });
@@ -103,12 +103,8 @@ export class HorizontalScrollComponent implements OnInit, OnDestroy {
 
 
   loadConfig() {
-    if (localStorage.getItem("columnConfig") !== null) {
-      let data = JSON.parse(localStorage.getItem("columnConfig") || '{}')
-      this.globalData.columnStructure = data.columnData
-    }
-    this.dashboard = this.globalData.columnStructure;
-    this.globalData.columnStructure.forEach((column) => {
+    this.dashboard = this.globalData.profileData[this.globalData.currentProfileID].columnStructure;
+    this.globalData.profileData[this.globalData.currentProfileID].columnStructure.forEach((column:any) => {
       if (this.globalData.flightstripData[column?.['uuid']] == null) {
         this.globalData.flightstripData[column?.['uuid']] = {name: column?.['name'], flightstrips: []}
       }
@@ -132,7 +128,7 @@ export class HorizontalScrollComponent implements OnInit, OnDestroy {
   }
 
   changeColumnWidth() {
-    this.dashboard = this.globalData.columnStructure;
+    this.dashboard = this.globalData.profileData[this.globalData.currentProfileID].columnStructure;
     this.options = {
       ...this.options,
       fixedColWidth: 450 * this.styles.multiplier
