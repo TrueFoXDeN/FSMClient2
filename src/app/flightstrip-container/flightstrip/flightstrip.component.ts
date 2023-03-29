@@ -46,7 +46,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
         this.checkStatus();
         this.fs.status = 0;
       }
-    }))
+    }));
 
     this.subscriptionHandles.push(this.fsService.dragChange.subscribe((data) => {
       if (data.id == this.fs.id) {
@@ -97,6 +97,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSquawkChange() {
+    // this.fs.triangleIconState = 4
     this.fsContainerDir.onSquawkChange(this.fs.squawk)
     this.fsIconDir.onSquawkChange(this.fs.squawk)
     this.onInputFocusLost()

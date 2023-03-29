@@ -2,7 +2,7 @@ import {Directive, ElementRef, Input, OnDestroy, OnInit} from "@angular/core";
 import {CustomStyles} from "../../customStyles";
 import {StyleChangerService} from "../../services/style-changer.service";
 import {FlightstripService} from "../flightstrip.service";
-import {iconState} from "../flightstrip.model";
+import {Flightstrip, iconState} from "../flightstrip.model";
 import {Subject} from "rxjs";
 
 @Directive({
@@ -11,7 +11,7 @@ import {Subject} from "rxjs";
 export class FlightstripIcon implements OnInit, OnDestroy {
   @Input("iconState") iconState: iconState = iconState.INACTIVE
   private internalState: iconState = iconState.INACTIVE
-  private squawk: string = ""
+  @Input("flightstripIcon") fs!: Flightstrip
 
   subscriptionList: any = []
 
@@ -20,13 +20,13 @@ export class FlightstripIcon implements OnInit, OnDestroy {
       this.setStyle();
     }));
     this.subscriptionList.push(this.fsService.changedTriangleState.subscribe(() => {
+      this.iconState = this.fs.triangleIconState;
       this.setStyle();
     }));
-
   }
 
   onSquawkChange(squawk: string) {
-    this.squawk = squawk;
+    this.fs.squawk = squawk;
     this.setStyle()
   }
 
@@ -41,7 +41,7 @@ export class FlightstripIcon implements OnInit, OnDestroy {
   }
 
   setStyle() {
-    if (this.squawk == "7500" || this.squawk == "7600" || this.squawk == "7700") {
+    if (this.fs.squawk == "7500" || this.fs.squawk == "7600" || this.fs.squawk == "7700") {
       this.internalState = iconState.ERROR;
     } else {
       this.internalState = this.iconState

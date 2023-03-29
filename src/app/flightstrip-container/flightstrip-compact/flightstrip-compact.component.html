@@ -52,7 +52,7 @@
                                   (dblclick)="onSecondDoubleClick($event)"></app-flightstrip-button>
         </div>
         <div class="icons">
-          <i-feather name="alert-triangle" class="icon" flightstripIcon [iconState]="fs.triangleIconState"
+          <i-feather name="alert-triangle" class="icon" [flightstripIcon]="fs" [iconState]="fs.triangleIconState"
                      [ngClass]="{'disabled' : inputsDisabled}"></i-feather>
           <i-feather name="headphones" class="icon"></i-feather>
         </div>
