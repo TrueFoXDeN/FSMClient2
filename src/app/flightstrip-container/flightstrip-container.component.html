@@ -1,6 +1,8 @@
 <div class="container">
   <app-flightstrip [fs]="stripModel" *ngIf="!stripModel.compactMode"
-                   (switchToCompact)="stripModel.compactMode = true"></app-flightstrip>
+                   (switchToCompact)="stripModel.compactMode = true" (nextStatus)="nextStatus()"
+                   (prevStatus)="prevStatus()"></app-flightstrip>
   <app-flightstrip-compact [fs]="stripModel" *ngIf="stripModel.compactMode"
-                           (dblclick)="stripModel.compactMode = false"></app-flightstrip-compact>
+                           (triggeredCompact)="stripModel.compactMode = false" (nextStatus)="nextStatus()"
+                           (prevStatus)="prevStatus()"></app-flightstrip-compact>
 </div>

@@ -36,6 +36,8 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() fs!: Flightstrip;
   @Input("isDragable") private isDragable = false;
   @Output("switchToCompact") compactSwitch = new EventEmitter<void>()
+  @Output("nextStatus") nextStatusEvent = new EventEmitter<void>()
+  @Output("prevStatus") prevStatusEvent = new EventEmitter<void>()
   subscriptionHandles: any = [];
   status: any;
   baseURL = environment.baseURL
@@ -120,38 +122,16 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
     this.onSquawkChange();
   }
 
-  nextStatus() {
-    this.checkTypeBeforeStatusChange(1)
+  nextStatus(){
+    this.nextStatusEvent.emit();
   }
 
-  prevStatus() {
-    this.checkTypeBeforeStatusChange(-1)
+  prevStatus(){
+    this.prevStatusEvent.emit();
   }
 
-  checkTypeBeforeStatusChange(direction: number) {
-    switch (this.fs.type) {
-      case stripType.OUTBOUND:
-        this.setStatus(direction, statusDeparture)
-        break;
-      case stripType.INBOUND:
-        this.setStatus(direction, statusArrival)
-        break;
-      case stripType.VFR:
-        this.setStatus(direction, statusVfr)
-        break;
-    }
-  }
 
-  setStatus(increment: number, object: any) {
-    let enumCount = Object.keys(object).length / 2;
-    let state = this.fs.status;
-    if (state < enumCount - 1 && increment == 1) {
-      state++;
-    } else if (state > 0 && increment == -1) {
-      state--;
-    }
-    this.fs.status = state;
-  }
+
 
   onContextOpened() {
     this.fsContainerDir.markForDeleteOperation()

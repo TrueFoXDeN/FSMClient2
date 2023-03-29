@@ -16,6 +16,7 @@ export class FlightstripCompactComponent implements OnDestroy {
   @ViewChild(FlightStripCompact) fsContainerDir: any;
   @ViewChild(FlightstripCompactBorderDirective) fsCompactBorder: any;
   @ViewChild('menutrigger') menutrigger!: ElementRef;
+  @Output("triggeredCompact") compactModeTrigger = new EventEmitter<void>()
   status: any;
   stripType = stripType;
   isMouseMoving: boolean = false;
@@ -25,6 +26,9 @@ export class FlightstripCompactComponent implements OnDestroy {
   isTouchMoved = false;
   inputsDisabled = false;
   subscriptionHandles: any = [];
+
+  @Output("nextStatus") nextStatusEvent = new EventEmitter<void>()
+  @Output("prevStatus") prevStatusEvent = new EventEmitter<void>()
 
   constructor(private fsService: FlightstripService) {
     this.subscriptionHandles.push(this.fsService.dragChange.subscribe((data) => {
@@ -106,6 +110,15 @@ export class FlightstripCompactComponent implements OnDestroy {
     this.fsCompactBorder.updateStyle();
   }
 
+  nextStatus() {
+    this.nextStatusEvent.emit();
+  }
+
+  prevStatus() {
+    this.prevStatusEvent.emit();
+  }
+
+
   onTouchStart() {
     this.isTouchEnded = false;
     this.isTouchCanceled = false;
@@ -124,4 +137,14 @@ export class FlightstripCompactComponent implements OnDestroy {
   onTouchEnd() {
     this.isTouchEnded = true;
   }
+
+  onDoubleClick() {
+    this.compactModeTrigger.emit()
+  }
+
+  onSecondDoubleClick(event : any){
+    event.stopPropagation()
+  }
+
+
 }

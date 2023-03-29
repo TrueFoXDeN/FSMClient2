@@ -1,6 +1,6 @@
 <div class="strip" flightStripCompact [fsCompact]="fs" [appFlightstripCompactBorder]="fs" (mousedown)="onMouseDown()"
      (mouseup)="onMouseUp()" (mousemove)="isMouseMoving = true" [cdkContextMenuTriggerFor]="context_menu"
-     (cdkContextMenuOpened)="onContextOpened()" (cdkContextMenuClosed)="onContextClosed()">
+     (cdkContextMenuOpened)="onContextOpened()" (cdkContextMenuClosed)="onContextClosed()" (dblclick)="onDoubleClick()">
   <div class="cols">
     <div class="col1" flightStripCompact [flightStripCompactDivider]="'right'" [fsCompact]="fs">
       <span class="callsign" flightStripCompact [fsCompact]="fs"
@@ -42,10 +42,14 @@
       <div class="top-row">
 
         <div class="status-row">
-          <app-flightstrip-button class="status-button" icon="chevron-left"></app-flightstrip-button>
+          <app-flightstrip-button class="status-button" icon="chevron-left"
+                                  (click)="prevStatus()"
+                                  (dblclick)="onSecondDoubleClick($event)"></app-flightstrip-button>
           <span class="status" flightStripCompact [fsCompact]="fs"
                 [flightStripFontSize]="'medium'" [ngClass]="{'disabled' : inputsDisabled}">{{status[fs.status]}}</span>
-          <app-flightstrip-button class="status-button" icon="chevron-right"></app-flightstrip-button>
+          <app-flightstrip-button class="status-button" icon="chevron-right"
+                                  (click)="nextStatus()"
+                                  (dblclick)="onSecondDoubleClick($event)"></app-flightstrip-button>
         </div>
         <div class="icons">
           <i-feather name="alert-triangle" class="icon" flightstripIcon [iconState]="fs.triangleIconState"
