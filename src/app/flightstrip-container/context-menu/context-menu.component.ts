@@ -27,6 +27,11 @@ export class ContextMenuComponent implements OnInit {
     this.globalData.flightstripData[this.fs.columnId].flightstrips.splice(index, 1)
   }
 
+  archiveStrip() {
+    this.globalData.archivedStrips[this.fs.id] = this.fs
+    this.deleteStrip();
+  }
+
   switchToOption(optionNumber: number) {
     switch (optionNumber) {
       case 1:
