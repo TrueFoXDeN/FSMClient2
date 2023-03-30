@@ -8,10 +8,26 @@
   justify-content: space-between;
   touch-action: none;
   box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
 }
 
 .icon-button {
   width: 100%;
+  aspect-ratio: 1;
+}
+.paint-palette{
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10%;
+  aspect-ratio: 1;
+}
+
+.radar{
+  box-sizing: border-box;
+  width: 100%;
+  padding: 4%;
   aspect-ratio: 1;
 }
 

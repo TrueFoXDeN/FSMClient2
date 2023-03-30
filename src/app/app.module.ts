@@ -86,6 +86,10 @@ import {
 import {ProfileSettingsFooterButtonDirective} from "./overlays/profile-settings/profileSettingsFooterButton.directive";
 import {CookieService} from "ngx-cookie-service";
 import { ProximitySettingsComponent } from './overlays/proximity-settings/proximity-settings.component';
+import { MultiplayerSettingsComponent } from './overlays/multiplayer-settings/multiplayer-settings.component';
+import { HelpOverlayComponent } from './overlays/help-overlay/help-overlay.component';
+import { StatisticsOverlayComponent } from './overlays/statistics-overlay/statistics-overlay.component';
+import { SearchCallsignComponent } from './overlays/search-callsign/search-callsign.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -138,6 +142,10 @@ import { ProximitySettingsComponent } from './overlays/proximity-settings/proxim
     ProfileSettingsSaveButtonDirective,
     ProfileSettingsFooterButtonDirective,
     ProximitySettingsComponent,
+    MultiplayerSettingsComponent,
+    HelpOverlayComponent,
+    StatisticsOverlayComponent,
+    SearchCallsignComponent,
   ],
   imports: [
     BrowserModule,

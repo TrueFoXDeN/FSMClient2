@@ -11,6 +11,14 @@ import {NetworkMenuComponent} from "../overlays/network-menu/network-menu.compon
 import {NetworkService} from "../services/network.service";
 import {SidebarButton} from "./sidebar-directives/sidebarButton.directive";
 import {ProfileSettingsComponent} from "../overlays/profile-settings/profile-settings.component";
+import {ProximitySettingsComponent} from "../overlays/proximity-settings/proximity-settings.component";
+import {MultiplayerSettingsComponent} from "../overlays/multiplayer-settings/multiplayer-settings.component";
+import {SettingsComponent} from "../overlays/settings/settings.component";
+import {ThemeBuilderComponent} from "../overlays/theme-builder/theme-builder.component";
+import {HelpOverlayComponent} from "../overlays/help-overlay/help-overlay.component";
+import {StatisticsOverlayComponent} from "../overlays/statistics-overlay/statistics-overlay.component";
+import {Search} from "angular-feather/icons";
+import {SearchCallsignComponent} from "../overlays/search-callsign/search-callsign.component";
 
 @Component({
   selector: 'app-sidebar',
@@ -58,9 +66,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
   }
 
-  searchCallsign() {
-    console.log(this.globalData.flightstripData)
-  }
 
   ngOnInit(): void {
   }
@@ -115,12 +120,73 @@ export class SidebarComponent implements OnInit, OnDestroy {
     const dialogConfig = new MatDialogConfig()
     dialogConfig.height = `${350 * this.customStyle.multiplier}px`;
     dialogConfig.width = `${350 * this.customStyle.multiplier}px`;
-    const dialogRef = this.dialog.open(ProfileSettingsComponent, dialogConfig);
+    const dialogRef = this.dialog.open(ProximitySettingsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
-      this.columnBuilderService.columnConfigChanged.next()
-      console.log(`Using profile "${this.globalData.currentProfile.name}"`)
+
+
+    });
+  }
+
+  openMultiplayerSettings() {
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.height = `${350 * this.customStyle.multiplier}px`;
+    dialogConfig.width = `${350 * this.customStyle.multiplier}px`;
+    const dialogRef = this.dialog.open(MultiplayerSettingsComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((data) => {
+
+
     });
   }
 
 
+  openAppSettings() {
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.height = `${350 * this.customStyle.multiplier}px`;
+    dialogConfig.width = `${350 * this.customStyle.multiplier}px`;
+    const dialogRef = this.dialog.open(SettingsComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((data) => {
+
+
+    });
+  }
+
+  openThemeSettings() {
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.height = `${350 * this.customStyle.multiplier}px`;
+    dialogConfig.width = `${350 * this.customStyle.multiplier}px`;
+    const dialogRef = this.dialog.open(ThemeBuilderComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((data) => {
+
+    });
+  }
+
+  openHelpOverlay() {
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.height = `${350 * this.customStyle.multiplier}px`;
+    dialogConfig.width = `${350 * this.customStyle.multiplier}px`;
+    const dialogRef = this.dialog.open(HelpOverlayComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((data) => {
+
+    });
+  }
+
+  openStatsOverlay() {
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.height = `${350 * this.customStyle.multiplier}px`;
+    dialogConfig.width = `${350 * this.customStyle.multiplier}px`;
+    const dialogRef = this.dialog.open(StatisticsOverlayComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((data) => {
+
+    });
+  }
+
+  openSearchCallsign() {
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.height = `${350 * this.customStyle.multiplier}px`;
+    dialogConfig.width = `${350 * this.customStyle.multiplier}px`;
+    const dialogRef = this.dialog.open(SearchCallsignComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((data) => {
+
+    });
+  }
 }

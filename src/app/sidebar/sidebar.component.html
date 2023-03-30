@@ -4,20 +4,24 @@
                             matTooltipPosition="right" (click)="openProfileSettings()"></app-sidebar-button-png>
     <app-sidebar-button icon="columns" (click)="openColumnbuilder()" class="icon-button"
                         matTooltip="Columns" matTooltipPosition="right" sidebarButton></app-sidebar-button>
+    <app-sidebar-button icon="wifi" class="icon-button" matTooltip="Networks"
+                        matTooltipPosition="right" sidebarButton [iconState]="networkIcon"
+                        (click)="openNetworkMenu()"></app-sidebar-button>
+    <app-sidebar-button-png icon="radar" sidebarButton class="radar" matTooltip="Proximity Settings"
+                            matTooltipPosition="right" (click)="openProximitySettings()"></app-sidebar-button-png>
+    <app-sidebar-button icon="users" class="icon-button" matTooltip="Multiplayer"
+                        matTooltipPosition="right" sidebarButton iconState="standard"
+                        (click)="openMultiplayerSettings()"></app-sidebar-button>
     <app-sidebar-button icon="search" class="icon-button" matTooltip="Search Callsign"
                         matTooltipPosition="right" sidebarButton iconState="standard"
-                        (click)="searchCallsign()"></app-sidebar-button>
-    <app-sidebar-button icon="users" class="icon-button" matTooltip="Multiplayer"
-                        matTooltipPosition="right" sidebarButton iconState="standard"></app-sidebar-button>
-    <app-sidebar-button icon="wifi" class="icon-button" matTooltip="Networks"
-                        matTooltipPosition="right" sidebarButton [iconState]="networkIcon"
-                        (click)="openNetworkMenu()"></app-sidebar-button>
-    <app-sidebar-button icon="wifi" class="icon-button" matTooltip="Networks"
-                        matTooltipPosition="right" sidebarButton [iconState]="networkIcon"
-                        (click)="openNetworkMenu()"></app-sidebar-button>
-    <app-sidebar-button icon="wifi" class="icon-button" matTooltip="Networks"
-                        matTooltipPosition="right" sidebarButton [iconState]="networkIcon"
-                        (click)="openNetworkMenu()"></app-sidebar-button>
+                        (click)="openSearchCallsign()"></app-sidebar-button>
+
+    <!--    <app-sidebar-button icon="wifi" class="icon-button" matTooltip="Networks"-->
+    <!--                        matTooltipPosition="right" sidebarButton [iconState]="networkIcon"-->
+    <!--                        (click)="openNetworkMenu()"></app-sidebar-button>-->
+    <!--    <app-sidebar-button icon="wifi" class="icon-button" matTooltip="Networks"-->
+    <!--                        matTooltipPosition="right" sidebarButton [iconState]="networkIcon"-->
+    <!--                        (click)="openNetworkMenu()"></app-sidebar-button>-->
   </div>
 
   <div class="bottom-buttons">
@@ -26,10 +30,15 @@
     <app-sidebar-button icon="zoom-out" (click)="onZoomOut()" class="icon-button" matTooltip="Zoom out"
                         matTooltipPosition="right" sidebarButton iconState="standard"></app-sidebar-button>
     <app-sidebar-button icon="bar-chart-2" class="icon-button" matTooltip="Statistics"
-                        matTooltipPosition="right" sidebarButton iconState="standard"></app-sidebar-button>
-    <app-sidebar-button icon="sliders" class="icon-button" matTooltip="Themes"
-                        matTooltipPosition="right" sidebarButton iconState="standard"></app-sidebar-button>
+                        matTooltipPosition="right" sidebarButton iconState="standard"
+                        (click)="openStatsOverlay()"></app-sidebar-button>
+    <app-sidebar-button-png icon="brush" sidebarButton class="paint-palette" matTooltip="Themes"
+                            matTooltipPosition="right" (click)="openThemeSettings()"></app-sidebar-button-png>
     <app-sidebar-button icon="settings" class="icon-button" matTooltip="Settings"
-                        matTooltipPosition="right" sidebarButton iconState="standard"></app-sidebar-button>
+                        matTooltipPosition="right" sidebarButton iconState="standard"
+                        (click)="openAppSettings()"></app-sidebar-button>
+    <app-sidebar-button icon="help-circle" class="icon-button" matTooltip="Help"
+                        matTooltipPosition="right" sidebarButton iconState="standard"
+                        (click)="openHelpOverlay()"></app-sidebar-button>
   </div>
 </div>
