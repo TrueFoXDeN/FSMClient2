@@ -1,1 +1,12 @@
-<p>search-callsign works!</p>
+<div class="window" searchCallsign>
+  <div class="header">
+    <span>Search Callsign</span>
+  </div>
+  <div class="input-container">
+    <input class="input" searchCallsignInput (input)="onInput()" [(ngModel)]="callsign"
+           (ngModelChange)="callsign = $event.toUpperCase()">
+    <app-search-callsign-button icon="search" class="icon" searchCallsignButton
+                                [ngClass]="{'disabled': !searchButtonActive}"
+                                (click)="onClose()"></app-search-callsign-button>
+  </div>
+</div>

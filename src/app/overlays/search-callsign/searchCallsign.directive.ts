@@ -1,0 +1,44 @@
+import {Directive, ElementRef, Input, OnDestroy, OnInit} from "@angular/core";
+import {CustomStyles} from "../../customStyles";
+import {StyleChangerService} from "../../services/style-changer.service";
+
+import {Subject} from "rxjs";
+
+@Directive({
+  selector: '[searchCallsign]'
+})
+export class SearchCallsignDirective implements OnInit, OnDestroy {
+
+  subscriptionList: any = []
+
+  constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService) {
+    this.subscriptionList.push(this.styleChanger.changedColors.subscribe(() => {
+      this.updateStyle();
+    }));
+    this.subscriptionList.push(this.styleChanger.changedSize.subscribe(() => {
+      this.updateSize();
+    }));
+  }
+
+  ngOnInit(): void {
+    this.updateStyle();
+    this.updateSize();
+  }
+
+  ngOnDestroy() {
+    this.subscriptionList.forEach((sub: any) => {
+      sub.unsubscribe();
+    });
+  }
+
+  updateStyle() {
+    this.elementRef.nativeElement.style.background = this.cS.style.appBackground;
+    this.elementRef.nativeElement.style.color = this.cS.style.fontColor;
+
+  }
+
+  updateSize() {
+    this.elementRef.nativeElement.style.fontSize = `${18 * this.cS.multiplier}pt`
+  }
+
+}

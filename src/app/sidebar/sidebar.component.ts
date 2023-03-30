@@ -182,8 +182,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   openSearchCallsign() {
     const dialogConfig = new MatDialogConfig()
-    dialogConfig.height = `${350 * this.customStyle.multiplier}px`;
-    dialogConfig.width = `${350 * this.customStyle.multiplier}px`;
+    dialogConfig.height = `${150 * this.customStyle.multiplier}px`;
+    dialogConfig.width = `${300 * this.customStyle.multiplier}px`;
     const dialogRef = this.dialog.open(SearchCallsignComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
 

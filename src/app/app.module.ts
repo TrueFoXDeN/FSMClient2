@@ -90,6 +90,12 @@ import { MultiplayerSettingsComponent } from './overlays/multiplayer-settings/mu
 import { HelpOverlayComponent } from './overlays/help-overlay/help-overlay.component';
 import { StatisticsOverlayComponent } from './overlays/statistics-overlay/statistics-overlay.component';
 import { SearchCallsignComponent } from './overlays/search-callsign/search-callsign.component';
+import {SearchCallsignButtonDirective} from "./overlays/search-callsign/searchCallsignButton.directive";
+import {SearchCallsignDirective} from "./overlays/search-callsign/searchCallsign.directive";
+import {SearchCallsignInputDirective} from "./overlays/search-callsign/searchCallsignInput.directive";
+import {
+  SearchCallsignButtonComponent
+} from "./overlays/search-callsign/search-callsign-button/search-callsign-button.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -146,6 +152,10 @@ import { SearchCallsignComponent } from './overlays/search-callsign/search-calls
     HelpOverlayComponent,
     StatisticsOverlayComponent,
     SearchCallsignComponent,
+    SearchCallsignButtonDirective,
+    SearchCallsignDirective,
+    SearchCallsignInputDirective,
+    SearchCallsignButtonComponent
   ],
   imports: [
     BrowserModule,

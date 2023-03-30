@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-search-callsign',
@@ -6,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./search-callsign.component.scss']
 })
 export class SearchCallsignComponent {
+  callsign: string = ""
+  searchButtonActive = false
 
+  constructor(public dialogRef: MatDialogRef<SearchCallsignComponent>) {
+  }
+
+  onClose() {
+    if (this.searchButtonActive) {
+      this.dialogRef.close(this.callsign)
+    }
+  }
+
+  onInput() {
+    this.searchButtonActive = this.callsign.length > 0;
+  }
 }

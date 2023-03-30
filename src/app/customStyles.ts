@@ -7,7 +7,7 @@ export class CustomStyles {
     "sidebarButton": "#2B2B2B",
     "fontColor": "#ffffff",
     "appBackground": "#3C3F41",
-    "appInput": "#3E4044",
+    "appInput": "#2B2B2B",
     "buttonAccent": "#3674BF",
     "buttonAccentOutline": "#ffffff",
     "buttonAccentBorder": "#ffffff",
