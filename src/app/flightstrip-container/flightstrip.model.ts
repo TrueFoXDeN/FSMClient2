@@ -21,7 +21,7 @@ export class Flightstrip {
   public route: string = "";
   public compactMode: boolean = false;
   public infosPulled = false;
-
+  public isMarkedBySearch = false;
 
   constructor(identifier: string, type: stripType, columnId: string) {
     this.id = identifier;

@@ -63,7 +63,7 @@ export class CustomStyles {
 
     "fsEmergencyBorderColor": "#ff0000",
     "fsDelete": "#ffffff",
-    "fsDragHighlight": "#FFFFFF"
+    "fsHighlight": "#ff7300"
   }
 
   constructor() {

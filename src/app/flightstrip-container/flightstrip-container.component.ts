@@ -3,6 +3,7 @@ import {Flightstrip, statusArrival, statusDeparture, statusVfr, stripType} from 
 import {HttpClient} from "@angular/common/http";
 import {NetworkService} from "../services/network.service";
 import {environment} from "../../environments/environment";
+import {FlightstripService} from "./flightstrip.service";
 
 @Component({
   selector: 'app-flightstrip-container',
@@ -15,7 +16,7 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
   subscriptionHandles: any = [];
   baseURL = environment.baseURL
 
-  constructor(private http: HttpClient, private networkService: NetworkService) {
+  constructor(private http: HttpClient, private networkService: NetworkService, private fsService: FlightstripService) {
     this.subscriptionHandles.push(this.networkService.networkEmitter.subscribe(() => {
       this.onCheckCallsignTrigger()
     }))
@@ -91,5 +92,9 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
     }
   }
 
-
+  onKeyDown(event: KeyboardEvent) {
+    if (!this.fsService.isInputFocused && event.key == "c") {
+      this.stripModel.compactMode = !this.stripModel.compactMode;
+    }
+  }
 }

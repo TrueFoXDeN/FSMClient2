@@ -14,6 +14,13 @@ export class FlightStripContainer implements OnInit, OnDestroy {
 
   subscriptionList: any = []
 
+  myPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("foo");
+    }, 750);
+  });
+
+
   constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService, private fsService: FlightstripService) {
     this.subscriptionList.push(this.styleChanger.changedColors.subscribe(() => {
       this.updateStyle();
@@ -22,6 +29,12 @@ export class FlightStripContainer implements OnInit, OnDestroy {
       if (data.id == this.fs.id) {
         this.fs.type = data.type;
         this.updateStyle();
+      }
+    }));
+
+    this.subscriptionList.push(this.fsService.searchFlightstrip.subscribe(() => {
+      if (this.fs.isMarkedBySearch) {
+        this.highlightStrip();
       }
     }));
   }
@@ -34,6 +47,45 @@ export class FlightStripContainer implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.updateStyle();
   }
+
+  wait(ms: number): Promise<void> {
+    return new Promise<void>(resolve => setTimeout(resolve, ms))
+  }
+
+  highlightStrip() {
+    let speed = 500;
+    this.wait(speed)
+      .then(() => {
+        this.elementRef.nativeElement.style.borderColor = this.cS.style.fsHighlight;
+        this.elementRef.nativeElement.style.borderWidth = "3px";
+        return this.wait(speed)
+      })
+      .then(() => {
+        this.updateStyle();
+        return this.wait(speed)
+      })
+      .then(() => {
+        this.elementRef.nativeElement.style.borderColor = this.cS.style.fsHighlight;
+        this.elementRef.nativeElement.style.borderWidth = "3px";
+        return this.wait(speed)
+      })
+      .then(() => {
+        this.updateStyle();
+        return this.wait(speed)
+      })
+      .then(() => {
+        this.elementRef.nativeElement.style.borderColor = this.cS.style.fsHighlight;
+        this.elementRef.nativeElement.style.borderWidth = "3px";
+        return this.wait(speed)
+      })
+      .then(() => {
+        this.updateStyle();
+        return this.wait(speed)
+      })
+
+    this.fs.isMarkedBySearch = false;
+  }
+
 
   ngOnDestroy() {
     this.subscriptionList.forEach((sub: any) => {

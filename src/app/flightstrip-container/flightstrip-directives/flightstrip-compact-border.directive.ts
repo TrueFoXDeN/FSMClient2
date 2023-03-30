@@ -22,6 +22,12 @@ export class FlightstripCompactBorderDirective implements OnDestroy {
         this.updateStyle();
       }
     }));
+
+    this.subscriptionList.push(this.fsService.searchFlightstrip.subscribe(() => {
+      if (this.fs.isMarkedBySearch) {
+        this.highlightStrip();
+      }
+    }));
   }
 
   ngOnInit(): void {
@@ -33,6 +39,42 @@ export class FlightstripCompactBorderDirective implements OnDestroy {
       sub.unsubscribe();
     });
   }
+
+  wait(ms: number): Promise<void> {
+    return new Promise<void>(resolve => setTimeout(resolve, ms))
+  }
+
+  highlightStrip() {
+    let speed = 500;
+    this.wait(speed)
+      .then(() => {
+        this.elementRef.nativeElement.style.borderColor = this.cS.style.fsHighlight;
+        return this.wait(speed)
+      })
+      .then(() => {
+        this.updateStyle();
+        return this.wait(speed)
+      })
+      .then(() => {
+        this.elementRef.nativeElement.style.borderColor = this.cS.style.fsHighlight;
+        return this.wait(speed)
+      })
+      .then(() => {
+        this.updateStyle();
+        return this.wait(speed)
+      })
+      .then(() => {
+        this.elementRef.nativeElement.style.borderColor = this.cS.style.fsHighlight;
+        return this.wait(speed)
+      })
+      .then(() => {
+        this.updateStyle();
+        return this.wait(speed)
+      })
+
+    this.fs.isMarkedBySearch = false;
+  }
+
 
   updateStyle() {
     this.elementRef.nativeElement.style.borderWidth = "2px";

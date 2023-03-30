@@ -14,6 +14,9 @@ import {Data} from "../data";
 import {CustomStyles} from "../customStyles";
 import {StyleChangerService} from "../services/style-changer.service";
 import {ColumnBuilderService} from "../services/column-builder.service";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {SearchCallsignComponent} from "../overlays/search-callsign/search-callsign.component";
+import {FlightstripService} from "../flightstrip-container/flightstrip.service";
 
 interface Safe extends GridsterConfig {
   draggable: Draggable;
@@ -32,7 +35,9 @@ export class HorizontalScrollComponent implements OnInit, OnDestroy {
   options: Safe;
   dashboard: Array<GridsterItem>;
   subscriptionList: any = []
-  constructor(private globalData: Data, private styles: CustomStyles, private styleChanger: StyleChangerService, private columnBuilderService: ColumnBuilderService) {
+
+  constructor(private globalData: Data, private styles: CustomStyles, private styleChanger: StyleChangerService, private columnBuilderService: ColumnBuilderService,
+              public dialog: MatDialog, private fsService: FlightstripService) {
     this.subscriptionList.push(columnBuilderService.columnConfigChanged.subscribe(() => {
       this.columnConfigChanged();
     }));
@@ -104,7 +109,7 @@ export class HorizontalScrollComponent implements OnInit, OnDestroy {
 
   loadConfig() {
     this.dashboard = this.globalData.profileData[this.globalData.currentProfileID].columnStructure;
-    this.globalData.profileData[this.globalData.currentProfileID].columnStructure.forEach((column:any) => {
+    this.globalData.profileData[this.globalData.currentProfileID].columnStructure.forEach((column: any) => {
       if (this.globalData.flightstripData[column?.['uuid']] == null) {
         this.globalData.flightstripData[column?.['uuid']] = {name: column?.['name'], flightstrips: []}
       }
@@ -134,4 +139,20 @@ export class HorizontalScrollComponent implements OnInit, OnDestroy {
       fixedColWidth: 450 * this.styles.multiplier
     }
   }
+
+  openSearchWindow(event: KeyboardEvent) {
+    if (event.key == "s") {
+      if (!this.fsService.isInputFocused) {
+        const dialogConfig = new MatDialogConfig()
+        dialogConfig.height = `${150 * this.styles.multiplier}px`;
+        dialogConfig.width = `${300 * this.styles.multiplier}px`;
+        const dialogRef = this.dialog.open(SearchCallsignComponent, dialogConfig);
+        dialogRef.afterClosed().subscribe((data) => {
+          this.fsService.findFlightStrip(data);
+        });
+      }
+    }
+  }
+
+
 }

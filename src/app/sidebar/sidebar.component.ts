@@ -19,6 +19,8 @@ import {HelpOverlayComponent} from "../overlays/help-overlay/help-overlay.compon
 import {StatisticsOverlayComponent} from "../overlays/statistics-overlay/statistics-overlay.component";
 import {Search} from "angular-feather/icons";
 import {SearchCallsignComponent} from "../overlays/search-callsign/search-callsign.component";
+import {Util} from "../util";
+import {FlightstripService} from "../flightstrip-container/flightstrip.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -33,7 +35,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   constructor(private customStyle: CustomStyles, private _snackBar: MatSnackBar, public dialog: MatDialog,
               private globalData: Data, private styleChanger: StyleChangerService, private snackService: SnackbarMessageService,
               private colBuilderService: ColumnBuilderService, private networkService: NetworkService,
-              private columnBuilderService: ColumnBuilderService) {
+              private columnBuilderService: ColumnBuilderService, private fsService: FlightstripService) {
     this.subscriptionList.push(this.networkService.changedNetworkEmitter.subscribe((data) => {
       if (data.active) {
         this.networkIcon = "success";
@@ -186,7 +188,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     dialogConfig.width = `${300 * this.customStyle.multiplier}px`;
     const dialogRef = this.dialog.open(SearchCallsignComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
-
+      this.fsService.findFlightStrip(data);
     });
   }
 }

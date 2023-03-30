@@ -147,4 +147,5 @@ export class FlightstripCompactComponent implements OnDestroy {
   }
 
 
+
 }
