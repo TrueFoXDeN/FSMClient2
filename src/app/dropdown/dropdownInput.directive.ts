@@ -5,9 +5,9 @@ import {FlightstripService} from "../flightstrip-container/flightstrip.service";
 import {Subject} from "rxjs";
 
 @Directive({
-  selector: '[appDropdownIcon]'
+  selector: '[appDropdownInput]'
 })
-export class DropdownIconDirective implements OnInit, OnDestroy {
+export class DropdownInputDirective implements OnInit, OnDestroy {
   subscriptionList: any = []
 
 

@@ -78,7 +78,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       if (data != null) {
         this.globalData.profileData[this.globalData.currentProfileID].columnStructure = data;
       }
-      this.globalData.profileData[this.globalData.currentProfileID].columnStructure.forEach((column : any) => {
+      this.globalData.profileData[this.globalData.currentProfileID].columnStructure.forEach((column: any) => {
         if (this.globalData.flightstripData[column?.['uuid']] == null) {
           this.globalData.flightstripData[column?.['uuid']] = {name: column?.['name'], flightstrips: []}
         }
@@ -104,6 +104,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
     dialogConfig.height = `${350 * this.customStyle.multiplier}px`;
     dialogConfig.width = `${350 * this.customStyle.multiplier}px`;
     dialogConfig.panelClass = 'custom-dialog-container';
+    const dialogRef = this.dialog.open(ProfileSettingsComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((data) => {
+      this.columnBuilderService.columnConfigChanged.next()
+      console.log(`Using profile "${this.globalData.currentProfile.name}"`)
+    });
+  }
+
+  openProximitySettings() {
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.height = `${350 * this.customStyle.multiplier}px`;
+    dialogConfig.width = `${350 * this.customStyle.multiplier}px`;
     const dialogRef = this.dialog.open(ProfileSettingsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
       this.columnBuilderService.columnConfigChanged.next()

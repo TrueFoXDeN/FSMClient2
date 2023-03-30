@@ -72,7 +72,7 @@ import {DropdownItemDirective} from "./dropdown/dropdownItem.directive";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatIconModule} from "@angular/material/icon";
-import {DropdownIconDirective} from "./dropdown/dropdownIcon.directive";
+import {DropdownInputDirective} from "./dropdown/dropdownInput.directive";
 import {ProfileSettingsInputDirective} from "./overlays/profile-settings/profileSettingsInput.directive";
 import {
   ProfileSettingsInputContainerDirective
@@ -85,6 +85,7 @@ import {
 } from "./overlays/profile-settings/profile-settings-save-button/profileSettingsSaveButton.directive";
 import {ProfileSettingsFooterButtonDirective} from "./overlays/profile-settings/profileSettingsFooterButton.directive";
 import {CookieService} from "ngx-cookie-service";
+import { ProximitySettingsComponent } from './overlays/proximity-settings/proximity-settings.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -130,12 +131,13 @@ import {CookieService} from "ngx-cookie-service";
     DropdownComponent,
     DropdownDirective,
     DropdownItemDirective,
-    DropdownIconDirective,
+    DropdownInputDirective,
     ProfileSettingsInputDirective,
     ProfileSettingsInputContainerDirective,
     ProfileSettingsSaveButtonComponent,
     ProfileSettingsSaveButtonDirective,
     ProfileSettingsFooterButtonDirective,
+    ProximitySettingsComponent,
   ],
   imports: [
     BrowserModule,
