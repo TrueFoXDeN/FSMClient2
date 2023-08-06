@@ -16,7 +16,7 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
   subscriptionHandles: any = [];
   baseURL = environment.baseURL
 
-  constructor(private http: HttpClient, private networkService: NetworkService, private fsService: FlightstripService) {
+  constructor(private networkService: NetworkService, private fsService: FlightstripService) {
     this.subscriptionHandles.push(this.networkService.networkEmitter.subscribe(() => {
       this.onCheckCallsignTrigger()
     }))
@@ -72,7 +72,7 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
   onCheckCallsignTrigger() {
     let network = this.networkService.getNetwork();
     if (!this.stripModel.infosPulled && this.stripModel.callsign != "") {
-      this.http.get(`${this.baseURL}/${network}/callsign/` + this.stripModel.callsign).subscribe({
+      this.fsService.getFlightstripByCallsign(this.stripModel.callsign, network).subscribe({
         next: (response: any) => {
           if (response.success) {
             this.stripModel.callsign = response.callsign

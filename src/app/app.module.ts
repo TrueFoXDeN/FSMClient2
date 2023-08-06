@@ -57,7 +57,7 @@ import {FsContextMenuItemDirective} from "./flightstrip-container/context-menu/f
 import {
   FlightstripCompactBorderDirective
 } from './flightstrip-container/flightstrip-directives/flightstrip-compact-border.directive';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ColumnBuilderFooterDirective} from "./overlays/column-builder/columnBuilderFooter.directive";
 import {NetworkMenuComponent} from './overlays/network-menu/network-menu.component';
 import {NetworkMenuDirective} from "./overlays/network-menu/networkMenu.directive";
@@ -66,13 +66,13 @@ import {NetworkMenuButtonDirective} from "./overlays/network-menu/networkMenuBut
 import { ProfileSettingsComponent } from './overlays/profile-settings/profile-settings.component';
 import {ProfileSettingsDirective} from "./overlays/profile-settings/profileSettings.directive";
 import {MatSelectModule} from '@angular/material/select';
-import { DropdownComponent } from './dropdown/dropdown.component';
-import {DropdownDirective} from "./dropdown/dropdown.directive";
-import {DropdownItemDirective} from "./dropdown/dropdownItem.directive";
+import { DropdownComponent } from './overlays/profile-settings/dropdown/dropdown.component';
+import {ProfileDropdownDirective} from "./overlays/profile-settings/dropdown/profile-dropdown.directive";
+import {DropdownItemDirective} from "./overlays/profile-settings/dropdown/dropdownItem.directive";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatIconModule} from "@angular/material/icon";
-import {DropdownInputDirective} from "./dropdown/dropdownInput.directive";
+import {DropdownInputDirective} from "./overlays/profile-settings/dropdown/dropdownInput.directive";
 import {ProfileSettingsInputDirective} from "./overlays/profile-settings/profileSettingsInput.directive";
 import {
   ProfileSettingsInputContainerDirective
@@ -96,6 +96,16 @@ import {SearchCallsignInputDirective} from "./overlays/search-callsign/searchCal
 import {
   SearchCallsignButtonComponent
 } from "./overlays/search-callsign/search-callsign-button/search-callsign-button.component";
+import {HttpInterceptorService} from "./http-interceptor/http-interceptor.service";
+import {ProximitySettingsDirective} from "./overlays/proximity-settings/proximity-settings.directive";
+import {MatTable, MatTableModule} from "@angular/material/table";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {ProximityTableDirective} from "./overlays/proximity-settings/proximity-table.directive";
+import {MatSlider, MatSliderModule} from "@angular/material/slider";
+import { GeneralDropdownComponent } from './general-dropdown/general-dropdown.component';
+import {GeneralDropdownItemDirective} from "./general-dropdown/general-dropdownItem.directive";
+import {GeneralProfileDropdownDirective} from "./general-dropdown/general-profile-dropdown.directive";
+import {GeneralDropdownInputDirective} from "./general-dropdown/general-dropdownInput.directive";
 @NgModule({
   declarations: [
     AppComponent,
@@ -139,7 +149,7 @@ import {
     ProfileSettingsComponent,
     ProfileSettingsDirective,
     DropdownComponent,
-    DropdownDirective,
+    ProfileDropdownDirective,
     DropdownItemDirective,
     DropdownInputDirective,
     ProfileSettingsInputDirective,
@@ -147,7 +157,6 @@ import {
     ProfileSettingsSaveButtonComponent,
     ProfileSettingsSaveButtonDirective,
     ProfileSettingsFooterButtonDirective,
-    ProximitySettingsComponent,
     MultiplayerSettingsComponent,
     HelpOverlayComponent,
     StatisticsOverlayComponent,
@@ -155,7 +164,14 @@ import {
     SearchCallsignButtonDirective,
     SearchCallsignDirective,
     SearchCallsignInputDirective,
-    SearchCallsignButtonComponent
+    SearchCallsignButtonComponent,
+    ProximitySettingsDirective,
+    ProximitySettingsComponent,
+    ProximityTableDirective,
+    GeneralDropdownComponent,
+    GeneralDropdownItemDirective,
+    GeneralProfileDropdownDirective,
+    GeneralDropdownInputDirective
   ],
   imports: [
     BrowserModule,
@@ -178,16 +194,28 @@ import {
     MatSelectModule,
     NgSelectModule,
     MatChipsModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatSliderModule
   ],
   providers: [
     CustomStyles,
     Data,
     Util,
-    {provide: MatDialogRef, useValue: {}},
-    CookieService
+    {
+      provide: MatDialogRef,
+      useValue: {},
+
+    },
+    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
+    CookieService,
+
   ],
   bootstrap: [AppComponent],
+  exports: [
+    ProximitySettingsDirective
+  ]
 })
 export class AppModule {
 }

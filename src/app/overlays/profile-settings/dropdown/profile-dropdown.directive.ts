@@ -1,13 +1,13 @@
 import {Directive, ElementRef, HostBinding, Input, OnDestroy, OnInit} from "@angular/core";
-import {CustomStyles} from "../customStyles";
-import {StyleChangerService} from "../services/style-changer.service";
-import {FlightstripService} from "../flightstrip-container/flightstrip.service";
+import {CustomStyles} from "../../../customStyles";
+import {StyleChangerService} from "../../../services/style-changer.service";
+import {FlightstripService} from "../../../flightstrip-container/flightstrip.service";
 import {Subject} from "rxjs";
 
 @Directive({
-  selector: '[appDropdownInput]'
+  selector: '[profileDropdown]'
 })
-export class DropdownInputDirective implements OnInit, OnDestroy {
+export class ProfileDropdownDirective implements OnInit, OnDestroy {
   subscriptionList: any = []
 
 
@@ -32,12 +32,13 @@ export class DropdownInputDirective implements OnInit, OnDestroy {
   }
 
   updateSizes() {
+    this.elementRef.nativeElement.style.height = `${40 * this.cS.multiplier}px`;
     this.elementRef.nativeElement.style.fontSize = `${11 * this.cS.multiplier}pt`;
   }
 
   updateStyle() {
     this.elementRef.nativeElement.style.color = this.cS.style.fontColor;
-    this.elementRef.nativeElement.style.background = 'transparent'
+    this.elementRef.nativeElement.style.background = this.cS.style.sidebarButton;
   }
 
 

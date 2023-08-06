@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Data} from "../data";
+import {Data} from "../../../data";
 
 @Component({
   selector: 'app-dropdown',

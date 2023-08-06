@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {Subject} from "rxjs";
 import {Flightstrip, stripType} from "./flightstrip.model";
 import {Data} from "../data";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +17,9 @@ export class FlightstripService {
   changedType = new Subject<{ type: stripType, id: string }>()
   dragChange = new Subject<{ id: string, dragEnabled: boolean }>()
   searchFlightstrip = new Subject<void>()
+  baseURL = environment.baseURL
 
-  constructor(private globalData: Data) {
+  constructor(private globalData: Data, private http: HttpClient) {
   }
 
   findFlightStrip(callsign: string) {
@@ -37,5 +40,9 @@ export class FlightstripService {
         }
       }
     });
+  }
+
+  getFlightstripByCallsign(callsign: string, network: string) {
+    return this.http.get(`${this.baseURL}/${network}/callsign/` + callsign)
   }
 }
