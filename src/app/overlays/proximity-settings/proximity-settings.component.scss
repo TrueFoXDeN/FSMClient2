@@ -62,9 +62,18 @@ mat-slider {
 .range-textbox{
   margin-top: 1%;
   margin-bottom: 1%;
+  margin-left:7%;
   text-align: center;
-  width: auto;
+  width: 50px;
+}
+.dropdown{
+  position: absolute;
+  z-index:10;
 }
 
-
+.container{
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
 

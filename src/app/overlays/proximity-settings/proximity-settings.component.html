@@ -34,7 +34,14 @@
         <ng-container matColumnDef="inboundColumn">
           <th mat-header-cell *matHeaderCellDef proximityTable>Inbound</th>
           <td mat-cell *matCellDef="let element" proximityTable>
-            <app-general-dropdown [options]="columns" [optionListLength]="columns.length"></app-general-dropdown>
+            <mat-form-field>
+              <mat-label>Column</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let item of columns" [value]="item.value">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </td>
         </ng-container>
 
@@ -42,14 +49,28 @@
         <ng-container matColumnDef="outboundColumn">
           <th mat-header-cell *matHeaderCellDef proximityTable>Outbound</th>
           <td mat-cell *matCellDef="let element" proximityTable>
-            <app-general-dropdown [options]="columns" [optionListLength]="columns.length"></app-general-dropdown>
+            <mat-form-field>
+              <mat-label>Column</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let item of columns" [value]="item.value">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="vfrColumn">
           <th mat-header-cell *matHeaderCellDef proximityTable>VFR</th>
-          <td mat-cell *matCellDef="let element" proximityTable class="dropdown-container">
-            <app-general-dropdown [options]="columns" [optionListLength]="columns.length"></app-general-dropdown>
+          <td mat-cell *matCellDef="let element" proximityTable>
+            <mat-form-field>
+              <mat-label>Column</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let item of columns" [value]="item.value">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </td>
         </ng-container>
 
