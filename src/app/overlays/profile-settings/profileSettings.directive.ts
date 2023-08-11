@@ -41,8 +41,8 @@ export class ProfileSettingsDirective implements OnInit, OnDestroy {
   }
 
   updateStyle() {
-    this.elementRef.nativeElement.style.color = this.cS.style.fontColor;
-    this.elementRef.nativeElement.style.background = this.cS.style.appBackground;
+    // this.elementRef.nativeElement.style.color = this.cS.style.fontColor;
+    // this.elementRef.nativeElement.style.background = this.cS.style.appBackground;
 
   }
 

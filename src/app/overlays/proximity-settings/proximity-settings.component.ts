@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -26,7 +26,7 @@ const ELEMENT_DATA: Airport[] = [
 @Component({
   selector: 'app-proximity-settings',
   templateUrl: './proximity-settings.component.html',
-  styleUrls: ['./proximity-settings.component.scss'],
+  styleUrls: ['./proximity-settings.component.scss', '../../../styles.scss'],
 })
 export class ProximitySettingsComponent {
   displayedColumns: string[] = ['select', 'name', 'inboundColumn', 'outboundColumn', 'vfrColumn', 'range'];

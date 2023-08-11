@@ -1,0 +1,8 @@
+.mat-mdc-cell {
+  &.mat-form-field {
+    &.mdc-text-field{
+      background-color: red;
+      border-radius: 0;
+    }
+  }
+}
