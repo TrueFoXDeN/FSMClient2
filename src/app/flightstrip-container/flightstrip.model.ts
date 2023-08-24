@@ -1,6 +1,7 @@
 export class Flightstrip {
   public columnId = "";
   public id: string = "";
+  public columnPosition = 0
   public type: stripType;
   public triangleIconState: iconState;
   public callsign: string = "";
@@ -23,10 +24,11 @@ export class Flightstrip {
   public infosPulled = false;
   public isMarkedBySearch = false;
 
-  constructor(identifier: string, type: stripType, columnId: string) {
+  constructor(identifier: string, type: stripType, columnId: string, columnPos : number) {
     this.id = identifier;
     this.columnId = columnId
     this.type = type;
+    this.columnPosition = columnPos;
     this.triangleIconState = iconState.INACTIVE;
     switch (type) {
       case stripType.INBOUND:

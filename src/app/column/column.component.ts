@@ -26,17 +26,21 @@ export class ColumnComponent {
 
 
   addInboundFlightstrip() {
-    let fs = new Flightstrip(this.util.generateUUID(), stripType.INBOUND, this.uuid);
+    let nextPos = this.data.flightstripData?.[this.uuid]?.['flightstrips'].length
+    console.log(nextPos)
+    let fs = new Flightstrip(this.util.generateUUID(), stripType.INBOUND, this.uuid, nextPos);
     this.data.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
   }
 
   addOutboundFlightstrip() {
-    let fs = new Flightstrip(this.util.generateUUID(), stripType.OUTBOUND, this.uuid);
+    let nextPos = this.data.flightstripData?.[this.uuid]?.['flightstrips'].length
+    let fs = new Flightstrip(this.util.generateUUID(), stripType.OUTBOUND, this.uuid, nextPos);
     this.data.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
   }
 
   addVfrFlightstrip() {
-    let fs = new Flightstrip(this.util.generateUUID(), stripType.VFR, this.uuid);
+    let nextPos = this.data.flightstripData?.[this.uuid]?.['flightstrips'].length
+    let fs = new Flightstrip(this.util.generateUUID(), stripType.VFR, this.uuid, nextPos);
     this.data.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
   }
 
@@ -52,6 +56,9 @@ export class ColumnComponent {
         event.currentIndex,
       );
     }
+    //this.fsService.changedStripPos.next()
+    // console.log(`From ${event.previousContainer.id}\.${event.previousIndex} To ${event.container.id}\.${event.currentIndex}`)
+    this.fsService.changedStripPos.next({id: event.item.data?.id, newPosistion: event.currentIndex})
   }
 
   onKeyPress(event: any) {
@@ -109,6 +116,7 @@ export class ColumnComponent {
     this.isMouseDown = false;
     this.isDragable = false;
     this.fsService.dragChange.next({id: fsId, dragEnabled : false})
+
   }
 
   onMouseMove(fsId: string) {

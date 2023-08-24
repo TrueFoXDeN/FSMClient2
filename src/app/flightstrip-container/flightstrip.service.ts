@@ -12,12 +12,13 @@ export class FlightstripService {
   dragDelay = 100;
   isInputFocused: boolean = false;
   changedTriangleState = new Subject<void>();
-
   dragFlightstrip = new Subject<boolean>()
   changedType = new Subject<{ type: stripType, id: string }>()
   dragChange = new Subject<{ id: string, dragEnabled: boolean }>()
   searchFlightstrip = new Subject<void>()
   baseURL = environment.baseURL
+
+  changedStripPos = new Subject<{ id: string, newPosistion: number }>()
 
   constructor(private globalData: Data, private http: HttpClient) {
   }
