@@ -11,8 +11,6 @@ import {
 import {Flightstrip, iconState, statusArrival, statusDeparture, statusVfr, stripType} from '../flightstrip.model';
 import {Data} from "../../data";
 import {FlightstripService} from "../flightstrip.service";
-import {FlightStripContainer} from "../flightstrip-directives/flightStrip.directive";
-import {FlightstripIcon} from "../flightstrip-directives/flightstripIcon.directive";
 import {FlightStripInput} from "../flightstrip-directives/flightStripInput.directive";
 import {StyleChangerService} from "../../services/style-changer.service";
 import {MatMenuTrigger} from "@angular/material/menu";
@@ -21,11 +19,9 @@ import {MatMenuTrigger} from "@angular/material/menu";
 @Component({
   selector: 'app-flightstrip',
   templateUrl: './flightstrip.component.html',
-  styleUrls: ['./flightstrip.component.scss']
+  styleUrls: ['./flightstrip.component.scss', '../icon.scss']
 })
 export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild(FlightStripContainer) fsContainerDir: any;
-  @ViewChild(FlightstripIcon) fsIconDir: any;
   @ViewChild(FlightStripInput) fsInputDir: any;
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
   @Input() fs!: Flightstrip;
@@ -35,11 +31,12 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output("prevStatus") prevStatusEvent = new EventEmitter<void>()
   subscriptionHandles: any = [];
   status: any;
-
+  stripTypes = stripType
   inputsDisabled = false;
-
+  highlightActive = false;
+  iconStates = iconState
   constructor(private globalData: Data, private fsService: FlightstripService, private styleChanger: StyleChangerService,
-              ) {
+  ) {
     this.subscriptionHandles.push(this.fsService.changedType.subscribe((data) => {
       if (data.id == this.fs.id) {
         this.fs.type = data.type;
@@ -51,6 +48,15 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscriptionHandles.push(this.fsService.dragChange.subscribe((data) => {
       if (data.id == this.fs.id) {
         this.inputsDisabled = data.dragEnabled;
+      }
+    }));
+    this.subscriptionHandles.push(this.fsService.searchFlightstrip.subscribe(() => {
+      if (this.fs.isMarkedBySearch) {
+        this.highlightActive = true;
+        this.fs.isMarkedBySearch = false;
+        setTimeout(() => {
+          this.highlightActive = false;
+        }, 8000);
       }
     }));
   }
@@ -97,9 +103,10 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSquawkChange() {
-    // this.fs.triangleIconState = 4
-    this.fsContainerDir.onSquawkChange(this.fs.squawk)
-    this.fsIconDir.onSquawkChange(this.fs.squawk)
+
+    if (this.fs.squawk == "7500" || this.fs.squawk == "7600" || this.fs.squawk == "7700") {
+      this.fs.triangleIconState = 4
+    }
     this.onInputFocusLost()
   }
 
@@ -125,11 +132,11 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   onContextOpened() {
-    this.fsContainerDir.markForDeleteOperation()
+
   }
 
   onContextClosed() {
-    this.fsContainerDir.updateStyle();
+
   }
 
 }

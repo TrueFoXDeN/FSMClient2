@@ -1,37 +1,40 @@
 <div class="sidebar">
   <div class="top-buttons">
-    <app-sidebar-button-png icon="tower" sidebarButton class="icon-button" matTooltip="Profile Settings"
+    <app-sidebar-button-png icon="tower"  class="icon-button default" matTooltip="Profile Settings"
                             matTooltipPosition="right" (click)="openProfileSettings()"></app-sidebar-button-png>
-    <app-sidebar-button icon="columns" (click)="openColumnbuilder()" class="icon-button"
-                        matTooltip="Columns" matTooltipPosition="right" sidebarButton></app-sidebar-button>
+    <app-sidebar-button icon="columns" (click)="openColumnbuilder()" class="icon-button default"
+                        matTooltip="Columns" matTooltipPosition="right" ></app-sidebar-button>
     <app-sidebar-button icon="wifi" class="icon-button" matTooltip="Networks"
-                        matTooltipPosition="right" sidebarButton [iconState]="networkIcon"
-                        (click)="openNetworkMenu()"></app-sidebar-button>
-    <app-sidebar-button-png icon="radar" sidebarButton class="radar" matTooltip="Proximity Settings"
+                        matTooltipPosition="right"
+                        (click)="openNetworkMenu()"
+                        [ngClass]="{
+                        'default': this.networkService.networkState == 'default',
+                        'success': this.networkService.networkState == 'success',
+                        'error': this.networkService.networkState == 'error'}"
+    ></app-sidebar-button>
+    <app-sidebar-button-png icon="radar" class="radar default" matTooltip="Proximity Settings"
                             matTooltipPosition="right" (click)="openProximitySettings()"></app-sidebar-button-png>
-    <app-sidebar-button icon="users" class="icon-button" matTooltip="Multiplayer"
-                        matTooltipPosition="right" sidebarButton iconState="standard"
+    <app-sidebar-button icon="users" class="icon-button default" matTooltip="Multiplayer"
+                        matTooltipPosition="right"
                         (click)="openMultiplayerSettings()"></app-sidebar-button>
-    <app-sidebar-button icon="search" class="icon-button" matTooltip="Search Callsign"
-                        matTooltipPosition="right" sidebarButton iconState="standard"
+    <app-sidebar-button icon="search" class="icon-button default" matTooltip="Search Callsign"
+                        matTooltipPosition="right"
                         (click)="openSearchCallsign()"></app-sidebar-button>
   </div>
 
   <div class="bottom-buttons">
-    <app-sidebar-button icon="zoom-in" (click)="onZoomIn()" class="icon-button" matTooltip="Zoom in"
-                        matTooltipPosition="right" sidebarButton iconState="standard"></app-sidebar-button>
-    <app-sidebar-button icon="zoom-out" (click)="onZoomOut()" class="icon-button" matTooltip="Zoom out"
-                        matTooltipPosition="right" sidebarButton iconState="standard"></app-sidebar-button>
-    <app-sidebar-button icon="bar-chart-2" class="icon-button" matTooltip="Statistics"
-                        matTooltipPosition="right" sidebarButton iconState="standard"
+    <app-sidebar-button icon="zoom-in" (click)="onZoomIn()" class="icon-button default" matTooltip="Zoom in"
+                        matTooltipPosition="right"></app-sidebar-button>
+    <app-sidebar-button icon="zoom-out" (click)="onZoomOut()" class="icon-button default" matTooltip="Zoom out"
+                        matTooltipPosition="right"></app-sidebar-button>
+    <app-sidebar-button icon="bar-chart-2" class="icon-button default" matTooltip="Statistics"
+                        matTooltipPosition="right"
                         (click)="openStatsOverlay()"></app-sidebar-button>
-    <app-sidebar-button-png icon="brush" sidebarButton class="paint-palette" matTooltip="Themes"
-                            matTooltipPosition="right" (click)="openThemeSettings()"></app-sidebar-button-png>
-    <app-sidebar-button icon="settings" class="icon-button" matTooltip="Settings"
-                        matTooltipPosition="right" sidebarButton iconState="standard"
+    <app-sidebar-button icon="settings" class="icon-button default" matTooltip="Settings"
+                        matTooltipPosition="right"
                         (click)="openAppSettings()"></app-sidebar-button>
-    <app-sidebar-button icon="help-circle" class="icon-button" matTooltip="Help"
-                        matTooltipPosition="right" sidebarButton iconState="standard"
+    <app-sidebar-button icon="help-circle" class="icon-button default" matTooltip="Help"
+                        matTooltipPosition="right"
                         (click)="openHelpOverlay()"></app-sidebar-button>
   </div>
 </div>

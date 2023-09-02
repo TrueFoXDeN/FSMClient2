@@ -4,6 +4,8 @@
   box-sizing: border-box;
   outline: none;
   overflow: hidden;
+  color: var(--proximity-fontcolor);
+  background-color: var(--proximity-background);
 }
 .header {
   outline: none;
@@ -13,6 +15,7 @@
   align-items: center;
   height: 10%;
   margin-top: 5%;
+
 }
 
 .flex-column {
@@ -30,7 +33,8 @@
 
 .table-body{
   border-radius: 5px;
-  background: red;
+  //color: var(--app-fontcolor);
+  background-color: var(--proximity-table-background);
 }
 
 table {

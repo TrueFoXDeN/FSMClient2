@@ -1,5 +1,11 @@
 <div class="strip"
-     [flightStrip]="fs" tabindex="0"
+     [ngClass]="{
+     'inbound': fs.type === stripTypes.INBOUND,
+     'outbound': fs.type === stripTypes.OUTBOUND,
+     'vfr': fs.type === stripTypes.VFR,
+     'emergency': fs.squawk == '7500' || fs.squawk == '7700' || fs.squawk == '7600',
+     'highlight': highlightActive}"
+     tabindex="0"
      [cdkContextMenuTriggerFor]="context_menu"
      (cdkContextMenuOpened)="onContextOpened()"
      (cdkContextMenuClosed)="onContextClosed()">
@@ -9,7 +15,7 @@
         type="text"
         class="box-element"
         placeholder="Callsign"
-        [flightStripInput]="fs"
+        flightStripInput
         [(ngModel)]="fs.callsign"
         (focusin)="onInputFocus()"
         (focusout)="onInputFocusLost()"
@@ -20,7 +26,7 @@
         class="box-element"
         placeholder="Dep"
         [(ngModel)]="fs.departureIcao"
-        [flightStripInput]="fs"
+        flightStripInput
         (focusin)="onInputFocus()"
         (focusout)="onInputFocusLost()"
         (ngModelChange)="fs.departureIcao = $event.toUpperCase()"
@@ -30,7 +36,7 @@
         class="box-element"
         placeholder="Aircraft"
         [(ngModel)]="fs.aircraft"
-        [flightStripInput]="fs"
+        flightStripInput
         (focusin)="onInputFocus()"
         (focusout)="onInputFocusLost()"
         (ngModelChange)="fs.aircraft = $event.toUpperCase()"
@@ -40,7 +46,7 @@
         class="box-element"
         placeholder="Altitude"
         [(ngModel)]="fs.altitude"
-        [flightStripInput]="fs"
+        flightStripInput
         (focusin)="onInputFocus()"
         (focusout)="onInputFocusLost()"
         (ngModelChange)="fs.altitude = $event.toUpperCase()"
@@ -49,8 +55,13 @@
         <i-feather
           name="alert-triangle"
           class="icon"
-          [flightstripIcon]=fs
-          [iconState]="fs.triangleIconState"
+          [ngClass]="{
+          'icon-default':fs.triangleIconState === iconStates.STANDARD,
+          'icon-success' : fs.triangleIconState === iconStates.SUCCESS,
+          'icon-error' : fs.triangleIconState === iconStates.ERROR,
+          'icon-warning' : fs.triangleIconState === iconStates.WARNING,
+          'icon-inactive' : fs.triangleIconState === iconStates.INACTIVE
+          }"
           (click)="cycleTriangleState()">
         </i-feather>
 
@@ -65,7 +76,7 @@
         class="box-element"
         placeholder="Airline"
         [(ngModel)]="fs.airline"
-        [flightStripInput]="fs"
+        flightStripInput
         (focusin)="onInputFocus()"
         (focusout)="onInputFocusLost()"
         (ngModelChange)="fs.airline = $event.toUpperCase()"
@@ -76,7 +87,7 @@
         class="box-element"
         placeholder="Arr"
         [(ngModel)]="fs.arrivalIcao"
-        [flightStripInput]="fs"
+        flightStripInput
         (focusin)="onInputFocus()"
         (focusout)="onInputFocusLost()"
         (ngModelChange)="fs.arrivalIcao = $event.toUpperCase()"
@@ -87,7 +98,7 @@
           placeholder="W"
           class="small-inputs"
           [(ngModel)]="fs.wakeCategory"
-          [flightStripInput]="fs"
+          flightStripInput
           (focusin)="onInputFocus()"
           (focusout)="onInputFocusLost()"
           (ngModelChange)="fs.wakeCategory = $event.toUpperCase()"
@@ -97,7 +108,7 @@
           placeholder="FR"
           class="small-inputs"
           [(ngModel)]="fs.flightrule"
-          [flightStripInput]="fs"
+          flightStripInput
           (focusin)="onInputFocus()"
           (focusout)="onInputFocusLost()"
           (ngModelChange)="fs.flightrule = $event.toUpperCase()"
@@ -108,7 +119,7 @@
         class="box-element"
         placeholder="SID/STAR"
         [(ngModel)]="fs.sidStar"
-        [flightStripInput]="fs"
+        flightStripInput
         (focusin)="onInputFocus()"
         (focusout)="onInputFocusLost()"
         (ngModelChange)="fs.sidStar = $event.toUpperCase()"
@@ -118,7 +129,7 @@
         class="box-element"
         placeholder="Gate"
         [(ngModel)]="fs.gate"
-        [flightStripInput]="fs"
+        flightStripInput
         (focusin)="onInputFocus()"
         (focusout)="onInputFocusLost()"
         (ngModelChange)="fs.gate = $event.toUpperCase()"
@@ -129,7 +140,7 @@
         type="text"
         class="box-element"
         placeholder="Squawk"
-        [flightStripInput]="fs"
+        flightStripInput
         [(ngModel)]="fs.squawk"
         (focusout)="onSquawkChange()"
         (focusin)="onInputFocus()"
@@ -139,7 +150,7 @@
         class="box-element"
         placeholder="Runway"
         [(ngModel)]="fs.runway"
-        [flightStripInput]="fs"
+        flightStripInput
         (focusin)="onInputFocus()"
         (focusout)="onInputFocusLost()"
         (ngModelChange)="fs.runway = $event.toUpperCase()"
@@ -155,7 +166,7 @@
           type="text"
           placeholder="Status"
           value="{{status[fs.status]}}"
-          [flightStripInput]="fs"
+          flightStripInput
           class="status"
           (focusin)="onInputFocus()"
           (focusout)="onInputFocusLost()"
@@ -172,7 +183,7 @@
         class="box-element"
         placeholder="Info"
         [(ngModel)]="fs.info"
-        [flightStripInput]="fs"
+        flightStripInput
         (focusin)="onInputFocus()"
         (focusout)="onInputFocusLost()"
         [disabled]="inputsDisabled">
@@ -182,7 +193,7 @@
         type="text"
         placeholder="Route"
         [(ngModel)]="fs.route"
-        [flightStripInput]="fs"
+        flightStripInput
         class="long-text"
         (focusin)="onInputFocus()"
         (focusout)="onInputFocusLost()"
@@ -194,7 +205,7 @@
         type="text"
         placeholder="Free Text"
         [(ngModel)]="fs.freeText"
-        [flightStripInput]="fs"
+        flightStripInput
         class="long-text"
         (focusin)="onInputFocus()"
         (focusout)="onInputFocusLost()"

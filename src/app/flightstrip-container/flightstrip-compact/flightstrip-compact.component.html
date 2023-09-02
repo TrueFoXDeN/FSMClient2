@@ -1,8 +1,14 @@
-<div class="strip" flightStripCompact [fsCompact]="fs" [appFlightstripCompactBorder]="fs" (mousedown)="onMouseDown()"
+<div class="strip" (mousedown)="onMouseDown()"
      (mouseup)="onMouseUp()" (mousemove)="isMouseMoving = true" [cdkContextMenuTriggerFor]="context_menu"
-     (cdkContextMenuOpened)="onContextOpened()" (cdkContextMenuClosed)="onContextClosed()" (dblclick)="onDoubleClick()">
+     (cdkContextMenuOpened)="onContextOpened()" (dblclick)="onDoubleClick()"
+     [ngClass]="{
+     'inbound': fs.type === stripTypes.INBOUND,
+     'outbound': fs.type === stripTypes.OUTBOUND,
+     'vfr': fs.type === stripTypes.VFR,
+     'emergency': fs.squawk == '7500' || fs.squawk == '7700' || fs.squawk == '7600',
+     'highlight': highlightActive}">
   <div class="cols">
-    <div class="col1" flightStripCompact [flightStripCompactDivider]="'right'" [fsCompact]="fs">
+    <div class="col1 border-right" flightStripCompact [fsCompact]="fs">
       <span class="callsign" flightStripCompact [fsCompact]="fs"
             [flightStripFontSize]="'large'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.callsign}}</span>
       <span class="airline" flightStripCompact [fsCompact]="fs"
@@ -14,7 +20,7 @@
               [flightStripFontSize]="'medium'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.wakeCategory}}</span>
       </div>
     </div>
-    <div class="col2" flightStripCompact [flightStripCompactDivider]="'right'" [fsCompact]="fs">
+    <div class="col2 border-right" flightStripCompact [fsCompact]="fs">
       <span class="departure" flightStripCompact [fsCompact]="fs"
             [flightStripFontSize]="'medium'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.departureIcao}}</span>
       <span class="arrival" flightStripCompact [fsCompact]="fs"
@@ -22,7 +28,7 @@
       <span class="flightrule" flightStripCompact [fsCompact]="fs"
             [flightStripFontSize]="'medium'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.flightrule}}</span>
     </div>
-    <div class="col3" flightStripCompact [flightStripCompactDivider]="'right'" [fsCompact]="fs">
+    <div class="col3 border-right" flightStripCompact [fsCompact]="fs">
       <span class="runway" flightStripCompact [fsCompact]="fs"
             [flightStripFontSize]="'medium'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.runway}}</span>
       <span class="sidStar" flightStripCompact [fsCompact]="fs"
@@ -30,7 +36,7 @@
       <span class="altitude" flightStripCompact [fsCompact]="fs"
             [flightStripFontSize]="'medium'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.altitude}}</span>
     </div>
-    <div class="col4" flightStripCompact [flightStripCompactDivider]="'right'" [fsCompact]="fs">
+    <div class="col4 border-right" flightStripCompact [fsCompact]="fs">
        <span class="squawk" flightStripCompact [fsCompact]="fs"
              [flightStripFontSize]="'medium'" [ngClass]="{'disabled' : inputsDisabled}">{{fs.squawk}}</span>
       <span class="gate" flightStripCompact [fsCompact]="fs"
@@ -52,8 +58,13 @@
                                   (dblclick)="onSecondDoubleClick($event)"></app-flightstrip-button>
         </div>
         <div class="icons">
-          <i-feather name="alert-triangle" class="icon" [flightstripIcon]="fs" [iconState]="fs.triangleIconState"
-                     [ngClass]="{'disabled' : inputsDisabled}"></i-feather>
+          <i-feather name="alert-triangle" class="icon"
+                     [ngClass]="{'disabled' : inputsDisabled,
+                     'icon-default':fs.triangleIconState === iconStates.STANDARD,
+          'icon-success' : fs.triangleIconState === iconStates.SUCCESS,
+          'icon-error' : fs.triangleIconState === iconStates.ERROR,
+          'icon-warning' : fs.triangleIconState === iconStates.WARNING,
+          'icon-inactive' : fs.triangleIconState === iconStates.INACTIVE}"></i-feather>
           <i-feather name="headphones" class="icon"></i-feather>
         </div>
       </div>

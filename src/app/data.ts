@@ -12,6 +12,8 @@ export class Data {
   public currentProfile: any = {}
   public archivedStrips: any = {}
 
+
+
   public getStandardProfileID() {
     return "a6574bc2-4351-40be-b5ed-eda88ee2c06c"
   }

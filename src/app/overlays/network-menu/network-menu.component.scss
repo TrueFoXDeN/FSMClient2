@@ -5,6 +5,8 @@
   outline: none;
   overflow: hidden;
   padding: 20px;
+  background-color: var(--network-background);
+  color: var(--app-fontcolor)
 }
 
 
@@ -75,6 +77,11 @@
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 0 3px 1px rgba(55, 55, 55, 0.2);
+  background-color: var(--network-button-background);
+  color: var(--network-button-font);
+  border-color: var(--network-button-bordercolor);
+
+
   &:hover{
     outline: 2px solid #ffffff;
     box-shadow: none;

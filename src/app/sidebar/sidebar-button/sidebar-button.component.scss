@@ -9,11 +9,7 @@
   justify-content: center;
   cursor: pointer;
   user-select: none;
-}
 
-:host:hover {
-  outline: 2px solid #565656;
-  box-shadow: none;
 }
 
 .icon {
@@ -21,3 +17,4 @@
   width: 55%;
   aspect-ratio: 1;
 }
+

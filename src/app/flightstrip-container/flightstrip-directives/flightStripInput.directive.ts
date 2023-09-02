@@ -8,23 +8,12 @@ import {FlightstripService} from "../flightstrip.service";
   selector: '[flightStripInput]'
 })
 export class FlightStripInput implements OnInit, OnDestroy {
-  @Input("flightStripInput") fs!: Flightstrip
 
   subscriptionList: any = []
 
-  constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService, private fsService: FlightstripService) {
-    this.subscriptionList.push(this.styleChanger.changedColors.subscribe(() => {
-      this.updateStyle()
-    }));
+  constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService) {
     this.subscriptionList.push(this.styleChanger.changedSize.subscribe(() => {
       this.updateStyle();
-    }));
-
-    this.subscriptionList.push(this.fsService.changedType.subscribe((data) => {
-      if (data.id == this.fs.id) {
-        this.fs.type = data.type;
-        this.updateStyle();
-      }
     }));
   }
 
@@ -41,23 +30,6 @@ export class FlightStripInput implements OnInit, OnDestroy {
 
   updateStyle() {
     this.elementRef.nativeElement.style.fontSize = `${10 * this.cS.multiplier}pt`
-    switch (this.fs.type) {
-      case stripType.INBOUND:
-        this.elementRef.nativeElement.style.background = this.cS.style.fsTextboxBackgroundInbound;
-        this.elementRef.nativeElement.style.color = this.cS.style.fsTextColorInbound;
-        this.elementRef.nativeElement.style.outlineColor = this.cS.style.fsTextboxBorderColorInbound
-        break;
-      case stripType.OUTBOUND:
-        this.elementRef.nativeElement.style.background = this.cS.style.fsTextboxBackgroundOutbound
-        this.elementRef.nativeElement.style.color = this.cS.style.fsTextColorOutbound;
-        this.elementRef.nativeElement.style.outlineColor = this.cS.style.fsTextboxBorderColorOutbound
-        break;
-      case stripType.VFR:
-        this.elementRef.nativeElement.style.background = this.cS.style.fsTextboxBackgroundVfr;
-        this.elementRef.nativeElement.style.color = this.cS.style.fsTextColorVfr;
-        this.elementRef.nativeElement.style.outlineColor = this.cS.style.fsTextboxBorderColorVfr
-        break;
-    }
   }
 
 

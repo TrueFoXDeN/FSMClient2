@@ -11,16 +11,12 @@ export class NetworkMenuDirective implements OnInit, OnDestroy {
   subscriptionList: any = []
 
   constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService, private fsService: FlightstripService) {
-    this.subscriptionList.push(this.styleChanger.changedColors.subscribe(() => {
-      this.updateStyle();
-    }));
     this.subscriptionList.push(this.styleChanger.changedSize.subscribe(() => {
       this.updateSizes();
     }));
   }
 
   ngOnInit(): void {
-    this.updateStyle();
     this.updateSizes()
   }
 
@@ -33,11 +29,5 @@ export class NetworkMenuDirective implements OnInit, OnDestroy {
   updateSizes() {
 
   }
-
-  updateStyle() {
-    this.elementRef.nativeElement.style.color = this.cS.style.fontColor;
-    this.elementRef.nativeElement.style.background = this.cS.style.appBackground;
-  }
-
 
 }

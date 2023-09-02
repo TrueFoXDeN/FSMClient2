@@ -11,17 +11,37 @@
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
+  background-color: var(--sidebar-background);
 }
 
 .icon-button {
   width: 100%;
   aspect-ratio: 1;
+
+  &:hover{
+    background-color: var(--sidebar-button-hover);
+    outline: 1px solid white;
+  }
 }
+.default {
+  outline: 1px solid var(--sidebar-button-foreground-default);
+  color: var(--sidebar-button-foreground-default);
+}
+.success {
+  outline: 1px solid var(--sidebar-button-foreground-success);
+  color: var(--sidebar-button-foreground-success);
+}
+.error {
+  outline: 1px solid var(--sidebar-button-foreground-error);
+  color: var(--sidebar-button-foreground-error);
+}
+
 .paint-palette{
   box-sizing: border-box;
   width: 100%;
   padding: 10%;
   aspect-ratio: 1;
+  background-color: var(--sidebar-button-background);
 }
 
 .radar{
@@ -29,6 +49,9 @@
   width: 100%;
   padding: 4%;
   aspect-ratio: 1;
+  color: var(--sidebar-button-background);
+  outline: 1px solid var(--sidebar-button-background);
+  background-color: var(--sidebar-background);
 }
 
 .top-buttons {

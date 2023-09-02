@@ -9,12 +9,10 @@ import {SnackbarMessageService} from "../services/snackbar-message.service";
 import {ColumnBuilderService} from "../services/column-builder.service";
 import {NetworkMenuComponent} from "../overlays/network-menu/network-menu.component";
 import {NetworkService} from "../services/network.service";
-import {SidebarButton} from "./sidebar-directives/sidebarButton.directive";
 import {ProfileSettingsComponent} from "../overlays/profile-settings/profile-settings.component";
 import {ProximitySettingsComponent} from "../overlays/proximity-settings/proximity-settings.component";
 import {MultiplayerSettingsComponent} from "../overlays/multiplayer-settings/multiplayer-settings.component";
 import {SettingsComponent} from "../overlays/settings/settings.component";
-import {ThemeBuilderComponent} from "../overlays/theme-builder/theme-builder.component";
 import {HelpOverlayComponent} from "../overlays/help-overlay/help-overlay.component";
 import {StatisticsOverlayComponent} from "../overlays/statistics-overlay/statistics-overlay.component";
 import {Search} from "angular-feather/icons";
@@ -30,11 +28,10 @@ import {FlightstripService} from "../flightstrip-container/flightstrip.service";
 export class SidebarComponent implements OnInit, OnDestroy {
   subscriptionList: any = []
   networkIcon: string = "standard";
-  @ViewChild(SidebarButton) sidebarButtonDir: any;
 
   constructor(private customStyle: CustomStyles, private _snackBar: MatSnackBar, public dialog: MatDialog,
               private globalData: Data, private styleChanger: StyleChangerService, private snackService: SnackbarMessageService,
-              private colBuilderService: ColumnBuilderService, private networkService: NetworkService,
+              private colBuilderService: ColumnBuilderService, public networkService: NetworkService,
               private columnBuilderService: ColumnBuilderService, private fsService: FlightstripService) {
     this.subscriptionList.push(this.networkService.changedNetworkEmitter.subscribe((data) => {
       if (data.active) {
@@ -152,15 +149,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     });
   }
 
-  openThemeSettings() {
-    const dialogConfig = new MatDialogConfig()
-    dialogConfig.height = `${350 * this.customStyle.multiplier}px`;
-    dialogConfig.width = `${350 * this.customStyle.multiplier}px`;
-    const dialogRef = this.dialog.open(ThemeBuilderComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe((data) => {
-
-    });
-  }
 
   openHelpOverlay() {
     const dialogConfig = new MatDialogConfig()

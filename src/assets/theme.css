@@ -1,3 +1,110 @@
+/*Custom Variables*/
+:root {
+  --app-background: #2A323D;
+  --app-fontcolor: #ffffff;
+  --app-primary: #0095ff;
+  --app-accent: #1044c8;
+  --app-input: #2B2B2B;
+  --app-accent-outline: #ffffff;
+  --app-error: #fb271f;
+  --main-container-background: var(--app-background);
+
+  --overlay-background: #2A323D;
+  --overlay-foreground: #e631d5;
+
+  /*Sidebar*/
+  --sidebar-background: #20262E;
+  --sidebar-button-background: #ADB0B4;
+  --sidebar-button-foreground-default: #ADB0B4;
+  --sidebar-button-foreground-success: #7bff00;
+  --sidebar-button-foreground-error: var(--app-error);
+  --sidebar-button-hover: var(--app-background);
+
+
+  /*Column*/
+  --column-background: #20262E;
+  --column-foreground: var(--app-fontcolor);
+  --column-button-background: #313335;
+
+  /*Flightsrips:*/
+  --fs-context-background: grey;
+  --fs-context-item-hover: #000000;
+  --fs-emergency-border-color:var(--app-error);
+  --fs-highlight-25: rgba(255, 115, 0, 0.25);
+  --fs-highlight-50: rgba(255, 115, 0, 0.5);
+  --fs-highlight-75: rgba(255, 115, 0, 0.75);
+  --fs-highlight-100: rgba(255, 115, 0, 1);
+  --fs-state-icon-default: #FFFFFF;
+  --fs-state-icon-success: #00FF00;
+  --fs-state-icon-error: var(--app-error);
+  --fs-state-icon-warning: #ffa600;
+  --fs-state-icon-inactive: #CACACA51;
+  /*Inbound*/
+  --fs-inbound-background: #233927;
+  --fs-inbound-border-color: #3C9E37;
+  --fs-inbound-foreground: #FFFFFF;
+  --fs-inbound-placeholder: #808080;
+  --fs-inbound-textbox-background: #2D4732;
+  --fs-inbound-textbox-border-color: #3C9E37;
+  --fs-inbound-divider: #5b7264;
+  /*Outbound*/
+  --fs-outbound-background: #223142;
+  --fs-outbound-border-color: #3674BF;
+  --fs-outbound-foreground: #FFFFFF;
+  --fs-outbound-placeholder: #808080;
+  --fs-outbound-textbox-background: #2C3C53;
+  --fs-outbound-textbox-border-color: #3674BF;
+  --fs-outbound-divider: #687679;
+  /*VFR*/
+  --fs-vfr-background: #3C2542;
+  --fs-vfr-border-color: #BD37BF;
+  --fs-vfr-foreground: #FFFFFF;
+  --fs-vfr-placeholder: #808080;
+  --fs-vfr-textbox-background: #472A4D;
+  --fs-vfr-textbox-border-color: #BD37BF;
+  --fs-vfr-divider: #76657d;
+
+  /*Overlay*/
+  /*Columnbuilder*/
+  --columnbuilder-background: var(--app-background);
+  --columbuilder-border: #bebebe;
+  --columnbuilder-button-background: #3674BF;
+  --columnbuilder-input-background: var(--app-input);
+  --columnbuilder-input-fontcolor: var(--app-fontcolor);
+  --columnbuilder-column-background: var(--column-background);
+  --columnbuilder-footer: grey;
+  /*Network*/
+  --network-button-bordercolor: #ffffff;
+  --network-button-background: #3674BF;
+  --network-button-font: #ffffff;
+  --network-background: var(--app-background);
+  --network-fontcolor: var(--app-fontcolor);
+  /*Proximity*/
+  --proximity-input: #2B2B2B;
+  --proximity-background: var(--app-background);
+  --proximity-fontcolor: var(--app-fontcolor);
+  --proximity-table-background: var(--app-input);
+  /*Search Callsign*/
+  --search-input: #2B2B2B;
+  --search-input-background: var(--app-input);
+  --search-input-fontcolor: var(--app-fontcolor);
+  --search-button-background: var(--app-accent);
+  --search-button-outline: var(--app-accent-outline);
+  --search-background: var(--app-background);
+  --search-fontcolor: var(--app-fontcolor);
+
+
+  /*Profle Settings*/
+  --profile-input-background: var(--app-input);
+  --profile-input-foreground: var(--app-fontcolor);
+  --profile-background: var(--app-background);
+  --profile-fontcolor: var(--app-fontcolor);
+}
+
+
+/*-------------*/
+
+
 :root {
   --surface-a: #2a323d;
   --surface-b: #20262e;
@@ -122,7 +229,7 @@
 }
 
 :root {
-  --fl-vfr-main:#0d6efd;
+  --fl-vfr-main: #0d6efd;
   --blue-50: #f3f8ff;
   --blue-100: #c5dcff;
   --blue-200: #97c1fe;

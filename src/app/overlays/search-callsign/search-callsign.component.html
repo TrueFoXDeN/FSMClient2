@@ -5,8 +5,8 @@
   <div class="input-container">
     <input class="input" searchCallsignInput (input)="onInput()" [(ngModel)]="callsign"
            (ngModelChange)="callsign = $event.toUpperCase()">
-    <app-search-callsign-button icon="search" class="icon" searchCallsignButton
+    <app-search-callsign-button icon="search" class="icon"
                                 [ngClass]="{'disabled': !searchButtonActive}"
-                                (click)="onClose()"></app-search-callsign-button>
+                                (click)="onClose()" ></app-search-callsign-button>
   </div>
 </div>

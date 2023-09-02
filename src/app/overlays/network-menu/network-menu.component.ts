@@ -59,7 +59,6 @@ export class NetworkMenuComponent implements OnInit {
       this.changeAllButtons(false);
       switch (this.networkService.getNetwork()) {
         case "ivao":
-          console.log(this.vatsimButtonEnabled)
           this.ivaoButtonText = this.connectedText;
           this.ivaoButtonEnabled = true;
           break;

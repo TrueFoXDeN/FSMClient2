@@ -2,6 +2,8 @@
   display: flex;
   flex-flow: column;
   height: 100%;
+  background-color: var(--column-background);
+  color: var(--column-foreground);
 }
 
 .drag-list {
@@ -54,7 +56,6 @@
 
 h2 {
   margin: 0 0 0 8%;
-  color: white;
 }
 
 .cdk-drag-preview {

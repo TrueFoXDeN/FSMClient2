@@ -1,14 +1,13 @@
-<div class="window" mainContainer>
+<div class="window">
   <div class="content">
-    <gridster [options]="options" class="gridBackground" mainContainer>
+    <gridster [options]="options" class="gridBackground">
       <gridster-item [item]="item" *ngFor="let item of dashboard">
-        <div class="columnContent" columnColor>
+        <div class="columnContent">
           <div class="header flex-container" columnHeaderHeight>
             <div class="gridster-item-content flex-container header-text"><input type="text" class="input"
                                                                                  placeholder="Name..."
                                                                                  [ngModel]="item?.['name']"
-                                                                                 (ngModelChange)="item['name']=$event"
-                                                                                 columnBuilderInput>
+                                                                                 (ngModelChange)="item['name']=$event">
             </div>
           </div>
           <div class="body flex-container">
@@ -21,10 +20,10 @@
     </gridster>
 
 
-    <div class="button-footer" columnBuilderFooter>
+    <div class="button-footer">
       <div class="left">
         <app-column-builder-button icon="plus" (click)="addItem($event)" class="footer-buttons" matTooltip="Add Column"
-                                   matTooltipPosition="above" sidebarButton></app-column-builder-button>
+                                   matTooltipPosition="above"></app-column-builder-button>
       </div>
       <div class="right">
 <!--        <app-column-builder-button icon="upload" class="footer-buttons" matTooltip="Export"-->
@@ -34,11 +33,9 @@
 <!--                                   matTooltipPosition="above" sidebarButton-->
 <!--                                   (click)="loadConfig()"></app-column-builder-button>-->
         <app-column-builder-button icon="save" class="footer-buttons" matTooltip="Save & Exit"
-                                   matTooltipPosition="above" (click)="saveAndClose()"
-                                   sidebarButton></app-column-builder-button>
+                                   matTooltipPosition="above" (click)="saveAndClose()"></app-column-builder-button>
         <app-column-builder-button icon="X" class="footer-buttons" matTooltip="Discard"
-                                   matTooltipPosition="above" (click)="closeWithoutSaving()"
-                                   sidebarButton></app-column-builder-button>
+                                   matTooltipPosition="above" (click)="closeWithoutSaving()"></app-column-builder-button>
       </div>
     </div>
   </div>

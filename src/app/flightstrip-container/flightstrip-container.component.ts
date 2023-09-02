@@ -19,15 +19,20 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
   constructor(private networkService: NetworkService, private fsService: FlightstripService) {
     this.subscriptionHandles.push(
       this.networkService.networkEmitter.subscribe(() => {
-      this.onCheckCallsignTrigger()
-    }),
+        this.onCheckCallsignTrigger()
+      }),
       this.fsService.changedStripPos.subscribe((data) => {
-        if(this.stripModel.id == data.id){
+        if (this.stripModel.id == data.id) {
           this.stripModel.columnPosition = data.newPosistion
-          console.log(this.stripModel)
+        }
+      }),
+      this.fsService.changedType.subscribe((data) => {
+        if (data.id == this.stripModel.id) {
+          this.stripModel.type = data.type;
         }
       })
     );
+
   }
 
   ngOnDestroy(): void {
@@ -95,6 +100,7 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
           }
         },
         error: (err) => {
+          this.networkService.triggerError()
         }
       });
     }

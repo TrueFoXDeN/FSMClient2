@@ -55,7 +55,6 @@ export class ProfileSettingsFooterButtonDirective implements OnInit, OnDestroy {
     }
     this.elementRef.nativeElement.style.fontSize = `${12 * this.cS.multiplier}pt`;
     this.elementRef.nativeElement.style.fontColor = this.cS.style.fontColor
-
   }
 
   @HostListener("mouseenter") onMouseEnter() {

@@ -11,24 +11,12 @@ export class FsContextMenuItemDirective implements OnInit, OnDestroy {
   subscriptionList: any = []
 
   constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService, private fsService: FlightstripService) {
-    this.subscriptionList.push(this.styleChanger.changedColors.subscribe(() => {
-      this.updateStyle();
-    }));
     this.subscriptionList.push(this.styleChanger.changedSize.subscribe(() => {
       this.updateSizes();
     }));
   }
 
-  @HostListener('mouseenter') onMouseEnter() {
-    this.elementRef.nativeElement.style.background = this.cS.style.buttonHover;
-  }
-
-  @HostListener('mouseleave') onMouseLeave() {
-    this.updateStyle();
-  }
-
   ngOnInit(): void {
-    this.updateStyle();
     this.updateSizes()
   }
 
@@ -45,11 +33,4 @@ export class FsContextMenuItemDirective implements OnInit, OnDestroy {
     this.elementRef.nativeElement.style.lineHeight = `${36 * this.cS.multiplier}px`;
 
   }
-
-  updateStyle() {
-    this.elementRef.nativeElement.style.background = "transparent";
-    this.elementRef.nativeElement.style.color = this.cS.style.fontColor
-  }
-
-
 }

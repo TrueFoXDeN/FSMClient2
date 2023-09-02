@@ -38,7 +38,7 @@ export class ProfileSettingsInputContainerDirective implements OnInit, OnDestroy
 
   updateStyle() {
     this.elementRef.nativeElement.style.color = this.cS.style.fontColor;
-    this.elementRef.nativeElement.style.background = 'transparent';
+    //this.elementRef.nativeElement.style.background = 'transparent';
   }
 
 

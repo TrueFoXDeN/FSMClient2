@@ -16,8 +16,6 @@ import {SidebarComponent} from './sidebar/sidebar.component';
 import {ColumnButtonsComponent} from './column/column-button/column-button.component';
 import {BlurOnDirective} from "./directives/general-directives/blur-on.directive";
 import {FormsModule} from "@angular/forms";
-import {BodyBackground} from "./directives/general-directives/bodyBackground.directive";
-import {FlightStripContainer} from "./flightstrip-container/flightstrip-directives/flightStrip.directive";
 import {CustomStyles} from "./customStyles";
 import {FlightStripInput} from "./flightstrip-container/flightstrip-directives/flightStripInput.directive";
 import {ColumnWidth} from "./column/column-directives/columnWidth.directive";
@@ -36,29 +34,17 @@ import {
 } from "./overlays/column-builder/column-builder-button/column-builder-button.component";
 import {Util} from "./util";
 import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
-import {Sidebar} from "./sidebar/sidebar-directives/sidebar.directive";
-import {SidebarButton} from "./sidebar/sidebar-directives/sidebarButton.directive";
-import {MainContainer} from "./directives/general-directives/mainContainer.directive";
-import {ColumnColor} from "./column/column-directives/columnColor.directive";
-import {ColumnButtonColor} from "./column/column-directives/columnButtonColor.directive";
 import {FlightStripCompact} from "./flightstrip-container/flightstrip-directives/flightStripCompact.directive";
-import {FlightstripIcon} from "./flightstrip-container/flightstrip-directives/flightstripIcon.directive";
 import {
   FlightstripButtonComponent
 } from "./flightstrip-container/flightstrip/flightstrip-button/flightstrip-button.component";
-import {ColumnBuilderInputDirective} from "./overlays/column-builder/columnBuilder.directive";
 import {SettingsComponent} from './overlays/settings/settings.component';
-import {ThemeBuilderComponent} from './overlays/theme-builder/theme-builder.component';
 import {SidebarButtonPngComponent} from "./sidebar/sidebar-button-png/sidebar-button-png.component";
 import {CdkMenuModule} from '@angular/cdk/menu';
 import {ContextMenuComponent} from './flightstrip-container/context-menu/context-menu.component';
 import {FsContextMenuDirective} from "./flightstrip-container/context-menu/fsContextMenu.directive";
 import {FsContextMenuItemDirective} from "./flightstrip-container/context-menu/fsContextMenuItem.directive";
-import {
-  FlightstripCompactBorderDirective
-} from './flightstrip-container/flightstrip-directives/flightstrip-compact-border.directive';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {ColumnBuilderFooterDirective} from "./overlays/column-builder/columnBuilderFooter.directive";
 import {NetworkMenuComponent} from './overlays/network-menu/network-menu.component';
 import {NetworkMenuDirective} from "./overlays/network-menu/networkMenu.directive";
 import {MatMenuModule} from '@angular/material/menu';
@@ -90,7 +76,6 @@ import { MultiplayerSettingsComponent } from './overlays/multiplayer-settings/mu
 import { HelpOverlayComponent } from './overlays/help-overlay/help-overlay.component';
 import { StatisticsOverlayComponent } from './overlays/statistics-overlay/statistics-overlay.component';
 import { SearchCallsignComponent } from './overlays/search-callsign/search-callsign.component';
-import {SearchCallsignButtonDirective} from "./overlays/search-callsign/searchCallsignButton.directive";
 import {SearchCallsignDirective} from "./overlays/search-callsign/searchCallsign.directive";
 import {SearchCallsignInputDirective} from "./overlays/search-callsign/searchCallsignInput.directive";
 import {
@@ -106,6 +91,7 @@ import { GeneralDropdownComponent } from './general-dropdown/general-dropdown.co
 import {GeneralDropdownItemDirective} from "./general-dropdown/general-dropdownItem.directive";
 import {GeneralProfileDropdownDirective} from "./general-dropdown/general-profile-dropdown.directive";
 import {GeneralDropdownInputDirective} from "./general-dropdown/general-dropdownInput.directive";
+import {Sidebar} from "./sidebar/sidebar-directives/sidebar.directive";
 @NgModule({
   declarations: [
     AppComponent,
@@ -116,8 +102,6 @@ import {GeneralDropdownInputDirective} from "./general-dropdown/general-dropdown
     SidebarComponent,
     ColumnButtonsComponent,
     BlurOnDirective,
-    BodyBackground,
-    FlightStripContainer,
     FlightStripInput,
     ColumnWidth,
     ColumnHeaderHeight,
@@ -127,22 +111,13 @@ import {GeneralDropdownInputDirective} from "./general-dropdown/general-dropdown
     ColumnBuilderComponent,
     ColumnBuilderButtonComponent,
     Sidebar,
-    SidebarButton,
-    MainContainer,
-    ColumnColor,
-    ColumnButtonColor,
-    FlightstripIcon,
     FlightstripButtonComponent,
     FlightStripCompact,
-    ColumnBuilderInputDirective,
     SettingsComponent,
-    ThemeBuilderComponent,
     SidebarButtonPngComponent,
     ContextMenuComponent,
     FsContextMenuDirective,
     FsContextMenuItemDirective,
-    FlightstripCompactBorderDirective,
-    ColumnBuilderFooterDirective,
     NetworkMenuComponent,
     NetworkMenuDirective,
     NetworkMenuButtonDirective,
@@ -161,7 +136,6 @@ import {GeneralDropdownInputDirective} from "./general-dropdown/general-dropdown
     HelpOverlayComponent,
     StatisticsOverlayComponent,
     SearchCallsignComponent,
-    SearchCallsignButtonDirective,
     SearchCallsignDirective,
     SearchCallsignInputDirective,
     SearchCallsignButtonComponent,

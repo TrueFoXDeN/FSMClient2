@@ -1,24 +1,23 @@
 import {Component, ElementRef, EventEmitter, Input, OnDestroy, Output, TemplateRef, ViewChild} from '@angular/core';
-import {Flightstrip, statusArrival, statusDeparture, statusVfr, stripType} from "../flightstrip.model";
+import {Flightstrip, iconState, statusArrival, statusDeparture, statusVfr, stripType} from "../flightstrip.model";
 import {FlightstripService} from "../flightstrip.service";
-import {FlightStripContainer} from "../flightstrip-directives/flightStrip.directive";
 import {FlightStripCompact} from "../flightstrip-directives/flightStripCompact.directive";
-import {FlightstripCompactBorderDirective} from "../flightstrip-directives/flightstrip-compact-border.directive";
 
 
 @Component({
   selector: 'app-flightstrip-compact',
   templateUrl: './flightstrip-compact.component.html',
-  styleUrls: ['./flightstrip-compact.component.scss']
+  styleUrls: ['./flightstrip-compact.component.scss', '../icon.scss']
 })
 export class FlightstripCompactComponent implements OnDestroy {
   @Input() fs!: Flightstrip;
   @ViewChild(FlightStripCompact) fsContainerDir: any;
-  @ViewChild(FlightstripCompactBorderDirective) fsCompactBorder: any;
   @ViewChild('menutrigger') menutrigger!: ElementRef;
   @Output("triggeredCompact") compactModeTrigger = new EventEmitter<void>()
+  stripTypes = stripType
+  iconStates = iconState
+  highlightActive = false;
   status: any;
-  stripType = stripType;
   isMouseMoving: boolean = false;
   isMouseDown: boolean = false;
   isTouchCanceled = false;
@@ -31,9 +30,27 @@ export class FlightstripCompactComponent implements OnDestroy {
   @Output("prevStatus") prevStatusEvent = new EventEmitter<void>()
 
   constructor(private fsService: FlightstripService) {
+    this.subscriptionHandles.push(this.fsService.changedType.subscribe((data) => {
+      if (data.id == this.fs.id) {
+        this.fs.type = data.type;
+        this.checkStatus();
+        this.fs.status = 0;
+      }
+    }));
+
     this.subscriptionHandles.push(this.fsService.dragChange.subscribe((data) => {
       if (data.id == this.fs.id) {
         this.inputsDisabled = data.dragEnabled;
+      }
+    }));
+
+    this.subscriptionHandles.push(this.fsService.searchFlightstrip.subscribe(() => {
+      if (this.fs.isMarkedBySearch) {
+        this.highlightActive = true;
+        this.fs.isMarkedBySearch = false;
+        setTimeout(() => {
+          this.highlightActive = false;
+        }, 8000);
       }
     }));
   }
@@ -103,11 +120,7 @@ export class FlightstripCompactComponent implements OnDestroy {
   }
 
   onContextOpened() {
-    this.fsContainerDir.markForDeleteOperation()
-  }
-
-  onContextClosed() {
-    this.fsCompactBorder.updateStyle();
+    //this.fsContainerDir.markForDeleteOperation()
   }
 
   nextStatus() {
@@ -116,6 +129,20 @@ export class FlightstripCompactComponent implements OnDestroy {
 
   prevStatus() {
     this.prevStatusEvent.emit();
+  }
+
+  checkStatus() {
+    switch (this.fs.type) {
+      case stripType.OUTBOUND:
+        this.status = statusDeparture
+        break;
+      case stripType.INBOUND:
+        this.status = statusArrival
+        break;
+      case stripType.VFR:
+        this.status = statusVfr
+        break;
+    }
   }
 
 

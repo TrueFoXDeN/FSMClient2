@@ -184,3 +184,69 @@
   opacity: 0.6;
 
 }
+
+
+.inbound {
+  background-color: var(--fs-inbound-background);
+  color: var(--fs-inbound-foreground);
+  border: 2px solid var(--fs-inbound-border-color);
+  .border-right{
+    border-right: 1px solid var(--fs-inbound-divider)
+  }
+}
+
+.outbound {
+  background-color: var(--fs-outbound-background);
+  color: var(--fs-outbound-foreground);
+  border: 2px solid var(--fs-outbound-border-color);
+  .border-right{
+    border-right: 1px solid var(--fs-outbound-divider)
+  }
+}
+
+.vfr {
+  background-color: var(--fs-vfr-background);
+  color: var(--fs-vfr-foreground);
+  border: 2px solid var(--fs-vfr-border-color);
+  .border-right{
+    border-right: 1px solid var(--fs-vfr-divider)
+  }
+
+}
+
+.emergency {
+  border-color: var(--fs-emergency-border-color);
+}
+
+.highlight {
+  animation: blink 1.3s linear 4;
+}
+
+@keyframes blink {
+  10% {
+    border-color: var(--fs-highlight-25);
+  }
+  20% {
+    border-color: var(--fs-highlight-50);
+  }
+  30% {
+    border-color: var(--fs-highlight-75);
+  }
+  50% {
+    border-color: var(--fs-highlight-100);
+  }
+  70% {
+    border-color: var(--fs-highlight-75);
+  }
+  80% {
+    border-color: var(--fs-highlight-50);
+  }
+  90% {
+    border-color: var(--fs-highlight-25);
+  }
+}
+
+
+
+
+

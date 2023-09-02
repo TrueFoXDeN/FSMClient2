@@ -11,16 +11,12 @@ export class ProximityTableDirective implements OnInit, OnDestroy {
   @Input("header") isHeader = false;
 
   constructor(private elementRef: ElementRef, private cS: CustomStyles, private styleChanger: StyleChangerService) {
-    this.subscriptionList.push(this.styleChanger.changedColors.subscribe(() => {
-      this.updateStyle();
-    }));
     this.subscriptionList.push(this.styleChanger.changedSize.subscribe(() => {
       this.updateSizes();
     }));
   }
 
   ngOnInit(): void {
-    this.updateStyle();
     this.updateSizes();
   }
 
@@ -37,13 +33,4 @@ export class ProximityTableDirective implements OnInit, OnDestroy {
       this.elementRef.nativeElement.style.fontSize = `${12 * this.cS.multiplier}pt`;
     }
   }
-
-  updateStyle() {
-    this.elementRef.nativeElement.style.color = this.cS.style.fontColor;
-    this.elementRef.nativeElement.style.fontColor = this.cS.style.fontColor;
-    this.elementRef.nativeElement.style.background = this.cS.style.appInput;
-
-  }
-
-
 }

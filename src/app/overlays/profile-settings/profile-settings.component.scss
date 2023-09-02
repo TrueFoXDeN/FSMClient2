@@ -6,6 +6,8 @@
   outline: none;
   overflow: hidden;
   padding: 20px;
+  background-color: var(--profile-background);
+  color: var(--profile-fontcolor);
 }
 
 .header {
@@ -58,6 +60,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  background-color: transparent;
 }
 
 .new-profile-input {
@@ -67,6 +70,8 @@
   border: none;
   padding-left: 1em;
   box-sizing: border-box;
+  background-color: var(--profile-input-background);
+  color: var(--profile-input-foreground);
 }
 
 .save-button-container {

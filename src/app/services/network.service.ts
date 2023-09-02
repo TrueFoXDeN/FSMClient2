@@ -10,10 +10,11 @@ export class NetworkService {
   private usedNetwork = networkType.VATSIM
   private fiveSecInterval = interval(5000);
   networkEmitter = new Subject<void>()
-
+  errorTriggered = false;
+  networkState = "default"
   changedNetworkEmitter = new Subject<any>()
 
-  constructor(private messageService : SnackbarMessageService) {
+  constructor(private messageService: SnackbarMessageService) {
     this.fiveSecInterval.subscribe(() => {
       if (this.isNetworkFetchActive) {
         this.networkEmitter.next();
@@ -26,12 +27,14 @@ export class NetworkService {
     this.isNetworkFetchActive = true;
     this.changedNetworkEmitter.next({active: true, network: this.usedNetwork})
     this.messageService.showMessage(`Network connected: ${networkType[this.usedNetwork]}`, "success")
+    this.networkState = "success"
   }
 
   stopNetworkConnection() {
     this.isNetworkFetchActive = false;
     this.changedNetworkEmitter.next({active: false, network: this.usedNetwork})
     this.messageService.showMessage("Network disconnected", "warning")
+    this.networkState = "default"
   }
 
   getIsNetworkFetchActive() {
@@ -52,8 +55,20 @@ export class NetworkService {
   setNetwork(network: networkType) {
     this.usedNetwork = network;
     this.changedNetworkEmitter.next({active: this.isNetworkFetchActive, network: this.usedNetwork})
+    this.errorTriggered = false
   }
 
+  triggerError() {
+    if (!this.errorTriggered) {
+      this.messageService.showMessage("Failed to fetch network data", "error")
+      this.errorTriggered = true
+      this.networkState = "error"
+    }
+  }
+
+  getErrorState() {
+    return this.errorTriggered
+  }
 }
 
 export enum networkType {

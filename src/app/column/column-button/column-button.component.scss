@@ -1,24 +1,25 @@
 :host {
-    aspect-ratio: 1;
-    width: 30%;
-    border: 0;
-    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    user-select: none;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
+  aspect-ratio: 1;
+  width: 30%;
+  border: 0;
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: var(--column-button-background);
+}
 
-  :host:hover {
-    outline: 2px solid #565656;
-    box-shadow: none;
-  }
+:host:hover {
+  outline: 2px solid #565656;
+  box-shadow: none;
+}
 
-  .icon {
-    height: 55%;
-    width: 55%;
-  }
+.icon {
+  height: 55%;
+  width: 55%;
+}

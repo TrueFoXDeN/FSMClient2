@@ -6,6 +6,8 @@
   justify-content: space-between;
   padding: 10%;
   box-sizing: border-box;
+  background-color: var(--search-background);
+  color: var(--search-fontcolor);
 }
 
 .header {
@@ -30,6 +32,8 @@
   border: none;
   box-sizing: border-box;
   padding-left: 0.8em;
+  background-color: var(--search-input-background);
+  color: var(--search-input-fontcolor)
 }
 
 .button {
@@ -48,6 +52,8 @@
 .icon {
   height: 100%;
   aspect-ratio: 1;
+  background-color: var(--search-button-background);
+  outline-color: var(--search-button-outline);
 }
 
 .disabled{
