@@ -7,15 +7,14 @@
   color: var(--proximity-fontcolor);
   background-color: var(--proximity-background);
 }
+
 .header {
   outline: none;
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 10%;
-  margin-top: 5%;
-
+  height: 15%;
 }
 
 .flex-column {
@@ -26,58 +25,85 @@
   height: 100%;
 }
 
-.flex-row{
-  height: 100%;
-  margin: 2%;
+.flex-row {
+
 }
 
-.table-body{
+.table-body {
   border-radius: 5px;
   //color: var(--app-fontcolor);
   background-color: var(--proximity-table-background);
 }
 
-table {
-  width: 100%;
-}
-
-//.mat-mdc-table {
-//  width: 100%;
-//  max-height: 300px;
-//  overflow: auto;
-//}
-//
-//.mat-column-name {
-//  height:100px;
-//}
 
 mat-slider {
   width: auto;
 }
 
-.range-flexbox{
+
+.container-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 100%;
-  width: 100%;
 }
 
-.range-textbox{
-  margin-top: 1%;
-  margin-bottom: 1%;
-  margin-left:7%;
-  text-align: center;
-  width: 50px;
-}
-.dropdown{
-  position: absolute;
-  z-index:10;
-}
-
-.container{
+.header-box {
   display: flex;
-  width: 100%;
-  height: 100%;
+  justify-content: center;
 }
 
+.container {
+  height:55% ;
+  margin-right: 5%;
+  margin-bottom: 5%;
+  margin-left: 5%;
+  background-color: transparent;
+}
+
+
+.left {
+  margin-left: 12px
+}
+
+.right {
+  display: flex;
+  flex-direction: row;
+  margin-right: 12px;
+  gap: 10px;
+}
+
+.footer-buttons {
+  width: 40px;
+}
+
+.button-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  box-sizing: border-box;
+  background-color: var(--proximity-footer-background);
+}
+
+
+.discard{
+  background-color: var(--proximity-button-discard-background);
+  &:hover{
+    background-color: var(--proximity-button-discard-background-hover);
+  }
+}
+
+.save{
+  background-color: var(--proximity-button-save-background);
+  &:hover{
+    background-color: var(--proximity-button-save-background-hover);
+  }
+}
+
+.add{
+  background-color: var(--proximity-button-add-background);
+  &:hover{
+    background-color: var(--proximity-button-add-background-hover);
+  }
+}

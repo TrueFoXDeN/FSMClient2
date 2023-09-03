@@ -6,11 +6,14 @@
   --mdc-dialog-container-color: transparent;
   /*--mdc-dialog-container-shape: 5px;*/
   --app-background: #2A323D;
+  --app-background-secondary: #20262E;
   --app-fontcolor: #ffffff;
   --app-primary: #3674BF;
   --app-primary-hover: #296291;
   --app-accent: #ADB0B4;
-  --app-input: #20262E;
+  --app-accent-secondary: #6C757D;
+  --app-accent-secondary-hover: #5e666d;
+  --app-input: var(--app-background-secondary);
   --app-primary-outline: #ffffff;
   --app-error: #fb271f;
   --main-container-background: var(--app-background);
@@ -18,19 +21,22 @@
   --overlay-foreground: #e631d5;
 
   /*Sidebar*/
-  --sidebar-background: #20262E;
-  --sidebar-button-background: #ADB0B4;
-  --sidebar-button-foreground-default: #ADB0B4;
+  --sidebar-background: var(--app-background-secondary);
+  --sidebar-fontcolor: var(--app-fontcolor);
+  --sidebar-button-background: #262e37;
+  --sidebar-button-foreground-default: #ffffff;
   --sidebar-button-foreground-success: #7bff00;
   --sidebar-button-foreground-error: var(--app-error);
   --sidebar-button-hover: var(--app-background);
+  --sidebar-button-outline: var(--app-accent);
 
 
   /*Column*/
-  --column-background: #20262E;
+  --column-background: var(--app-background-secondary);
   --column-foreground: var(--app-fontcolor);
-  --column-button-background: #313335;
-
+  --column-button-background: #262e37;
+  --column-button-outline: var(--app-accent);
+--column-button-background-hover: var(--app-background);
   /*Flightsrips:*/
   --fs-context-background: grey;
   --fs-context-item-hover: #000000;
@@ -78,8 +84,8 @@
   --columnbuilder-button-save-background-hover: var(--app-primary-hover);
   --columnbuilder-button-add-background: var(--app-primary);
   --columnbuilder-button-add-background-hover: var(--app-primary-hover);
-  --columnbuilder-button-discard-background: #6C757D;
-  --columnbuilder-button-discard-background-hover: #5e666d;
+  --columnbuilder-button-discard-background: var(--app-accent-secondary);
+  --columnbuilder-button-discard-background-hover: var(--app-accent-secondary-hover);
   --columnbuilder-background: var(--app-background);
   --columbuilder-border: var(--app-accent);
   --columnbuilder-button-background: #3674BF;
@@ -97,10 +103,18 @@
   --network-fontcolor: var(--app-fontcolor);
 
   /*Proximity*/
-  --proximity-input: #2B2B2B;
+  --proximity-input: var(--app-input);
   --proximity-background: var(--app-background);
   --proximity-fontcolor: var(--app-fontcolor);
   --proximity-table-background: var(--app-input);
+  --proximity-footer-background: var(--sidebar-background);
+  --proximity-button-discard-background: var(--app-accent-secondary);
+  --proximity-button-discard-background-hover: var(--app-accent-secondary-hover);
+  --proximity-button-save-background: var(--app-primary);
+  --proximity-button-save-background-hover: var(--app-primary-hover);
+  --proximity-button-add-background: var(--app-primary);
+  --proximity-button-add-background-hover: var(--app-primary-hover);
+
   /*Search Callsign*/
   --search-input: #2B2B2B;
   --search-input-background: var(--app-input);
@@ -126,8 +140,8 @@
   --profile-hover-outline: white;
   --profile-confirm-delete-button-background: var(--app-error);
   --profile-confirm-delete-button-fontcolor: var(--app-error);
-  --profile-save-button-background: var(--app-primary);
-  --profile-save-button-outline: var(--app-primary-outline);
+  --profile-save-button-background: var(--app-accent);
+  --profile-save-button-outline: var(--app-accent);
   --profile-save-button-fontcolor: var(--app-fontcolor);
 }
 

@@ -15,8 +15,9 @@
 }
 
 :host:hover {
-  outline: 2px solid #565656;
+  outline: 1px solid var(--column-button-outline);
   box-shadow: none;
+  background-color: var(--column-button-background-hover);
 }
 
 .icon {

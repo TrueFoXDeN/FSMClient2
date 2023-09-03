@@ -117,8 +117,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   openProximitySettings() {
     const dialogConfig = new MatDialogConfig()
-    dialogConfig.height = `${500 * this.customStyle.multiplier}px`;
-    dialogConfig.width = `${1200 * this.customStyle.multiplier}px`;
+    dialogConfig.height = `80vh`;
+    dialogConfig.width = `80vw`;
     const dialogRef = this.dialog.open(ProximitySettingsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
 

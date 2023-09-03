@@ -88,6 +88,7 @@ import {GeneralProfileDropdownDirective} from "./general-dropdown/general-profil
 import {GeneralDropdownInputDirective} from "./general-dropdown/general-dropdownInput.directive";
 import {Sidebar} from "./sidebar/sidebar-directives/sidebar.directive";
 import { DropdownModule } from 'primeng/dropdown';
+import { ProximityButtonComponent } from './overlays/proximity-settings/proximity-button/proximity-button.component';
 
 @NgModule({
   declarations: [
@@ -137,7 +138,8 @@ import { DropdownModule } from 'primeng/dropdown';
     GeneralDropdownComponent,
     GeneralDropdownItemDirective,
     GeneralProfileDropdownDirective,
-    GeneralDropdownInputDirective
+    GeneralDropdownInputDirective,
+    ProximityButtonComponent
   ],
   imports: [
     BrowserModule,

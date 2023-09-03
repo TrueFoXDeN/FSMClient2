@@ -3,92 +3,28 @@
     <div class="header" proximitySettings [header]="true">
       <span>Proximity Settings</span>
     </div>
-    <div class="flex-row">
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-body" proximityTable>
-        <!-- Checkbox Column -->
-        <ng-container matColumnDef="select">
-          <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox (change)="$event ? toggleAllRows() : null"
-                          [checked]="selection.hasValue() && isAllSelected()"
-                          [indeterminate]="selection.hasValue() && !isAllSelected()"
-                          [aria-label]="checkboxLabel()">
-            </mat-checkbox>
-          </th>
-          <td mat-cell *matCellDef="let row">
-            <mat-checkbox (click)="$event.stopPropagation()"
-                          (change)="$event ? selection.toggle(row) : null"
-                          [checked]="selection.isSelected(row)"
-                          [aria-label]="checkboxLabel(row)">
-            </mat-checkbox>
-          </td>
-        </ng-container>
-
-
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef proximityTable> Name</th>
-          <td mat-cell *matCellDef="let element" proximityTable> {{element.name}} </td>
-        </ng-container>
-
-        <!-- Weight Column -->
-        <ng-container matColumnDef="inboundColumn">
-          <th mat-header-cell *matHeaderCellDef proximityTable>Inbound</th>
-          <td mat-cell *matCellDef="let element" proximityTable>
-            <mat-form-field >
-              <mat-label>Column</mat-label>
-              <mat-select class="material-dropdown">
-                <mat-option *ngFor="let item of columns" [value]="item.value" class="material-dropdown">
-                  {{item.name}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td>
-        </ng-container>
-
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="outboundColumn">
-          <th mat-header-cell *matHeaderCellDef proximityTable>Outbound</th>
-          <td mat-cell *matCellDef="let element" proximityTable>
-            <mat-form-field>
-              <mat-label>Column</mat-label>
-              <mat-select>
-                <mat-option *ngFor="let item of columns" [value]="item.value">
-                  {{item.name}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="vfrColumn">
-          <th mat-header-cell *matHeaderCellDef proximityTable>VFR</th>
-          <td mat-cell *matCellDef="let element" proximityTable>
-            <mat-form-field>
-              <mat-label>Column</mat-label>
-              <mat-select>
-                <mat-option *ngFor="let item of columns" [value]="item.value">
-                  {{item.name}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="range">
-          <th mat-header-cell *matHeaderCellDef proximityTable>Range (NM)</th>
-          <td mat-cell *matCellDef="let element" class="range-flexbox">
-            <mat-slider min="0" max="100" step="1">
-              <input matSliderThumb [(ngModel)]="element.range">
-            </mat-slider>
-            <input type="text" [(ngModel)]="element.range" class="range-textbox" proximityTable>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-        </tr>
-      </table>
-
+    <div class="container">
+      <div class="container-header">
+        <div class="header-box"><span>Active</span></div>
+        <div class="header-box"><span>Name</span></div>
+        <div class="header-box"><span>Inbound</span></div>
+        <div class="header-box"><span>Outbound</span></div>
+        <div class="header-box"><span>VFR</span></div>
+        <div class="header-box"><span>Range</span></div>
+        <div class="header-box"><span>Delete</span></div>
+      </div>
     </div>
+      <div class="button-footer">
+        <div class="left">
+          <app-proximity-button icon="plus" (click)="addItem($event)" class="footer-buttons add" matTooltip="Add Column"
+                                matTooltipPosition="above"></app-proximity-button>
+        </div>
+        <div class="right">
+          <app-proximity-button icon="save" class="footer-buttons save" matTooltip="Save & Exit"
+                                matTooltipPosition="above" (click)="saveAndClose()"></app-proximity-button>
+          <app-proximity-button icon="X" class="footer-buttons discard" matTooltip="Discard"
+                                matTooltipPosition="above" (click)="closeWithoutSaving()"></app-proximity-button>
+        </div>
+      </div>
   </div>
 </div>

@@ -12,27 +12,25 @@
   overflow-x: hidden;
   scrollbar-width: thin;
   background-color: var(--sidebar-background);
+  color: var(--sidebar-fontcolor);
 }
 
 .icon-button {
   width: 100%;
   aspect-ratio: 1;
-
+  background-color: var(--sidebar-button-background);
   &:hover{
     background-color: var(--sidebar-button-hover);
-    outline: 1px solid white;
+    outline: 1px solid var(--sidebar-button-outline);
   }
 }
 .default {
-  outline: 1px solid var(--sidebar-button-foreground-default);
   color: var(--sidebar-button-foreground-default);
 }
 .success {
-  outline: 1px solid var(--sidebar-button-foreground-success);
   color: var(--sidebar-button-foreground-success);
 }
 .error {
-  outline: 1px solid var(--sidebar-button-foreground-error);
   color: var(--sidebar-button-foreground-error);
 }
 
@@ -49,9 +47,11 @@
   width: 100%;
   padding: 4%;
   aspect-ratio: 1;
-  color: var(--sidebar-button-background);
-  outline: 1px solid var(--sidebar-button-background);
-  background-color: var(--sidebar-background);
+  background-color: var(--sidebar-button-background);
+  &:hover{
+    background-color: var(--sidebar-button-hover);
+    outline: 1px solid var(--sidebar-button-outline);
+  }
 }
 
 .top-buttons {
