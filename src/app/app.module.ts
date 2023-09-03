@@ -92,6 +92,7 @@ import {GeneralDropdownItemDirective} from "./general-dropdown/general-dropdownI
 import {GeneralProfileDropdownDirective} from "./general-dropdown/general-profile-dropdown.directive";
 import {GeneralDropdownInputDirective} from "./general-dropdown/general-dropdownInput.directive";
 import {Sidebar} from "./sidebar/sidebar-directives/sidebar.directive";
+
 @NgModule({
   declarations: [
     AppComponent,
