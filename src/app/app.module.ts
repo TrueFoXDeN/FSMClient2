@@ -69,7 +69,6 @@ import {
 import {
   ProfileSettingsSaveButtonDirective
 } from "./overlays/profile-settings/profile-settings-save-button/profileSettingsSaveButton.directive";
-import {ProfileSettingsFooterButtonDirective} from "./overlays/profile-settings/profileSettingsFooterButton.directive";
 import {CookieService} from "ngx-cookie-service";
 import { ProximitySettingsComponent } from './overlays/proximity-settings/proximity-settings.component';
 import { MultiplayerSettingsComponent } from './overlays/multiplayer-settings/multiplayer-settings.component';
@@ -92,6 +91,7 @@ import {GeneralDropdownItemDirective} from "./general-dropdown/general-dropdownI
 import {GeneralProfileDropdownDirective} from "./general-dropdown/general-profile-dropdown.directive";
 import {GeneralDropdownInputDirective} from "./general-dropdown/general-dropdownInput.directive";
 import {Sidebar} from "./sidebar/sidebar-directives/sidebar.directive";
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -132,7 +132,6 @@ import {Sidebar} from "./sidebar/sidebar-directives/sidebar.directive";
     ProfileSettingsInputContainerDirective,
     ProfileSettingsSaveButtonComponent,
     ProfileSettingsSaveButtonDirective,
-    ProfileSettingsFooterButtonDirective,
     MultiplayerSettingsComponent,
     HelpOverlayComponent,
     StatisticsOverlayComponent,
@@ -172,7 +171,8 @@ import {Sidebar} from "./sidebar/sidebar-directives/sidebar.directive";
     MatIconModule,
     MatTableModule,
     MatCheckboxModule,
-    MatSliderModule
+    MatSliderModule,
+    DropdownModule
   ],
   providers: [
     CustomStyles,

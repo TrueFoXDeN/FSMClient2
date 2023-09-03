@@ -9,16 +9,15 @@
   justify-content: center;
   cursor: pointer;
   user-select: none;
+
 }
 
-:host:hover {
-  outline: 2px solid;
-  box-shadow: none;
-}
+
 
 .icon {
   height: 55%;
   width: 55%;
   margin-bottom: 2px;
   aspect-ratio: 1;
+
 }

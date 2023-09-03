@@ -3,8 +3,8 @@
   --app-background: #2A323D;
   --app-fontcolor: #ffffff;
   --app-primary: #0095ff;
-  --app-accent: #1044c8;
-  --app-input: #2B2B2B;
+  --app-accent: #3674BF;
+  --app-input: #20262E;
   --app-accent-outline: #ffffff;
   --app-error: #fb271f;
   --main-container-background: var(--app-background);
@@ -29,7 +29,7 @@
   /*Flightsrips:*/
   --fs-context-background: grey;
   --fs-context-item-hover: #000000;
-  --fs-emergency-border-color:var(--app-error);
+  --fs-emergency-border-color: var(--app-error);
   --fs-highlight-25: rgba(255, 115, 0, 0.25);
   --fs-highlight-50: rgba(255, 115, 0, 0.5);
   --fs-highlight-75: rgba(255, 115, 0, 0.75);
@@ -99,6 +99,19 @@
   --profile-input-foreground: var(--app-fontcolor);
   --profile-background: var(--app-background);
   --profile-fontcolor: var(--app-fontcolor);
+  --profile-border-color: #3f4b5b;
+  --profile-mark-delete-border-color: var(--app-error);
+  --profile-mark-delete-font-color: var(--app-error);
+  --profile-cancel-button-background: var(--app-accent);
+  --profile-cancel-button-outline: var(--app-accent-outline);
+  --profile-load-button-background: var(--app-accent);
+  --profile-load-button-outline: var(--app-accent-outline);
+  --profile-hover-outline: white;
+  --profile-confirm-delete-button-background: var(--app-error);
+  --profile-confirm-delete-button-fontcolor: var(--app-error);
+  --profile-save-button-background: var(--app-accent);
+  --profile-save-button-outline: var(--app-accent-outline);
+  --profile-save-button-fontcolor: var(--app-fontcolor);
 }
 
 
@@ -1006,11 +1019,23 @@ p-chips.p-chips-clearable .p-chips-clear-icon {
   box-shadow: none
 }
 
+.p-hidden-accessible {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
 .p-dropdown {
-  background: #20262e;
-  border: 1px solid #3f4b5b;
+  background: var(--app-input);
+  border: 1px solid var(--profile-border-color);
   transition: background-color .15s, border-color .15s, box-shadow .15s;
-  border-radius: 4px
+  border-radius: 4px;
+  width: 100%;
 }
 
 .p-dropdown.flightstrip {

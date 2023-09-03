@@ -29,23 +29,27 @@ export class ProfileSettingsComponent implements OnInit {
     });
   }
 
-  onItemselect(option: any) {
+  onItemselect(event: any) {
+    console.log(event)
+    let option = event.value
     if (option.id != this.globalData.getStandardProfileID()) {
       this.deleteButtonActive = true;
     } else {
       this.deleteButtonActive = false;
     }
-    this.selectedProfile = option;
   }
 
   saveProfile() {
     if (this.saveButtonActive) {
       let newProfile = {name: this.newProfileName, id: this.util.generateUUID()}
       this.profiles.push(newProfile)
-      this.onItemselect(newProfile)
       this.newProfileName = ""
       this.globalData.profileData[newProfile.id] = {name: newProfile.name, columnStructure: []};
-      localStorage.setItem("profileStructure", JSON.stringify(this.globalData.profileData))
+      localStorage.setItem("profileStructure", JSON.stringify(this.globalData.profileData));
+      this.selectedProfile = newProfile;
+      this.deleteButtonActive = true;
+      this.saveButtonActive = false;
+      // this.onItemselect(newProfile)
     }
   }
 
@@ -70,12 +74,12 @@ export class ProfileSettingsComponent implements OnInit {
     delete this.globalData.profileData[`${id}`]
     this.saveProfileSettings(this.globalData.getStandardProfileID());
     this.snackService.showMessage(`Profile ${deletedProfile.name} deleted`, "warning")
+    this.deleteButtonActive = false;
   }
 
   onApply() {
     this.saveProfileSettings(this.selectedProfile.id)
     this.snackService.showMessage(`Profile "${this.globalData.currentProfile.name}" loaded`, "success")
-
     this.dialogRef.close()
   }
 
@@ -84,16 +88,20 @@ export class ProfileSettingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let currentProfile = this.globalData.currentProfileID
+    for (let i = 0; i < this.profiles.length; i++) {
+      if (this.profiles[i].id == currentProfile) {
+        this.selectedProfile = this.profiles[i]
+      }
+    }
   }
 
   saveProfileSettings(profileID: string) {
-
-
     this.globalData.currentProfileID = profileID;
     localStorage.setItem("profileStructure", JSON.stringify(this.globalData.profileData))
     this.cookieService.set("currentProfileID", this.globalData.currentProfileID, 9999)
     this.globalData.currentProfile = this.globalData.profileData[profileID]
+    this.selectedProfile = this.globalData.currentProfile
   }
-
 
 }

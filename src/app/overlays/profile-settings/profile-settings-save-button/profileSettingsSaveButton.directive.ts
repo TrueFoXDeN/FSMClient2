@@ -36,10 +36,7 @@ export class ProfileSettingsSaveButtonDirective implements OnInit, OnDestroy {
   }
 
   updateStyle() {
-    this.elementRef.nativeElement.style.background = this.cS.style.buttonAccent;
-    this.elementRef.nativeElement.style.outlineColor = this.cS.style.buttonAccentBorder;
     this.elementRef.nativeElement.style.fontSize = `${12 * this.cS.multiplier}pt`;
-    this.elementRef.nativeElement.style.fontColor = this.cS.style.fontColor
   }
 
 

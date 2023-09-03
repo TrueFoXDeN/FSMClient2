@@ -48,8 +48,9 @@
   box-sizing: border-box;
 }
 
-.dropdown{
+.dropdown {
   width: 100%;
+
 }
 
 .input-container {
@@ -67,7 +68,7 @@
   border-radius: 5px;
   width: 78%;
   outline: none;
-  border: none;
+  border: 1px solid var(--profile-border-color);
   padding-left: 1em;
   box-sizing: border-box;
   background-color: var(--profile-input-background);
@@ -75,7 +76,7 @@
 }
 
 .save-button-container {
-  width: 15%;
+  width: 13.5%;
   aspect-ratio: 1;
 }
 
@@ -96,32 +97,76 @@
   height: 60%;
   width: 40%;
   border-radius: 5px;
+}
+
+
+
+
+.mark-delete {
+  border: 1px solid var(--profile-mark-delete-border-color);
+  color: var(--profile-mark-delete-font-color);
 
   &:hover {
-    border: 2px solid white;
+    cursor: pointer;
+    border-width: 2px;
+  }
+
+  &.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+
+    &:hover {
+      border-width: 1px;
+    }
+  }
+
+}
+
+.cancel {
+  background-color: var(--profile-cancel-button-background);
+  outline-color: var(--profile-cancel-button-outline);
+
+  &:hover {
+    border: 1px solid var(--profile-hover-outline);
     cursor: pointer;
   }
 }
 
-.disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
+.load {
+  background-color: var(--profile-load-button-background);
+  outline-color: var(--profile-load-button-outline);
 
   &:hover {
-    border: none;
-    cursor: not-allowed;
+    border: 1px solid var(--profile-hover-outline);
+    cursor: pointer;
   }
 }
 
-.save-disabled {
-  opacity: 0.4;
-
+.confirm-delete {
+  border: 1px solid var(--profile-confirm-delete-button-background);
+  color: var(--profile-confirm-delete-button-fontcolor);
   &:hover {
-    outline: none;
-    cursor: not-allowed;
+    cursor: pointer;
+    border-width: 2px;
   }
 }
 
 
+.save-button {
+  background-color: var(--profile-save-button-background);
+  outline-color: var(--profile-save-button-outline);
+  color: var(--profile-save-button-fontcolor);
 
+  &:hover {
+    outline: 1px solid;
+    box-shadow: none;
+  }
+  &.save-disabled {
+    opacity: 0.4;
+    &:hover {
+      outline: none;
+      cursor: not-allowed;
+    }
+  }
+}
 
