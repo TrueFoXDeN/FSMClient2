@@ -2,13 +2,13 @@
 :root {
   --app-background: #2A323D;
   --app-fontcolor: #ffffff;
-  --app-primary: #0095ff;
-  --app-accent: #3674BF;
+  --app-primary: #3674BF;
+  --app-primary-hover:#296291;
+  --app-accent: #ADB0B4;
   --app-input: #20262E;
-  --app-accent-outline: #ffffff;
+  --app-primary-outline: #ffffff;
   --app-error: #fb271f;
   --main-container-background: var(--app-background);
-
   --overlay-background: #2A323D;
   --overlay-foreground: #e631d5;
 
@@ -66,13 +66,23 @@
 
   /*Overlay*/
   /*Columnbuilder*/
+  /*--columnbuilder-button-delete-outline: rgba(255, 255, 255, 0.72);*/
+  --columnbuilder-button-delete-outline: var(--app-accent);
+  --columnbuilder-button-delete-outline-hover: var(--app-error);
+  --columnbuilder-button-save-background: var(--app-primary);
+  --columnbuilder-button-save-background-hover: var(--app-primary-hover);
+  --columnbuilder-button-add-background: var(--app-primary);
+  --columnbuilder-button-add-background-hover: var(--app-primary-hover);
+  --columnbuilder-button-discard-background: #6C757D;
+  --columnbuilder-button-discard-background-hover: #5e666d;
   --columnbuilder-background: var(--app-background);
-  --columbuilder-border: #bebebe;
+  --columbuilder-border: var(--app-accent);
   --columnbuilder-button-background: #3674BF;
   --columnbuilder-input-background: var(--app-input);
   --columnbuilder-input-fontcolor: var(--app-fontcolor);
+  --columnbuilder-input-border: #3f4b5b;
   --columnbuilder-column-background: var(--column-background);
-  --columnbuilder-footer: grey;
+  --columnbuilder-footer: var(--sidebar-background);
   /*Network*/
   --network-button-bordercolor: #ffffff;
   --network-button-background: #3674BF;
@@ -88,8 +98,8 @@
   --search-input: #2B2B2B;
   --search-input-background: var(--app-input);
   --search-input-fontcolor: var(--app-fontcolor);
-  --search-button-background: var(--app-accent);
-  --search-button-outline: var(--app-accent-outline);
+  --search-button-background: var(--app-primary);
+  --search-button-outline: var(--app-primary-outline);
   --search-background: var(--app-background);
   --search-fontcolor: var(--app-fontcolor);
 
@@ -102,15 +112,15 @@
   --profile-border-color: #3f4b5b;
   --profile-mark-delete-border-color: var(--app-error);
   --profile-mark-delete-font-color: var(--app-error);
-  --profile-cancel-button-background: var(--app-accent);
-  --profile-cancel-button-outline: var(--app-accent-outline);
-  --profile-load-button-background: var(--app-accent);
-  --profile-load-button-outline: var(--app-accent-outline);
+  --profile-cancel-button-background: var(--app-primary);
+  --profile-cancel-button-outline: var(--app-primary-outline);
+  --profile-load-button-background: var(--app-primary);
+  --profile-load-button-outline: var(--app-primary-outline);
   --profile-hover-outline: white;
   --profile-confirm-delete-button-background: var(--app-error);
   --profile-confirm-delete-button-fontcolor: var(--app-error);
-  --profile-save-button-background: var(--app-accent);
-  --profile-save-button-outline: var(--app-accent-outline);
+  --profile-save-button-background: var(--app-primary);
+  --profile-save-button-outline: var(--app-primary-outline);
   --profile-save-button-fontcolor: var(--app-fontcolor);
 }
 

@@ -52,13 +52,9 @@ import {NetworkMenuButtonDirective} from "./overlays/network-menu/networkMenuBut
 import { ProfileSettingsComponent } from './overlays/profile-settings/profile-settings.component';
 import {ProfileSettingsDirective} from "./overlays/profile-settings/profileSettings.directive";
 import {MatSelectModule} from '@angular/material/select';
-import { DropdownComponent } from './overlays/profile-settings/dropdown/dropdown.component';
-import {ProfileDropdownDirective} from "./overlays/profile-settings/dropdown/profile-dropdown.directive";
-import {DropdownItemDirective} from "./overlays/profile-settings/dropdown/dropdownItem.directive";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatIconModule} from "@angular/material/icon";
-import {DropdownInputDirective} from "./overlays/profile-settings/dropdown/dropdownInput.directive";
 import {ProfileSettingsInputDirective} from "./overlays/profile-settings/profileSettingsInput.directive";
 import {
   ProfileSettingsInputContainerDirective
@@ -124,10 +120,6 @@ import { DropdownModule } from 'primeng/dropdown';
     NetworkMenuButtonDirective,
     ProfileSettingsComponent,
     ProfileSettingsDirective,
-    DropdownComponent,
-    ProfileDropdownDirective,
-    DropdownItemDirective,
-    DropdownInputDirective,
     ProfileSettingsInputDirective,
     ProfileSettingsInputContainerDirective,
     ProfileSettingsSaveButtonComponent,

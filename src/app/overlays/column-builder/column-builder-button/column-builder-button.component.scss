@@ -9,13 +9,9 @@
   justify-content: center;
   cursor: pointer;
   user-select: none;
-  background: var(--columnbuilder-button-background);
+  //background: var(--columnbuilder-button-background);
 }
 
-:host:hover {
-  outline: 2px solid #565656;
-  box-shadow: none;
-}
 
 .icon {
   height: 55%;

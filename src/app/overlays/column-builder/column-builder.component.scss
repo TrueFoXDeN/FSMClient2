@@ -51,6 +51,12 @@
 .delete-button {
   background-color: var(--columnbuilder-button-delete-background);
   width: 40px;
+  outline: 1px solid  var(--columnbuilder-button-delete-outline);
+  &:hover {
+    outline: 1px solid var(--columnbuilder-button-delete-outline-hover);
+    color: var(--columnbuilder-button-delete-outline-hover);
+    box-shadow: none;
+  }
 }
 
 .flex-container {
@@ -66,9 +72,10 @@
 .input {
   width: 100%;
   height: 35px;
-  font-size: 20pt;
-  border: 0;
+  font-size: 18pt;
   color: var(--columnbuilder-input-fontcolor);
+  border: 1px solid var(--columnbuilder-input-border);
+  border-radius: 5px;
   text-align: center;
   box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
   font-family: Roboto Mono, sans-serif;
@@ -80,19 +87,40 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 60px;
+  height: 70px;
   box-sizing: border-box;
   background-color: var(--columnbuilder-footer);
 }
 
+.discard{
+  background-color: var(--columnbuilder-button-discard-background);
+  &:hover{
+    background-color: var(--columnbuilder-button-discard-background-hover);
+  }
+}
+
+.save{
+  background-color: var(--columnbuilder-button-save-background);
+  &:hover{
+    background-color: var(--columnbuilder-button-save-background-hover);
+  }
+}
+
+.add{
+  background-color: var(--columnbuilder-button-add-background);
+  &:hover{
+    background-color: var(--columnbuilder-button-add-background-hover);
+  }
+}
+
 .left {
-  margin-left: 7px
+  margin-left: 12px
 }
 
 .right {
   display: flex;
   flex-direction: row;
-  margin-right: 10px;
+  margin-right: 12px;
   gap: 10px;
 }
 
