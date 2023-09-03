@@ -1036,6 +1036,7 @@ p-chips.p-chips-clearable .p-chips-clear-icon {
   transition: background-color .15s, border-color .15s, box-shadow .15s;
   border-radius: 4px;
   width: 100%;
+  height: 100%;
 }
 
 .p-dropdown.flightstrip {
