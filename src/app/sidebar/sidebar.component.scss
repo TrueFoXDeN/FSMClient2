@@ -1,13 +1,75 @@
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    padding-right: 15%;
-    padding-left: 15%;
-    background-color: #272E33;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-right: 15%;
+  padding-left: 15%;
+  height: 100%;
+  padding-top: 10px;
+  justify-content: space-between;
+  touch-action: none;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  background-color: var(--sidebar-background);
 }
 
-.network-icon {  
-    width: 80%;
-    aspect-ratio: 1;
+.icon-button {
+  width: 100%;
+  aspect-ratio: 1;
+
+  &:hover{
+    background-color: var(--sidebar-button-hover);
+    outline: 1px solid white;
+  }
 }
+.default {
+  outline: 1px solid var(--sidebar-button-foreground-default);
+  color: var(--sidebar-button-foreground-default);
+}
+.success {
+  outline: 1px solid var(--sidebar-button-foreground-success);
+  color: var(--sidebar-button-foreground-success);
+}
+.error {
+  outline: 1px solid var(--sidebar-button-foreground-error);
+  color: var(--sidebar-button-foreground-error);
+}
+
+.paint-palette{
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10%;
+  aspect-ratio: 1;
+  background-color: var(--sidebar-button-background);
+}
+
+.radar{
+  box-sizing: border-box;
+  width: 100%;
+  padding: 4%;
+  aspect-ratio: 1;
+  color: var(--sidebar-button-background);
+  outline: 1px solid var(--sidebar-button-background);
+  background-color: var(--sidebar-background);
+}
+
+.top-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bottom-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+.my-dialog {
+  overflow: hidden;
+}
+
+
+

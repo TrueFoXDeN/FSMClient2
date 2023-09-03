@@ -1,0 +1,107 @@
+.window {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  overflow: hidden;
+  padding: 20px;
+  background-color: var(--network-background);
+  color: var(--app-fontcolor)
+}
+
+
+.flex-row {
+  display: flex;
+  flex-flow: row;
+  height: 100%;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.flex-column {
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  width: 33%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.middle-element {
+  border-left: 1px solid #646464;
+  border-right: 1px solid #646464;
+}
+
+.logo-header {
+  height: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.network-info {
+  height: 20%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.network-info-content{
+  display: flex;
+  flex-direction: row;
+}
+.network-info-description{
+  width: 70%;
+}
+.network-info-value{
+  width: 30%;
+}
+
+.image {
+  width: 70%;
+}
+
+.button {
+  padding: 0;
+  margin: 0;
+  border: none;
+  user-select: none;
+  width: 60%;
+  border-radius: 5px;
+  height: 30px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 3px 1px rgba(55, 55, 55, 0.2);
+  background-color: var(--network-button-background);
+  color: var(--network-button-font);
+  border-color: var(--network-button-bordercolor);
+
+
+  &:hover{
+    outline: 2px solid #ffffff;
+    box-shadow: none;
+  }
+
+  &:disabled{
+    opacity: 0.4;
+    &:hover{
+      outline: none;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.button-container {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+

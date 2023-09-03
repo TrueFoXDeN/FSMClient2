@@ -1,0 +1,25 @@
+:host {
+  padding: 0;
+  aspect-ratio: 1;
+  border: 0;
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  background: var(--columnbuilder-button-background);
+}
+
+:host:hover {
+  outline: 2px solid #565656;
+  box-shadow: none;
+}
+
+.icon {
+  height: 55%;
+  width: 55%;
+  margin-bottom: 2px;
+  aspect-ratio: 1;
+}

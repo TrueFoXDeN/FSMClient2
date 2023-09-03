@@ -1,6 +1,7 @@
-<div cdkDropListGroup class="container">
-    <app-column [tabIndex]="0"></app-column>
-    <app-column [tabIndex]="1"></app-column>
-    <app-column [tabIndex]="2"></app-column>
-    <app-column [tabIndex]="3"></app-column>
+<div cdkDropListGroup class="container" (keydown)="openSearchWindow($event)">
+  <gridster [options]="options" class="gridBackground">
+    <gridster-item [item]="item" *ngFor="let item of dashboard">
+      <app-column name="{{item?.['name']}}" uuid="{{item?.['uuid']}}"></app-column>
+    </gridster-item>
+  </gridster>
 </div>

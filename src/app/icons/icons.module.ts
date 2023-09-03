@@ -1,14 +1,71 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
 
-import { FeatherModule } from 'angular-feather';
-import { ArrowDownRight, ArrowUpRight, Repeat } from 'angular-feather/icons';
+import {FeatherModule} from 'angular-feather';
+import {
+  ArrowDownRight,
+  ArrowUpRight,
+  Repeat,
+  Columns,
+  ZoomIn,
+  ZoomOut,
+  Settings,
+  Sliders,
+  Users,
+  Wifi,
+  Search,
+  BarChart2,
+  Trash,
+  Trash2,
+  XCircle,
+  PlusCircle,
+  Plus,
+  Save,
+  Upload,
+  Download,
+  X,
+  AlertTriangle,
+  Headphones,
+  Type,
+  Archive,
+  ChevronUp,
+  ChevronLeft,
+  ChevronRight,
+  ChevronDown,
+  HelpCircle
+} from 'angular-feather/icons';
 
 // Select some icons (use an object, not an array)
 const icons = {
   ArrowDownRight,
   ArrowUpRight,
-  Repeat
+  Repeat,
+  Columns,
+  ZoomIn,
+  ZoomOut,
+  Settings,
+  Sliders,
+  Users,
+  Wifi,
+  Search,
+  BarChart2,
+  Trash,
+  Trash2,
+  XCircle,
+  PlusCircle,
+  Plus,
+  Save,
+  Upload,
+  Download,
+  X,
+  AlertTriangle,
+  Headphones,
+  Type,
+  Archive,
+  ChevronUp,
+  ChevronLeft,
+  ChevronRight,
+  ChevronDown,
+  HelpCircle
 };
 
 @NgModule({
@@ -19,4 +76,5 @@ const icons = {
     FeatherModule
   ]
 })
-export class IconsModule { }
+export class IconsModule {
+}

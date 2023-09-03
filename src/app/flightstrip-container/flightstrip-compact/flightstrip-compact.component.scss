@@ -1,0 +1,252 @@
+
+.strip {
+  aspect-ratio: 5;
+  //margin-bottom: 10px;
+  user-select: none;
+}
+
+.cols {
+  display: flex;
+  height: 100%;
+
+  .col1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    width: 23%;
+
+    .callsign {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40%;
+      font-weight: bold;
+    }
+
+    .airline {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 30%;
+    }
+
+    .aircraft-size {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      height: 30%;
+    }
+  }
+
+  .col2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    width: 13%;
+
+    .departure {
+      display: flex;
+      align-items: center;
+      height: 33%;
+    }
+
+    .arrival {
+      display: flex;
+      align-items: center;
+      height: 33%;
+    }
+
+    .flightrule {
+      display: flex;
+      align-items: center;
+      height: 33%
+    }
+  }
+
+  .col3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    width: 19%;
+
+    .runway {
+      display: flex;
+      align-items: center;
+      height: 33%;
+    }
+
+    .sidStar {
+      display: flex;
+      align-items: center;
+      height: 33%
+    }
+
+    .altitude {
+      display: flex;
+      align-items: center;
+      height: 33%
+    }
+  }
+
+  .col4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    width: 10%;
+
+    .squawk {
+      display: flex;
+      align-items: center;
+      height: 33%;
+    }
+
+    .gate {
+      display: flex;
+      align-items: center;
+      height: 33%
+    }
+
+    .info {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      height: 33%;
+      padding-left: 2px;
+      padding-right: 2px;
+    }
+  }
+
+  .col5 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    margin-left: 5px;
+    width: 35%;
+
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-flow: row;
+      height: 30%;
+      width: 100%;
+
+      .status-row {
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-flow: row;
+        width: 70%;
+        height: 100%;
+        gap: 5px;
+        .status-button {
+          height: 60%;
+          aspect-ratio: 1;
+        }
+      }
+
+      .icons{
+        display: flex;
+        flex-flow: row;
+        justify-content: end;
+        width: 25%;
+        height: 60%;
+        gap: 0.4em;
+        padding-right: 0.4em;
+
+        .icon{
+          aspect-ratio: 1;
+          width: 41%;
+        }
+      }
+    }
+
+    .route {
+      display: flex;
+      text-align: justify;
+      height: 35%
+    }
+
+    .freeText {
+      text-align: justify;
+      height: 35%
+    }
+  }
+}
+.disabled{
+  opacity: 0.6;
+
+}
+
+
+.inbound {
+  background-color: var(--fs-inbound-background);
+  color: var(--fs-inbound-foreground);
+  border: 2px solid var(--fs-inbound-border-color);
+  .border-right{
+    border-right: 1px solid var(--fs-inbound-divider)
+  }
+}
+
+.outbound {
+  background-color: var(--fs-outbound-background);
+  color: var(--fs-outbound-foreground);
+  border: 2px solid var(--fs-outbound-border-color);
+  .border-right{
+    border-right: 1px solid var(--fs-outbound-divider)
+  }
+}
+
+.vfr {
+  background-color: var(--fs-vfr-background);
+  color: var(--fs-vfr-foreground);
+  border: 2px solid var(--fs-vfr-border-color);
+  .border-right{
+    border-right: 1px solid var(--fs-vfr-divider)
+  }
+
+}
+
+.emergency {
+  border-color: var(--fs-emergency-border-color);
+}
+
+.highlight {
+  animation: blink 1.3s linear 4;
+}
+
+@keyframes blink {
+  10% {
+    border-color: var(--fs-highlight-25);
+  }
+  20% {
+    border-color: var(--fs-highlight-50);
+  }
+  30% {
+    border-color: var(--fs-highlight-75);
+  }
+  50% {
+    border-color: var(--fs-highlight-100);
+  }
+  70% {
+    border-color: var(--fs-highlight-75);
+  }
+  80% {
+    border-color: var(--fs-highlight-50);
+  }
+  90% {
+    border-color: var(--fs-highlight-25);
+  }
+}
+
+
+
+
+

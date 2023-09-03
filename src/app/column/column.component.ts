@@ -1,6 +1,10 @@
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, Input } from '@angular/core';
-import { Flightstrip } from '../flightstrip/flightstrip.model';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {Component, EventEmitter, Input, Output, QueryList, ViewChild} from '@angular/core';
+import {Flightstrip, stripType} from '../flightstrip-container/flightstrip.model';
+import {Data} from "../data";
+import {Util} from "../util";
+import {FlightstripService} from "../flightstrip-container/flightstrip.service";
+import {FlightstripContainerComponent} from "../flightstrip-container/flightstrip-container.component";
 
 @Component({
   selector: 'app-column',
@@ -8,28 +12,40 @@ import { Flightstrip } from '../flightstrip/flightstrip.model';
   styleUrls: ['./column.component.scss']
 })
 export class ColumnComponent {
-  @Input() tabIndex = 0
+  @Input("name") name = ""
+  @Input("uuid") uuid = ""
+  @Output() submittedValue = new EventEmitter<void>();
+  @ViewChild(FlightstripContainerComponent) fsContainer!: QueryList<FlightstripContainerComponent>;
   public strips: Flightstrip[] = []
+  isMouseMoving: boolean = false;
+  isMouseDown: boolean = false;
+  isDragable = false;
+
+  constructor(public data: Data, private util: Util, private fsService: FlightstripService) {
+  }
+
 
   addInboundFlightstrip() {
-    let fs = new Flightstrip(this.generateRandomString(), "inbound");
-    this.strips.push(fs)
+    let nextPos = this.data.flightstripData?.[this.uuid]?.['flightstrips'].length
+    console.log(nextPos)
+    let fs = new Flightstrip(this.util.generateUUID(), stripType.INBOUND, this.uuid, nextPos);
+    this.data.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
   }
+
   addOutboundFlightstrip() {
-    let fs = new Flightstrip(this.generateRandomString(), "outbound");
-    this.strips.push(fs)
+    let nextPos = this.data.flightstripData?.[this.uuid]?.['flightstrips'].length
+    let fs = new Flightstrip(this.util.generateUUID(), stripType.OUTBOUND, this.uuid, nextPos);
+    this.data.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
   }
+
   addVfrFlightstrip() {
-    let fs = new Flightstrip(this.generateRandomString(), "vfr");
-    this.strips.push(fs)
-  }
-
-  generateRandomString() {
-    return Math.random().toString(36).substring(2, 7);
+    let nextPos = this.data.flightstripData?.[this.uuid]?.['flightstrips'].length
+    let fs = new Flightstrip(this.util.generateUUID(), stripType.VFR, this.uuid, nextPos);
+    this.data.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
   }
 
 
-  drop(event: CdkDragDrop<Flightstrip[]>) {
+  drop(event: CdkDragDrop<[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -40,30 +56,72 @@ export class ColumnComponent {
         event.currentIndex,
       );
     }
+    //this.fsService.changedStripPos.next()
+    // console.log(`From ${event.previousContainer.id}\.${event.previousIndex} To ${event.container.id}\.${event.currentIndex}`)
+    this.fsService.changedStripPos.next({id: event.item.data?.id, newPosistion: event.currentIndex})
   }
 
   onKeyPress(event: any) {
-    console.log(event)
     switch (event.key) {
       case "i":
-        this.addInboundFlightstrip();
+        console.log(this.fsService.isInputFocused)
+        if (!this.fsService.isInputFocused) {
+          this.addInboundFlightstrip();
+        }
         break;
       case "o":
-        this.addOutboundFlightstrip();
+        if (!this.fsService.isInputFocused) {
+          this.addOutboundFlightstrip();
+        }
         break;
       case "v":
-        this.addVfrFlightstrip();
+        if (!this.fsService.isInputFocused) {
+          this.addVfrFlightstrip();
+        }
         break;
     }
   }
 
   onMouseEnter(event: any) {
-    console.log(event)
     event.target.focus()
-    console.log("Entered Column " + this.tabIndex)
   }
 
-  onMouseLeave(event: any) {
-    console.log("Left Column " + this.tabIndex)
+  onMouseLeave(_event: any) {
+    this.submittedValue.emit();
+  }
+
+  getDragDelay() {
+    return this.fsService.dragDelay;
+  }
+
+  dragEnded(fsId: string) {
+    this.isDragable = false;
+    this.fsService.dragChange.next({id: fsId, dragEnabled : false})
+  }
+
+  onMouseDown(fsId: string, event : any) {
+    this.isMouseDown = true
+    setTimeout(() => {
+      if(event.button == 0){
+        if (!this.isMouseMoving && this.isMouseDown) {
+          this.fsService.dragChange.next({id: fsId, dragEnabled : true})
+          this.isDragable = true;
+        }
+      }
+    }, this.fsService.dragDelay - 20);
+    this.isMouseMoving = false;
+  }
+
+  onMouseUp(fsId: string) {
+    this.isMouseDown = false;
+    this.isDragable = false;
+    this.fsService.dragChange.next({id: fsId, dragEnabled : false})
+
+  }
+
+  onMouseMove(fsId: string) {
+    if (!this.isMouseMoving) {
+      this.isMouseMoving = true
+    }
   }
 }

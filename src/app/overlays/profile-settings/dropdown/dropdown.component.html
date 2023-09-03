@@ -1,0 +1,17 @@
+<div class="dropdown" profileDropdown (click)="onIconClick()">
+  <div class="input-container" >
+    <input type="text" class="input-field" appDropdownInput placeholder="Select a profile..."
+           [(ngModel)]="selectedOption.name" [readOnly]="true">
+    <div class="icon-container" [ngClass]="{'opening': showDropDown, 'closing': closing}">
+      <i-feather name="chevron-down" class="icon" ></i-feather>
+    </div>
+  </div>
+</div>
+<ul class="item-container"
+    [ngStyle]="{'display': (showDropDown) ? 'block' : 'none'}">
+  <li *ngFor="let option of options, let last = last, let first = first;"
+      [ngClass]="{'last-item': (last),'first-item': (first)}" appDropdownItem class="item"
+      (click)="onItemClick(option)">{{option.name}}</li>
+</ul>
+
+

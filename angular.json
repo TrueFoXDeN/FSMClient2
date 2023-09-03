@@ -18,6 +18,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "preserveSymlinks": true,
             "outputPath": "dist/fsm-demo",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -75,7 +76,8 @@
               "browserTarget": "fsm-demo:build:production"
             },
             "development": {
-              "browserTarget": "fsm-demo:build:development"
+              "browserTarget": "fsm-demo:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

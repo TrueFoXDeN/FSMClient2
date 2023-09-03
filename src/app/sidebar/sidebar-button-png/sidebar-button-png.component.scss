@@ -1,0 +1,22 @@
+:host {
+    aspect-ratio: 1;
+    width: 50%;
+    border: 0;
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  :host:hover {
+    outline: 2px solid #565656;
+    box-shadow: none;
+  }
+
+  .icon {
+    height: 80%;
+    width: 80%;
+  }

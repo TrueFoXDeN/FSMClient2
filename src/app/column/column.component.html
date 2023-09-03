@@ -1,13 +1,23 @@
-<div class="header">
-    <h2>Departure</h2>
+<div class="content" columnWidth>
+  <div class="header" columnHeaderHeight>
+    <h2 columnHeaderFont>{{name}}</h2>
     <div class="buttons">
-        <app-column-button icon="arrow-up-right" (click)="addOutboundFlightstrip()"></app-column-button>
-        <app-column-button icon="arrow-down-right" (click)="addInboundFlightstrip()"></app-column-button>
-        <app-column-button icon="repeat" (click)="addVfrFlightstrip()"></app-column-button>
+      <app-column-button icon="airplane-take-off" (click)="addOutboundFlightstrip()" class="button"></app-column-button>
+      <app-column-button icon="airplane-landing" class="button" (click)="addInboundFlightstrip()"></app-column-button>
+      <app-column-button icon="aircraft" class="button" (click)="addVfrFlightstrip()"></app-column-button>
     </div>
+  </div>
+  <div cdkDropList class="drag-list" [cdkDropListData]="data.flightstripData?.[uuid]?.['flightstrips']"
+       (cdkDropListDropped)="drop($event)"
+       (keydown)="onKeyPress($event)" [tabindex]="0" (mouseenter)="onMouseEnter($event)"
+       (mouseleave)="onMouseLeave($event)" [blurOn]="submittedValue">
+    <div *ngFor="let strip of data.flightstripData?.[uuid]?.['flightstrips']" cdkDrag [cdkDragData]="strip"
+         [cdkDragStartDelay]="getDragDelay()" class="drag-item" (cdkDragEnded)="dragEnded(strip.id)"
+         (mousedown)="onMouseDown(strip.id, $event)" (mouseup)="onMouseUp(strip.id)" (mousemove)="onMouseMove(strip.id)"
+         (touchstart)="onMouseDown(strip.id, {button : 0})" (touchend)="onMouseUp(strip.id)" (touchmove)="onMouseMove(strip.id)"
+    >
+      <app-flightstrip-container [stripModel]="strip" [colID]="uuid"></app-flightstrip-container>
+    </div>
+  </div>
 </div>
-<div cdkDropList class="container" [cdkDropListData]="strips" (cdkDropListDropped)="drop($event)"
-    (keydown)="onKeyPress($event)" [tabindex]="tabIndex" (mouseenter)="onMouseEnter($event)"
-    (mouseleave)="onMouseLeave($event)">
-    <app-flightstrip *ngFor="let strip of strips" cdkDrag [cdkDragData]="strip" [fs]="strip"></app-flightstrip>
-</div>
+
