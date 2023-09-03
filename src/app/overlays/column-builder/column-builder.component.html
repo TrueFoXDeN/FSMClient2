@@ -22,7 +22,7 @@
 
     <div class="button-footer">
       <div class="left">
-        <app-column-builder-button icon="plus" (click)="addItem($event)" class="footer-buttons" matTooltip="Add Column"
+        <app-column-builder-button icon="plus" (click)="addItem($event)" class="footer-buttons add" matTooltip="Add Column"
                                    matTooltipPosition="above"></app-column-builder-button>
       </div>
       <div class="right">
@@ -32,9 +32,9 @@
 <!--        <app-column-builder-button icon="download" class="footer-buttons" matTooltip="Import"-->
 <!--                                   matTooltipPosition="above" sidebarButton-->
 <!--                                   (click)="loadConfig()"></app-column-builder-button>-->
-        <app-column-builder-button icon="save" class="footer-buttons" matTooltip="Save & Exit"
+        <app-column-builder-button icon="save" class="footer-buttons save" matTooltip="Save & Exit"
                                    matTooltipPosition="above" (click)="saveAndClose()"></app-column-builder-button>
-        <app-column-builder-button icon="X" class="footer-buttons" matTooltip="Discard"
+        <app-column-builder-button icon="X" class="footer-buttons discard" matTooltip="Discard"
                                    matTooltipPosition="above" (click)="closeWithoutSaving()"></app-column-builder-button>
       </div>
     </div>
