@@ -21,7 +21,7 @@
     "@angular/platform-browser": "^16.2.3",
     "@angular/platform-browser-dynamic": "^16.2.3",
     "@angular/router": "^16.2.3",
-    "@ng-select/ng-select": "^10.0.4",
+    "@ng-select/ng-select": "^11.1.1",
     "angular-feather": "^6.5.0",
     "angular-gridster2": "^15.0.3",
     "ngx-cookie-service": "^15.0.0",
