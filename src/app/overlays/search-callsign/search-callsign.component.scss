@@ -33,7 +33,8 @@
   box-sizing: border-box;
   padding-left: 0.8em;
   background-color: var(--search-input-background);
-  color: var(--search-input-fontcolor)
+  color: var(--search-input-fontcolor);
+  border-radius: 5px;
 }
 
 .button {
@@ -53,14 +54,16 @@
   height: 100%;
   aspect-ratio: 1;
   background-color: var(--search-button-background);
-  outline-color: var(--search-button-outline);
+  &:hover {
+    background-color: var(--search-button-background-hover);
+  }
 }
 
-.disabled{
+.disabled {
   opacity: 0.4;
   outline: none;
 
-  &:hover{
+  &:hover {
     outline: none;
     cursor: not-allowed;
   }

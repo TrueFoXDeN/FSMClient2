@@ -1,9 +1,14 @@
 /*Custom Variables*/
+.mat-dialog-container {
+  border-radius: 5px !important;
+}
 :root {
+  --mdc-dialog-container-color: transparent;
+  /*--mdc-dialog-container-shape: 5px;*/
   --app-background: #2A323D;
   --app-fontcolor: #ffffff;
   --app-primary: #3674BF;
-  --app-primary-hover:#296291;
+  --app-primary-hover: #296291;
   --app-accent: #ADB0B4;
   --app-input: #20262E;
   --app-primary-outline: #ffffff;
@@ -85,10 +90,12 @@
   --columnbuilder-footer: var(--sidebar-background);
   /*Network*/
   --network-button-bordercolor: #ffffff;
-  --network-button-background: #3674BF;
-  --network-button-font: #ffffff;
+  --network-button-background: var(--app-primary);
+  --network-button-background-hover: var(--app-primary-hover);
+  --network-button-font: var(--app-fontcolor);
   --network-background: var(--app-background);
   --network-fontcolor: var(--app-fontcolor);
+
   /*Proximity*/
   --proximity-input: #2B2B2B;
   --proximity-background: var(--app-background);
@@ -99,7 +106,7 @@
   --search-input-background: var(--app-input);
   --search-input-fontcolor: var(--app-fontcolor);
   --search-button-background: var(--app-primary);
-  --search-button-outline: var(--app-primary-outline);
+  --search-button-background-hover: var(--app-primary-hover);
   --search-background: var(--app-background);
   --search-fontcolor: var(--app-fontcolor);
 
