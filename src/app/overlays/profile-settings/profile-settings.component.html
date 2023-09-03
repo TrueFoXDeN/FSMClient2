@@ -4,10 +4,9 @@
       <span>Profile Settings</span>
     </div>
         <div class="flex-row dropdown-container">
-    <!--      <app-dropdown [options]="profiles" (onItemSelect)="onItemselect($event)"-->
-    <!--                    [optionListLength]="profiles.length" class="dropdown"></app-dropdown>-->
-
-          <p-dropdown [options]="profiles" [(ngModel)]="selectedProfile" optionLabel="name" class="dropdown" (onChange)="onItemselect($event)"  [disabled]="markForDelete"></p-dropdown>
+          <p-dropdown [options]="profiles" [(ngModel)]="selectedProfile"
+                      optionLabel="name" class="dropdown" (onChange)="onItemselect($event)"
+                     [disabled]="markForDelete"></p-dropdown>
         </div>
     <div class="flex-row">
       <div class="input-container">

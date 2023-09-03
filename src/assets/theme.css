@@ -173,7 +173,7 @@
 
 .p-component {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 1rem;
+  /*font-size: 1rem;*/
   font-weight: normal
 }
 
@@ -1037,6 +1037,7 @@ p-chips.p-chips-clearable .p-chips-clear-icon {
   border-radius: 4px;
   width: 100%;
   height: 100%;
+
 }
 
 .p-dropdown.flightstrip {
@@ -1045,6 +1046,10 @@ p-chips.p-chips-clearable .p-chips-clear-icon {
   transition: background-color .15s, border-color .15s, box-shadow .15s;
   border-radius: 0px
 }
+
+/*.p-dropdown.p-inputtext {*/
+/*  font-size: 10rem !important;*/
+/*}*/
 
 .p-dropdown:not(.p-disabled):hover {
   border-color: #3f4b5b
@@ -1398,6 +1403,7 @@ p-inputnumber.p-inputnumber-clearable .p-inputnumber-buttons-horizontal .p-input
   margin-top: -0.625rem;
   border-radius: 4px;
   transition-duration: .15s
+
 }
 
 .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {
@@ -1432,14 +1438,15 @@ p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
 
 .p-inputtext {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 1rem;
+  /*font-size: 1em;*/
   color: rgba(255, 255, 255, .87);
   background: #20262e;
-  padding: .5rem .75rem;
+  padding-left: 5%;
   border: 1px solid #3f4b5b;
   transition: background-color .15s, border-color .15s, box-shadow .15s;
   appearance: none;
-  border-radius: 4px
+  border-radius: 4px;
+  align-self: center;
 }
 
 .p-inputtext:enabled:hover {
