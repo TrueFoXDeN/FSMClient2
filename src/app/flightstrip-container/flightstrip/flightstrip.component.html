@@ -52,22 +52,27 @@
         (ngModelChange)="fs.altitude = $event.toUpperCase()"
         [disabled]="inputsDisabled">
       <div class="box-element icon-container">
+
         <i-feather
           name="alert-triangle"
           class="icon"
           [ngClass]="{
-          'icon-default':fs.triangleIconState === iconStates.STANDARD,
-          'icon-success' : fs.triangleIconState === iconStates.SUCCESS,
-          'icon-error' : fs.triangleIconState === iconStates.ERROR,
-          'icon-warning' : fs.triangleIconState === iconStates.WARNING,
-          'icon-inactive' : fs.triangleIconState === iconStates.INACTIVE
+          'icon-default':fs.triangleIconState === triangleIconStates.STANDARD,
+          'icon-success' : fs.triangleIconState === triangleIconStates.SUCCESS,
+          'icon-error' : fs.triangleIconState === triangleIconStates.ERROR,
+          'icon-warning' : fs.triangleIconState === triangleIconStates.WARNING,
+          'icon-inactive' : fs.triangleIconState === triangleIconStates.INACTIVE
           }"
+          style="cursor: pointer"
           (click)="cycleTriangleState()">
         </i-feather>
 
-        <i-feather name="headphones" class="icon"></i-feather>
-        <app-flightstrip-button icon="archive" class="button" size="70%" [cdkMenuTriggerFor]="context_menu">
-        </app-flightstrip-button>
+        <i-feather
+          name="{{fs.communicationIconState === communicationIconStates.VOICE ? 'headphones' : 'type'}}"
+          class="icon"
+          style="cursor: pointer"
+          (click)="cycleCommunicationState()"></i-feather>
+        <i-feather name="settings" class="icon" style="cursor: pointer" [cdkMenuTriggerFor]="context_menu"></i-feather>
       </div>
     </div>
     <div class="flex-row">

@@ -1,5 +1,13 @@
 import {Component, ElementRef, EventEmitter, Input, OnDestroy, Output, TemplateRef, ViewChild} from '@angular/core';
-import {Flightstrip, iconState, statusArrival, statusDeparture, statusVfr, stripType} from "../flightstrip.model";
+import {
+  Flightstrip,
+  triangleIconState,
+  statusArrival,
+  statusDeparture,
+  statusVfr,
+  stripType,
+  communicationIconState
+} from "../flightstrip.model";
 import {FlightstripService} from "../flightstrip.service";
 import {FlightStripCompact} from "../flightstrip-directives/flightStripCompact.directive";
 
@@ -15,7 +23,8 @@ export class FlightstripCompactComponent implements OnDestroy {
   @ViewChild('menutrigger') menutrigger!: ElementRef;
   @Output("triggeredCompact") compactModeTrigger = new EventEmitter<void>()
   stripTypes = stripType
-  iconStates = iconState
+  triangleIconStates = triangleIconState
+  communicationIconStates = communicationIconState
   highlightActive = false;
   status: any;
   isMouseMoving: boolean = false;
@@ -174,5 +183,5 @@ export class FlightstripCompactComponent implements OnDestroy {
   }
 
 
-
+  protected readonly communicationIconState = communicationIconState;
 }

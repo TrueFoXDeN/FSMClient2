@@ -8,7 +8,15 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import {Flightstrip, iconState, statusArrival, statusDeparture, statusVfr, stripType} from '../flightstrip.model';
+import {
+  Flightstrip,
+  triangleIconState,
+  statusArrival,
+  statusDeparture,
+  statusVfr,
+  stripType,
+  communicationIconState
+} from '../flightstrip.model';
 import {Data} from "../../data";
 import {FlightstripService} from "../flightstrip.service";
 import {FlightStripInput} from "../flightstrip-directives/flightStripInput.directive";
@@ -34,7 +42,8 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   stripTypes = stripType
   inputsDisabled = false;
   highlightActive = false;
-  iconStates = iconState
+  triangleIconStates = triangleIconState
+  communicationIconStates = communicationIconState
   constructor(private globalData: Data, private fsService: FlightstripService, private styleChanger: StyleChangerService,
   ) {
     this.subscriptionHandles.push(this.fsService.changedType.subscribe((data) => {
@@ -91,7 +100,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   cycleTriangleState() {
-    let enumCount = Object.keys(iconState).length / 2;
+    let enumCount = Object.keys(triangleIconState).length / 2;
     let state = this.fs.triangleIconState;
     if (state < enumCount - 1) {
       state++;
@@ -100,6 +109,18 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.fs.triangleIconState = state;
     this.fsService.changedTriangleState.next();
+  }
+
+  cycleCommunicationState() {
+    let enumCount = Object.keys(communicationIconState).length / 2;
+    let state = this.fs.communicationIconState;
+    if (state < enumCount - 1) {
+      state++;
+    } else {
+      state = 0;
+    }
+    this.fs.communicationIconState = state;
+    this.fsService.changedCommunicationState.next();
   }
 
   onSquawkChange() {

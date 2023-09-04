@@ -12,6 +12,7 @@ export class FlightstripService {
   dragDelay = 100;
   isInputFocused: boolean = false;
   changedTriangleState = new Subject<void>();
+  changedCommunicationState = new Subject<void>();
   dragFlightstrip = new Subject<boolean>()
   changedType = new Subject<{ type: stripType, id: string }>()
   dragChange = new Subject<{ id: string, dragEnabled: boolean }>()

@@ -60,12 +60,15 @@
         <div class="icons">
           <i-feather name="alert-triangle" class="icon"
                      [ngClass]="{'disabled' : inputsDisabled,
-                     'icon-default':fs.triangleIconState === iconStates.STANDARD,
-          'icon-success' : fs.triangleIconState === iconStates.SUCCESS,
-          'icon-error' : fs.triangleIconState === iconStates.ERROR,
-          'icon-warning' : fs.triangleIconState === iconStates.WARNING,
-          'icon-inactive' : fs.triangleIconState === iconStates.INACTIVE}"></i-feather>
-          <i-feather name="headphones" class="icon"></i-feather>
+                     'icon-default':fs.triangleIconState === triangleIconStates.STANDARD,
+          'icon-success' : fs.triangleIconState === triangleIconStates.SUCCESS,
+          'icon-error' : fs.triangleIconState === triangleIconStates.ERROR,
+          'icon-warning' : fs.triangleIconState === triangleIconStates.WARNING,
+          'icon-inactive' : fs.triangleIconState === triangleIconStates.INACTIVE}"></i-feather>
+          <i-feather
+            name="{{fs.communicationIconState === communicationIconStates.VOICE ? 'headphones' : 'type'}}"
+            class="icon"
+            ></i-feather>
         </div>
       </div>
       <span class="route" flightStripCompact [fsCompact]="fs"

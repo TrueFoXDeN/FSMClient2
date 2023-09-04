@@ -36,10 +36,11 @@
   --column-foreground: var(--app-fontcolor);
   --column-button-background: #262e37;
   --column-button-outline: var(--app-accent);
---column-button-background-hover: var(--app-background);
+  --column-button-background-hover: var(--app-background);
   /*Flightsrips:*/
-  --fs-context-background: grey;
-  --fs-context-item-hover: #000000;
+  --fs-context-background: var(--app-background);
+  --fs-context-item-hover: var(--app-background-secondary);
+  --fs-button-hover: var(--app-accent);
   --fs-emergency-border-color: var(--app-error);
   --fs-highlight-25: rgba(255, 115, 0, 0.25);
   --fs-highlight-50: rgba(255, 115, 0, 0.5);

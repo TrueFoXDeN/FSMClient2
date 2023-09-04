@@ -5,6 +5,21 @@
   border-radius: 5px;
   box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.2);
   background-color: var(--fs-context-background);
+  width: auto;
+}
+
+.row {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.row:hover {
+  background-color: var(--fs-context-item-hover);
+}
+
+.icon {
+  margin-left: 8px;
 }
 
 .menu-item {
@@ -15,12 +30,8 @@
   display: flex;
   align-items: center;
   flex-direction: row;
-  flex: 1;
   box-sizing: border-box;
   outline: none;
   background-color: transparent;
 }
 
-.menu-item:hover{
-  background-color: var(--fs-context-item-hover);
-}

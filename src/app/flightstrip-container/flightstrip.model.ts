@@ -3,7 +3,8 @@ export class Flightstrip {
   public id: string = "";
   public columnPosition = 0
   public type: stripType;
-  public triangleIconState: iconState;
+  public triangleIconState: triangleIconState;
+  public communicationIconState: communicationIconState;
   public callsign: string = "";
   public departureIcao: string = "";
   public arrivalIcao: string = "";
@@ -29,7 +30,8 @@ export class Flightstrip {
     this.columnId = columnId
     this.type = type;
     this.columnPosition = columnPos;
-    this.triangleIconState = iconState.INACTIVE;
+    this.triangleIconState = triangleIconState.INACTIVE;
+    this.communicationIconState = communicationIconState.VOICE;
     switch (type) {
       case stripType.INBOUND:
         this.status = statusArrival.ARRIVING
@@ -75,10 +77,15 @@ export enum stripType {
   VFR
 }
 
-export enum iconState {
+export enum triangleIconState {
   INACTIVE,
   STANDARD,
   SUCCESS,
   WARNING,
   ERROR
+}
+
+export enum communicationIconState {
+  VOICE,
+  TEXT
 }

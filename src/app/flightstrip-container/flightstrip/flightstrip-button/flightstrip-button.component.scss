@@ -12,7 +12,7 @@
 }
 
 :host:hover {
-  outline: 2px solid #565656;
+  outline: 1px solid var(--fs-button-hover);
   box-shadow: none;
 }
 
