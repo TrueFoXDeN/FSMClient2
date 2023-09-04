@@ -14,6 +14,7 @@
   --app-accent-secondary: #6C757D;
   --app-accent-secondary-hover: #5e666d;
   --app-input: var(--app-background-secondary);
+  --app-border: #3f4b5b;
   --app-primary-outline: #ffffff;
   --app-error: #fb271f;
   --main-container-background: var(--app-background);
@@ -92,7 +93,8 @@
   --columnbuilder-button-background: #3674BF;
   --columnbuilder-input-background: var(--app-input);
   --columnbuilder-input-fontcolor: var(--app-fontcolor);
-  --columnbuilder-input-border: #3f4b5b;
+  --columnbuilder-input-border: var(--app-border);
+  --columnbuilder-input-border-focus: var(--app-accent);
   --columnbuilder-column-background: var(--column-background);
   --columnbuilder-footer: var(--sidebar-background);
   /*Network*/
@@ -119,6 +121,8 @@
   /*Search Callsign*/
   --search-input: #2B2B2B;
   --search-input-background: var(--app-input);
+  --search-input-border: var(--app-border);
+  --search-input-border-focus: var(--app-accent);
   --search-input-fontcolor: var(--app-fontcolor);
   --search-button-background: var(--app-primary);
   --search-button-background-hover: var(--app-primary-hover);
@@ -131,18 +135,19 @@
   --profile-input-foreground: var(--app-fontcolor);
   --profile-background: var(--app-background);
   --profile-fontcolor: var(--app-fontcolor);
-  --profile-border-color: #3f4b5b;
+  --profile-border-color: var(--app-border);
+  --profile-border-focus: var(--app-accent);
   --profile-mark-delete-border-color: var(--app-error);
   --profile-mark-delete-font-color: var(--app-error);
   --profile-cancel-button-background: var(--app-primary);
   --profile-cancel-button-outline: var(--app-primary-outline);
   --profile-load-button-background: var(--app-primary);
-  --profile-load-button-outline: var(--app-primary-outline);
+  --profile-load-button-background-hover: var(--app-primary-hover);
   --profile-hover-outline: white;
   --profile-confirm-delete-button-background: var(--app-error);
   --profile-confirm-delete-button-fontcolor: var(--app-error);
   --profile-save-button-background: var(--app-primary);
-  --profile-save-button-outline: var(--app-primary-outline);
+  --profile-save-button-background-hover: var(--app-primary-hover);
   --profile-save-button-fontcolor: var(--app-fontcolor);
 }
 
@@ -1090,8 +1095,9 @@ p-chips.p-chips-clearable .p-chips-clear-icon {
 .p-dropdown:not(.p-disabled).p-focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: 0 0 0 1px #e3f3fe;
-  border-color: #8dd0ff
+  border-color: var(--app-accent);
+  /*box-shadow: 0 0 0 1px #e3f3fe;*/
+  /*border-color: #8dd0ff*/
 }
 
 .p-dropdown.p-dropdown-clearable .p-dropdown-label {

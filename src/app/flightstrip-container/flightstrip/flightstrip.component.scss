@@ -139,7 +139,12 @@ input {
 
 .long-text {
   width: 100%;
+  &.last{
+    width: 93%;
+  }
 }
+
+
 
 .icon-container {
   height: 82%;

@@ -29,12 +29,15 @@
 
 .input {
   outline: none;
-  border: none;
   box-sizing: border-box;
   padding-left: 0.8em;
   background-color: var(--search-input-background);
+  border: 1px solid var(--search-input-border);
   color: var(--search-input-fontcolor);
   border-radius: 5px;
+  &:focus{
+    border-color: var(--search-input-border-focus);
+  }
 }
 
 .button {
@@ -61,10 +64,9 @@
 
 .disabled {
   opacity: 0.4;
-  outline: none;
 
   &:hover {
-    outline: none;
+    background-color: var(--search-button-background);
     cursor: not-allowed;
   }
 }

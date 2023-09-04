@@ -80,6 +80,10 @@
   box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
   font-family: Roboto Mono, sans-serif;
   background-color: var(--columnbuilder-input-background);
+  &:focus{
+    border: 1px solid var(--columnbuilder-input-border-focus);
+    outline: none;
+  }
 }
 
 .button-footer {

@@ -78,6 +78,9 @@
   box-sizing: border-box;
   background-color: var(--profile-input-background);
   color: var(--profile-input-foreground);
+  &:focus{
+    border: 1px solid var(--profile-border-focus);
+  }
 }
 
 .save-button-container {
@@ -130,17 +133,17 @@
   outline-color: var(--profile-cancel-button-outline);
 
   &:hover {
-    border: 1px solid var(--profile-hover-outline);
+    background-color: var(--profile-load-button-background-hover);
     cursor: pointer;
   }
 }
 
 .load {
   background-color: var(--profile-load-button-background);
-  outline-color: var(--profile-load-button-outline);
+
 
   &:hover {
-    border: 1px solid var(--profile-hover-outline);
+    background-color: var(--profile-load-button-background-hover);
     cursor: pointer;
   }
 }
@@ -158,19 +161,16 @@
 
 .save-button {
   background-color: var(--profile-save-button-background);
-  outline-color: var(--profile-save-button-outline);
   color: var(--profile-save-button-fontcolor);
 
   &:hover {
-    outline: 1px solid;
-    box-shadow: none;
+    background-color: var(--profile-save-button-background-hover);
   }
 
   &.save-disabled {
     opacity: 0.4;
-
+    background-color: var(--profile-save-button-background);
     &:hover {
-      outline: none;
       cursor: not-allowed;
     }
   }

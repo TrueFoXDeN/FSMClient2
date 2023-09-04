@@ -14,9 +14,9 @@
     ></app-sidebar-button>
     <app-sidebar-button-png icon="radar" class="radar default" matTooltip="Proximity Settings"
                             matTooltipPosition="right" (click)="openProximitySettings()"></app-sidebar-button-png>
-    <app-sidebar-button icon="users" class="icon-button default" matTooltip="Multiplayer"
+    <app-sidebar-button icon="users" class="icon-button default disabled" matTooltip="Multiplayer"
                         matTooltipPosition="right"
-                        (click)="openMultiplayerSettings()"></app-sidebar-button>
+                        ></app-sidebar-button>
     <app-sidebar-button icon="search" class="icon-button default" matTooltip="Search Callsign"
                         matTooltipPosition="right"
                         (click)="openSearchCallsign()"></app-sidebar-button>
@@ -27,14 +27,14 @@
                         matTooltipPosition="right"></app-sidebar-button>
     <app-sidebar-button icon="zoom-out" (click)="onZoomOut()" class="icon-button default" matTooltip="Zoom out"
                         matTooltipPosition="right"></app-sidebar-button>
-    <app-sidebar-button icon="bar-chart-2" class="icon-button default" matTooltip="Statistics"
+    <app-sidebar-button icon="bar-chart-2" class="icon-button default disabled" matTooltip="Statistics"
                         matTooltipPosition="right"
-                        (click)="openStatsOverlay()"></app-sidebar-button>
-    <app-sidebar-button icon="settings" class="icon-button default" matTooltip="Settings"
+                        ></app-sidebar-button>
+    <app-sidebar-button icon="settings" class="icon-button default disabled" matTooltip="Settings"
                         matTooltipPosition="right"
-                        (click)="openAppSettings()"></app-sidebar-button>
-    <app-sidebar-button icon="help-circle" class="icon-button default" matTooltip="Help"
+                        ></app-sidebar-button>
+    <app-sidebar-button icon="help-circle" class="icon-button default disabled" matTooltip="Help"
                         matTooltipPosition="right"
-                        (click)="openHelpOverlay()"></app-sidebar-button>
+                        ></app-sidebar-button>
   </div>
 </div>
