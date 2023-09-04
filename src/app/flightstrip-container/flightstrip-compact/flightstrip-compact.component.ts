@@ -84,33 +84,42 @@ export class FlightstripCompactComponent implements OnDestroy {
     }
   }
 
-  trimRoute(route: string): string {
-    if (route === undefined || route === null) {
-      return "";
+  trimRoute(input: string): string {
+    const maxLength = 54; // 2 Zeilen mit je 27 Zeichen
+    const ellipsis = '...';
+
+    if (input.length <= maxLength) {
+      return input; // Wenn der Eingabestring bereits passt, gib ihn unverändert zurück.
     }
 
-    let waypoints = route.split(" ")
-    let charCount = 0
+    // Teile den Eingabestring in zwei Hälften.
+    const middle = Math.floor(input.length / 2);
 
-    waypoints.forEach((x) => {
-      charCount += x.length;
-    })
-
-    while (charCount > 25) {
-      charCount -= waypoints[Math.floor(waypoints.length / 2)].length + 1
-
-      let waypointsLeft = waypoints.slice(0, Math.floor(waypoints.length / 2))
-      let waypointsRight = waypoints.slice(Math.floor(waypoints.length / 2 + 1), waypoints.length + 1)
-      waypoints = waypointsLeft.concat(waypointsRight)
+    // Finde das letzte Leerzeichen vor oder nach der Mitte, um ein ganzes Wort zu entfernen.
+    let startIndex = middle;
+    while (startIndex < input.length && input[startIndex] !== ' ') {
+      startIndex++;
     }
 
-    let waypointsLeft = waypoints.slice(0, Math.floor(waypoints.length / 2))
-    let waypointsRight = waypoints.slice(Math.floor(waypoints.length / 2 + 1), waypoints.length + 1)
+    let endIndex = middle;
+    while (endIndex >= 0 && input[endIndex] !== ' ') {
+      endIndex--;
+    }
 
-    waypoints = waypointsLeft.concat(["..."])
-    waypoints = waypoints.concat(waypointsRight)
+    // Falls kein Leerzeichen gefunden wurde, schneide einfach den String ab.
+    if (startIndex >= input.length && endIndex < 0) {
+      return input.substring(0, maxLength - ellipsis.length) + ellipsis;
+    }
 
-    return waypoints.join(" ")
+    // Schneide den String und füge "..." in die Mitte ein.
+    const trimmedString = input.substring(0, endIndex) + ellipsis + input.substring(startIndex);
+
+    // Stelle sicher, dass die Länge des gekürzten Strings nicht mehr als maxLength beträgt.
+    if (trimmedString.length > maxLength) {
+      return this.trimRoute(trimmedString); // Rekursion, um sicherzustellen, dass die Länge passt.
+    }
+
+    return trimmedString;
   }
 
   onMouseDown() {

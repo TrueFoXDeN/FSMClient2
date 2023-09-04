@@ -22,6 +22,7 @@
       align-items: center;
       height: 40%;
       font-weight: bold;
+      font-family: Roboto Mono, sans-serif;
     }
 
     .airline {
@@ -171,12 +172,14 @@
     .route {
       display: flex;
       text-align: justify;
-      height: 35%
+      height: 35%;
+      font-family: Roboto Mono, sans-serif;
     }
 
     .freeText {
       text-align: justify;
-      height: 35%
+      height: 35%;
+      font-family: Roboto Mono, sans-serif;
     }
   }
 }
