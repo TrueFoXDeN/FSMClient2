@@ -44,6 +44,6 @@ export class FlightstripService {
   }
 
   getFlightstripByCallsign(callsign: string, network: string) {
-    return this.http.get(`${this.baseURL}/${network}/callsign/` + callsign)
+    return this.http.get(`${this.baseURL}:5000/${network}/callsign/` + callsign)
   }
 }

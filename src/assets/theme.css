@@ -140,8 +140,8 @@
   --profile-hover-outline: white;
   --profile-confirm-delete-button-background: var(--app-error);
   --profile-confirm-delete-button-fontcolor: var(--app-error);
-  --profile-save-button-background: var(--app-accent);
-  --profile-save-button-outline: var(--app-accent);
+  --profile-save-button-background: var(--app-primary);
+  --profile-save-button-outline: var(--app-primary-outline);
   --profile-save-button-fontcolor: var(--app-fontcolor);
 }
 
