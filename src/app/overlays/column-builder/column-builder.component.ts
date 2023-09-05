@@ -12,6 +12,7 @@ import {
 import {Util} from "../../util";
 import {Data} from "../../data";
 import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from "@angular/material/dialog";
+import {DataService} from "../../services/data.service";
 
 
 interface Safe extends GridsterConfig {
@@ -34,7 +35,7 @@ export class ColumnBuilderComponent implements OnInit {
   currentData: any
 
   constructor(private util: Util, public dialogRef: MatDialogRef<ColumnBuilderComponent>,
-              @Inject(MAT_DIALOG_DATA) data: any, private globalData : Data) {
+              @Inject(MAT_DIALOG_DATA) data: any, private dataService : DataService) {
     this.currentData = data
     this.dashboard = data.columnData;
     this.options = {
@@ -122,9 +123,9 @@ export class ColumnBuilderComponent implements OnInit {
   }
 
   saveAndClose() {
-    this.globalData.profileData[this.globalData.currentProfileID].columnStructure = this.dashboard
+    this.dataService.profileData[this.dataService.currentProfileID].columnStructure = this.dashboard
     let data = {"columnData": this.dashboard}
-    localStorage.setItem("profileStructure", JSON.stringify(this.globalData.profileData))
+    localStorage.setItem("profileStructure", JSON.stringify(this.dataService.profileData))
     this.dialogRef.close(this.dashboard)
   }
 

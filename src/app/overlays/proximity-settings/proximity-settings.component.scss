@@ -44,20 +44,23 @@ mat-slider {
 .container-header {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 1%;
+  margin-bottom: 20px;
 }
 
 .header-box {
-  display: flex;
-  justify-content: center;
+  //display: flex;
+  //justify-content: center;
 }
 
 .container {
-  height:55% ;
+  height: 65%;
   margin-right: 5%;
   margin-bottom: 5%;
   margin-left: 5%;
-  background-color: transparent;
+  overflow: auto;
+  //background-color: var(--proximity-table-background);
 }
 
 
@@ -87,23 +90,68 @@ mat-slider {
 }
 
 
-.discard{
+.discard {
   background-color: var(--proximity-button-discard-background);
-  &:hover{
+
+  &:hover {
     background-color: var(--proximity-button-discard-background-hover);
   }
 }
 
-.save{
+.save {
   background-color: var(--proximity-button-save-background);
-  &:hover{
+
+  &:hover {
     background-color: var(--proximity-button-save-background-hover);
   }
 }
 
-.add{
+.add {
   background-color: var(--proximity-button-add-background);
-  &:hover{
+
+  &:hover {
     background-color: var(--proximity-button-add-background-hover);
   }
+}
+
+.active {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+}
+
+.icao {
+  width: 10% !important;
+  display: flex;
+  justify-content: center;
+}
+
+.inbound {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+}
+
+.outbound {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+}
+
+.vfr {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+}
+
+.range {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+}
+
+.delete {
+  width: 5%;
+  display: flex;
+  justify-content: center;
 }

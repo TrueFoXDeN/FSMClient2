@@ -5,15 +5,18 @@
     </div>
     <div class="container">
       <div class="container-header">
-        <div class="header-box"><span>Active</span></div>
-        <div class="header-box"><span>Name</span></div>
-        <div class="header-box"><span>Inbound</span></div>
-        <div class="header-box"><span>Outbound</span></div>
-        <div class="header-box"><span>VFR</span></div>
-        <div class="header-box"><span>Range</span></div>
-        <div class="header-box"><span>Delete</span></div>
+        <div class="header-box active"><span>Active</span></div>
+        <div class="header-box icao"><span>ICAO</span></div>
+        <div class="header-box inbound"><span>Inbound</span></div>
+        <div class="header-box outbound"><span>Outbound</span></div>
+        <div class="header-box vfr"><span>VFR</span></div>
+        <div class="header-box range"><span>Range (NM)</span></div>
+        <div class="header-box delete"><span>Delete</span></div>
       </div>
+
+      <app-proximity-row *ngFor="let airport of airports" [airport]="airport"></app-proximity-row>
     </div>
+
       <div class="button-footer">
         <div class="left">
           <app-proximity-button icon="plus" (click)="addItem($event)" class="footer-buttons add" matTooltip="Add Column"

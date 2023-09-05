@@ -4,6 +4,7 @@ import {Flightstrip, stripType} from "./flightstrip.model";
 import {Data} from "../data";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
+import {DataService} from "../services/data.service";
 
 @Injectable({
   providedIn: 'root'
@@ -21,17 +22,17 @@ export class FlightstripService {
 
   changedStripPos = new Subject<{ id: string, newPosistion: number }>()
 
-  constructor(private globalData: Data, private http: HttpClient) {
+  constructor(private dataService: DataService, private http: HttpClient) {
   }
 
   findFlightStrip(callsign: string) {
     let currentColumnIDList: string [] = []
-    this.globalData.profileData[this.globalData.currentProfileID].columnStructure.forEach((element: any) => {
+    this.dataService.profileData[this.dataService.currentProfileID].columnStructure.forEach((element: any) => {
       currentColumnIDList.push(element.uuid)
     });
 
     currentColumnIDList.forEach((colID: string) => {
-      for (let flightstrip of this.globalData.flightstripData[colID].flightstrips) {
+      for (let flightstrip of this.dataService.flightstripData[colID].flightstrips) {
         if (flightstrip.callsign == callsign) {
           flightstrip.isMarkedBySearch = true;
           flightstrip.compactMode = false;

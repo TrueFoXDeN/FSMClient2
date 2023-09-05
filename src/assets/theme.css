@@ -17,6 +17,7 @@
   --app-border: #3f4b5b;
   --app-primary-outline: #ffffff;
   --app-error: #fb271f;
+  --app-button-background: #262e37;
   --main-container-background: var(--app-background);
   --overlay-background: #2A323D;
   --overlay-foreground: #e631d5;
@@ -24,7 +25,7 @@
   /*Sidebar*/
   --sidebar-background: var(--app-background-secondary);
   --sidebar-fontcolor: var(--app-fontcolor);
-  --sidebar-button-background: #262e37;
+  --sidebar-button-background: var(--app-button-background);
   --sidebar-button-foreground-default: #ffffff;
   --sidebar-button-foreground-success: #7bff00;
   --sidebar-button-foreground-error: var(--app-error);
@@ -35,7 +36,7 @@
   /*Column*/
   --column-background: var(--app-background-secondary);
   --column-foreground: var(--app-fontcolor);
-  --column-button-background: #262e37;
+  --column-button-background: var(--app-button-background);
   --column-button-outline: var(--app-accent);
   --column-button-background-hover: var(--app-background);
   /*Flightsrips:*/
@@ -109,8 +110,11 @@
   --proximity-input: var(--app-input);
   --proximity-background: var(--app-background);
   --proximity-fontcolor: var(--app-fontcolor);
-  --proximity-table-background: var(--app-input);
+  --proximity-table-background: var(--sidebar-background);
   --proximity-footer-background: var(--sidebar-background);
+  --proximity-button-background: var(--app-button-background);
+  --proximity-button-hover: var(--app-background);
+  --proximity-button-border: var(--app-accent);
   --proximity-button-discard-background: var(--app-accent-secondary);
   --proximity-button-discard-background-hover: var(--app-accent-secondary-hover);
   --proximity-button-save-background: var(--app-primary);
@@ -1430,16 +1434,16 @@ p-inputnumber.p-inputnumber-clearable .p-inputnumber-buttons-horizontal .p-input
 .p-inputswitch .p-inputswitch-slider {
   background: #3f4b5b;
   transition: background-color .15s, border-color .15s, box-shadow .15s;
-  border-radius: 4px
+  border-radius: 20px
 }
 
 .p-inputswitch .p-inputswitch-slider:before {
-  background: rgba(255, 255, 255, .6);
+  background: var(--app-accent);
   width: 1.25rem;
   height: 1.25rem;
   left: .25rem;
   margin-top: -0.625rem;
-  border-radius: 4px;
+  border-radius: 20px;
   transition-duration: .15s
 
 }
@@ -1459,15 +1463,15 @@ p-inputnumber.p-inputnumber-clearable .p-inputnumber-buttons-horizontal .p-input
 }
 
 .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
-  background: #8dd0ff
+  background: var(--app-primary);
 }
 
 .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {
-  background: #151515
+  background: #ffffff;
 }
 
 .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
-  background: #8dd0ff
+  background: var(--app-primary);
 }
 
 p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
@@ -2082,8 +2086,8 @@ p-selectbutton.ng-dirty.ng-invalid > .p-selectbutton > .p-button {
 .p-slider .p-slider-handle {
   height: 1.143rem;
   width: 1.143rem;
-  background: #8dd0ff;
-  border: 2px solid #8dd0ff;
+  background: var(--app-primary);
+  border: 2px solid var(--app-primary);;
   border-radius: 4px;
   transition: background-color .15s, border-color .15s, box-shadow .15s
 }
@@ -2091,11 +2095,11 @@ p-selectbutton.ng-dirty.ng-invalid > .p-selectbutton > .p-button {
 .p-slider .p-slider-handle:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: 0 0 0 1px #e3f3fe
+  box-shadow: 0 0 0 1px var(--app-accent);
 }
 
 .p-slider .p-slider-range {
-  background: #8dd0ff
+  background: var(--app-primary);
 }
 
 .p-slider:not(.p-disabled) .p-slider-handle:hover {

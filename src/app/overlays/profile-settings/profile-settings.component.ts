@@ -5,6 +5,7 @@ import {CookieService} from "ngx-cookie-service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {SnackbarMessageService} from "../../services/snackbar-message.service";
 import {ColumnBuilderService} from "../../services/column-builder.service";
+import {DataService} from "../../services/data.service";
 
 @Component({
   selector: 'app-profile-settings',
@@ -20,10 +21,10 @@ export class ProfileSettingsComponent implements OnInit {
   markForDelete = false;
   saveButtonActive = false;
 
-  constructor(private util: Util, private globalData: Data, private cookieService: CookieService,
+  constructor(private util: Util, private dataService: DataService, private cookieService: CookieService,
               public dialogRef: MatDialogRef<ProfileSettingsComponent>, private snackService: SnackbarMessageService,
               private columnBuilderService: ColumnBuilderService) {
-    const obj: any = this.globalData.profileData;
+    const obj: any = this.dataService.profileData;
     Object.keys(obj).forEach((id: string) => {
       this.profiles.push({id: id, name: obj[id].name})
     });
@@ -32,7 +33,7 @@ export class ProfileSettingsComponent implements OnInit {
   onItemselect(event: any) {
     console.log(event)
     let option = event.value
-    if (option.id != this.globalData.getStandardProfileID()) {
+    if (option.id != this.dataService.getStandardProfileID()) {
       this.deleteButtonActive = true;
     } else {
       this.deleteButtonActive = false;
@@ -44,8 +45,8 @@ export class ProfileSettingsComponent implements OnInit {
       let newProfile = {name: this.newProfileName, id: this.util.generateUUID()}
       this.profiles.push(newProfile)
       this.newProfileName = ""
-      this.globalData.profileData[newProfile.id] = {name: newProfile.name, columnStructure: []};
-      localStorage.setItem("profileStructure", JSON.stringify(this.globalData.profileData));
+      this.dataService.profileData[newProfile.id] = {name: newProfile.name, columnStructure: []};
+      localStorage.setItem("profileStructure", JSON.stringify(this.dataService.profileData));
       this.selectedProfile = newProfile;
       this.deleteButtonActive = true;
       this.saveButtonActive = false;
@@ -71,15 +72,15 @@ export class ProfileSettingsComponent implements OnInit {
     this.profiles.splice(index, 1);
     this.markForDelete = false;
     let id = this.selectedProfile.id;
-    delete this.globalData.profileData[`${id}`]
-    this.saveProfileSettings(this.globalData.getStandardProfileID());
+    delete this.dataService.profileData[`${id}`]
+    this.saveProfileSettings(this.dataService.getStandardProfileID());
     this.snackService.showMessage(`Profile ${deletedProfile.name} deleted`, "warning")
     this.deleteButtonActive = false;
   }
 
   onApply() {
     this.saveProfileSettings(this.selectedProfile.id)
-    this.snackService.showMessage(`Profile "${this.globalData.currentProfile.name}" loaded`, "success")
+    this.snackService.showMessage(`Profile "${this.dataService.currentProfile.name}" loaded`, "success")
     this.dialogRef.close()
   }
 
@@ -88,7 +89,7 @@ export class ProfileSettingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let currentProfile = this.globalData.currentProfileID
+    let currentProfile = this.dataService.currentProfileID
     for (let i = 0; i < this.profiles.length; i++) {
       if (this.profiles[i].id == currentProfile) {
         this.selectedProfile = this.profiles[i]
@@ -97,11 +98,11 @@ export class ProfileSettingsComponent implements OnInit {
   }
 
   saveProfileSettings(profileID: string) {
-    this.globalData.currentProfileID = profileID;
-    localStorage.setItem("profileStructure", JSON.stringify(this.globalData.profileData))
-    this.cookieService.set("currentProfileID", this.globalData.currentProfileID, 9999)
-    this.globalData.currentProfile = this.globalData.profileData[profileID]
-    this.selectedProfile = this.globalData.currentProfile
+    this.dataService.currentProfileID = profileID;
+    localStorage.setItem("profileStructure", JSON.stringify(this.dataService.profileData))
+    this.cookieService.set("currentProfileID", this.dataService.currentProfileID, 9999)
+    this.dataService.currentProfile = this.dataService.profileData[profileID]
+    this.selectedProfile = this.dataService.currentProfile
   }
 
 }

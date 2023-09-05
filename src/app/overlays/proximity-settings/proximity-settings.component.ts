@@ -1,23 +1,14 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {Data} from "../../data";
-
-export interface Airport {
-  icaoCode: string;
-  inboundColumn: string;
-  outboundColumn: string;
-  vfrColumn: string;
-  range: number
-}
+import {range} from "rxjs";
+import {Airport} from "./proximity.model";
 
 export interface DropdownOption {
   name: string,
   value: string
 }
 
-const ELEMENT_DATA: Airport[] = [
-  {icaoCode: "EDDF", inboundColumn: "APP", outboundColumn: 'DEL', "vfrColumn": "TWR", range: 15},
-  {icaoCode: "EDDP", inboundColumn: "APP", outboundColumn: 'DEL', "vfrColumn": "TWR", range: 10},
-];
+// const airportModel: Airport = {icaoCode: "", inboundColumn: "", outboundColumn: '', vfrColumn: "", range: 0}
 
 @Component({
   selector: 'app-proximity-settings',
@@ -25,11 +16,11 @@ const ELEMENT_DATA: Airport[] = [
   styleUrls: ['./proximity-settings.component.scss', '../../../styles.scss'],
 })
 export class ProximitySettingsComponent {
-  constructor(private globalData: Data) {
-  }
+  airports: Airport[] = []
+
 
   addItem($event: MouseEvent | TouchEvent): void {
-
+    this.airports.push(new Airport())
   }
 
   saveAndClose() {
@@ -42,4 +33,6 @@ export class ProximitySettingsComponent {
   closeWithoutSaving() {
     // this.dialogRef.close()
   }
+
+  protected readonly Airport = Airport;
 }

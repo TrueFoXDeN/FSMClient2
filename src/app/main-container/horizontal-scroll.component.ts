@@ -17,6 +17,7 @@ import {ColumnBuilderService} from "../services/column-builder.service";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {SearchCallsignComponent} from "../overlays/search-callsign/search-callsign.component";
 import {FlightstripService} from "../flightstrip-container/flightstrip.service";
+import {DataService} from "../services/data.service";
 
 interface Safe extends GridsterConfig {
   draggable: Draggable;
@@ -36,7 +37,7 @@ export class HorizontalScrollComponent implements OnInit, OnDestroy {
   dashboard: Array<GridsterItem>;
   subscriptionList: any = []
 
-  constructor(private globalData: Data, private styles: CustomStyles, private styleChanger: StyleChangerService, private columnBuilderService: ColumnBuilderService,
+  constructor(private dataService: DataService, private styles: CustomStyles, private styleChanger: StyleChangerService, private columnBuilderService: ColumnBuilderService,
               public dialog: MatDialog, private fsService: FlightstripService) {
     this.subscriptionList.push(columnBuilderService.columnConfigChanged.subscribe(() => {
       this.columnConfigChanged();
@@ -100,7 +101,7 @@ export class HorizontalScrollComponent implements OnInit, OnDestroy {
       disableWarnings: false,
       scrollToNewItems: false,
     }
-    this.dashboard = this.globalData.profileData[this.globalData.currentProfileID].columnStructure;
+    this.dashboard = this.dataService.profileData[this.dataService.currentProfileID].columnStructure;
     this.styleChanger.changedSize.subscribe(() => {
       this.changeColumnWidth();
     });
@@ -108,10 +109,10 @@ export class HorizontalScrollComponent implements OnInit, OnDestroy {
 
 
   loadConfig() {
-    this.dashboard = this.globalData.profileData[this.globalData.currentProfileID].columnStructure;
-    this.globalData.profileData[this.globalData.currentProfileID].columnStructure.forEach((column: any) => {
-      if (this.globalData.flightstripData[column?.['uuid']] == null) {
-        this.globalData.flightstripData[column?.['uuid']] = {name: column?.['name'], flightstrips: []}
+    this.dashboard = this.dataService.profileData[this.dataService.currentProfileID].columnStructure;
+    this.dataService.profileData[this.dataService.currentProfileID].columnStructure.forEach((column: any) => {
+      if (this.dataService.flightstripData[column?.['uuid']] == null) {
+        this.dataService.flightstripData[column?.['uuid']] = {name: column?.['name'], flightstrips: []}
       }
     });
   }
@@ -133,7 +134,7 @@ export class HorizontalScrollComponent implements OnInit, OnDestroy {
   }
 
   changeColumnWidth() {
-    this.dashboard = this.globalData.profileData[this.globalData.currentProfileID].columnStructure;
+    this.dashboard = this.dataService.profileData[this.dataService.currentProfileID].columnStructure;
     this.options = {
       ...this.options,
       fixedColWidth: 450 * this.styles.multiplier

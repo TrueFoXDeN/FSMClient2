@@ -17,11 +17,11 @@ import {
   stripType,
   communicationIconState
 } from '../flightstrip.model';
-import {Data} from "../../data";
 import {FlightstripService} from "../flightstrip.service";
 import {FlightStripInput} from "../flightstrip-directives/flightStripInput.directive";
 import {StyleChangerService} from "../../services/style-changer.service";
 import {MatMenuTrigger} from "@angular/material/menu";
+import {DataService} from "../../services/data.service";
 
 
 @Component({
@@ -44,7 +44,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   highlightActive = false;
   triangleIconStates = triangleIconState
   communicationIconStates = communicationIconState
-  constructor(private globalData: Data, private fsService: FlightstripService, private styleChanger: StyleChangerService,
+  constructor(private dataService: DataService, private fsService: FlightstripService, private styleChanger: StyleChangerService,
   ) {
     this.subscriptionHandles.push(this.fsService.changedType.subscribe((data) => {
       if (data.id == this.fs.id) {

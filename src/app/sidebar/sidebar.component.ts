@@ -19,6 +19,7 @@ import {Search} from "angular-feather/icons";
 import {SearchCallsignComponent} from "../overlays/search-callsign/search-callsign.component";
 import {Util} from "../util";
 import {FlightstripService} from "../flightstrip-container/flightstrip.service";
+import {DataService} from "../services/data.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -30,7 +31,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   networkIcon: string = "standard";
 
   constructor(private customStyle: CustomStyles, private _snackBar: MatSnackBar, public dialog: MatDialog,
-              private globalData: Data, private styleChanger: StyleChangerService, private snackService: SnackbarMessageService,
+              private dataService: DataService, private styleChanger: StyleChangerService, private snackService: SnackbarMessageService,
               private colBuilderService: ColumnBuilderService, public networkService: NetworkService,
               private columnBuilderService: ColumnBuilderService, private fsService: FlightstripService) {
     this.subscriptionList.push(this.networkService.changedNetworkEmitter.subscribe((data) => {
@@ -75,16 +76,16 @@ export class SidebarComponent implements OnInit, OnDestroy {
     dialogConfig.width = '80vw';
     dialogConfig.panelClass = 'custom-dialog-container';
     dialogConfig.data = {
-      columnData: JSON.parse(JSON.stringify(this.globalData.profileData[this.globalData.currentProfileID].columnStructure))
+      columnData: JSON.parse(JSON.stringify(this.dataService.profileData[this.dataService.currentProfileID].columnStructure))
     }
     const dialogRef = this.dialog.open(ColumnBuilderComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
       if (data != null) {
-        this.globalData.profileData[this.globalData.currentProfileID].columnStructure = data;
+        this.dataService.profileData[this.dataService.currentProfileID].columnStructure = data;
       }
-      this.globalData.profileData[this.globalData.currentProfileID].columnStructure.forEach((column: any) => {
-        if (this.globalData.flightstripData[column?.['uuid']] == null) {
-          this.globalData.flightstripData[column?.['uuid']] = {name: column?.['name'], flightstrips: []}
+      this.dataService.profileData[this.dataService.currentProfileID].columnStructure.forEach((column: any) => {
+        if (this.dataService.flightstripData[column?.['uuid']] == null) {
+          this.dataService.flightstripData[column?.['uuid']] = {name: column?.['name'], flightstrips: []}
         }
       });
       this.colBuilderService.columnConfigChanged.next();
@@ -111,7 +112,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(ProfileSettingsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
       this.columnBuilderService.columnConfigChanged.next()
-      console.log(`Using profile "${this.globalData.currentProfile.name}"`)
+      console.log(`Using profile "${this.dataService.currentProfile.name}"`)
     });
   }
 

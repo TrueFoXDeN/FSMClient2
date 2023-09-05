@@ -89,6 +89,11 @@ import {GeneralDropdownInputDirective} from "./general-dropdown/general-dropdown
 import {Sidebar} from "./sidebar/sidebar-directives/sidebar.directive";
 import { DropdownModule } from 'primeng/dropdown';
 import { ProximityButtonComponent } from './overlays/proximity-settings/proximity-button/proximity-button.component';
+import { ProximityRowComponent } from './overlays/proximity-settings/proximity-row/proximity-row.component';
+import {InputSwitchModule} from "primeng/inputswitch";
+import {SliderModule} from "primeng/slider";
+import { ProximityRowButtonComponent } from './overlays/proximity-settings/proximity-row/proximity-row-button/proximity-row-button.component';
+import {ButtonModule} from "primeng/button";
 
 @NgModule({
   declarations: [
@@ -139,7 +144,9 @@ import { ProximityButtonComponent } from './overlays/proximity-settings/proximit
     GeneralDropdownItemDirective,
     GeneralProfileDropdownDirective,
     GeneralDropdownInputDirective,
-    ProximityButtonComponent
+    ProximityButtonComponent,
+    ProximityRowComponent,
+    ProximityRowButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -166,7 +173,10 @@ import { ProximityButtonComponent } from './overlays/proximity-settings/proximit
     MatTableModule,
     MatCheckboxModule,
     MatSliderModule,
-    DropdownModule
+    DropdownModule,
+    InputSwitchModule,
+    SliderModule,
+    ButtonModule
   ],
   providers: [
     CustomStyles,

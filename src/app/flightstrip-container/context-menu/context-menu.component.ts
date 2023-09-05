@@ -3,6 +3,7 @@ import {Data} from "../../data";
 import {Flightstrip, stripType} from "../flightstrip.model";
 import {FlightstripService} from "../flightstrip.service";
 import {StyleChangerService} from "../../services/style-changer.service";
+import {DataService} from "../../services/data.service";
 
 @Component({
   selector: 'app-context-menu',
@@ -17,18 +18,18 @@ export class ContextMenuComponent implements OnInit {
   option1: stripType = stripType.INBOUND
   option2: stripType = stripType.INBOUND
 
-  constructor(private globalData: Data, private styleService: StyleChangerService, private fsService: FlightstripService) {
+  constructor(private dataService: DataService, private styleService: StyleChangerService, private fsService: FlightstripService) {
 
   }
 
 
   deleteStrip() {
-    let index = this.globalData.flightstripData[this.fs.columnId].flightstrips.indexOf(this.fs)
-    this.globalData.flightstripData[this.fs.columnId].flightstrips.splice(index, 1)
+    let index = this.dataService.flightstripData[this.fs.columnId].flightstrips.indexOf(this.fs)
+    this.dataService.flightstripData[this.fs.columnId].flightstrips.splice(index, 1)
   }
 
   archiveStrip() {
-    this.globalData.archivedStrips[this.fs.id] = this.fs
+    this.dataService.archivedStrips[this.fs.id] = this.fs
     this.deleteStrip();
   }
 
@@ -36,14 +37,14 @@ export class ContextMenuComponent implements OnInit {
     switch (optionNumber) {
       case 1:
         let index: number = 0
-        index = this.globalData.flightstripData[this.fs.columnId].flightstrips.indexOf(this.fs)
-        this.globalData.flightstripData[this.fs.columnId].flightstrips[index].type = this.option1
+        index = this.dataService.flightstripData[this.fs.columnId].flightstrips.indexOf(this.fs)
+        this.dataService.flightstripData[this.fs.columnId].flightstrips[index].type = this.option1
         this.fsService.changedType.next({type: this.option1, id: this.fs.id})
         break;
       case 2:
         let index2: number = 0;
-        index2 = this.globalData.flightstripData[this.fs.columnId].flightstrips.indexOf(this.fs)
-        this.globalData.flightstripData[this.fs.columnId].flightstrips[index2].type = this.option2
+        index2 = this.dataService.flightstripData[this.fs.columnId].flightstrips.indexOf(this.fs)
+        this.dataService.flightstripData[this.fs.columnId].flightstrips[index2].type = this.option2
         this.fsService.changedType.next({type: this.option2, id: this.fs.id})
         break;
     }
