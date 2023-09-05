@@ -1,0 +1,68 @@
+.row{
+  display: flex;
+  flex-direction: row;
+  gap: 1%;
+  justify-content: center;
+  margin-bottom: 10px;
+  //justify-content: space-between;
+}
+
+.input {
+  outline: none;
+  box-sizing: border-box;
+  padding-left: 0.8em;
+  background-color: var(--search-input-background);
+  border: 1px solid var(--search-input-border);
+  color: var(--search-input-fontcolor);
+  border-radius: 5px;
+  &:focus{
+    border-color: var(--search-input-border-focus);
+  }
+
+}
+
+.active{
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icao{
+  width: 10% !important;
+}
+
+.inbound{
+  width: 15%;
+}
+
+.outbound{
+  width: 15%;
+}
+
+.vfr{
+  width: 15%;
+}
+
+.range{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+}
+
+.delete{
+  width: 5%;
+  display: flex;
+  justify-content: center;
+}
+
+.slider-range{
+  width: 50%;
+}
+.input-range{
+  width: 20%;
+  height: 100%;
+  margin-left: 15px;
+}
+

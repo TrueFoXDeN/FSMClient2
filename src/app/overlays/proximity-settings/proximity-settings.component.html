@@ -14,7 +14,7 @@
         <div class="header-box delete"><span>Delete</span></div>
       </div>
 
-      <app-proximity-row *ngFor="let airport of airports" [airport]="airport"></app-proximity-row>
+      <app-proximity-row *ngFor="let airport of airports" [airport]="airport" (delete)="deleteRow(airport)"></app-proximity-row>
     </div>
 
       <div class="button-footer">

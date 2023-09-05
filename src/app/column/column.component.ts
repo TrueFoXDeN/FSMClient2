@@ -5,6 +5,7 @@ import {Data} from "../data";
 import {Util} from "../util";
 import {FlightstripService} from "../flightstrip-container/flightstrip.service";
 import {FlightstripContainerComponent} from "../flightstrip-container/flightstrip-container.component";
+import {DataService} from "../services/data.service";
 
 @Component({
   selector: 'app-column',
@@ -21,27 +22,27 @@ export class ColumnComponent {
   isMouseDown: boolean = false;
   isDragable = false;
 
-  constructor(public data: Data, private util: Util, private fsService: FlightstripService) {
+  constructor(public dataService: DataService, private util: Util, private fsService: FlightstripService) {
   }
 
 
   addInboundFlightstrip() {
-    let nextPos = this.data.flightstripData?.[this.uuid]?.['flightstrips'].length
+    let nextPos = this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].length
     console.log(nextPos)
     let fs = new Flightstrip(this.util.generateUUID(), stripType.INBOUND, this.uuid, nextPos);
-    this.data.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
+    this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
   }
 
   addOutboundFlightstrip() {
-    let nextPos = this.data.flightstripData?.[this.uuid]?.['flightstrips'].length
+    let nextPos = this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].length
     let fs = new Flightstrip(this.util.generateUUID(), stripType.OUTBOUND, this.uuid, nextPos);
-    this.data.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
+    this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
   }
 
   addVfrFlightstrip() {
-    let nextPos = this.data.flightstripData?.[this.uuid]?.['flightstrips'].length
+    let nextPos = this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].length
     let fs = new Flightstrip(this.util.generateUUID(), stripType.VFR, this.uuid, nextPos);
-    this.data.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
+    this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
   }
 
 

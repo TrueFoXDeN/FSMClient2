@@ -1,0 +1,26 @@
+:host {
+  padding: 0;
+  aspect-ratio: 1;
+  border: 0;
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  width: 40px;
+  background-color: var(--proximity-button-background);
+  &:hover{
+    background-color: var(--proximity-button-hover);
+    outline: 1px solid var(--proximity-button-border);
+  }
+}
+
+
+.icon {
+  height: 55%;
+  width: 55%;
+  margin-bottom: 2px;
+  aspect-ratio: 1;
+}

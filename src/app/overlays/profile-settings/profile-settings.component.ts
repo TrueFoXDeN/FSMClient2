@@ -45,7 +45,7 @@ export class ProfileSettingsComponent implements OnInit {
       let newProfile = {name: this.newProfileName, id: this.util.generateUUID()}
       this.profiles.push(newProfile)
       this.newProfileName = ""
-      this.dataService.profileData[newProfile.id] = {name: newProfile.name, columnStructure: []};
+      this.dataService.profileData[newProfile.id] = {name: newProfile.name, columnStructure: [], proximity: []};
       localStorage.setItem("profileStructure", JSON.stringify(this.dataService.profileData));
       this.selectedProfile = newProfile;
       this.deleteButtonActive = true;

@@ -123,7 +123,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(ProximitySettingsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
 
-
     });
   }
 

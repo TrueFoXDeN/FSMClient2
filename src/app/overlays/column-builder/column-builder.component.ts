@@ -124,7 +124,7 @@ export class ColumnBuilderComponent implements OnInit {
 
   saveAndClose() {
     this.dataService.profileData[this.dataService.currentProfileID].columnStructure = this.dashboard
-    let data = {"columnData": this.dashboard}
+    // let data = {"columnData": this.dashboard}
     localStorage.setItem("profileStructure", JSON.stringify(this.dataService.profileData))
     this.dialogRef.close(this.dashboard)
   }
