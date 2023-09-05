@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component} from '@angular/core';
 import {range} from "rxjs";
 import {Airport} from "./proximity.model";
 import {DataService} from "../../services/data.service";
@@ -9,23 +9,21 @@ export interface DropdownOption {
   value: string
 }
 
-// const airportModel: Airport = {icaoCode: "", inboundColumn: "", outboundColumn: '', vfrColumn: "", range: 0}
 
 @Component({
   selector: 'app-proximity-settings',
   templateUrl: './proximity-settings.component.html',
   styleUrls: ['./proximity-settings.component.scss', '../../../styles.scss'],
 })
-export class ProximitySettingsComponent implements OnInit{
+export class ProximitySettingsComponent{
   airports: Airport[] = []
 
   constructor(private dataService: DataService, public dialogRef: MatDialogRef<ProximitySettingsComponent>) {
-    this.airports = this.dataService.profileData[this.dataService.currentProfileID].proximity
+    this.airports = []
+    this.dataService.profileData[this.dataService.currentProfileID].proximity.forEach((val: any) => this.airports.push(Object.assign({}, val)));
+    Object.assign({}, this.dataService.profileData[this.dataService.currentProfileID].proximity)
   }
-  ngOnInit(){
-    this.airports = this.dataService.profileData[this.dataService.currentProfileID].proximity
-    console.log(this.dataService.profileData[this.dataService.currentProfileID].proximity)
-  }
+
 
   addItem($event: MouseEvent | TouchEvent): void {
     this.airports.push(new Airport())
@@ -41,10 +39,6 @@ export class ProximitySettingsComponent implements OnInit{
   closeWithoutSaving() {
     this.dialogRef.close()
   }
-
-
-
-  protected readonly Airport = Airport;
 
   deleteRow(airport: Airport) {
     this.airports.splice(this.airports.indexOf(airport), 1)
