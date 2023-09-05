@@ -1,9 +1,9 @@
 <div class="row">
   <p-inputSwitch class="active" [(ngModel)]="airport.active"></p-inputSwitch>
   <input class="input icao" searchCallsignInput [(ngModel)]="airport.icaoCode" (ngModelChange)="airport.icaoCode = $event.toUpperCase()">
-  <p-dropdown class="dropdown inbound" [options]="columns" [(ngModel)]="airport.inboundColumn" optionLabel="name" ></p-dropdown>
-  <p-dropdown class="dropdown outbound" [options]="columns" [(ngModel)]="airport.outboundColumn" optionLabel="name" ></p-dropdown>
-  <p-dropdown class="dropdown vfr" [options]="columns" [(ngModel)]="airport.vfrColumn" optionLabel="name" ></p-dropdown>
+  <p-dropdown class="dropdown inbound" [options]="columns" [(ngModel)]="airport.inboundColumn" optionLabel="name" optionValue="uuid"  ></p-dropdown>
+  <p-dropdown class="dropdown outbound" [options]="columns" [(ngModel)]="airport.outboundColumn" optionLabel="name" optionValue="uuid" ></p-dropdown>
+  <p-dropdown class="dropdown vfr" [options]="columns" [(ngModel)]="airport.vfrColumn" optionLabel="name" optionValue="uuid" ></p-dropdown>
   <div class="range">
     <p-slider [(ngModel)]="airport.range" [step]="5" class="slider-range"></p-slider>
     <input [(ngModel)]="airport.range" class="input input-range">

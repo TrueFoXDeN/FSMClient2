@@ -15,13 +15,15 @@ export interface DropdownOption {
   templateUrl: './proximity-settings.component.html',
   styleUrls: ['./proximity-settings.component.scss', '../../../styles.scss'],
 })
-export class ProximitySettingsComponent{
+export class ProximitySettingsComponent {
   airports: Airport[] = []
+  columns: any = []
 
   constructor(private dataService: DataService, public dialogRef: MatDialogRef<ProximitySettingsComponent>) {
     this.airports = []
     this.dataService.profileData[this.dataService.currentProfileID].proximity.forEach((val: any) => this.airports.push(Object.assign({}, val)));
     Object.assign({}, this.dataService.profileData[this.dataService.currentProfileID].proximity)
+    this.columns = this.dataService.profileData[this.dataService.currentProfileID].columnStructure
   }
 
 
