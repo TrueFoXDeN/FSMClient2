@@ -1,6 +1,6 @@
 export class Airport{
   active: boolean;
-  icaoCode: string;
+  icao: string;
   inboundColumn: string;
   outboundColumn: string;
   range: number;
@@ -8,7 +8,7 @@ export class Airport{
 
   constructor() {
     this.active = false;
-    this.icaoCode = "";
+    this.icao = "";
     this.inboundColumn = "";
     this.outboundColumn = "";
     this.range = 0;

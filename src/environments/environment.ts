@@ -1,5 +1,5 @@
 export const environment = {
   appVersion: require('../../package.json').version + '-dev',
   production: false,
-  baseURL : "http://192.168.0.101"
+  baseURL : "http://217.72.203.68:5000/api/v1"
 };

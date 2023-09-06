@@ -1,7 +1,6 @@
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Component, EventEmitter, Input, Output, QueryList, ViewChild} from '@angular/core';
 import {Flightstrip, stripType} from '../flightstrip-container/flightstrip.model';
-import {Data} from "../data";
 import {Util} from "../util";
 import {FlightstripService} from "../flightstrip-container/flightstrip.service";
 import {FlightstripContainerComponent} from "../flightstrip-container/flightstrip-container.component";
@@ -27,22 +26,25 @@ export class ColumnComponent {
 
 
   addInboundFlightstrip() {
-    let nextPos = this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].length
-    console.log(nextPos)
-    let fs = new Flightstrip(this.util.generateUUID(), stripType.INBOUND, this.uuid, nextPos);
-    this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
+    this.fsService.createFlightstrip(this.uuid, '', stripType.INBOUND)
+    // let nextPos = this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].length
+    // console.log(nextPos)
+    // let fs = new Flightstrip(this.util.generateUUID(), stripType.INBOUND, this.uuid, nextPos);
+    // this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
   }
 
   addOutboundFlightstrip() {
-    let nextPos = this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].length
-    let fs = new Flightstrip(this.util.generateUUID(), stripType.OUTBOUND, this.uuid, nextPos);
-    this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
+    this.fsService.createFlightstrip(this.uuid, '', stripType.OUTBOUND)
+    // let nextPos = this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].length
+    // let fs = new Flightstrip(this.util.generateUUID(), stripType.OUTBOUND, this.uuid, nextPos);
+    // this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
   }
 
   addVfrFlightstrip() {
-    let nextPos = this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].length
-    let fs = new Flightstrip(this.util.generateUUID(), stripType.VFR, this.uuid, nextPos);
-    this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
+    this.fsService.createFlightstrip(this.uuid, '', stripType.VFR)
+    // let nextPos = this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].length
+    // let fs = new Flightstrip(this.util.generateUUID(), stripType.VFR, this.uuid, nextPos);
+    // this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
   }
 
 

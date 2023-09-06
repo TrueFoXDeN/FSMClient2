@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Subject} from "rxjs";
 import {Flightstrip, stripType} from "./flightstrip.model";
-import {Data} from "../data";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {DataService} from "../services/data.service";
+import {Util} from "../util";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class FlightstripService {
 
   changedStripPos = new Subject<{ id: string, newPosistion: number }>()
 
-  constructor(private dataService: DataService, private http: HttpClient) {
+  constructor(private dataService: DataService, private http: HttpClient, private util: Util) {
   }
 
   findFlightStrip(callsign: string) {
@@ -47,5 +47,15 @@ export class FlightstripService {
 
   getFlightstripByCallsign(callsign: string, network: string) {
     return this.http.get(`${this.baseURL}:5000/${network}/callsign/` + callsign)
+  }
+
+  createFlightstrip(column: string, callsign: string, type: stripType) {
+    let nextPos = this.dataService.flightstripData?.[column]?.['flightstrips'].length
+    let fs = new Flightstrip(this.util.generateUUID(), type, column, nextPos);
+    if(callsign !== ""){
+      fs.callsign = callsign
+    }
+    this.dataService.flightstripData?.[column]?.['flightstrips'].push(fs);
+
   }
 }

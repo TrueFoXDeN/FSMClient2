@@ -1,6 +1,6 @@
 <div class="row">
   <p-inputSwitch class="active" [(ngModel)]="airport.active"></p-inputSwitch>
-  <input class="input icao" searchCallsignInput [(ngModel)]="airport.icaoCode" (ngModelChange)="airport.icaoCode = $event.toUpperCase()">
+  <input class="input icao" searchCallsignInput [(ngModel)]="airport.icao" (ngModelChange)="airport.icao = $event.toUpperCase()">
   <p-dropdown class="dropdown inbound" [options]="columns" [(ngModel)]="airport.inboundColumn" optionLabel="name" optionValue="uuid"  ></p-dropdown>
   <p-dropdown class="dropdown outbound" [options]="columns" [(ngModel)]="airport.outboundColumn" optionLabel="name" optionValue="uuid" ></p-dropdown>
   <p-dropdown class="dropdown vfr" [options]="columns" [(ngModel)]="airport.vfrColumn" optionLabel="name" optionValue="uuid" ></p-dropdown>
