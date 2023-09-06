@@ -10,7 +10,7 @@ import {Util} from "../util";
   providedIn: 'root'
 })
 export class FlightstripService {
-  dragDelay = 100;
+  dragDelay = 90;
   isInputFocused: boolean = false;
   changedTriangleState = new Subject<void>();
   changedCommunicationState = new Subject<void>();
@@ -19,7 +19,6 @@ export class FlightstripService {
   dragChange = new Subject<{ id: string, dragEnabled: boolean }>()
   searchFlightstrip = new Subject<void>()
   baseURL = environment.baseURL
-
   changedStripPos = new Subject<{ id: string, newPosistion: number }>()
 
   constructor(private dataService: DataService, private http: HttpClient, private util: Util) {

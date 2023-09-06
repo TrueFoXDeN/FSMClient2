@@ -14,7 +14,6 @@ import {SidebarButtonComponent} from './sidebar/sidebar-button/sidebar-button.co
 import {IconsModule} from './icons/icons.module';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {ColumnButtonsComponent} from './column/column-button/column-button.component';
-import {BlurOnDirective} from "./directives/general-directives/blur-on.directive";
 import {FormsModule} from "@angular/forms";
 import {CustomStyles} from "./customStyles";
 import {FlightStripInput} from "./flightstrip-container/flightstrip-directives/flightStripInput.directive";
@@ -104,7 +103,6 @@ import {ButtonModule} from "primeng/button";
     SidebarButtonComponent,
     SidebarComponent,
     ColumnButtonsComponent,
-    BlurOnDirective,
     FlightStripInput,
     ColumnWidth,
     ColumnHeaderHeight,

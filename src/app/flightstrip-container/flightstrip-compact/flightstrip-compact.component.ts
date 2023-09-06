@@ -20,7 +20,7 @@ import {FlightStripCompact} from "../flightstrip-directives/flightStripCompact.d
 export class FlightstripCompactComponent implements OnDestroy {
   @Input() fs!: Flightstrip;
   @ViewChild(FlightStripCompact) fsContainerDir: any;
-  @ViewChild('menutrigger') menutrigger!: ElementRef;
+  //@ViewChild('menutrigger') menutrigger!: ElementRef;
   @Output("triggeredCompact") compactModeTrigger = new EventEmitter<void>()
   stripTypes = stripType
   triangleIconStates = triangleIconState
@@ -50,6 +50,7 @@ export class FlightstripCompactComponent implements OnDestroy {
     this.subscriptionHandles.push(this.fsService.dragChange.subscribe((data) => {
       if (data.id == this.fs.id) {
         this.inputsDisabled = data.dragEnabled;
+        console.log(`Strip is Dragged: ${data.dragEnabled}`)
       }
     }));
 

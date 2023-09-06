@@ -33,7 +33,6 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(FlightStripInput) fsInputDir: any;
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
   @Input() fs!: Flightstrip;
-  @Input("isDragable") private isDragable = false;
   @Output("switchToCompact") compactSwitch = new EventEmitter<void>()
   @Output("nextStatus") nextStatusEvent = new EventEmitter<void>()
   @Output("prevStatus") prevStatusEvent = new EventEmitter<void>()
@@ -44,6 +43,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   highlightActive = false;
   triangleIconStates = triangleIconState
   communicationIconStates = communicationIconState
+
   constructor(private dataService: DataService, private fsService: FlightstripService, private styleChanger: StyleChangerService,
   ) {
     this.subscriptionHandles.push(this.fsService.changedType.subscribe((data) => {
@@ -54,11 +54,6 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     }));
 
-    this.subscriptionHandles.push(this.fsService.dragChange.subscribe((data) => {
-      if (data.id == this.fs.id) {
-        this.inputsDisabled = data.dragEnabled;
-      }
-    }));
     this.subscriptionHandles.push(this.fsService.searchFlightstrip.subscribe(() => {
       if (this.fs.isMarkedBySearch) {
         this.highlightActive = true;

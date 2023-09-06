@@ -14,12 +14,11 @@ import {DataService} from "../services/data.service";
 export class ColumnComponent {
   @Input("name") name = ""
   @Input("uuid") uuid = ""
-  @Output() submittedValue = new EventEmitter<void>();
+  @Output() blurEmitter = new EventEmitter<void>();
   @ViewChild(FlightstripContainerComponent) fsContainer!: QueryList<FlightstripContainerComponent>;
   public strips: Flightstrip[] = []
   isMouseMoving: boolean = false;
   isMouseDown: boolean = false;
-  isDragable = false;
 
   constructor(public dataService: DataService, private util: Util, private fsService: FlightstripService) {
   }
@@ -90,7 +89,7 @@ export class ColumnComponent {
   }
 
   onMouseLeave(_event: any) {
-    this.submittedValue.emit();
+    this.blurEmitter.emit();
   }
 
   getDragDelay() {
@@ -98,17 +97,20 @@ export class ColumnComponent {
   }
 
   dragEnded(fsId: string) {
-    this.isDragable = false;
-    this.fsService.dragChange.next({id: fsId, dragEnabled : false})
+    this.fsService.dragChange.next({id: fsId, dragEnabled: false})
   }
 
-  onMouseDown(fsId: string, event : any) {
+
+  onMouseDown(fsId: string, event: any) {
     this.isMouseDown = true
     setTimeout(() => {
-      if(event.button == 0){
-        if (!this.isMouseMoving && this.isMouseDown) {
-          this.fsService.dragChange.next({id: fsId, dragEnabled : true})
-          this.isDragable = true;
+      if (event.button == 0 && this.isMouseDown && !this.isMouseMoving) {
+        for (let i = 0; i < this.dataService.flightstripData?.[this.uuid].flightstrips.length; i++) {
+          if (this.dataService.flightstripData[this.uuid].flightstrips[i].id == fsId && this.dataService.flightstripData[this.uuid].flightstrips[i].compactMode) {
+            console.log("Is in compact mode")
+            this.fsService.dragChange.next({id: fsId, dragEnabled: true})
+            break;
+          }
         }
       }
     }, this.fsService.dragDelay - 20);
@@ -117,9 +119,7 @@ export class ColumnComponent {
 
   onMouseUp(fsId: string) {
     this.isMouseDown = false;
-    this.isDragable = false;
-    this.fsService.dragChange.next({id: fsId, dragEnabled : false})
-
+    this.fsService.dragChange.next({id: fsId, dragEnabled: false})
   }
 
   onMouseMove(fsId: string) {
@@ -127,4 +127,16 @@ export class ColumnComponent {
       this.isMouseMoving = true
     }
   }
+
+  dragStarted(fsId :string){
+    for (let i = 0; i < this.dataService.flightstripData?.[this.uuid].flightstrips.length; i++) {
+      if (this.dataService.flightstripData[this.uuid].flightstrips[i].id == fsId && this.dataService.flightstripData[this.uuid].flightstrips[i].compactMode) {
+        console.log("Is in compact mode")
+        this.fsService.dragChange.next({id: fsId, dragEnabled: true})
+        break;
+      }
+    }
+  }
 }
+
+
