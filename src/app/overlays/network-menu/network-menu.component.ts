@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NetworkService, networkType} from "../../services/network.service";
+import {NetworkService, NetworkType} from "../../services/network.service";
 import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
@@ -31,15 +31,15 @@ export class NetworkMenuComponent implements OnInit {
     if (!this.networkService.getIsNetworkFetchActive()) {
       switch (network) {
         case "ivao":
-          this.networkService.setNetwork(networkType.IVAO);
+          this.networkService.setNetwork(NetworkType.IVAO);
           this.dialogRef.close()
           break;
         case "vatsim":
-          this.networkService.setNetwork(networkType.VATSIM);
+          this.networkService.setNetwork(NetworkType.VATSIM);
           this.dialogRef.close()
           break;
         case "poscon":
-          this.networkService.setNetwork(networkType.POSCON);
+          this.networkService.setNetwork(NetworkType.POSCON);
           this.dialogRef.close()
           break;
       }

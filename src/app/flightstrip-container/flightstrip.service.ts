@@ -46,7 +46,7 @@ export class FlightstripService {
   }
 
   getFlightstripByCallsign(callsign: string, network: string) {
-    return this.http.get(`${this.baseURL}:5000/${network}/callsign/` + callsign)
+    return this.http.get(`${this.baseURL}/${network}/callsign/` + callsign)
   }
 
   createFlightstrip(column: string, callsign: string, type: stripType) {
@@ -56,6 +56,23 @@ export class FlightstripService {
       fs.callsign = callsign
     }
     this.dataService.flightstripData?.[column]?.['flightstrips'].push(fs);
+  }
+
+  flightStripExists(callsign: string){
+    let currentColumnIDList: string [] = []
+    this.dataService.profileData[this.dataService.currentProfileID].columnStructure.forEach((element: any) => {
+      currentColumnIDList.push(element.uuid)
+    });
+
+    for(let col of currentColumnIDList){
+      for (let flightstrip of this.dataService.flightstripData[col].flightstrips) {
+        if (flightstrip.callsign == callsign) {
+          return true;
+        }
+      }
+    }
+    return false
 
   }
+
 }
