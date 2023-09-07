@@ -10,7 +10,7 @@ import {Util} from "../util";
   providedIn: 'root'
 })
 export class FlightstripService {
-  dragDelay = 90;
+  dragDelay = 60;
   isInputFocused: boolean = false;
   changedTriangleState = new Subject<void>();
   changedCommunicationState = new Subject<void>();
@@ -46,6 +46,10 @@ export class FlightstripService {
 
   getFlightstripByCallsign(callsign: string, network: string) {
     return this.http.get(`${this.baseURL}/${network}/callsign/` + callsign)
+  }
+
+  getAirlineCallsign(icaoCode: string){
+    return this.http.get(`${this.baseURL}/airline/` + icaoCode)
   }
 
   createFlightstrip(column: string, callsign: string, type: stripType) {

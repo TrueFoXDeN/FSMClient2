@@ -94,6 +94,18 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
     this.compactSwitch.emit()
   }
 
+  getAirlineName(icaoCode: string) {
+      this.fsService.getAirlineCallsign(icaoCode).subscribe({
+        next: (response: any) => {
+          this.fs.airline = response.airline
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      });
+  }
+
+
   cycleTriangleState() {
     let enumCount = Object.keys(triangleIconState).length / 2;
     let state = this.fs.triangleIconState;
@@ -151,6 +163,13 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onContextClosed() {
+
+  }
+
+  onCallsignChange() {
+    if (this.fs.callsign.length >= 3 && this.fs.airline == "") {
+      this.getAirlineName(this.fs.callsign.substring(0, 3))
+    }
 
   }
 

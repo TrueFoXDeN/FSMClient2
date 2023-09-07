@@ -20,6 +20,7 @@
         (focusin)="onInputFocus()"
         (focusout)="onInputFocusLost()"
         (ngModelChange)="fs.callsign = $event.toUpperCase()"
+        (change)="onCallsignChange()"
         [disabled]="inputsDisabled">
       <input
         type="text"
