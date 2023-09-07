@@ -14,7 +14,12 @@
           <span class="network-info-value">{{ivaoControllers}}</span>
         </div>
       </div>
+
+
       <div class="button-container">
+        <div class="spinner">
+          <p-progressSpinner strokeWidth="2" *ngIf="ivaoLoading"></p-progressSpinner>
+        </div>
         <button class="button" networkMenuButton (click)="changeNetworkConnection('ivao')"
                 [disabled]="!ivaoButtonEnabled">{{ivaoButtonText}}</button>
       </div>
@@ -34,6 +39,9 @@
         </div>
       </div>
       <div class="button-container">
+        <div class="spinner">
+          <p-progressSpinner strokeWidth="2" *ngIf="vatsimLoading"></p-progressSpinner>
+        </div>
         <button class="button" networkMenuButton (click)="changeNetworkConnection('vatsim')"
                 [disabled]="!vatsimButtonEnabled">{{vatsimButtonText}}</button>
       </div>
@@ -53,6 +61,9 @@
         </div>
       </div>
       <div class="button-container">
+        <div class="spinner">
+          <p-progressSpinner strokeWidth="2" *ngIf="posconLoading"></p-progressSpinner>
+        </div>
         <button class="button" networkMenuButton (click)="changeNetworkConnection('poscon')"
                 [disabled]="!posconButtonEnabled">{{posconButtonText}}</button>
       </div>

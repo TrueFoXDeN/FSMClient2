@@ -2,6 +2,18 @@
 .mat-dialog-container {
   border-radius: 5px !important;
 }
+
+.p-progress-spinner-svg {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.p-progress-spinner {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+
 :root {
   --mdc-dialog-container-color: transparent;
   /*--mdc-dialog-container-shape: 5px;*/
@@ -16,18 +28,48 @@
   --app-input: var(--app-background-secondary);
   --app-border: #3f4b5b;
   --app-primary-outline: #ffffff;
-  --app-error: #fb271f;
+  --app-error: #e31e18;
+  --app-warning: #ffa600;
+  --app-success: #7bff00;
   --app-button-background: #262e37;
   --main-container-background: var(--app-background);
   --overlay-background: #2A323D;
   --overlay-foreground: #e631d5;
+
+  /*Snackbar*/
+
+  .mat-mdc-snack-bar-container {
+    &.standard-snackbar {
+      --mdc-snackbar-container-color: var(--app-accent-secondary);
+      --mat-mdc-snack-bar-button-color: #fff;
+      --mdc-snackbar-supporting-text-color: #fff;
+    }
+
+    &.warning-snackbar {
+      --mdc-snackbar-container-color: var(--app-warning);
+      --mat-mdc-snack-bar-button-color: #fff;
+      --mdc-snackbar-supporting-text-color: #fff;
+    }
+
+    &.success-snackbar {
+      --mdc-snackbar-container-color: #3C9E37;
+      --mat-mdc-snack-bar-button-color: #fff;
+      --mdc-snackbar-supporting-text-color: #fff;
+    }
+
+    &.error-snackbar {
+      --mdc-snackbar-container-color: var(--app-error);
+      --mat-mdc-snack-bar-button-color: #fff;
+      --mdc-snackbar-supporting-text-color: #fff;
+    }
+  }
 
   /*Sidebar*/
   --sidebar-background: var(--app-background-secondary);
   --sidebar-fontcolor: var(--app-fontcolor);
   --sidebar-button-background: var(--app-button-background);
   --sidebar-button-foreground-default: #ffffff;
-  --sidebar-button-foreground-success: #7bff00;
+  --sidebar-button-foreground-success: var(--app-success);
   --sidebar-button-foreground-error: var(--app-error);
   --sidebar-button-hover: var(--app-background);
   --sidebar-button-outline: var(--app-accent);
@@ -51,7 +93,7 @@
   --fs-state-icon-default: #FFFFFF;
   --fs-state-icon-success: #00FF00;
   --fs-state-icon-error: var(--app-error);
-  --fs-state-icon-warning: #ffa600;
+  --fs-state-icon-warning: var(--app-warning);
   --fs-state-icon-inactive: #CACACA51;
   /*Inbound*/
   --fs-inbound-background: #233927;

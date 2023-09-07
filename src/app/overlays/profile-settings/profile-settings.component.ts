@@ -31,7 +31,7 @@ export class ProfileSettingsComponent implements OnInit {
   }
 
   onItemselect(event: any) {
-    console.log(event)
+    // console.log(event)
     let option = event.value
     if (option.id != this.dataService.getStandardProfileID()) {
       this.deleteButtonActive = true;
@@ -57,8 +57,8 @@ export class ProfileSettingsComponent implements OnInit {
   onDeleteClick() {
     if (this.deleteButtonActive) {
       this.markForDelete = true;
-      console.log(this.profiles)
-      console.log(this.selectedProfile)
+      // console.log(this.profiles)
+      // console.log(this.selectedProfile)
     }
   }
 
