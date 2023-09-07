@@ -93,6 +93,7 @@ import {InputSwitchModule} from "primeng/inputswitch";
 import {SliderModule} from "primeng/slider";
 import { ProximityRowButtonComponent } from './overlays/proximity-settings/proximity-row/proximity-row-button/proximity-row-button.component';
 import {ButtonModule} from "primeng/button";
+import { CookieDialogComponent } from './overlays/cookie-dialog/cookie-dialog.component';
 
 @NgModule({
   declarations: [
@@ -144,7 +145,8 @@ import {ButtonModule} from "primeng/button";
     GeneralDropdownInputDirective,
     ProximityButtonComponent,
     ProximityRowComponent,
-    ProximityRowButtonComponent
+    ProximityRowButtonComponent,
+    CookieDialogComponent
   ],
   imports: [
     BrowserModule,

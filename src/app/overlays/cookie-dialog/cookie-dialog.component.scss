@@ -1,0 +1,66 @@
+.window {
+  height: 100%;
+  width: 100%;
+  background-color: var(--cookie-background);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 250px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25%;
+  min-height: 40px;
+  & h2{
+    margin:0;
+  }
+}
+
+.text-container{
+  height: 40%;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer{
+  height: 25%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  min-height: 40px;
+  aspect-ratio: 3;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 65%;
+  border-radius: 5px;
+  background-color: var(--cookie-button-background);
+  &:hover {
+    background-color: var(--cookie-button-background-hover);
+    cursor: pointer;
+  }
+}
+
+.image{
+  height: 100%;
+  width: 40%;
+  overflow: hidden;
+  & img{
+    max-width: 100%; /* Make the image responsive by limiting its width to the container's width */
+    height: auto;
+  }
+}
+
+
+

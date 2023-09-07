@@ -153,6 +153,11 @@
   --profile-save-button-background: var(--app-primary);
   --profile-save-button-background-hover: var(--app-primary-hover);
   --profile-save-button-fontcolor: var(--app-fontcolor);
+
+  /*Cookie Dialog*/
+  --cookie-background: var(--app-background);
+  --cookie-button-background: var(--app-primary);
+  --cookie-button-background-hover: var(--app-primary-hover);
 }
 
 
