@@ -48,26 +48,38 @@ export class FlightstripService {
     return this.http.get(`${this.baseURL}/${network}/callsign/` + callsign)
   }
 
-  getAirlineCallsign(icaoCode: string){
+  getAirlineCallsign(icaoCode: string) {
     return this.http.get(`${this.baseURL}/airline/` + icaoCode)
   }
 
   createFlightstrip(column: string, callsign: string, type: stripType) {
     let nextPos = this.dataService.flightstripData?.[column]?.['flightstrips'].length
     let fs = new Flightstrip(this.util.generateUUID(), type, column, nextPos);
-    if(callsign !== ""){
+    if (callsign !== "") {
       fs.callsign = callsign
     }
-    this.dataService.flightstripData?.[column]?.['flightstrips'].push(fs);
+
+    if (callsign.length >= 3) {
+      this.getAirlineCallsign(callsign.substring(0, 3)).subscribe({
+        next: (res: any) => {
+          console.log(res)
+          fs.airline = res.airline
+          this.dataService.flightstripData?.[column]?.['flightstrips'].push(fs);
+        }
+      })
+    } else {
+      this.dataService.flightstripData?.[column]?.['flightstrips'].push(fs);
+    }
+
   }
 
-  flightStripExists(callsign: string){
+  flightStripExists(callsign: string) {
     let currentColumnIDList: string [] = []
     this.dataService.profileData[this.dataService.currentProfileID].columnStructure.forEach((element: any) => {
       currentColumnIDList.push(element.uuid)
     });
 
-    for(let col of currentColumnIDList){
+    for (let col of currentColumnIDList) {
       for (let flightstrip of this.dataService.flightstripData[col].flightstrips) {
         if (flightstrip.callsign == callsign) {
           return true;

@@ -4,6 +4,7 @@ import {Flightstrip, stripType} from "../flightstrip.model";
 import {FlightstripService} from "../flightstrip.service";
 import {StyleChangerService} from "../../services/style-changer.service";
 import {DataService} from "../../services/data.service";
+import {ProximityService} from "../../overlays/proximity-settings/proximity.service";
 
 @Component({
   selector: 'app-context-menu',
@@ -18,10 +19,15 @@ export class ContextMenuComponent implements OnInit {
   option1: stripType = stripType.INBOUND
   option2: stripType = stripType.INBOUND
 
-  constructor(private dataService: DataService, private styleService: StyleChangerService, private fsService: FlightstripService) {
+  constructor(private dataService: DataService, private proximityService: ProximityService, private styleService: StyleChangerService, private fsService: FlightstripService) {
 
   }
 
+  finishStrip() {
+    this.proximityService.finishedAircrafts.push(this.fs.callsign)
+    let index = this.dataService.flightstripData[this.fs.columnId].flightstrips.indexOf(this.fs)
+    this.dataService.flightstripData[this.fs.columnId].flightstrips.splice(index, 1)
+  }
 
   deleteStrip() {
     let index = this.dataService.flightstripData[this.fs.columnId].flightstrips.indexOf(this.fs)
@@ -72,4 +78,6 @@ export class ContextMenuComponent implements OnInit {
         break;
     }
   }
+
+
 }

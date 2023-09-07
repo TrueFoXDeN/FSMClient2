@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Airport} from "./proximity.model";
 import {DataService} from "../../services/data.service";
 import {MatDialogRef} from "@angular/material/dialog";
-import {ProximityService} from "../profile-settings/proximity.service";
+import {ProximityService} from "./proximity.service";
 import {FlightstripService} from "../../flightstrip-container/flightstrip.service";
 import {stripType} from "../../flightstrip-container/flightstrip.model";
 

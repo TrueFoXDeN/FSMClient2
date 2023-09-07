@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {interval, Subject} from "rxjs";
 import {SnackbarMessageService} from "./snackbar-message.service";
-import {ProximityService} from "../overlays/profile-settings/proximity.service";
+import {ProximityService} from "../overlays/proximity-settings/proximity.service";
 import {DataService} from "./data.service";
 import {Airport} from "../overlays/proximity-settings/proximity.model";
 import {HttpClient} from "@angular/common/http";
@@ -34,6 +34,9 @@ export class NetworkService {
         this.proximityService.getAircraftsInProximity(this.usedNetwork, airports).subscribe({
           next: (res: any) => {
             this.proximityService.updateProximity(res, airports)
+          },
+          error: (err) => {
+            this.triggerError()
           }
         })
       }
@@ -102,9 +105,6 @@ export class NetworkService {
     return this.errorTriggered
   }
 
-  updateProximity() {
-
-  }
 
 
 }
