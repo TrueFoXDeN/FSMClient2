@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {CookieService} from "ngx-cookie-service";
 import {SnackbarMessageService} from "./services/snackbar-message.service";
 import {DataService} from "./services/data.service";
+import packageInfo from '../../package.json';
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-root',
@@ -9,9 +11,10 @@ import {DataService} from "./services/data.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'FlightStrip Manager';
-
-  constructor(private cookieService: CookieService, private dataService: DataService, private messageService: SnackbarMessageService) {
+  title = 'FSM';
+  version = packageInfo.version
+  constructor(private cookieService: CookieService, private dataService: DataService, private messageService: SnackbarMessageService, private titleService:Title) {
+    this.titleService.setTitle(this.title + " " + this.version);
     if (this.cookieService.check("currentProfileID")) {
       this.dataService.currentProfileID = this.cookieService.get("currentProfileID");
     } else {
