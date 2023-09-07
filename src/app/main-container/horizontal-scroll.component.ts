@@ -10,7 +10,6 @@ import {
   PushDirections,
   Resizable,
 } from "angular-gridster2";
-import {Data} from "../data";
 import {CustomStyles} from "../customStyles";
 import {StyleChangerService} from "../services/style-changer.service";
 import {ColumnBuilderService} from "../services/column-builder.service";

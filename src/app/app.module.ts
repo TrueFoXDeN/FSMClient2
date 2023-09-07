@@ -26,7 +26,6 @@ import {FlightstripContainerComponent} from './flightstrip-container/flightstrip
 import {FlightstripCompactComponent} from './flightstrip-container/flightstrip-compact/flightstrip-compact.component';
 import {ColumnBuilderComponent} from './overlays/column-builder/column-builder.component';
 import {DialogModule} from '@angular/cdk/dialog';
-import {Data} from "./data";
 import {GridsterModule} from "angular-gridster2";
 import {
   ColumnBuilderButtonComponent
@@ -182,7 +181,6 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
   ],
   providers: [
     CustomStyles,
-    Data,
     Util,
     {
       provide: MatDialogRef,

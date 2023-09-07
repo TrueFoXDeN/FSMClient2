@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Util} from "../../util";
-import {Data} from "../../data";
 import {CookieService} from "ngx-cookie-service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {SnackbarMessageService} from "../../services/snackbar-message.service";

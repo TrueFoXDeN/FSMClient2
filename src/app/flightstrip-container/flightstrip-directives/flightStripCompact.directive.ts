@@ -35,10 +35,10 @@ export class FlightStripCompact implements OnInit, OnDestroy {
         this.elementRef.nativeElement.style.fontSize = `${7 * this.cS.multiplier}pt`
         break;
       case "medium":
-        this.elementRef.nativeElement.style.fontSize = `${11 * this.cS.multiplier}pt`
+        this.elementRef.nativeElement.style.fontSize = `${10 * this.cS.multiplier}pt`
         break;
       case "large":
-        this.elementRef.nativeElement.style.fontSize = `${17 * this.cS.multiplier}pt`
+        this.elementRef.nativeElement.style.fontSize = `${15 * this.cS.multiplier}pt`
         break;
     }
   }

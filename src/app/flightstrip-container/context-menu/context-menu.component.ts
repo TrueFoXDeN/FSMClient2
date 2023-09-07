@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Data} from "../../data";
 import {Flightstrip, stripType} from "../flightstrip.model";
 import {FlightstripService} from "../flightstrip.service";
 import {StyleChangerService} from "../../services/style-changer.service";
