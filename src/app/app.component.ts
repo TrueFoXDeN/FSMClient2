@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   title = 'FSM';
   version = packageInfo.version
   constructor(private cookieService: CookieService, private dataService: DataService, private messageService: SnackbarMessageService, private titleService:Title) {
-    this.titleService.setTitle(this.title + " " + this.version);
+    this.titleService.setTitle(this.title + " v" + this.version);
     if (this.cookieService.check("currentProfileID")) {
       this.dataService.currentProfileID = this.cookieService.get("currentProfileID");
     } else {
