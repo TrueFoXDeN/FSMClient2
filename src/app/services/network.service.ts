@@ -4,6 +4,8 @@ import {SnackbarMessageService} from "./snackbar-message.service";
 import {ProximityService} from "../overlays/profile-settings/proximity.service";
 import {DataService} from "./data.service";
 import {Airport} from "../overlays/proximity-settings/proximity.model";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +19,9 @@ export class NetworkService {
   errorTriggered = false;
   networkState = "default"
   changedNetworkEmitter = new Subject<any>()
+  baseURL = environment.baseURL
 
-  constructor(private messageService: SnackbarMessageService, private proximityService: ProximityService, private dataService: DataService) {
+  constructor(private messageService: SnackbarMessageService, private proximityService: ProximityService, private dataService: DataService, private http: HttpClient) {
     this.networkFetchInterval.subscribe(() => {
       if (this.isNetworkFetchActive) {
         this.networkEmitter.next();
@@ -58,6 +61,18 @@ export class NetworkService {
     return this.isNetworkFetchActive;
   }
 
+  getVatsimOnlineCounter() {
+    return this.http.get(`${this.baseURL}/vatsim/connections`)
+  }
+
+  getIvaoOnlineCounter() {
+    return this.http.get(`${this.baseURL}/ivao/connections`)
+  }
+
+  getPosconOnlineCounter() {
+    return this.http.get(`${this.baseURL}/poscon/connections`)
+  }
+
   getNetwork() {
     switch (this.usedNetwork) {
       case NetworkType.VATSIM:
@@ -87,7 +102,7 @@ export class NetworkService {
     return this.errorTriggered
   }
 
-  updateProximity(){
+  updateProximity() {
 
   }
 

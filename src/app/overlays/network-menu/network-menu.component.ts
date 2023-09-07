@@ -74,6 +74,37 @@ export class NetworkMenuComponent implements OnInit {
     } else {
       this.changeAllButtons(true);
     }
+    this.getNetworkCounts()
+  }
+
+  getNetworkCounts(){
+    this.networkService.getIvaoOnlineCounter().subscribe({
+      next: (response: any) => {
+        this.ivaoControllers = response.controllerCount
+        this.ivaoPilots = response.pilotCount
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    });
+    this.networkService.getVatsimOnlineCounter().subscribe({
+      next: (response: any) => {
+        this.vatsimControllers = response.controllerCount
+        this.vatsimPilots = response.pilotCount
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    });
+    this.networkService.getPosconOnlineCounter().subscribe({
+      next: (response: any) => {
+        this.posconControllers = response.controllerCount
+        this.posconPilots = response.pilotCount
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    });
   }
 
   changeAllButtons(state: boolean) {
