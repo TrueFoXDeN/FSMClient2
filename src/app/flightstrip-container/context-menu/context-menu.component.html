@@ -1,23 +1,23 @@
 <div class="menu" cdkMenu fsContextMenu>
-  <div class="row" (click)="finishStrip()">
+  <div class="row" cdkMenuItem fsContextMenuItem (click)="finishStrip()">
     <i-feather name="check" class="icon"></i-feather>
-    <button class="menu-item" cdkMenuItem fsContextMenuItem >Finished</button>
+    <button class="menu-item">Finished</button>
   </div>
-  <div class="row" (click)="archiveStrip()">
+  <div class="row" cdkMenuItem fsContextMenuItem (click)="archiveStrip()">
     <i-feather name="archive" class="icon"></i-feather>
-    <button class="menu-item" cdkMenuItem fsContextMenuItem >Archive</button>
+    <button class="menu-item" >Archive</button>
   </div>
-  <div class="row" (click)="deleteStrip()">
+  <div class="row" cdkMenuItem fsContextMenuItem (click)="deleteStrip()">
     <i-feather name="trash-2" class="icon"></i-feather>
-    <button class="menu-item" cdkMenuItem fsContextMenuItem >Delete</button>
+    <button class="menu-item">Delete</button>
   </div>
-  <div class="row" (click)="switchToOption(1)">
+  <div class="row" cdkMenuItem fsContextMenuItem (click)="switchToOption(1)">
     <i-feather name="arrow-right" class="icon"></i-feather>
-    <button class="menu-item" cdkMenuItem fsContextMenuItem >To {{switchOption1}}</button>
+    <button class="menu-item">To {{switchOption1}}</button>
   </div>
-  <div class="row" (click)="switchToOption(2)">
+  <div class="row" cdkMenuItem fsContextMenuItem (click)="switchToOption(2)">
     <i-feather name="arrow-right" class="icon"></i-feather>
-    <button class="menu-item" cdkMenuItem fsContextMenuItem >To {{switchOption2}}</button>
+    <button class="menu-item">To {{switchOption2}}</button>
   </div>
 
 
