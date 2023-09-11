@@ -7,6 +7,8 @@ import {Title} from "@angular/platform-browser";
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ColumnBuilderComponent} from "./overlays/column-builder/column-builder.component";
 import {CookieDialogComponent} from "./overlays/cookie-dialog/cookie-dialog.component";
+import {LoggingService} from "./services/logging.service";
+import {Util} from "./util";
 
 @Component({
   selector: 'app-root',
@@ -19,7 +21,7 @@ export class AppComponent implements OnInit {
 
   constructor(private cookieService: CookieService, private dataService: DataService,
               private messageService: SnackbarMessageService, private titleService: Title,
-              public dialog: MatDialog,) {
+              public dialog: MatDialog, private loggingService: LoggingService, private util: Util) {
     this.titleService.setTitle(this.title + " v" + this.version);
     if (this.cookieService.check("currentProfileID")) {
       this.dataService.currentProfileID = this.cookieService.get("currentProfileID");
@@ -38,8 +40,18 @@ export class AppComponent implements OnInit {
     }
     if (!this.cookieService.check("cookieAccepted")) {
       this.openCookieDialog();
-      this.cookieService.set("cookieAccepted", "true", { expires: 10000, sameSite: 'Lax' })
+      this.cookieService.set("cookieAccepted", "true", {expires: 10000, sameSite: 'Lax'})
     }
+
+    if (this.cookieService.check('uid')) {
+      this.dataService.uid = this.cookieService.get('uid')
+    } else {
+      this.dataService.uid = this.util.generateUUID()
+      this.cookieService.set('uid',  this.dataService.uid)
+    }
+
+    this.loggingService.logActivity(this.dataService.uid)
+
 
     console.log(`Current profile-ID: ${this.dataService.currentProfileID}`)
     console.log(`Current profile-Name: ${this.dataService.profileData[this.dataService.currentProfileID].name}`)
@@ -50,7 +62,7 @@ export class AppComponent implements OnInit {
     const dialogConfig = new MatDialogConfig()
     dialogConfig.height = '30vh';
     dialogConfig.width = '25vw';
-    dialogConfig.disableClose= true;
+    dialogConfig.disableClose = true;
     dialogConfig.panelClass = 'custom-dialog-container';
     const dialogRef = this.dialog.open(CookieDialogComponent, dialogConfig);
 

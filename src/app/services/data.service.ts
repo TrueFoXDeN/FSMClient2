@@ -18,6 +18,7 @@ export class DataService {
   public currentProfileID = "a6574bc2-4351-40be-b5ed-eda88ee2c06c"
   public currentProfile: any = {}
   public archivedStrips: any = {}
+  public uid = ''
 
 
 
