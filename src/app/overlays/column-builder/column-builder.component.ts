@@ -10,7 +10,6 @@ import {
   Resizable,
 } from "angular-gridster2";
 import {Util} from "../../util";
-import {Data} from "../../data";
 import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from "@angular/material/dialog";
 import {DataService} from "../../services/data.service";
 

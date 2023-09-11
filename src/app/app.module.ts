@@ -26,7 +26,6 @@ import {FlightstripContainerComponent} from './flightstrip-container/flightstrip
 import {FlightstripCompactComponent} from './flightstrip-container/flightstrip-compact/flightstrip-compact.component';
 import {ColumnBuilderComponent} from './overlays/column-builder/column-builder.component';
 import {DialogModule} from '@angular/cdk/dialog';
-import {Data} from "./data";
 import {GridsterModule} from "angular-gridster2";
 import {
   ColumnBuilderButtonComponent
@@ -94,6 +93,7 @@ import {SliderModule} from "primeng/slider";
 import { ProximityRowButtonComponent } from './overlays/proximity-settings/proximity-row/proximity-row-button/proximity-row-button.component';
 import {ButtonModule} from "primeng/button";
 import { CookieDialogComponent } from './overlays/cookie-dialog/cookie-dialog.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -176,11 +176,11 @@ import { CookieDialogComponent } from './overlays/cookie-dialog/cookie-dialog.co
     DropdownModule,
     InputSwitchModule,
     SliderModule,
-    ButtonModule
+    ButtonModule,
+    ProgressSpinnerModule
   ],
   providers: [
     CustomStyles,
-    Data,
     Util,
     {
       provide: MatDialogRef,

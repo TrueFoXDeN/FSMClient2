@@ -87,6 +87,11 @@ export class NetworkService {
     }
   }
 
+  getCurrentNetworkEnum() {
+    return this.usedNetwork
+  }
+
+
   setNetwork(network: NetworkType) {
     this.usedNetwork = network;
     this.changedNetworkEmitter.next({active: this.isNetworkFetchActive, network: this.usedNetwork})
@@ -104,7 +109,6 @@ export class NetworkService {
   getErrorState() {
     return this.errorTriggered
   }
-
 
 
 }

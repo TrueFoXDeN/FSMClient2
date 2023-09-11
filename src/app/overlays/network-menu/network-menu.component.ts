@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NetworkService, NetworkType} from "../../services/network.service";
 import {MatDialogRef} from "@angular/material/dialog";
+import {SnackbarMessageService} from "../../services/snackbar-message.service";
 
 @Component({
   selector: 'app-network-menu',
@@ -9,6 +10,7 @@ import {MatDialogRef} from "@angular/material/dialog";
 })
 export class NetworkMenuComponent implements OnInit {
 
+  networkType = NetworkType
   connectedText = "Disconnect"
   notConnectedText = "Connect"
   vatsimButtonText = ""
@@ -23,8 +25,11 @@ export class NetworkMenuComponent implements OnInit {
   vatsimControllers = "0"
   posconPilots = "0"
   posconControllers = "0"
+  ivaoLoading: boolean = false;
+  vatsimLoading: boolean = false;
+  posconLoading: boolean = false;
 
-  constructor(private networkService: NetworkService, public dialogRef: MatDialogRef<NetworkMenuComponent>) {
+  constructor(private networkService: NetworkService, public dialogRef: MatDialogRef<NetworkMenuComponent>, private snackService: SnackbarMessageService) {
   }
 
   changeNetworkConnection(network: string) {
@@ -60,49 +65,63 @@ export class NetworkMenuComponent implements OnInit {
       switch (this.networkService.getNetwork()) {
         case "ivao":
           this.ivaoButtonText = this.connectedText;
-          this.ivaoButtonEnabled = true;
           break;
         case "vatsim":
-          this.vatsimButtonEnabled = true;
           this.vatsimButtonText = this.connectedText;
           break;
         case "poscon":
-          this.posconButtonEnabled = true;
           this.posconButtonText = this.connectedText;
           break;
       }
-    } else {
-      this.changeAllButtons(true);
     }
     this.getNetworkCounts()
   }
 
-  getNetworkCounts(){
+  getNetworkCounts() {
+    this.ivaoLoading = true;
+    this.vatsimLoading = true;
+    this.posconLoading = true;
     this.networkService.getIvaoOnlineCounter().subscribe({
       next: (response: any) => {
-        this.ivaoControllers = response.controllerCount
-        this.ivaoPilots = response.pilotCount
+        this.ivaoControllers = response.controllerCount;
+        this.ivaoPilots = response.pilotCount;
+        if (!this.networkService.getIsNetworkFetchActive() || this.networkService.getCurrentNetworkEnum() == this.networkType.IVAO) {
+          this.ivaoButtonEnabled = true;
+        }
+
+        this.ivaoLoading = false;
       },
       error: (err) => {
-        console.log(err)
+        this.snackService.showMessage(`Cannot connect to IVAO`, "error");
+        this.ivaoLoading = false;
       }
     });
     this.networkService.getVatsimOnlineCounter().subscribe({
       next: (response: any) => {
-        this.vatsimControllers = response.controllerCount
-        this.vatsimPilots = response.pilotCount
+        this.vatsimControllers = response.controllerCount;
+        this.vatsimPilots = response.pilotCount;
+        if (!this.networkService.getIsNetworkFetchActive() || this.networkService.getCurrentNetworkEnum() == this.networkType.VATSIM) {
+          this.vatsimButtonEnabled = true;
+        }
+        this.vatsimLoading = false;
       },
       error: (err) => {
-        console.log(err)
+        this.snackService.showMessage(`Cannot connect to VATSIM`, "error");
+        this.vatsimLoading = false;
       }
     });
     this.networkService.getPosconOnlineCounter().subscribe({
       next: (response: any) => {
         this.posconControllers = response.controllerCount
         this.posconPilots = response.pilotCount
+        if (!this.networkService.getIsNetworkFetchActive() || this.networkService.getCurrentNetworkEnum() == this.networkType.POSCON) {
+          this.posconButtonEnabled = true;
+        }
+        this.posconLoading = false
       },
       error: (err) => {
-        console.log(err)
+        this.snackService.showMessage(`Cannot connect to POSCON`, "error");
+        this.posconLoading = false;
       }
     });
   }

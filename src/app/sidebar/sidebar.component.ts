@@ -3,7 +3,7 @@ import {CustomStyles} from "../customStyles";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ColumnBuilderComponent} from "../overlays/column-builder/column-builder.component";
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {Data} from "../data";
+
 import {StyleChangerService} from "../services/style-changer.service";
 import {SnackbarMessageService} from "../services/snackbar-message.service";
 import {ColumnBuilderService} from "../services/column-builder.service";
