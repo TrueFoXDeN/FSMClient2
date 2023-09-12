@@ -100,7 +100,6 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
           this.fs.airline = response.airline
         },
         error: (err) => {
-          console.log(err)
         }
       });
   }

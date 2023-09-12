@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Subject} from "rxjs";
+import {Observable, Subject, throwError} from "rxjs";
 import {Flightstrip, stripType} from "./flightstrip.model";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
@@ -49,7 +49,11 @@ export class FlightstripService {
   }
 
   getAirlineCallsign(icaoCode: string) {
-    return this.http.get(`${this.baseURL}/airline/` + icaoCode)
+    let allowed = /[\d*\w*]/;
+    if (allowed.test(icaoCode)) {
+      return this.http.get(`${this.baseURL}/airline/` + icaoCode)
+    }
+    return throwError(() => new Error('malformed callsign'))
   }
 
   createFlightstrip(column: string, callsign: string, type: stripType) {
@@ -65,6 +69,8 @@ export class FlightstripService {
           console.log(res)
           fs.airline = res.airline
           this.dataService.flightstripData?.[column]?.['flightstrips'].push(fs);
+        },
+        error: (err) => {
         }
       })
     } else {
