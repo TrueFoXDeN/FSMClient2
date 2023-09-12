@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {CookieService} from "ngx-cookie-service";
 import {SnackbarMessageService} from "./services/snackbar-message.service";
 import {DataService} from "./services/data.service";
@@ -9,6 +9,7 @@ import {ColumnBuilderComponent} from "./overlays/column-builder/column-builder.c
 import {CookieDialogComponent} from "./overlays/cookie-dialog/cookie-dialog.component";
 import {LoggingService} from "./services/logging.service";
 import {Util} from "./util";
+import {SearchcallsignService} from "./services/searchcallsign.service";
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,8 @@ export class AppComponent implements OnInit {
 
   constructor(private cookieService: CookieService, private dataService: DataService,
               private messageService: SnackbarMessageService, private titleService: Title,
-              public dialog: MatDialog, private loggingService: LoggingService, private util: Util) {
+              public dialog: MatDialog, private loggingService: LoggingService, private util: Util,
+              private searchcallsignService: SearchcallsignService) {
     this.titleService.setTitle(this.title + " v" + this.version);
     if (this.cookieService.check("currentProfileID")) {
       this.dataService.currentProfileID = this.cookieService.get("currentProfileID");
@@ -47,7 +49,7 @@ export class AppComponent implements OnInit {
       this.dataService.uid = this.cookieService.get('uid')
     } else {
       this.dataService.uid = this.util.generateUUID()
-      this.cookieService.set('uid',  this.dataService.uid)
+      this.cookieService.set('uid', this.dataService.uid)
     }
 
     this.loggingService.logActivity(this.dataService.uid)
@@ -70,4 +72,14 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  @HostListener('window:keydown', ['$event'])
+  keyEvent(e: KeyboardEvent){
+    if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+      e.preventDefault();
+      this.searchcallsignService.openSearchCallsign()
+    }
+  }
+
+
 }

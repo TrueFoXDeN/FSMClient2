@@ -20,6 +20,7 @@ import {SearchCallsignComponent} from "../overlays/search-callsign/search-callsi
 import {Util} from "../util";
 import {FlightstripService} from "../flightstrip-container/flightstrip.service";
 import {DataService} from "../services/data.service";
+import {SearchcallsignService} from "../services/searchcallsign.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -33,7 +34,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   constructor(private customStyle: CustomStyles, private _snackBar: MatSnackBar, public dialog: MatDialog,
               private dataService: DataService, private styleChanger: StyleChangerService, private snackService: SnackbarMessageService,
               private colBuilderService: ColumnBuilderService, public networkService: NetworkService,
-              private columnBuilderService: ColumnBuilderService, private fsService: FlightstripService) {
+              private columnBuilderService: ColumnBuilderService, private searchcallsignService: SearchcallsignService) {
+
     this.subscriptionList.push(this.networkService.changedNetworkEmitter.subscribe((data) => {
       if (data.active) {
         this.networkIcon = "success";
@@ -171,12 +173,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   openSearchCallsign() {
-    const dialogConfig = new MatDialogConfig()
-    dialogConfig.height = `${150 * this.customStyle.multiplier}px`;
-    dialogConfig.width = `${300 * this.customStyle.multiplier}px`;
-    const dialogRef = this.dialog.open(SearchCallsignComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe((data) => {
-      this.fsService.findFlightStrip(data);
-    });
+    this.searchcallsignService.openSearchCallsign()
   }
 }
