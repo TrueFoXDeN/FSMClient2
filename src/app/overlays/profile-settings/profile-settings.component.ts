@@ -32,11 +32,7 @@ export class ProfileSettingsComponent implements OnInit {
   onItemselect(event: any) {
     // console.log(event)
     let option = event.value
-    if (option.id != this.dataService.getStandardProfileID()) {
-      this.deleteButtonActive = true;
-    } else {
-      this.deleteButtonActive = false;
-    }
+    this.deleteButtonActive = option.id != this.dataService.getStandardProfileID();
   }
 
   saveProfile() {
@@ -44,20 +40,20 @@ export class ProfileSettingsComponent implements OnInit {
       let newProfile = {name: this.newProfileName, id: this.util.generateUUID()}
       this.profiles.push(newProfile)
       this.newProfileName = ""
-      this.dataService.profileData[newProfile.id] = {name: newProfile.name, columnStructure: [], proximity: []};
+      let newProfileData = {name: newProfile.name, id: newProfile.id,
+        columnStructure: this.dataService.currentProfile.columnStructure, proximity: this.dataService.currentProfile.proximity}
+      this.dataService.profileData[newProfileData.id] = newProfileData
       localStorage.setItem("profileStructure", JSON.stringify(this.dataService.profileData));
       this.selectedProfile = newProfile;
       this.deleteButtonActive = true;
       this.saveButtonActive = false;
-      // this.onItemselect(newProfile)
+      this.onApply()
     }
   }
 
   onDeleteClick() {
     if (this.deleteButtonActive) {
       this.markForDelete = true;
-      // console.log(this.profiles)
-      // console.log(this.selectedProfile)
     }
   }
 

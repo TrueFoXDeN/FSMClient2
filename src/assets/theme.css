@@ -31,6 +31,8 @@
   --app-error: #e31e18;
   --app-warning: #ffa600;
   --app-success: #7bff00;
+  --app-success-secondary: #3C9E37;
+  --app-success-tertiary: #2b722f;
   --app-button-background: #262e37;
   --main-container-background: var(--app-background);
   --overlay-background: #2A323D;
@@ -52,7 +54,7 @@
     }
 
     &.success-snackbar {
-      --mdc-snackbar-container-color: #3C9E37;
+      --mdc-snackbar-container-color: var(--app-success-secondary);
       --mat-mdc-snack-bar-button-color: #fff;
       --mdc-snackbar-supporting-text-color: #fff;
     }
@@ -127,8 +129,8 @@
   --columnbuilder-button-delete-outline-hover: var(--app-error);
   --columnbuilder-button-save-background: var(--app-primary);
   --columnbuilder-button-save-background-hover: var(--app-primary-hover);
-  --columnbuilder-button-add-background: var(--app-primary);
-  --columnbuilder-button-add-background-hover: var(--app-primary-hover);
+  --columnbuilder-button-add-background: var(--app-success-secondary);
+  --columnbuilder-button-add-background-hover: var(--app-success-tertiary);
   --columnbuilder-button-discard-background: var(--app-accent-secondary);
   --columnbuilder-button-discard-background-hover: var(--app-accent-secondary-hover);
   --columnbuilder-background: var(--app-background);
@@ -161,8 +163,8 @@
   --proximity-button-discard-background-hover: var(--app-accent-secondary-hover);
   --proximity-button-save-background: var(--app-primary);
   --proximity-button-save-background-hover: var(--app-primary-hover);
-  --proximity-button-add-background: var(--app-primary);
-  --proximity-button-add-background-hover: var(--app-primary-hover);
+  --proximity-button-add-background: var(--app-success-secondary);
+  --proximity-button-add-background-hover: var(--app-success-tertiary);
 
   /*Search Callsign*/
   --search-input: #2B2B2B;

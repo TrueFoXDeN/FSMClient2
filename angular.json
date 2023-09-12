@@ -19,7 +19,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "preserveSymlinks": true,
-            "outputPath": "dist/fsm-demo",
+            "outputPath": "dist/fsm",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
