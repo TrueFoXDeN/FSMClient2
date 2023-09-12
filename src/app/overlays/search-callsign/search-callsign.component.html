@@ -4,7 +4,7 @@
   </div>
   <div class="input-container">
     <input class="input" searchCallsignInput (input)="onInput()" [(ngModel)]="callsign"
-           (ngModelChange)="callsign = $event.toUpperCase()">
+           (ngModelChange)="callsign = $event.toUpperCase()" (keyup.enter)="onClose()">
     <app-search-callsign-button icon="search" class="icon"
                                 [ngClass]="{'disabled': !searchButtonActive}"
                                 (click)="onClose()" ></app-search-callsign-button>

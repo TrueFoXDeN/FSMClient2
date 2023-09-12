@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Flightstrip, stripType} from "../flightstrip.model";
 import {FlightstripService} from "../flightstrip.service";
-import {StyleChangerService} from "../../services/style-changer.service";
 import {DataService} from "../../services/data.service";
 import {ProximityService} from "../../overlays/proximity-settings/proximity.service";
 
@@ -14,11 +13,13 @@ export class ContextMenuComponent implements OnInit {
   @Input("fs") fs!: Flightstrip
   switchOption1: string = ""
   switchOption2: string = ""
+  compactIcon: string = ""
+  compactText: string = ""
 
   option1: stripType = stripType.INBOUND
   option2: stripType = stripType.INBOUND
 
-  constructor(private dataService: DataService, private proximityService: ProximityService, private styleService: StyleChangerService, private fsService: FlightstripService) {
+  constructor(private dataService: DataService, private proximityService: ProximityService, private fsService: FlightstripService) {
 
   }
 
@@ -76,7 +77,22 @@ export class ContextMenuComponent implements OnInit {
         this.option2 = stripType.OUTBOUND;
         break;
     }
+    this.setCompactText()
   }
 
 
+  setCompactText() {
+    console.log(this.fs)
+    if(this.fs.compactMode){
+      this.compactIcon = "maximize-2"
+      this.compactText = "Expand"
+    }else{
+      this.compactIcon = "minimize-2"
+      this.compactText = "Compact"
+    }
+  }
+
+  switchCompact() {
+    this.fs.compactMode = !this.fs.compactMode;
+  }
 }

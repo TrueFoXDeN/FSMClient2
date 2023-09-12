@@ -1,4 +1,9 @@
 <div class="menu" cdkMenu fsContextMenu>
+  <div class="row" cdkMenuItem fsContextMenuItem (click)="switchCompact()">
+    <i-feather name="{{compactIcon}}" class="icon"></i-feather>
+    <button class="menu-item">{{compactText}}</button>
+  </div>
+  <div class="border"></div>
   <div class="row" cdkMenuItem fsContextMenuItem (click)="finishStrip()">
     <i-feather name="check" class="icon"></i-feather>
     <button class="menu-item">Finished</button>
@@ -11,6 +16,7 @@
     <i-feather name="trash-2" class="icon"></i-feather>
     <button class="menu-item">Delete</button>
   </div>
+  <div class="border"></div>
   <div class="row" cdkMenuItem fsContextMenuItem (click)="switchToOption(1)">
     <i-feather name="arrow-right" class="icon"></i-feather>
     <button class="menu-item">To {{switchOption1}}</button>

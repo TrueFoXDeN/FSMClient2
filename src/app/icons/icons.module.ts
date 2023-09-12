@@ -34,6 +34,8 @@ import {
   HelpCircle,
   Check,
   ArrowRight,
+  Maximize2,
+  Minimize2,
 } from 'angular-feather/icons';
 
 // Select some icons (use an object, not an array)
@@ -69,7 +71,9 @@ const icons = {
   ChevronDown,
   HelpCircle,
   Check,
-  ArrowRight
+  ArrowRight,
+  Maximize2,
+  Minimize2
 };
 
 @NgModule({
