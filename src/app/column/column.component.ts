@@ -26,24 +26,14 @@ export class ColumnComponent {
 
   addInboundFlightstrip() {
     this.fsService.createFlightstrip(this.uuid, '', stripType.INBOUND)
-    // let nextPos = this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].length
-    // console.log(nextPos)
-    // let fs = new Flightstrip(this.util.generateUUID(), stripType.INBOUND, this.uuid, nextPos);
-    // this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
   }
 
   addOutboundFlightstrip() {
     this.fsService.createFlightstrip(this.uuid, '', stripType.OUTBOUND)
-    // let nextPos = this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].length
-    // let fs = new Flightstrip(this.util.generateUUID(), stripType.OUTBOUND, this.uuid, nextPos);
-    // this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
   }
 
   addVfrFlightstrip() {
     this.fsService.createFlightstrip(this.uuid, '', stripType.VFR)
-    // let nextPos = this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].length
-    // let fs = new Flightstrip(this.util.generateUUID(), stripType.VFR, this.uuid, nextPos);
-    // this.dataService.flightstripData?.[this.uuid]?.['flightstrips'].push(fs);
   }
 
 
@@ -58,15 +48,12 @@ export class ColumnComponent {
         event.currentIndex,
       );
     }
-    //this.fsService.changedStripPos.next()
-    // console.log(`From ${event.previousContainer.id}\.${event.previousIndex} To ${event.container.id}\.${event.currentIndex}`)
     this.fsService.changedStripPos.next({id: event.item.data?.id, newPosistion: event.currentIndex})
   }
 
   onKeyPress(event: any) {
     switch (event.key) {
       case "i":
-        console.log(this.fsService.isInputFocused)
         if (!this.fsService.isInputFocused) {
           this.addInboundFlightstrip();
         }
@@ -107,7 +94,7 @@ export class ColumnComponent {
       if (event.button == 0 && this.isMouseDown && !this.isMouseMoving) {
         for (let i = 0; i < this.dataService.flightstripData?.[this.uuid].flightstrips.length; i++) {
           if (this.dataService.flightstripData[this.uuid].flightstrips[i].id == fsId && this.dataService.flightstripData[this.uuid].flightstrips[i].compactMode) {
-            console.log("Is in compact mode")
+
             this.fsService.dragChange.next({id: fsId, dragEnabled: true})
             break;
           }
@@ -131,7 +118,7 @@ export class ColumnComponent {
   dragStarted(fsId :string){
     for (let i = 0; i < this.dataService.flightstripData?.[this.uuid].flightstrips.length; i++) {
       if (this.dataService.flightstripData[this.uuid].flightstrips[i].id == fsId && this.dataService.flightstripData[this.uuid].flightstrips[i].compactMode) {
-        console.log("Is in compact mode")
+
         this.fsService.dragChange.next({id: fsId, dragEnabled: true})
         break;
       }

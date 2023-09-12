@@ -55,9 +55,7 @@ export class AppComponent implements OnInit {
     this.loggingService.logActivity(this.dataService.uid)
 
 
-    console.log(`Current profile-ID: ${this.dataService.currentProfileID}`)
-    console.log(`Current profile-Name: ${this.dataService.profileData[this.dataService.currentProfileID].name}`)
-  }
+    }
 
 
   openCookieDialog() {

@@ -118,7 +118,6 @@ export class HorizontalScrollComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadConfig()
-    console.log(environment.appVersion)
   }
 
   ngOnDestroy() {

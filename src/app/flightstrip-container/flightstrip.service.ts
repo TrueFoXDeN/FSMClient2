@@ -66,7 +66,7 @@ export class FlightstripService {
     if (callsign.length >= 3) {
       this.getAirlineCallsign(callsign.substring(0, 3)).subscribe({
         next: (res: any) => {
-          console.log(res)
+
           fs.airline = res.airline
           this.dataService.flightstripData?.[column]?.['flightstrips'].push(fs);
         },

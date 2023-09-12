@@ -82,7 +82,7 @@ export class ContextMenuComponent implements OnInit {
 
 
   setCompactText() {
-    console.log(this.fs)
+
     if(this.fs.compactMode){
       this.compactIcon = "maximize-2"
       this.compactText = "Expand"

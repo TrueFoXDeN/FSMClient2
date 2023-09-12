@@ -30,7 +30,7 @@ export class ProfileSettingsComponent implements OnInit {
   }
 
   onItemselect(event: any) {
-    // console.log(event)
+
     let option = event.value
     this.deleteButtonActive = option.id != this.dataService.getStandardProfileID();
   }

@@ -50,8 +50,7 @@ export class FlightstripCompactComponent implements OnDestroy {
     this.subscriptionHandles.push(this.fsService.dragChange.subscribe((data) => {
       if (data.id == this.fs.id) {
         this.inputsDisabled = data.dragEnabled;
-        console.log(`Strip is Dragged: ${data.dragEnabled}`)
-      }
+       }
     }));
 
     this.subscriptionHandles.push(this.fsService.searchFlightstrip.subscribe(() => {
@@ -171,7 +170,7 @@ export class FlightstripCompactComponent implements OnDestroy {
     this.isTouchMoved = false;
     setTimeout(() => {
       if (!this.isTouchEnded && !this.isTouchCanceled && !this.isTouchMoved) {
-        console.log("Clicked");
+
       }
     }, 1000);
   }

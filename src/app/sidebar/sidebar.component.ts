@@ -114,7 +114,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(ProfileSettingsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
       this.columnBuilderService.columnConfigChanged.next()
-      console.log(`Using profile "${this.dataService.currentProfile.name}"`)
     });
   }
 

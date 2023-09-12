@@ -11,9 +11,7 @@ export class Sidebar implements OnInit, OnDestroy {
   constructor(private elementRef: ElementRef, private customStyles: CustomStyles, private styleChanger: StyleChangerService) {
     this.subscriptionList.push(
       this.styleChanger.changedSize.subscribe(() => {
-        console.log(this.elementRef.nativeElement.style.width);
         this.elementRef.nativeElement.style.width = `${60 * (1+(this.customStyles.multiplier-1)/1.9)}px`;
-        console.log(this.elementRef.nativeElement.style.width);
       }));
   }
 

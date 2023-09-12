@@ -13,7 +13,7 @@ export class LoggingService {
   logActivity(uid: string){
     this.http.post(`${this.baseURL}/log/activity`, {"uid": uid}).subscribe({
       next: (response: any) => {
-        console.log(response)
+
       },
       error: (err) => {
         console.log(err)
