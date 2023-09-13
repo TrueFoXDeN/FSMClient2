@@ -11,7 +11,7 @@ export class Airport{
     this.icao = "";
     this.inboundColumn = "";
     this.outboundColumn = "";
-    this.range = 0;
+    this.range = 25;
     this.vfrColumn = "";
   }
 
