@@ -12,7 +12,7 @@
                         'success': this.networkService.networkState == 'success',
                         'error': this.networkService.networkState == 'error'}"
     ></app-sidebar-button>
-    <app-sidebar-button-png icon="radar" class="radar default" matTooltip="Proximity Settings"
+    <app-sidebar-button-png icon="{{radarIcon}}" class="radar default" matTooltip="Proximity Settings"
                             matTooltipPosition="right" (click)="openProximitySettings()"></app-sidebar-button-png>
     <app-sidebar-button icon="users" class="icon-button default disabled" matTooltip="Multiplayer"
                         matTooltipPosition="right"

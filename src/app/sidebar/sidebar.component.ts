@@ -21,6 +21,7 @@ import {Util} from "../util";
 import {FlightstripService} from "../flightstrip-container/flightstrip.service";
 import {DataService} from "../services/data.service";
 import {SearchcallsignService} from "../services/searchcallsign.service";
+import {ProximityService} from "../overlays/proximity-settings/proximity.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -30,17 +31,23 @@ import {SearchcallsignService} from "../services/searchcallsign.service";
 export class SidebarComponent implements OnInit, OnDestroy {
   subscriptionList: any = []
   networkIcon: string = "standard";
+  radarIcon: string = "radar";
 
   constructor(private customStyle: CustomStyles, private _snackBar: MatSnackBar, public dialog: MatDialog,
               private dataService: DataService, private styleChanger: StyleChangerService, private snackService: SnackbarMessageService,
               private colBuilderService: ColumnBuilderService, public networkService: NetworkService,
-              private columnBuilderService: ColumnBuilderService, private searchcallsignService: SearchcallsignService) {
+              private columnBuilderService: ColumnBuilderService, private searchcallsignService: SearchcallsignService,
+              private proximityService: ProximityService) {
 
     this.subscriptionList.push(this.networkService.changedNetworkEmitter.subscribe((data) => {
       if (data.active) {
         this.networkIcon = "success";
+        if(this.proximityService.getActiveAirports().length > 0){
+          this.radarIcon = "radar_success";
+        }
       } else {
         this.networkIcon = "standard";
+        this.radarIcon = "radar";
       }
     }));
   }
@@ -123,7 +130,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
     dialogConfig.width = `80vw`;
     const dialogRef = this.dialog.open(ProximitySettingsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
-
+      if(this.proximityService.getActiveAirports().length > 0 && this.networkService.getIsNetworkFetchActive()){
+        this.radarIcon = "radar_success"
+      }else{
+        this.radarIcon = "radar"
+      }
     });
   }
 

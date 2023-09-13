@@ -7,6 +7,7 @@ import {stripType} from "../../flightstrip-container/flightstrip.model";
 import {FlightstripService} from "../../flightstrip-container/flightstrip.service";
 import {SnackbarMessageService} from "../../services/snackbar-message.service";
 import {ColumnService} from "../../column/column.service";
+import {DataService} from "../../services/data.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,23 @@ export class ProximityService {
   baseURL = environment.baseURL
   finishedAircrafts: string[] = []
 
-  constructor(private http: HttpClient, private flightstripService: FlightstripService, private snackService: SnackbarMessageService, private columnService : ColumnService) {
+  constructor(private http: HttpClient, private flightstripService: FlightstripService,
+              private snackService: SnackbarMessageService,
+              private columnService : ColumnService,
+              protected dataService: DataService) {
 
 
+  }
+
+  getAirports(){
+    let airports: Airport[] = []
+    this.dataService.profileData[this.dataService.currentProfileID].proximity.forEach((val: any) => airports.push(Object.assign({}, val)));
+    return airports
+  }
+
+  getActiveAirports(){
+    let airports: Airport[] = this.getAirports()
+    return airports.filter(airport => airport.active)
   }
 
   getAircraftsInProximity(networkType: NetworkType, airports: Airport[]) {
