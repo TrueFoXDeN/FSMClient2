@@ -75,7 +75,6 @@ import {
   SearchCallsignButtonComponent
 } from "./overlays/search-callsign/search-callsign-button/search-callsign-button.component";
 import {HttpInterceptorService} from "./http-interceptor/http-interceptor.service";
-import {ProximitySettingsDirective} from "./overlays/proximity-settings/proximity-settings.directive";
 import {MatTable, MatTableModule} from "@angular/material/table";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {ProximityTableDirective} from "./overlays/proximity-settings/proximity-table.directive";
@@ -136,7 +135,6 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     SearchCallsignDirective,
     SearchCallsignInputDirective,
     SearchCallsignButtonComponent,
-    ProximitySettingsDirective,
     ProximitySettingsComponent,
     ProximityTableDirective,
     GeneralDropdownComponent,
@@ -193,7 +191,6 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
   ],
   bootstrap: [AppComponent],
   exports: [
-    ProximitySettingsDirective
   ]
 })
 export class AppModule {
