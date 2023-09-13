@@ -85,6 +85,9 @@ export class ProfileSettingsComponent implements OnInit {
 
   ngOnInit(): void {
     let currentProfile = this.dataService.currentProfileID
+    if(currentProfile !== this.dataService.getStandardProfileID()){
+      this.deleteButtonActive = true;
+    }
     for (let i = 0; i < this.profiles.length; i++) {
       if (this.profiles[i].id == currentProfile) {
         this.selectedProfile = this.profiles[i]
