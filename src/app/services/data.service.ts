@@ -16,7 +16,7 @@ export class DataService {
     "proximity": []
   }
   public currentProfileID = "a6574bc2-4351-40be-b5ed-eda88ee2c06c"
-  public currentProfile: any = {}
+  public currentProfile: any = this.standardProfile
   public archivedStrips: any = {}
   public uid = ''
 
