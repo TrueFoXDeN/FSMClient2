@@ -17,9 +17,11 @@ export class NetworkService {
   private proximityFetchInterval = interval(5000)
   networkEmitter = new Subject<void>()
   errorTriggered = false;
+  errorCount: number = 0
   networkState = "default"
   changedNetworkEmitter = new Subject<any>()
   baseURL = environment.baseURL
+
 
   constructor(private messageService: SnackbarMessageService, private proximityService: ProximityService, private dataService: DataService, private http: HttpClient) {
     this.networkFetchInterval.subscribe(() => {
@@ -34,9 +36,15 @@ export class NetworkService {
         this.proximityService.getAircraftsInProximity(this.usedNetwork, airports).subscribe({
           next: (res: any) => {
             this.proximityService.updateProximity(res, airports)
+            this.triggerErrorCleared()
           },
           error: (err) => {
-            this.triggerError()
+            this.errorCount ++
+            if(this.errorCount > 2){
+              this.triggerError()
+            }
+
+
           }
         })
       }
@@ -104,6 +112,12 @@ export class NetworkService {
       this.errorTriggered = true
       this.networkState = "error"
     }
+  }
+
+  triggerErrorCleared(){
+    this.errorCount = 0
+    this.errorTriggered = false
+    this.networkState = "success"
   }
 
   getErrorState() {
