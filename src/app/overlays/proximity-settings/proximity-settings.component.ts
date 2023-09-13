@@ -25,12 +25,14 @@ export class ProximitySettingsComponent {
               private flightstripService: FlightstripService, public dialogRef: MatDialogRef<ProximitySettingsComponent>) {
     this.airports = []
     this.dataService.profileData[this.dataService.currentProfileID].proximity.forEach((val: any) => this.airports.push(Object.assign({}, val)));
-    // Object.assign({}, this.dataService.profileData[this.dataService.currentProfileID].proximity)
+    if(this.airports.length == 0){
+      this.addItem()
+    }
     this.columns = this.dataService.profileData[this.dataService.currentProfileID].columnStructure
   }
 
 
-  addItem($event: MouseEvent | TouchEvent): void {
+  addItem(): void {
     this.airports.push(new Airport())
   }
 
