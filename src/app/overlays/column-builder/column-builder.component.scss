@@ -51,7 +51,8 @@
 .delete-button {
   background-color: var(--columnbuilder-button-delete-background);
   width: 40px;
-  outline: 1px solid  var(--columnbuilder-button-delete-outline);
+  outline: 1px solid var(--columnbuilder-button-delete-outline);
+
   &:hover {
     outline: 1px solid var(--columnbuilder-button-delete-outline-hover);
     color: var(--columnbuilder-button-delete-outline-hover);
@@ -80,7 +81,8 @@
   box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
   font-family: Roboto Mono, sans-serif;
   background-color: var(--columnbuilder-input-background);
-  &:focus{
+
+  &:focus {
     border: 1px solid var(--columnbuilder-input-border-focus);
     outline: none;
   }
@@ -96,29 +98,42 @@
   background-color: var(--columnbuilder-footer);
 }
 
-.discard{
+.discard {
   background-color: var(--columnbuilder-button-discard-background);
-  &:hover{
+
+  &:hover {
     background-color: var(--columnbuilder-button-discard-background-hover);
   }
 }
 
-.save{
+.save {
   background-color: var(--columnbuilder-button-save-background);
-  &:hover{
+
+  &:hover {
     background-color: var(--columnbuilder-button-save-background-hover);
   }
 }
 
-.add{
+.add {
   background-color: var(--columnbuilder-button-add-background);
-  &:hover{
+
+  &:hover {
     background-color: var(--columnbuilder-button-add-background-hover);
   }
 }
 
+.align {
+  background-color: var(--columnbuilder-button-discard-background);
+
+  &:hover {
+    background-color: var(--columnbuilder-button-discard-background-hover);
+  }
+}
+
 .left {
-  margin-left: 12px
+  margin-left: 12px;
+  gap: 10px;
+  display: flex;
 }
 
 .right {

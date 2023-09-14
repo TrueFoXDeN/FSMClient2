@@ -65,7 +65,7 @@ export class HorizontalScrollComponent implements OnInit, OnDestroy {
       minItemArea: 1,
       defaultItemCols: 4,
       defaultItemRows: 15,
-      fixedColWidth: 450 * this.styles.multiplier,
+      fixedColWidth: 450 * this.styleChanger.multiplier,
       fixedRowHeight: 105,
       keepFixedHeightInMobile: false,
       keepFixedWidthInMobile: false,
@@ -139,19 +139,19 @@ export class HorizontalScrollComponent implements OnInit, OnDestroy {
     }
   }
 
-  openSearchWindow(event: KeyboardEvent) {
-    if (event.key == "s") {
-      if (!this.fsService.isInputFocused) {
-        const dialogConfig = new MatDialogConfig()
-        dialogConfig.height = `${150 * this.styleChanger.multiplier}px`;
-        dialogConfig.width = `${300 * this.styleChanger.multiplier}px`;
-        const dialogRef = this.dialog.open(SearchCallsignComponent, dialogConfig);
-        dialogRef.afterClosed().subscribe((data) => {
-          this.fsService.findFlightStrip(data);
-        });
-      }
-    }
-  }
+  // openSearchWindow(event: KeyboardEvent) {
+  //   if (event.key == "s") {
+  //     if (!this.fsService.isInputFocused) {
+  //       const dialogConfig = new MatDialogConfig()
+  //       dialogConfig.height = `${150 * this.styleChanger.multiplier}px`;
+  //       dialogConfig.width = `${300 * this.styleChanger.multiplier}px`;
+  //       const dialogRef = this.dialog.open(SearchCallsignComponent, dialogConfig);
+  //       dialogRef.afterClosed().subscribe((data) => {
+  //         this.fsService.findFlightStrip(data);
+  //       });
+  //     }
+  //   }
+  // }
 
 
 }

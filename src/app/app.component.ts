@@ -10,6 +10,7 @@ import {CookieDialogComponent} from "./overlays/cookie-dialog/cookie-dialog.comp
 import {LoggingService} from "./services/logging.service";
 import {Util} from "./util";
 import {SearchcallsignService} from "./services/searchcallsign.service";
+import {StyleChangerService} from "./services/style-changer.service";
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,7 @@ export class AppComponent implements OnInit {
   constructor(private cookieService: CookieService, private dataService: DataService,
               private messageService: SnackbarMessageService, private titleService: Title,
               public dialog: MatDialog, private loggingService: LoggingService, private util: Util,
-              private searchcallsignService: SearchcallsignService) {
+              private searchcallsignService: SearchcallsignService, private styleChanger: StyleChangerService) {
     this.titleService.setTitle(this.title + " v" + this.version);
     if (this.cookieService.check("currentProfileID")) {
       this.dataService.currentProfileID = this.cookieService.get("currentProfileID");
@@ -44,6 +45,16 @@ export class AppComponent implements OnInit {
       this.openCookieDialog();
       this.cookieService.set("cookieAccepted", "true", {expires: 10000, sameSite: 'Lax'})
     }
+    if (this.cookieService.check("zoomLevel")) {
+      try {
+        this.styleChanger.multiplier = parseFloat(this.cookieService.get('zoomLevel'))
+        this.styleChanger.changedSize.next()
+        console.log(this.cookieService.get('zoomLevel'))
+        this.messageService.showMessage(`Zoom set to ${Math.round(this.styleChanger.multiplier * 100)}%`, "standard")
+      } catch (e) {
+        this.styleChanger.multiplier = 1.0
+      }
+    }
 
     if (this.cookieService.check('uid')) {
       this.dataService.uid = this.cookieService.get('uid')
@@ -55,7 +66,7 @@ export class AppComponent implements OnInit {
     this.loggingService.logActivity(this.dataService.uid)
 
 
-    }
+  }
 
 
   openCookieDialog() {
@@ -72,15 +83,16 @@ export class AppComponent implements OnInit {
   }
 
   @HostListener('window:keydown', ['$event'])
-  keyEvent(e: KeyboardEvent){
+  keyEvent(e: KeyboardEvent) {
     if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+      console.log("hello")
       e.preventDefault();
       this.searchcallsignService.openSearchCallsign()
     }
-    if(e.key === 'Escape'){
-      for(const [k, c] of Object.entries(this.dataService.flightstripData)){
-        if(c && typeof c === 'object' && 'flightstrips' in c && Array.isArray(c.flightstrips)){
-          for(let f of c.flightstrips){
+    if (e.key === 'Escape') {
+      for (const [k, c] of Object.entries(this.dataService.flightstripData)) {
+        if (c && typeof c === 'object' && 'flightstrips' in c && Array.isArray(c.flightstrips)) {
+          for (let f of c.flightstrips) {
             f.deleteActive = false
           }
         }

@@ -24,6 +24,8 @@
       <div class="left">
         <app-column-builder-button icon="plus" (click)="addItem($event)" class="footer-buttons add" matTooltip="Add Column"
                                    matTooltipPosition="above"></app-column-builder-button>
+        <app-column-builder-button icon="chevrons-left" (click)="alignColumns()" class="footer-buttons align" matTooltip="Align Columns"
+                                   matTooltipPosition="above"></app-column-builder-button>
       </div>
       <div class="right">
 <!--        <app-column-builder-button icon="upload" class="footer-buttons" matTooltip="Export"-->

@@ -1,5 +1,4 @@
 export class CustomStyles {
-  public multiplier = 1.0;
   public style = {
     "name": "Dark",
     //General App settings

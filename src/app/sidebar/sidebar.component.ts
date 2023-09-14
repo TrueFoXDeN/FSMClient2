@@ -22,6 +22,7 @@ import {FlightstripService} from "../flightstrip-container/flightstrip.service";
 import {DataService} from "../services/data.service";
 import {SearchcallsignService} from "../services/searchcallsign.service";
 import {ProximityService} from "../overlays/proximity-settings/proximity.service";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-sidebar',
@@ -33,11 +34,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
   networkIcon: string = "standard";
   radarIcon: string = "radar";
 
-  constructor(private customStyle: CustomStyles, private _snackBar: MatSnackBar, public dialog: MatDialog,
+  constructor( private _snackBar: MatSnackBar, public dialog: MatDialog,
               private dataService: DataService, private styleChanger: StyleChangerService, private snackService: SnackbarMessageService,
               private colBuilderService: ColumnBuilderService, public networkService: NetworkService,
               private columnBuilderService: ColumnBuilderService, private searchcallsignService: SearchcallsignService,
-              private proximityService: ProximityService) {
+              private proximityService: ProximityService, private cookieService: CookieService) {
 
     this.subscriptionList.push(this.networkService.changedNetworkEmitter.subscribe((data) => {
       if (data.active) {
@@ -64,6 +65,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.styleChanger.multiplier += 0.10;
       this.snackService.showMessage(`Zoom set to ${Math.round(this.styleChanger.multiplier * 100)}%`, "standard")
       this.styleChanger.changedSize.next();
+      this.cookieService.set("zoomLevel", this.styleChanger.multiplier.toString(), {expires: 10000, sameSite: 'Lax'})
     }
   }
 
@@ -72,6 +74,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.styleChanger.multiplier -= 0.10;
       this.snackService.showMessage(`Zoom set to ${Math.round(this.styleChanger.multiplier * 100)}%`, "standard")
       this.styleChanger.changedSize.next();
+      this.cookieService.set("zoomLevel", this.styleChanger.multiplier.toString(), {expires: 10000, sameSite: 'Lax'})
     }
   }
 

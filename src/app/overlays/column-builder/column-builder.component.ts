@@ -121,6 +121,13 @@ export class ColumnBuilderComponent implements OnInit {
     this.dashboard.push({x: 0, y: 0, cols: 1, rows: 9, uuid: uuid, name: ""});
   }
 
+
+  alignColumns(){
+    this.options.compactType = CompactType.CompactLeft
+    this.changedOptions()
+    this.options.compactType = CompactType.None
+    this.changedOptions()
+  }
   saveAndClose() {
     this.dataService.profileData[this.dataService.currentProfileID].columnStructure = this.dashboard
     // let data = {"columnData": this.dashboard}
