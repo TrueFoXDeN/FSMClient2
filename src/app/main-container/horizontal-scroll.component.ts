@@ -135,7 +135,7 @@ export class HorizontalScrollComponent implements OnInit, OnDestroy {
     this.dashboard = this.dataService.profileData[this.dataService.currentProfileID].columnStructure;
     this.options = {
       ...this.options,
-      fixedColWidth: 450 * this.styles.multiplier
+      fixedColWidth: 450 * this.styleChanger.multiplier
     }
   }
 
@@ -143,8 +143,8 @@ export class HorizontalScrollComponent implements OnInit, OnDestroy {
     if (event.key == "s") {
       if (!this.fsService.isInputFocused) {
         const dialogConfig = new MatDialogConfig()
-        dialogConfig.height = `${150 * this.styles.multiplier}px`;
-        dialogConfig.width = `${300 * this.styles.multiplier}px`;
+        dialogConfig.height = `${150 * this.styleChanger.multiplier}px`;
+        dialogConfig.width = `${300 * this.styleChanger.multiplier}px`;
         const dialogRef = this.dialog.open(SearchCallsignComponent, dialogConfig);
         dialogRef.afterClosed().subscribe((data) => {
           this.fsService.findFlightStrip(data);

@@ -36,7 +36,7 @@ export class ProfileSettingsSaveButtonDirective implements OnInit, OnDestroy {
   }
 
   updateStyle() {
-    this.elementRef.nativeElement.style.fontSize = `${12 * this.cS.multiplier}pt`;
+    this.elementRef.nativeElement.style.fontSize = `${12 * this.styleChanger.multiplier}pt`;
   }
 
 

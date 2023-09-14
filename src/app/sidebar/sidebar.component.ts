@@ -60,17 +60,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
 
   onZoomIn() {
-    if (this.customStyle.multiplier < 2.2) {
-      this.customStyle.multiplier += 0.15;
-      this.snackService.showMessage(`Zoom set to ${Math.round(this.customStyle.multiplier * 100)}%`, "standard")
+    if (this.styleChanger.multiplier < 2.2) {
+      this.styleChanger.multiplier += 0.10;
+      this.snackService.showMessage(`Zoom set to ${Math.round(this.styleChanger.multiplier * 100)}%`, "standard")
       this.styleChanger.changedSize.next();
     }
   }
 
   onZoomOut() {
-    if (this.customStyle.multiplier > 0.7) {
-      this.customStyle.multiplier -= 0.15;
-      this.snackService.showMessage(`Zoom set to ${Math.round(this.customStyle.multiplier * 100)}%`, "standard")
+    if (this.styleChanger.multiplier > 0.7) {
+      this.styleChanger.multiplier -= 0.10;
+      this.snackService.showMessage(`Zoom set to ${Math.round(this.styleChanger.multiplier * 100)}%`, "standard")
       this.styleChanger.changedSize.next();
     }
   }
@@ -115,8 +115,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   openProfileSettings() {
     const dialogConfig = new MatDialogConfig()
-    dialogConfig.height = `${350 * this.customStyle.multiplier}px`;
-    dialogConfig.width = `${350 * this.customStyle.multiplier}px`;
+    dialogConfig.height = `${350 * this.styleChanger.multiplier}px`;
+    dialogConfig.width = `${350 * this.styleChanger.multiplier}px`;
     dialogConfig.panelClass = 'custom-dialog-container';
     const dialogRef = this.dialog.open(ProfileSettingsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
@@ -140,8 +140,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   openMultiplayerSettings() {
     const dialogConfig = new MatDialogConfig()
-    dialogConfig.height = `${350 * this.customStyle.multiplier}px`;
-    dialogConfig.width = `${350 * this.customStyle.multiplier}px`;
+    dialogConfig.height = `${350 * this.styleChanger.multiplier}px`;
+    dialogConfig.width = `${350 * this.styleChanger.multiplier}px`;
     const dialogRef = this.dialog.open(MultiplayerSettingsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
 
@@ -152,8 +152,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   openAppSettings() {
     const dialogConfig = new MatDialogConfig()
-    dialogConfig.height = `${350 * this.customStyle.multiplier}px`;
-    dialogConfig.width = `${350 * this.customStyle.multiplier}px`;
+    dialogConfig.height = `${350 * this.styleChanger.multiplier}px`;
+    dialogConfig.width = `${350 * this.styleChanger.multiplier}px`;
     const dialogRef = this.dialog.open(SettingsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
 
@@ -164,8 +164,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   openHelpOverlay() {
     const dialogConfig = new MatDialogConfig()
-    dialogConfig.height = `${350 * this.customStyle.multiplier}px`;
-    dialogConfig.width = `${350 * this.customStyle.multiplier}px`;
+    dialogConfig.height = `${350 * this.styleChanger.multiplier}px`;
+    dialogConfig.width = `${350 * this.styleChanger.multiplier}px`;
     const dialogRef = this.dialog.open(HelpOverlayComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
 
@@ -174,8 +174,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   openStatsOverlay() {
     const dialogConfig = new MatDialogConfig()
-    dialogConfig.height = `${350 * this.customStyle.multiplier}px`;
-    dialogConfig.width = `${350 * this.customStyle.multiplier}px`;
+    dialogConfig.height = `${350 * this.styleChanger.multiplier}px`;
+    dialogConfig.width = `${350 * this.styleChanger.multiplier}px`;
     const dialogRef = this.dialog.open(StatisticsOverlayComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
 

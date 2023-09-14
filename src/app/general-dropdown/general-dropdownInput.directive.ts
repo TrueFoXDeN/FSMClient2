@@ -32,7 +32,7 @@ export class GeneralDropdownInputDirective implements OnInit, OnDestroy {
   }
 
   updateSizes() {
-    this.elementRef.nativeElement.style.fontSize = `${11 * this.cS.multiplier}pt`;
+    this.elementRef.nativeElement.style.fontSize = `${11 * this.styleChanger.multiplier}pt`;
   }
 
   updateStyle() {

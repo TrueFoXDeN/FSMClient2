@@ -27,7 +27,7 @@ export class SearchCallsignDirective implements OnInit, OnDestroy {
   }
 
   updateSize() {
-    this.elementRef.nativeElement.style.fontSize = `${18 * this.cS.multiplier}pt`
+    this.elementRef.nativeElement.style.fontSize = `${18 * this.styleChanger.multiplier}pt`
   }
 
 }

@@ -27,7 +27,7 @@ export class FsContextMenuDirective implements OnInit, OnDestroy {
   }
 
   updateSizes() {
-    this.elementRef.nativeElement.style.width = `${155 * this.cS.multiplier}px`;
+    this.elementRef.nativeElement.style.width = `${155 * this.styleChanger.multiplier}px`;
   }
 
 

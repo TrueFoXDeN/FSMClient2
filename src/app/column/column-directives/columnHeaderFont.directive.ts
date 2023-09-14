@@ -10,12 +10,12 @@ export class ColumnHeaderFont implements OnInit, OnDestroy {
 
   constructor(private elementRef: ElementRef, private customStyles: CustomStyles, private styleChanger: StyleChangerService) {
     this.subscriptionList.push(this.styleChanger.changedSize.subscribe(() => {
-      this.elementRef.nativeElement.style.fontSize = `${20 * this.customStyles.multiplier}pt`;
+      this.elementRef.nativeElement.style.fontSize = `${20 * this.styleChanger.multiplier}pt`;
     }));
   }
 
   ngOnInit(): void {
-    this.elementRef.nativeElement.style.fontSize = `${20 * this.customStyles.multiplier}pt`;
+    this.elementRef.nativeElement.style.fontSize = `${20 * this.styleChanger.multiplier}pt`;
   }
 
   ngOnDestroy() {

@@ -10,12 +10,12 @@ export class ColumnHeaderHeight implements OnInit, OnDestroy {
 
   constructor(private elementRef: ElementRef, private customStyles: CustomStyles, private styleChanger: StyleChangerService) {
     this.subscriptionList.push(this.styleChanger.changedSize.subscribe(() => {
-      this.elementRef.nativeElement.style.height = `${70 * this.customStyles.multiplier}px`;
+      this.elementRef.nativeElement.style.height = `${70 * this.styleChanger.multiplier}px`;
     }));
   }
 
   ngOnInit(): void {
-    this.elementRef.nativeElement.style.height = `${70 * this.customStyles.multiplier}px`;
+    this.elementRef.nativeElement.style.height = `${70 * this.styleChanger.multiplier}px`;
   }
 
   ngOnDestroy() {

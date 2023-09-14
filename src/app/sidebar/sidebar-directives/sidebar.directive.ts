@@ -11,12 +11,12 @@ export class Sidebar implements OnInit, OnDestroy {
   constructor(private elementRef: ElementRef, private customStyles: CustomStyles, private styleChanger: StyleChangerService) {
     this.subscriptionList.push(
       this.styleChanger.changedSize.subscribe(() => {
-        this.elementRef.nativeElement.style.width = `${60 * (1+(this.customStyles.multiplier-1)/1.9)}px`;
+        this.elementRef.nativeElement.style.width = `${60 * (1+(this.styleChanger.multiplier-1)/1.9)}px`;
       }));
   }
 
   ngOnInit(): void {
-    this.elementRef.nativeElement.style.width = `${60 * (1+(this.customStyles.multiplier-1)/1.9)}px`;
+    this.elementRef.nativeElement.style.width = `${60 * (1+(this.styleChanger.multiplier-1)/1.9)}px`;
   }
 
   ngOnDestroy() {

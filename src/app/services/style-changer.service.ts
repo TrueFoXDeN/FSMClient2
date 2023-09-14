@@ -5,8 +5,9 @@ import {Subject} from "rxjs";
   providedIn: 'root'
 })
 export class StyleChangerService {
-changedSize = new Subject<void>();
-changedColors = new Subject<void>();
+  multiplier = 1.0;
+  changedSize = new Subject<void>();
+  changedColors = new Subject<void>();
   constructor() {
   }
 

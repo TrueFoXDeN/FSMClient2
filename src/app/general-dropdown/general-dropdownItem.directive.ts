@@ -32,8 +32,8 @@ export class GeneralDropdownItemDirective implements OnInit, OnDestroy {
   }
 
   updateSizes() {
-    this.elementRef.nativeElement.style.lineHeight = `${40 * this.cS.multiplier}px`;
-    this.elementRef.nativeElement.style.fontSize = `${11 * this.cS.multiplier}pt`;
+    this.elementRef.nativeElement.style.lineHeight = `${40 * this.styleChanger.multiplier}px`;
+    this.elementRef.nativeElement.style.fontSize = `${11 * this.styleChanger.multiplier}pt`;
   }
 
   updateStyle() {

@@ -10,12 +10,12 @@ export class ColumnWidth implements OnInit, OnDestroy {
 
   constructor(private elementRef: ElementRef, private customStyles: CustomStyles, private styleChanger: StyleChangerService) {
     this.subscriptionList.push(this.styleChanger.changedSize.subscribe(() => {
-      this.elementRef.nativeElement.style.width = `${450 * this.customStyles.multiplier}px`;
+      this.elementRef.nativeElement.style.width = `${450 * this.styleChanger.multiplier}px`;
     }));
   }
 
   ngOnInit(): void {
-    this.elementRef.nativeElement.style.width = `${450 * this.customStyles.multiplier}px`;
+    this.elementRef.nativeElement.style.width = `${450 * this.styleChanger.multiplier}px`;
   }
 
   ngOnDestroy() {

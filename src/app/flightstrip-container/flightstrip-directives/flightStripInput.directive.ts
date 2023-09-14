@@ -29,7 +29,7 @@ export class FlightStripInput implements OnInit, OnDestroy {
 
 
   updateStyle() {
-    this.elementRef.nativeElement.style.fontSize = `${10 * this.cS.multiplier}pt`
+    this.elementRef.nativeElement.style.fontSize = `${10 * this.styleChanger.multiplier}pt`
   }
 
 

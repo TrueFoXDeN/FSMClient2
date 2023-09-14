@@ -28,9 +28,9 @@ export class ProximityTableDirective implements OnInit, OnDestroy {
 
   updateSizes() {
     if (this.isHeader) {
-      this.elementRef.nativeElement.style.fontSize = `${20 * this.cS.multiplier}pt`;
+      this.elementRef.nativeElement.style.fontSize = `${20 * this.styleChanger.multiplier}pt`;
     }else{
-      this.elementRef.nativeElement.style.fontSize = `${12 * this.cS.multiplier}pt`;
+      this.elementRef.nativeElement.style.fontSize = `${12 * this.styleChanger.multiplier}pt`;
     }
   }
 }
