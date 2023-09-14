@@ -5,7 +5,8 @@
      'inbound': fs.type === stripTypes.INBOUND,
      'outbound': fs.type === stripTypes.OUTBOUND,
      'vfr': fs.type === stripTypes.VFR,
-     'emergency': fs.squawk == '7500' || fs.squawk == '7700' || fs.squawk == '7600',
+     'emergency': fs.emergencyActive,
+     'delete': fs.deleteActive,
      'highlight': highlightActive}">
   <div class="cols">
     <div class="col1 border-right" flightStripCompact [fsCompact]="fs">
@@ -57,7 +58,7 @@
                                   (click)="nextStatus()"
                                   (dblclick)="onSecondDoubleClick($event)"></app-flightstrip-button>
         </div>
-        <div class="icons">
+        <div class="icons" flightStripCompact>
           <i-feather name="alert-triangle" class="icon"
                      [ngClass]="{'disabled' : inputsDisabled,
                      'icon-default':fs.triangleIconState === triangleIconStates.STANDARD,

@@ -3,7 +3,8 @@
      'inbound': fs.type === stripTypes.INBOUND,
      'outbound': fs.type === stripTypes.OUTBOUND,
      'vfr': fs.type === stripTypes.VFR,
-     'emergency': fs.squawk == '7500' || fs.squawk == '7700' || fs.squawk == '7600',
+     'emergency': fs.emergencyActive,
+     'delete': fs.deleteActive,
      'highlight': highlightActive}"
      tabindex="0"
      [cdkContextMenuTriggerFor]="context_menu"

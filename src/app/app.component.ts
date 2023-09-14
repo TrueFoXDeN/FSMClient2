@@ -77,6 +77,16 @@ export class AppComponent implements OnInit {
       e.preventDefault();
       this.searchcallsignService.openSearchCallsign()
     }
+    if(e.key === 'Escape'){
+      for(const [k, c] of Object.entries(this.dataService.flightstripData)){
+        if(c && typeof c === 'object' && 'flightstrips' in c && Array.isArray(c.flightstrips)){
+          for(let f of c.flightstrips){
+            f.deleteActive = false
+          }
+        }
+
+      }
+    }
   }
 
 

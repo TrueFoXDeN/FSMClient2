@@ -1,9 +1,10 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnDestroy, OnInit} from '@angular/core';
 import {Flightstrip, statusArrival, statusDeparture, statusVfr, stripType} from "./flightstrip.model";
 import {HttpClient} from "@angular/common/http";
 import {NetworkService} from "../services/network.service";
 import {environment} from "../../environments/environment";
 import {FlightstripService} from "./flightstrip.service";
+import {DataService} from "../services/data.service";
 
 @Component({
   selector: 'app-flightstrip-container',
@@ -15,8 +16,9 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
   @Input("colID") columnId!: string;
   subscriptionHandles: any = [];
   baseURL = environment.baseURL
+  isMouseOver: boolean = false
 
-  constructor(private networkService: NetworkService, private fsService: FlightstripService) {
+  constructor(private networkService: NetworkService, private fsService: FlightstripService, private dataService: DataService) {
     this.subscriptionHandles.push(
       this.networkService.networkEmitter.subscribe(() => {
         this.onCheckCallsignTrigger()
@@ -106,9 +108,38 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
     }
   }
 
-  onKeyDown(event: KeyboardEvent) {
-    if (!this.fsService.isInputFocused && event.key == "c") {
-      this.stripModel.compactMode = !this.stripModel.compactMode;
+
+  onMouseEnter(e: MouseEvent){
+    this.isMouseOver = true
+  }
+
+  onMouseLeave(e: MouseEvent) {
+    this.isMouseOver = false
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  keyEvent(e: KeyboardEvent){
+    if (this.isMouseOver && !this.fsService.isInputFocused){
+      if(e.key === 'x') {
+        if(!this.stripModel.deleteActive){
+          this.stripModel.deleteActive = true
+        }else{
+          let index = this.dataService.flightstripData[this.stripModel.columnId].flightstrips.indexOf(this.stripModel)
+          this.dataService.flightstripData[this.stripModel.columnId].flightstrips.splice(index, 1)
+        }
+      }
+      if(e.key==='c'){
+        this.stripModel.compactMode = !this.stripModel.compactMode;
+      }
+      if(e.key==='a' || e.key === 'ArrowLeft'){
+        e.preventDefault()
+        this.prevStatus()
+      }
+      if(e.key==='d' || e.key === 'ArrowRight'){
+        e.preventDefault()
+        this.nextStatus()
+      }
+
     }
   }
 }

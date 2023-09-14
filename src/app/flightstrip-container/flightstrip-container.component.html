@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" (mouseenter)="onMouseEnter($event)" (mouseleave)="onMouseLeave($event)">
   <app-flightstrip [fs]="stripModel" *ngIf="!stripModel.compactMode"
                    (switchToCompact)="stripModel.compactMode = true" (nextStatus)="nextStatus()"
                    (prevStatus)="prevStatus()"></app-flightstrip>

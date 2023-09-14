@@ -24,6 +24,8 @@ export class Flightstrip {
   public compactMode: boolean = false;
   public infosPulled = false;
   public isMarkedBySearch = false;
+  public emergencyActive: boolean = false;
+  public deleteActive: boolean = false;
 
   constructor(identifier: string, type: stripType, columnId: string, columnPos : number) {
     this.id = identifier;

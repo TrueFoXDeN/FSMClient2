@@ -132,6 +132,9 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   onSquawkChange() {
     if (this.fs.squawk == "7500" || this.fs.squawk == "7600" || this.fs.squawk == "7700") {
       this.fs.triangleIconState = 4
+      this.fs.emergencyActive = true
+    }else{
+      this.fs.emergencyActive = false
     }
     this.onInputFocusLost()
   }

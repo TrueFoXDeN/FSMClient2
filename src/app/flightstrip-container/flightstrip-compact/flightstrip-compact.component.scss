@@ -222,6 +222,10 @@
   border-color: var(--fs-emergency-border-color);
 }
 
+.delete {
+  border-color: var(--fs-delete-border-color);
+}
+
 .highlight {
   animation: blink 1.3s linear 4;
 }
