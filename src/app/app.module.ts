@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule, isDevMode} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -93,6 +93,7 @@ import { ProximityRowButtonComponent } from './overlays/proximity-settings/proxi
 import {ButtonModule} from "primeng/button";
 import { CookieDialogComponent } from './overlays/cookie-dialog/cookie-dialog.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -175,7 +176,13 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     InputSwitchModule,
     SliderModule,
     ButtonModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [
     CustomStyles,
