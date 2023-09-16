@@ -16,7 +16,7 @@ export class SnackbarMessageService {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       duration: 1800,
-      panelClass: [`${severity}-snackbar`]
+      panelClass: [`${severity}-snackbar`],
     });
   }
 }
