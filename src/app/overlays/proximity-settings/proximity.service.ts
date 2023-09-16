@@ -18,19 +18,19 @@ export class ProximityService {
 
   constructor(private http: HttpClient, private flightstripService: FlightstripService,
               private snackService: SnackbarMessageService,
-              private columnService : ColumnService,
+              private columnService: ColumnService,
               protected dataService: DataService) {
 
 
   }
 
-  getAirports(){
+  getAirports() {
     let airports: Airport[] = []
     this.dataService.profileData[this.dataService.currentProfileID].proximity.forEach((val: any) => airports.push(Object.assign({}, val)));
     return airports
   }
 
-  getActiveAirports(){
+  getActiveAirports() {
     let airports: Airport[] = this.getAirports()
     return airports.filter(airport => airport.active)
   }
@@ -38,10 +38,12 @@ export class ProximityService {
   getAircraftsInProximity(networkType: NetworkType, airports: Airport[]) {
     let body = {airports: airports.filter(airport => airport.active)}
     let network = ''
-    switch (networkType){
-      case NetworkType.IVAO: network = 'ivao'
+    switch (networkType) {
+      case NetworkType.IVAO:
+        network = 'ivao'
         break
-      case NetworkType.VATSIM: network = 'vatsim'
+      case NetworkType.VATSIM:
+        network = 'vatsim'
         break
     }
     return this.http.post(`${this.baseURL}/${network}/proximity`, body)
@@ -62,13 +64,11 @@ export class ProximityService {
       if (Array.isArray(v)) {
         for (const aircraft of v) {
           if (!this.flightstripService.flightStripExists(aircraft) && !this.finishedAircrafts.includes(aircraft)) {
-
             this.flightstripService.createFlightstrip(inboundColumn, aircraft, stripType.INBOUND);
-            this.snackService.showMessage(`New aircraft in ${inboundColumnName}`, "success");
+            this.snackService.showMessage(`Added ${aircraft} to ${inboundColumnName}`, "success");
           }
         }
       }
-
     }
     for (const [k, v] of Object.entries(res.outbound)) {
 
@@ -82,7 +82,7 @@ export class ProximityService {
         for (const aircraft of v) {
           if (!this.flightstripService.flightStripExists(aircraft) && !this.finishedAircrafts.includes(aircraft)) {
             this.flightstripService.createFlightstrip(outboundColumn, aircraft, stripType.OUTBOUND);
-            this.snackService.showMessage(`New aircraft in ${outboundColumnName}`, "success");
+            this.snackService.showMessage(`Added ${aircraft} to ${outboundColumnName}`, "success");
           }
         }
       }
@@ -99,11 +99,18 @@ export class ProximityService {
         for (const aircraft of v) {
           if (!this.flightstripService.flightStripExists(aircraft) && !this.finishedAircrafts.includes(aircraft)) {
             this.flightstripService.createFlightstrip(vfrColumn, aircraft, stripType.VFR);
-            this.snackService.showMessage(`New aircraft in ${vfrColumnName}`, "success");
+            this.snackService.showMessage(`Added ${aircraft} to ${vfrColumnName}`, "success");
           }
         }
       }
 
     }
+  }
+
+  playAudio(path: string) {
+    let audio = new Audio();
+    audio.src = path;
+    audio.load();
+    audio.play();
   }
 }
