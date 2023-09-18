@@ -1,1 +1,50 @@
-<p>multiplayer-settings works!</p>
+<div class="window">
+  <div *ngIf="isConnected" class="flex-column">
+    <div class="header">
+      <span>Multiplayer</span>
+    </div>
+    <div class="container">
+      <div class="create">
+        <div class="sub-header">
+          <span>Create Room</span>
+        </div>
+        <div class="content">
+          <div class="room">
+            <span class="roomText" *ngIf="createdRoomId.length > 0">RoomID:</span>
+            <span class="id" *ngIf="createdRoomId.length > 0">{{createdRoomId}} </span>
+          </div>
+          <div class="roomid">
+            <span>Password:</span>
+            <input class="input" [(ngModel)]="createPassword">
+          </div>
+          <button class="button" (click)="createRoom()"
+                  [disabled]="false">Create</button>
+        </div>
+      </div>
+      <div class="join">
+        <div class="sub-header">
+          <span>Join Room</span>
+
+        </div>
+        <div class="content">
+          <div class="roomid">
+            <span>RoomID:</span>
+            <input class="input" [(ngModel)]="enteredRoomid">
+          </div>
+          <div class="roomid">
+            <span>Password:</span>
+            <input class="input" [(ngModel)]="joinPassword">
+          </div>
+
+          <button class="button" (click)="joinRoom()"
+                  [disabled]="false">Join</button>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+

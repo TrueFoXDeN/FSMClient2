@@ -96,7 +96,6 @@ export class AppComponent implements OnInit {
             f.deleteActive = false
           }
         }
-
       }
     }
   }

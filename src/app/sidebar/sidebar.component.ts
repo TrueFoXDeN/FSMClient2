@@ -22,6 +22,7 @@ import {FlightstripService} from "../flightstrip-container/flightstrip.service";
 import {DataService} from "../services/data.service";
 import {SearchcallsignService} from "../services/searchcallsign.service";
 import {ProximityService} from "../overlays/proximity-settings/proximity.service";
+import {MultiplayerService} from "../services/multiplayer.service";
 import {CookieService} from "ngx-cookie-service";
 
 @Component({
@@ -38,6 +39,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
               private dataService: DataService, private styleChanger: StyleChangerService, private snackService: SnackbarMessageService,
               private colBuilderService: ColumnBuilderService, public networkService: NetworkService,
               private columnBuilderService: ColumnBuilderService, private searchcallsignService: SearchcallsignService,
+              private multiplayerService: MultiplayerService,
               private proximityService: ProximityService, private cookieService: CookieService) {
 
     this.subscriptionList.push(this.networkService.changedNetworkEmitter.subscribe((data) => {
@@ -143,13 +145,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   openMultiplayerSettings() {
     const dialogConfig = new MatDialogConfig()
-    dialogConfig.height = `${350 * this.styleChanger.multiplier}px`;
-    dialogConfig.width = `${350 * this.styleChanger.multiplier}px`;
+    dialogConfig.height = `60vh`;
+    dialogConfig.width = `80vw`;
     const dialogRef = this.dialog.open(MultiplayerSettingsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
 
 
     });
+    // this.multiplayerService.connect()
+
   }
 
 

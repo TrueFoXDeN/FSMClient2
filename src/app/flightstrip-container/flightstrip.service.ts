@@ -25,13 +25,8 @@ export class FlightstripService {
   }
 
   findFlightStrip(callsign: string) {
-    let currentColumnIDList: string [] = []
     this.dataService.profileData[this.dataService.currentProfileID].columnStructure.forEach((element: any) => {
-      currentColumnIDList.push(element.uuid)
-    });
-
-    currentColumnIDList.forEach((colID: string) => {
-      for (let flightstrip of this.dataService.flightstripData[colID].flightstrips) {
+      for (let flightstrip of this.dataService.flightstripData[element.uuid].flightstrips) {
         if (flightstrip.callsign == callsign) {
           flightstrip.isMarkedBySearch = true;
           flightstrip.compactMode = false;
@@ -42,6 +37,7 @@ export class FlightstripService {
         }
       }
     });
+
   }
 
   getFlightstripByCallsign(callsign: string, network: string) {

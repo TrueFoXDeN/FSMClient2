@@ -14,7 +14,7 @@
     ></app-sidebar-button>
     <app-sidebar-button-png icon="{{radarIcon}}" class="radar default" matTooltip="Proximity Settings"
                             matTooltipPosition="right" (click)="openProximitySettings()"></app-sidebar-button-png>
-    <app-sidebar-button icon="users" class="icon-button default disabled" matTooltip="Multiplayer"
+    <app-sidebar-button icon="users" (click)="openMultiplayerSettings()" class="icon-button default" matTooltip="Multiplayer"
                         matTooltipPosition="right"
                         ></app-sidebar-button>
     <app-sidebar-button icon="search" class="icon-button default" matTooltip="Search Callsign"
