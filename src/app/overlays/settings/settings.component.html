@@ -1,7 +1,16 @@
 <div class="window">
-  <div class="flex-row">
-
-  </div>
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav mode="side" opened class="navbar">
+      <div class="flex-container">
+        <div class="navbar-item header"><span appSettings [header]="true">Settings</span></div>
+        <div class="navbar-item item"><span appSettings>General</span></div>
+        <div class="navbar-item item"><span appSettings>Keybindings</span></div>
+        <div class="navbar-item item"><span appSettings>ATC Frequencies</span></div>
+        <div class="navbar-item item"><span appSettings>Multiplayer</span></div>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content class="nav-content">Main content</mat-sidenav-content>
+  </mat-sidenav-container>
 </div>
 
 

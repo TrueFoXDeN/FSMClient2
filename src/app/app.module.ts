@@ -94,6 +94,7 @@ import {ButtonModule} from "primeng/button";
 import { CookieDialogComponent } from './overlays/cookie-dialog/cookie-dialog.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import {SettingsDirective} from "./overlays/settings/settings.directive";
 
 @NgModule({
   declarations: [
@@ -182,7 +183,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
             // Register the ServiceWorker as soon as the application is stable
             // or after 30 seconds (whichever comes first).
             registrationStrategy: 'registerWhenStable:30000'
-        })
+        }),
+        SettingsDirective
     ],
   providers: [
     CustomStyles,

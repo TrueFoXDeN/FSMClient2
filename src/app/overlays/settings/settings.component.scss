@@ -8,3 +8,55 @@
   background-color: var(--network-background);
   color: var(--app-fontcolor)
 }
+
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(238, 238, 238, 0);
+}
+
+.navbar {
+  border-right: 1px solid var(--app-border);
+  background-color: var(--sidebar-background);
+  width: 20%;
+}
+
+.nav-content {
+  background-color: var(--overlay-background);
+}
+
+.navbar-item {
+  display: flex;
+  height: 100%;
+  flex-direction: row;
+  align-items: center;
+
+  &.item {
+    background-color: var(--app-button-background);
+    cursor: pointer;
+    padding-left: 1rem;
+
+    &:hover {
+      background-color: var(--app-accent-secondary-hover);
+    }
+  }
+
+  &.header {
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+}
+
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  height: 40%;
+  gap: 1.5%;
+}
