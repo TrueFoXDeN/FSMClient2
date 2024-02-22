@@ -6,7 +6,7 @@ import {Airport} from "../overlays/proximity-settings/proximity.model";
   providedIn: 'root'
 })
 export class DataService {
-  public columnStructure: Array<GridsterItem> = []
+  //public columnStructure: Array<GridsterItem> = []
   public proximity: Airport[] = []
   public flightstripData: any = {}
   public profileData: any = {}

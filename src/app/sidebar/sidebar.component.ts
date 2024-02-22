@@ -159,8 +159,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   openAppSettings() {
     const dialogConfig = new MatDialogConfig()
-    dialogConfig.height = `${350 * this.styleChanger.multiplier}px`;
-    dialogConfig.width = `${350 * this.styleChanger.multiplier}px`;
+    dialogConfig.height = `${450 * this.styleChanger.multiplier}px`;
+    dialogConfig.width = `${850 * this.styleChanger.multiplier}px`;
     const dialogRef = this.dialog.open(SettingsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
 

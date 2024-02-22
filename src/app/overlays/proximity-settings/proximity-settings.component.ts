@@ -40,7 +40,6 @@ export class ProximitySettingsComponent {
     this.dataService.profileData[this.dataService.currentProfileID].proximity = this.airports
     localStorage.setItem("profileStructure", JSON.stringify(this.dataService.profileData))
     this.dialogRef.close()
-
   }
 
   closeWithoutSaving() {

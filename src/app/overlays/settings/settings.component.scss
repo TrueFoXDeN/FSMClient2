@@ -1,0 +1,10 @@
+.window {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  overflow: hidden;
+  padding: 20px;
+  background-color: var(--network-background);
+  color: var(--app-fontcolor)
+}
