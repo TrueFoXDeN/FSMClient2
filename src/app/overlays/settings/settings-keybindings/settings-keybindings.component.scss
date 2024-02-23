@@ -1,0 +1,68 @@
+table {
+  color: var(--app-fontcolor);
+  width: 100%;
+  height: 100%;
+}
+
+th {
+  color: var(--app-fontcolor);
+}
+
+td {
+  color: var(--app-fontcolor);
+}
+
+
+.action-name {
+  padding-left: 0.5rem;
+}
+
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.input {
+  margin-bottom: 0;
+  margin-top: 0;
+  width: 12rem;
+  height: 100%;
+  outline: none;
+  box-sizing: border-box;
+  padding-left: 0.4em;
+  padding-bottom: 0.4rem;
+  padding-top: 0.4rem;
+  background-color: var(--app-input);
+  border: 1px solid var(--search-input-border);
+  color: var(--search-input-fontcolor);
+  border-radius: 5px;
+
+  &:focus {
+    border-color: var(--search-input-border-focus);
+  }
+}
+
+
+.icon {
+  height: 2rem;
+  aspect-ratio: 1;
+
+  &.apply {
+    background-color: var(--settings-keybinding-apply-button-background);
+
+    &:hover {
+      background-color: var(--settings-keybinding-apply-button-background-hover);
+    }
+  }
+
+  &.reset {
+    background-color: var(--settings-keybinding-reset-button-background);
+
+    &:hover {
+      background-color: var(--settings-keybinding-reset-button-background-hover);
+    }
+  }
+}
+

@@ -203,6 +203,18 @@
   --cookie-background: var(--app-background);
   --cookie-button-background: var(--app-primary);
   --cookie-button-background-hover: var(--app-primary-hover);
+
+  /*Settings*/
+  --settings-discard-button-background: var(--app-accent-secondary);
+  --settings-discard-button-background-hover: var(--app-accent-secondary-hover);
+  --settings-save-button-background: var(--app-primary);
+  --settings-save-button-background-hover: var(--app-primary-hover);
+
+  /*Keybinding-settings*/
+  --settings-keybinding-reset-button-background: var(--app-accent-secondary);
+  --settings-keybinding-reset-button-background-hover: var(--app-accent-secondary-hover);
+  --settings-keybinding-apply-button-background: var(--app-primary);
+  --settings-keybinding-apply-button-background-hover: var(--app-primary-hover);
 }
 
 
@@ -3449,7 +3461,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   text-align: left;
   border: 1px solid #3f4b5b;
   border-width: 1px 0 0 0;
-  padding: 1rem 1rem
+  padding: 0.4rem 0.4rem
 }
 
 .p-datatable .p-datatable-tbody > tr > td .p-row-toggler, .p-datatable .p-datatable-tbody > tr > td .p-row-editor-init, .p-datatable .p-datatable-tbody > tr > td .p-row-editor-save, .p-datatable .p-datatable-tbody > tr > td .p-row-editor-cancel {

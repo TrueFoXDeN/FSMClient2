@@ -16,7 +16,7 @@ export enum SettingsTypes {
 
 
 export class SettingsComponent {
-  settingsSelector: SettingsTypes = SettingsTypes.GENERAL
+  settingsSelector: SettingsTypes = SettingsTypes.KEYBINDINGS
   protected readonly settingItems = SettingsTypes;
 
   onSettingClick(selector: SettingsTypes) {

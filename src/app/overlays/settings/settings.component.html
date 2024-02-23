@@ -26,14 +26,24 @@
       </div>
     </mat-sidenav>
     <mat-sidenav-content class="nav-content">
-      @switch (settingsSelector) {
-        @case (SettingsTypes.KEYBINDINGS) {
-          <app-settings-keybindings></app-settings-keybindings>
+      <div class="sub-settings">
+        @switch (settingsSelector) {
+          @case (SettingsTypes.KEYBINDINGS) {
+            <app-settings-keybindings></app-settings-keybindings>
+          }
+          @case (SettingsTypes.ATC_FREQS) {
+            <app-settings-atc></app-settings-atc>
+          }
         }
-        @case (SettingsTypes.ATC_FREQS) {
-          <app-settings-atc></app-settings-atc>
-        }
-      }
+      </div>
+      <div class="footer">
+      <app-icon-button icon="save" class="icon save" matTooltip="Save & Exit"
+                       matTooltipPosition="above"></app-icon-button>
+        <app-icon-button icon="x" class="icon discard" matTooltip="Discard"
+                         matTooltipPosition="above"></app-icon-button>
+
+      </div>
+
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

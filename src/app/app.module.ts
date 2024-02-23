@@ -97,6 +97,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import {SettingsDirective} from "./overlays/settings/settings.directive";
 import {SettingsKeybindingsComponent} from "./overlays/settings/settings-keybindings/settings-keybindings.component";
 import {SettingsAtcComponent} from "./overlays/settings/settings-atc/settings-atc.component";
+import {IconButtonComponent} from "./shared-components/icon-button/icon-button.component";
+import {
+  KeybindingsButtonComponent
+} from "./overlays/settings/settings-keybindings/keybindings-button/keybindings-button.component";
 
 @NgModule({
   declarations: [
@@ -188,7 +192,9 @@ import {SettingsAtcComponent} from "./overlays/settings/settings-atc/settings-at
     }),
     SettingsDirective,
     SettingsKeybindingsComponent,
-    SettingsAtcComponent
+    SettingsAtcComponent,
+    IconButtonComponent,
+    KeybindingsButtonComponent
   ],
   providers: [
     CustomStyles,

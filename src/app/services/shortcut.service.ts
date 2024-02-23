@@ -41,7 +41,6 @@ export class ShortcutService {
   }
 
   checkIfShortcutExists(shortcutString: string) {
-
     return this.primaryShortcutsConfig.has(shortcutString) || this.secondaryShortcutsConfig.has(shortcutString);
   }
 
@@ -49,7 +48,7 @@ export class ShortcutService {
     if (!this.componentActions.has(componentID)) {
       this.componentActions.set(componentID, actionMap);
     }
-    console.log(this.componentActions)
+    //console.log(this.componentActions)
   }
 
   removeComponentActions(componentID: string) {
@@ -95,13 +94,20 @@ export class ShortcutService {
     shortcutString += "+";
     shortcutString += key.key;
     return shortcutString;
-
   }
 
 //Format: ctrl+alt+shift+key
   addDefaultShortcuts() {
-    this.primaryShortcutsConfig.set("ctrl+++f", "openSearchCallsign")
-    this.primaryShortcutsConfig.set("+++Escape", "abortDeletion")
+    this.primaryShortcutsConfig.set("ctrl+++f", "openSearchCallsign");
+    this.primaryShortcutsConfig.set("+++Escape", "abortDeletion");
+    this.primaryShortcutsConfig.set("+++x", "deleteFs");
+    this.primaryShortcutsConfig.set("+++c", "toggleCompact");
+    this.primaryShortcutsConfig.set("+++a", "prevStatus");
+    this.primaryShortcutsConfig.set("+++d", "nextStatus");
+
+    this.secondaryShortcutsConfig.set("+++ArrowLeft", "prevStatus");
+    this.secondaryShortcutsConfig.set("+++ArrowRight", "nextStatus");
   }
+
 
 }

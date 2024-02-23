@@ -1,1 +1,29 @@
-<p>settings-keybindings works!</p>
+<p-table [value]="dataSource" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Name</th>
+      <th>Primary</th>
+      <th>Secondary</th>
+<!--      <th></th>-->
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-product>
+    <tr>
+      <td><span class="action-name">Abort deletion</span></td>
+      <td class="inputColumns">
+        <div class="flex-container">
+          <input type="text" class="input" appSettingsKeybindings>
+          <app-keybindings-button icon="rotate-ccw" class="icon reset"></app-keybindings-button>
+          <app-keybindings-button icon="check" class="icon apply"></app-keybindings-button>
+        </div>
+      </td>
+      <td class="inputColumns">
+        <div class="flex-container">
+          <input type="text" class="input" appSettingsKeybindings>
+          <app-keybindings-button icon="rotate-ccw" class="icon reset"></app-keybindings-button>
+          <app-keybindings-button icon="check" class="icon apply"></app-keybindings-button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

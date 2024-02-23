@@ -29,17 +29,22 @@ export class AppComponent implements OnInit, OnDestroy {
               private searchcallsignService: SearchcallsignService, private styleChanger: StyleChangerService,
               private shortcutService: ShortcutService) {
 
-
+    this.titleService.setTitle(this.title + " v" + this.version);
     this.actionsmap.set("openSearchCallsign", () => this.searchcallsignService.openSearchCallsign())
     this.actionsmap.set("abortDeletion", () => this.abortDeletion())
-
-
-    this.titleService.setTitle(this.title + " v" + this.version);
-
-
     shortcutService.registerComponentActions("app", this.actionsmap)
 
+    this.loadProfileStructure();
+    this.checkCookieService()
 
+    this.loggingService.logActivity(this.dataService.uid)
+  }
+
+  ngOnDestroy(): void {
+    this.shortcutService.removeComponentActions("app")
+  }
+
+  loadProfileStructure() {
     if (this.cookieService.check("currentProfileID")) {
       this.dataService.currentProfileID = this.cookieService.get("currentProfileID");
     } else {
@@ -49,12 +54,16 @@ export class AppComponent implements OnInit, OnDestroy {
       this.dataService.profileData = JSON.parse(localStorage.getItem("profileStructure") || '{}')
     }
     this.dataService.profileData[this.dataService.getStandardProfileID()] = this.dataService.standardProfile
+
     if (!this.dataService.profileData.hasOwnProperty(this.dataService.currentProfileID)) {
       this.dataService.currentProfileID = this.dataService.getStandardProfileID();
       this.messageService.showMessage("Error loading profile. Loading default. ", "error");
     } else {
       this.messageService.showMessage(`Profile "${this.dataService.profileData[this.dataService.currentProfileID].name}" loaded`, "standard");
     }
+  }
+
+  checkCookieService() {
     if (!this.cookieService.check("cookieAccepted")) {
       this.openCookieDialog();
       this.cookieService.set("cookieAccepted", "true", {expires: 10000, sameSite: 'Lax'})
@@ -69,19 +78,12 @@ export class AppComponent implements OnInit, OnDestroy {
         this.styleChanger.multiplier = 1.0
       }
     }
-
     if (this.cookieService.check('uid')) {
       this.dataService.uid = this.cookieService.get('uid')
     } else {
       this.dataService.uid = this.util.generateUUID()
       this.cookieService.set('uid', this.dataService.uid)
     }
-
-    this.loggingService.logActivity(this.dataService.uid)
-  }
-
-  ngOnDestroy(): void {
-    this.shortcutService.removeComponentActions("app")
   }
 
 
@@ -98,7 +100,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('window:keydown', ['$event'])
-
   keyEvent(e: KeyboardEvent) {
     this.shortcutService.executeShortcut("app", e);
   }

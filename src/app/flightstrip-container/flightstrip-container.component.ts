@@ -5,6 +5,7 @@ import {NetworkService} from "../services/network.service";
 import {environment} from "../../environments/environment";
 import {FlightstripService} from "./flightstrip.service";
 import {DataService} from "../services/data.service";
+import {ShortcutService} from "../services/shortcut.service";
 
 @Component({
   selector: 'app-flightstrip-container',
@@ -17,8 +18,10 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
   subscriptionHandles: any = [];
   baseURL = environment.baseURL
   isMouseOver: boolean = false
+  actionNames: Map<string, Function> = new Map();
 
-  constructor(private networkService: NetworkService, private fsService: FlightstripService, private dataService: DataService) {
+  constructor(private networkService: NetworkService, private fsService: FlightstripService, private dataService: DataService,
+              private shortcutService: ShortcutService) {
     this.subscriptionHandles.push(
       this.networkService.networkEmitter.subscribe(() => {
         this.onCheckCallsignTrigger()
@@ -47,6 +50,12 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
     if (this.stripModel.columnId != this.columnId) {
       this.stripModel.columnId = this.columnId
     }
+    this.actionNames.set("deleteFs", () => this.checkFsDeletion())
+    this.actionNames.set("toggleCompact", () => this.toggleCompactMode())
+    this.actionNames.set("nextStatus", () => this.setNextStatus())
+    this.actionNames.set("prevStatus", () => this.setPrevStatus())
+    this.shortcutService.registerComponentActions(this.stripModel.id, this.actionNames);
+
   }
 
 
@@ -119,28 +128,29 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
 
   @HostListener('window:keydown', ['$event'])
   keyEvent(e: KeyboardEvent) {
-    console.log(e);
     if (this.isMouseOver && !this.fsService.isInputFocused) {
-      if (e.key === 'x') {
-        if (!this.stripModel.deleteActive) {
-          this.stripModel.deleteActive = true
-        } else {
-          let index = this.dataService.flightstripData[this.stripModel.columnId].flightstrips.indexOf(this.stripModel)
-          this.dataService.flightstripData[this.stripModel.columnId].flightstrips.splice(index, 1)
-        }
-      }
-      if (e.key === 'c') {
-        this.stripModel.compactMode = !this.stripModel.compactMode;
-      }
-      if (e.key === 'a' || e.key === 'ArrowLeft') {
-        e.preventDefault()
-        this.prevStatus()
-      }
-      if (e.key === 'd' || e.key === 'ArrowRight') {
-        e.preventDefault()
-        this.nextStatus()
-      }
-
+      this.shortcutService.executeShortcut(this.stripModel.id, e);
     }
+  }
+
+  checkFsDeletion() {
+    if (!this.stripModel.deleteActive) {
+      this.stripModel.deleteActive = true
+    } else {
+      let index = this.dataService.flightstripData[this.stripModel.columnId].flightstrips.indexOf(this.stripModel)
+      this.dataService.flightstripData[this.stripModel.columnId].flightstrips.splice(index, 1)
+    }
+  }
+
+  toggleCompactMode() {
+    this.stripModel.compactMode = !this.stripModel.compactMode;
+  }
+
+  setNextStatus() {
+    this.nextStatus()
+  }
+
+  setPrevStatus() {
+    this.prevStatus()
   }
 }

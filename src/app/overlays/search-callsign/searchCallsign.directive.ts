@@ -16,6 +16,7 @@ export class SearchCallsignDirective implements OnInit, OnDestroy {
       this.updateSize();
     }));
   }
+
   ngOnInit(): void {
     this.updateSize();
   }

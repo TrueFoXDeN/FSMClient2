@@ -37,6 +37,7 @@ import {
   Maximize2,
   Minimize2,
   ChevronsLeft,
+  RotateCcw
 } from 'angular-feather/icons';
 
 // Select some icons (use an object, not an array)
@@ -75,7 +76,8 @@ const icons = {
   ArrowRight,
   Maximize2,
   Minimize2,
-  ChevronsLeft
+  ChevronsLeft,
+  RotateCcw
 };
 
 @NgModule({
