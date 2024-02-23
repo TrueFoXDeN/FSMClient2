@@ -18,6 +18,8 @@
   background: rgba(238, 238, 238, 0);
 }
 
+
+
 .navbar {
   border-right: 1px solid var(--app-border);
   background-color: var(--sidebar-background);
@@ -42,12 +44,18 @@
     &:hover {
       background-color: var(--app-accent-secondary-hover);
     }
+    &.selected {
+      background-color: var(--app-primary);
+    }
   }
 
   &.header {
     margin-top: 0.5rem;
     padding-left: 1rem;
     margin-bottom: 0.5rem;
+    text-align: center;
+    align-items: center;
+    align-content: center;
   }
 
 }

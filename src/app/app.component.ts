@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {CookieService} from "ngx-cookie-service";
 import {SnackbarMessageService} from "./services/snackbar-message.service";
 import {DataService} from "./services/data.service";
@@ -11,21 +11,35 @@ import {LoggingService} from "./services/logging.service";
 import {Util} from "./util";
 import {SearchcallsignService} from "./services/searchcallsign.service";
 import {StyleChangerService} from "./services/style-changer.service";
+import {ShortcutService} from "./services/shortcut.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'FSM';
   version = packageInfo.version
+  actionsmap: Map<string, Function> = new Map();
 
   constructor(private cookieService: CookieService, private dataService: DataService,
               private messageService: SnackbarMessageService, private titleService: Title,
               public dialog: MatDialog, private loggingService: LoggingService, private util: Util,
-              private searchcallsignService: SearchcallsignService, private styleChanger: StyleChangerService) {
+              private searchcallsignService: SearchcallsignService, private styleChanger: StyleChangerService,
+              private shortcutService: ShortcutService) {
+
+
+    this.actionsmap.set("openSearchCallsign", () => this.searchcallsignService.openSearchCallsign())
+    this.actionsmap.set("abortDeletion", () => this.abortDeletion())
+
+
     this.titleService.setTitle(this.title + " v" + this.version);
+
+
+    shortcutService.registerComponentActions("app", this.actionsmap)
+
+
     if (this.cookieService.check("currentProfileID")) {
       this.dataService.currentProfileID = this.cookieService.get("currentProfileID");
     } else {
@@ -64,8 +78,10 @@ export class AppComponent implements OnInit {
     }
 
     this.loggingService.logActivity(this.dataService.uid)
+  }
 
-
+  ngOnDestroy(): void {
+    this.shortcutService.removeComponentActions("app")
   }
 
 
@@ -76,29 +92,24 @@ export class AppComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.panelClass = 'custom-dialog-container';
     const dialogRef = this.dialog.open(CookieDialogComponent, dialogConfig);
-
   }
 
   ngOnInit(): void {
   }
 
   @HostListener('window:keydown', ['$event'])
+
   keyEvent(e: KeyboardEvent) {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
-      console.log("hello")
-      e.preventDefault();
-      this.searchcallsignService.openSearchCallsign()
-    }
-    if (e.key === 'Escape') {
-      for (const [k, c] of Object.entries(this.dataService.flightstripData)) {
-        if (c && typeof c === 'object' && 'flightstrips' in c && Array.isArray(c.flightstrips)) {
-          for (let f of c.flightstrips) {
-            f.deleteActive = false
-          }
+    this.shortcutService.executeShortcut("app", e);
+  }
+
+  abortDeletion() {
+    for (const [k, c] of Object.entries(this.dataService.flightstripData)) {
+      if (c && typeof c === 'object' && 'flightstrips' in c && Array.isArray(c.flightstrips)) {
+        for (let f of c.flightstrips) {
+          f.deleteActive = false
         }
       }
     }
   }
-
-
 }

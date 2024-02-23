@@ -109,7 +109,7 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
   }
 
 
-  onMouseEnter(e: MouseEvent){
+  onMouseEnter(e: MouseEvent) {
     this.isMouseOver = true
   }
 
@@ -118,24 +118,25 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('window:keydown', ['$event'])
-  keyEvent(e: KeyboardEvent){
-    if (this.isMouseOver && !this.fsService.isInputFocused){
-      if(e.key === 'x') {
-        if(!this.stripModel.deleteActive){
+  keyEvent(e: KeyboardEvent) {
+    console.log(e);
+    if (this.isMouseOver && !this.fsService.isInputFocused) {
+      if (e.key === 'x') {
+        if (!this.stripModel.deleteActive) {
           this.stripModel.deleteActive = true
-        }else{
+        } else {
           let index = this.dataService.flightstripData[this.stripModel.columnId].flightstrips.indexOf(this.stripModel)
           this.dataService.flightstripData[this.stripModel.columnId].flightstrips.splice(index, 1)
         }
       }
-      if(e.key==='c'){
+      if (e.key === 'c') {
         this.stripModel.compactMode = !this.stripModel.compactMode;
       }
-      if(e.key==='a' || e.key === 'ArrowLeft'){
+      if (e.key === 'a' || e.key === 'ArrowLeft') {
         e.preventDefault()
         this.prevStatus()
       }
-      if(e.key==='d' || e.key === 'ArrowRight'){
+      if (e.key === 'd' || e.key === 'ArrowRight') {
         e.preventDefault()
         this.nextStatus()
       }

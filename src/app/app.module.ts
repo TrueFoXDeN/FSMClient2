@@ -95,6 +95,8 @@ import { CookieDialogComponent } from './overlays/cookie-dialog/cookie-dialog.co
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import {SettingsDirective} from "./overlays/settings/settings.directive";
+import {SettingsKeybindingsComponent} from "./overlays/settings/settings-keybindings/settings-keybindings.component";
+import {SettingsAtcComponent} from "./overlays/settings/settings-atc/settings-atc.component";
 
 @NgModule({
   declarations: [
@@ -148,44 +150,46 @@ import {SettingsDirective} from "./overlays/settings/settings.directive";
     ProximityRowButtonComponent,
     CookieDialogComponent
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        DragDropModule,
-        MatGridListModule,
-        ScrollingModule,
-        MatSidenavModule,
-        IconsModule,
-        FormsModule,
-        MatTooltipModule,
-        MatSnackBarModule,
-        DialogModule,
-        GridsterModule,
-        MatDialogModule,
-        CdkMenuModule,
-        HttpClientModule,
-        MatMenuModule,
-        MatSelectModule,
-        NgSelectModule,
-        MatChipsModule,
-        MatIconModule,
-        MatTableModule,
-        MatCheckboxModule,
-        MatSliderModule,
-        DropdownModule,
-        InputSwitchModule,
-        SliderModule,
-        ButtonModule,
-        ProgressSpinnerModule,
-        ServiceWorkerModule.register('ngsw-worker.js', {
-            enabled: !isDevMode(),
-            // Register the ServiceWorker as soon as the application is stable
-            // or after 30 seconds (whichever comes first).
-            registrationStrategy: 'registerWhenStable:30000'
-        }),
-        SettingsDirective
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    DragDropModule,
+    MatGridListModule,
+    ScrollingModule,
+    MatSidenavModule,
+    IconsModule,
+    FormsModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    DialogModule,
+    GridsterModule,
+    MatDialogModule,
+    CdkMenuModule,
+    HttpClientModule,
+    MatMenuModule,
+    MatSelectModule,
+    NgSelectModule,
+    MatChipsModule,
+    MatIconModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatSliderModule,
+    DropdownModule,
+    InputSwitchModule,
+    SliderModule,
+    ButtonModule,
+    ProgressSpinnerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
+    SettingsDirective,
+    SettingsKeybindingsComponent,
+    SettingsAtcComponent
+  ],
   providers: [
     CustomStyles,
     Util,
