@@ -3,6 +3,17 @@ import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {SnackbarMessageService} from "./snackbar-message.service";
 import {CookieService} from "ngx-cookie-service";
+import {CreateFlightstripCommand} from "./commands/create-flightstrip-command";
+import {TokenCommand} from "./commands/token-command";
+import {Command} from "./commands/command";
+import {CreateColumnCommand} from "./commands/create-column-command";
+import {DeleteColumnCommand} from "./commands/delete-column-command";
+import {DeleteFlightstripCommand} from "./commands/delete-flightstrip-command";
+import {EditFlightstripCommand} from "./commands/edit-flightstrip-command";
+import {EditStatusCommand} from "./commands/edit-status-command";
+import {GetClientsCommand} from "./commands/get-clients-command";
+import {GetDataCommand} from "./commands/get-data-command";
+import {MoveFlightstripCommand} from "./commands/move-flightstrip-command";
 
 
 @Injectable({
@@ -18,18 +29,43 @@ export class MultiplayerService {
   multiplayerUrl = environment.multiplayerURL
   url = environment.websocketURL
 
+  commands = new Map<string, Command>()
+
   constructor(private http: HttpClient,
-              private snackService: SnackbarMessageService, private cookieService: CookieService) {
+              private snackService: SnackbarMessageService, private cookieService: CookieService,
+              private tokenCommand: TokenCommand, private createColumnCommand: CreateColumnCommand,
+              private createFlightstripCommand: CreateFlightstripCommand, private deleteColumnCommand: DeleteColumnCommand,
+              private deleteFlightStripCommand: DeleteFlightstripCommand, private editFlightStripCommand: EditFlightstripCommand,
+              private editStatusCommand: EditStatusCommand, private getClientsCommand: GetClientsCommand,
+              private getDataCommand: GetDataCommand, private moveFlightstripCommand: MoveFlightstripCommand,
+  ) {
+
+    this.commands.set('token', tokenCommand)
+    this.commands.set('create_column', createColumnCommand)
+    this.commands.set('create_flightstrip', createFlightstripCommand)
+    this.commands.set('delete_column', deleteColumnCommand)
+    this.commands.set('delete_flightstrip', deleteFlightStripCommand)
+    this.commands.set('edit_flightstrip', editFlightStripCommand)
+    this.commands.set('edit_status', editStatusCommand)
+    this.commands.set('get_clients', getClientsCommand)
+    this.commands.set('get_data', getClientsCommand)
+    this.commands.set('move_flightstrip', moveFlightstripCommand)
   }
 
 
   processMessage(data: any) {
+
     data = JSON.parse(data)
-    switch (data.cmd) {
-      case "token":
-        this.snackService.showMessage(`Connected to Multiplayer`, "success");
-        this.cookieService.set('multiplayerAuth', data.args[0])
+
+    let cmd = this.commands.get(data.cmd)
+
+    if (cmd) {
+      cmd.execute(data.args)
+    } else {
+      console.log(data.cmd + ' is not implemented')
     }
+
+
   }
 
   connect(roomId: string, password: string, name: string) {
