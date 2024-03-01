@@ -215,6 +215,10 @@
   --settings-keybinding-reset-button-background-hover: var(--app-accent-secondary-hover);
   --settings-keybinding-apply-button-background: var(--app-primary);
   --settings-keybinding-apply-button-background-hover: var(--app-primary-hover);
+  --settings-keybinding-input-background: var(--app-input);
+  --settings-keybinding-input-border: var(--app-border);
+  --settings-keybinding-input-border-recording: var(--app-error);
+  --settings-keybinding-input-fontcolor: var(--app-fontcolor);
 }
 
 

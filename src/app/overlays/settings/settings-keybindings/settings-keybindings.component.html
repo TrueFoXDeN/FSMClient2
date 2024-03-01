@@ -1,27 +1,31 @@
-<p-table [value]="dataSource" [tableStyle]="{ 'min-width': '50rem' }">
+<p-table [value]="configData" [tableStyle]="{ 'min-width': '50rem' }">
   <ng-template pTemplate="header">
     <tr>
       <th>Name</th>
       <th>Primary</th>
       <th>Secondary</th>
-<!--      <th></th>-->
+      <!--      <th></th>-->
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-product>
+  <ng-template pTemplate="body" let-data>
     <tr>
-      <td><span class="action-name">Abort deletion</span></td>
+      <td><span class="action-name">{{ data.name }}</span></td>
       <td class="inputColumns">
         <div class="flex-container">
-          <input type="text" class="input" appSettingsKeybindings>
-          <app-keybindings-button icon="rotate-ccw" class="icon reset"></app-keybindings-button>
-          <app-keybindings-button icon="check" class="icon apply"></app-keybindings-button>
+          <input type="text" class="input" appSettingsKeybindings [placeholder]="data.primaryConfig | keybindings"
+                 (click)="onInputClick(data)">
+          <app-keybindings-button icon="rotate-ccw" class="icon reset"
+                                  [ngClass]="{'disabled' : data.isPrimaryDefault}"></app-keybindings-button>
+          <app-keybindings-button icon="check" class="icon apply"
+                                  [ngClass]="{'disabled' : !data.isRecording}"></app-keybindings-button>
         </div>
       </td>
       <td class="inputColumns">
         <div class="flex-container">
-          <input type="text" class="input" appSettingsKeybindings>
-          <app-keybindings-button icon="rotate-ccw" class="icon reset"></app-keybindings-button>
-          <app-keybindings-button icon="check" class="icon apply"></app-keybindings-button>
+          <input type="text" class="input" appSettingsKeybindings [placeholder]="data.secondaryConfig | keybindings">
+          <app-keybindings-button icon="rotate-ccw" class="icon reset"
+                                  [ngClass]="{'disabled' : data.isSecondaryDefault}"></app-keybindings-button>
+          <app-keybindings-button icon="check" class="icon apply" [ngClass]="{'disabled' : !data.isRecording}"></app-keybindings-button>
         </div>
       </td>
     </tr>

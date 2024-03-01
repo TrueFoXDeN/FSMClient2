@@ -9,17 +9,38 @@ export class ShortcutObject {
 
 }
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class ShortcutService {
-
+  private primaryDefaultActionKeyConfig: Map<string, string> = new Map();
+  private secondaryDefaultActionKeyConfig: Map<string, string> = new Map();
   private primaryShortcutsConfig: Map<string, string> = new Map();  //Map<shortcutString, ActionName>
   private secondaryShortcutsConfig: Map<string, string> = new Map();  //Map<shortcutString, ActionName>
   private componentActions: Map<string, Map<string, Function>> = new Map(); //Map<componentID, actionMap>
+  private actionNames: Map<string, string> = new Map();
 
   constructor() {
+    this.createDefaultActionKeyMaps()
     this.addDefaultShortcuts();
+    this.insertActionNames();
+  }
+
+
+  createDefaultActionKeyMaps() {
+    this.primaryDefaultActionKeyConfig.set("openSearchCallsign", "ctrl+++f");
+    this.primaryDefaultActionKeyConfig.set("abortDeletion", "+++Escape");
+    this.primaryDefaultActionKeyConfig.set("deleteFs", "+++x");
+    this.primaryDefaultActionKeyConfig.set("toggleCompact", "+++c");
+    this.primaryDefaultActionKeyConfig.set("prevStatus", "+++a");
+    this.primaryDefaultActionKeyConfig.set("nextStatus", "+++d");
+    this.primaryDefaultActionKeyConfig.set("createVfr", "+++v");
+    this.primaryDefaultActionKeyConfig.set("createOutbound", "+++o");
+    this.primaryDefaultActionKeyConfig.set("createInbound", "+++i");
+
+    this.secondaryDefaultActionKeyConfig.set("prevStatus", "+++ArrowLeft");
+    this.secondaryDefaultActionKeyConfig.set("nextStatus", "+++ArrowRight");
   }
 
   setShortcut(shortcutString: string, actionName: string, type: ShortcutType) {
@@ -104,9 +125,84 @@ export class ShortcutService {
     this.primaryShortcutsConfig.set("+++c", "toggleCompact");
     this.primaryShortcutsConfig.set("+++a", "prevStatus");
     this.primaryShortcutsConfig.set("+++d", "nextStatus");
+    this.primaryShortcutsConfig.set("+++v", "createVfr");
+    this.primaryShortcutsConfig.set("+++o", "createOutbound");
+    this.primaryShortcutsConfig.set("+++i", "createInbound");
 
     this.secondaryShortcutsConfig.set("+++ArrowLeft", "prevStatus");
     this.secondaryShortcutsConfig.set("+++ArrowRight", "nextStatus");
+  }
+
+
+  insertActionNames() {
+    this.actionNames.set("openSearchCallsign", "Search Callsign");
+    this.actionNames.set("abortDeletion", "Abort deletion");
+    this.actionNames.set("deleteFs", "Delete");
+    this.actionNames.set("toggleCompact", "Toggle view-mode");
+    this.actionNames.set("prevStatus", "Previous status");
+    this.actionNames.set("nextStatus", "Next status");
+    this.actionNames.set("createVfr", "Create VFR strip");
+    this.actionNames.set("createOutbound", "Create outbound strip");
+    this.actionNames.set("createInbound", "Create Inbound strip")
+  }
+
+  getActionNames() {
+    return this.actionNames;
+  }
+
+  getPrimaryConfig() {
+    return this.primaryShortcutsConfig;
+  }
+
+  getSecondaryConfig() {
+    return this.secondaryShortcutsConfig;
+  }
+
+  getPrimaryDefaultConfig() {
+    return this.primaryDefaultActionKeyConfig;
+  }
+
+  getSecondaryDefaultConfig() {
+    return this.secondaryDefaultActionKeyConfig;
+  }
+
+  loadDefaultShortcuts() {
+    this.primaryShortcutsConfig.clear();
+    this.secondaryShortcutsConfig.clear();
+    this.addDefaultShortcuts();
+  }
+
+
+  findShortcutInPrimaryConfig(actionName: string) {
+    for (let [key, value] of this.primaryShortcutsConfig) {
+      if (value === actionName) return key;
+    }
+    return ""
+  }
+
+  findShortcutInSecondaryConfig(actionName: string) {
+    for (let [key, value] of this.secondaryShortcutsConfig) {
+      if (value === actionName) return key;
+    }
+    return ""
+  }
+
+  checkIfKeyIsDefaultShortcut(key: string, isPrimaryKey: boolean) {
+    if (isPrimaryKey) {
+      let shortcut = this.findShortcutInPrimaryConfig(key);
+      let defaultShortcut = this.primaryDefaultActionKeyConfig.get(key)
+      if (!defaultShortcut) {
+        defaultShortcut = ""
+      }
+      return defaultShortcut === shortcut;
+    } else {
+      let shortcut = this.findShortcutInSecondaryConfig(key);
+      let defaultShortcut = this.secondaryDefaultActionKeyConfig.get(key)
+      if (!defaultShortcut) {
+        defaultShortcut = ""
+      }
+      return defaultShortcut === shortcut;
+    }
   }
 
 

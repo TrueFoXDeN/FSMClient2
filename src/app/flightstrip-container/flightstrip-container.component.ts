@@ -55,7 +55,6 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
     this.actionNames.set("nextStatus", () => this.setNextStatus())
     this.actionNames.set("prevStatus", () => this.setPrevStatus())
     this.shortcutService.registerComponentActions(this.stripModel.id, this.actionNames);
-
   }
 
 

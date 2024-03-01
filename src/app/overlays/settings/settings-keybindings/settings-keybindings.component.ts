@@ -1,38 +1,62 @@
 import {Component} from '@angular/core';
-import { TableModule } from 'primeng/table';
+import {TableModule} from 'primeng/table';
 import {SettingsKeybindingsDirective} from "./settings-keybindings.directive";
 import {KeybindingsButtonComponent} from "./keybindings-button/keybindings-button.component";
+import {ShortcutService} from "../../../services/shortcut.service";
+import {NgClass} from "@angular/common";
+import {KeybindingsPipe} from "./keybindings.pipe";
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+
+export interface KeybindingConfig {
+  actionName: string,
+  name: string,
+  primaryConfig: string,
+  secondaryConfig: string,
+  isPrimaryDefault: boolean,
+  isSecondaryDefault: boolean,
+  isRecording: boolean
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
-
-
 
 @Component({
   selector: 'app-settings-keybindings',
   standalone: true,
-  imports: [SettingsKeybindingsDirective, TableModule, KeybindingsButtonComponent],
+  imports: [SettingsKeybindingsDirective, TableModule, KeybindingsButtonComponent, NgClass, KeybindingsPipe],
   templateUrl: './settings-keybindings.component.html',
   styleUrl: './settings-keybindings.component.scss'
 })
 export class SettingsKeybindingsComponent {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  configData: KeybindingConfig [] = []
+  names: Map<string, string> = new Map()
+  primaryConfig: Map<string, string> = new Map();
+  secondaryConfig: Map<string, string> = new Map();
+
+  constructor(private shortcutService: ShortcutService) {
+    this.names = this.shortcutService.getActionNames();
+    this.primaryConfig = this.shortcutService.getPrimaryConfig();
+    this.secondaryConfig = this.shortcutService.getSecondaryConfig();
+    this.loadDataIntoConfig();
+  }
+
+
+  loadDataIntoConfig() {
+    for (let key of this.names.keys()) {
+      let config = {
+        actionName: key,
+        name: this.names.get(key),
+        primaryConfig: this.shortcutService.findShortcutInPrimaryConfig(key),
+        secondaryConfig: this.shortcutService.findShortcutInSecondaryConfig(key),
+        isPrimaryDefault: this.shortcutService.checkIfKeyIsDefaultShortcut(key, true),
+        isSecondaryDefault: this.shortcutService.checkIfKeyIsDefaultShortcut(key, false),
+        isRecording: false
+      }
+      this.configData.push(<KeybindingConfig>config);
+    }
+    console.log(this.configData)
+  }
+
+
+  onInputClick(config: KeybindingConfig) {
+    console.log(config);
+  }
 }
