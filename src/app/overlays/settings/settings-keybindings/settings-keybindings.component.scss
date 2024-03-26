@@ -15,6 +15,8 @@ td {
 
 .action-name {
   padding-left: 0.5rem;
+  width: 25rem;
+  margin-right: 12rem;
 }
 
 
@@ -34,13 +36,13 @@ td {
   padding-left: 0.4em;
   padding-bottom: 0.4rem;
   padding-top: 0.4rem;
-  background-color: var(--app-input);
-  border: 1px solid var(--search-input-border);
-  color: var(--search-input-fontcolor);
+  background-color: var(--settings-keybinding-input-background);
+  border: 1px solid var(--settings-keybinding-input-border);
+  color: var(--settings-keybinding-input-fontcolor);
   border-radius: 5px;
 
   &:focus {
-    border-color: var(--search-input-border-focus);
+    border-color: var(--settings-keybinding-input-border-recording);
   }
 }
 
@@ -64,5 +66,22 @@ td {
       background-color: var(--settings-keybinding-reset-button-background-hover);
     }
   }
+
+  &.discard{
+    background-color: var(--settings-keybinding-discard-button-background);
+    &:hover {
+      background-color: var(--settings-keybinding-discard-button-background-hover);
+    }
+  }
+
+  &.disabled {
+    opacity: 50%;
+
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
+
+
 }
 

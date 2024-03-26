@@ -72,7 +72,6 @@ export class AppComponent implements OnInit, OnDestroy {
       try {
         this.styleChanger.multiplier = parseFloat(this.cookieService.get('zoomLevel'))
         this.styleChanger.changedSize.next()
-        console.log(this.cookieService.get('zoomLevel'))
         this.messageService.showMessage(`Zoom set to ${Math.round(this.styleChanger.multiplier * 100)}%`, "standard")
       } catch (e) {
         this.styleChanger.multiplier = 1.0

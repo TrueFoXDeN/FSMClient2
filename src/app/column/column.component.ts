@@ -1,17 +1,19 @@
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {Component, EventEmitter, Input, Output, QueryList, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChild} from '@angular/core';
 import {Flightstrip, stripType} from '../flightstrip-container/flightstrip.model';
 import {Util} from "../util";
 import {FlightstripService} from "../flightstrip-container/flightstrip.service";
 import {FlightstripContainerComponent} from "../flightstrip-container/flightstrip-container.component";
 import {DataService} from "../services/data.service";
+import {ShortcutService} from "../services/shortcut.service";
 
 @Component({
   selector: 'app-column',
   templateUrl: './column.component.html',
   styleUrls: ['./column.component.scss']
 })
-export class ColumnComponent {
+
+export class ColumnComponent implements OnInit {
   @Input("name") name = ""
   @Input("uuid") uuid = ""
   @Output() blurEmitter = new EventEmitter<void>();
@@ -19,8 +21,17 @@ export class ColumnComponent {
   public strips: Flightstrip[] = []
   isMouseMoving: boolean = false;
   isMouseDown: boolean = false;
+  actionList: Map<string, Function> = new Map();
 
-  constructor(public dataService: DataService, private util: Util, private fsService: FlightstripService) {
+  constructor(public dataService: DataService, private util: Util, private fsService: FlightstripService, private shortcutService: ShortcutService) {
+
+  }
+
+  ngOnInit(): void {
+    this.actionList.set("createVfr", () => this.addVfrFlightstrip());
+    this.actionList.set("createOutbound", () => this.addOutboundFlightstrip());
+    this.actionList.set("createInbound", () => this.addInboundFlightstrip());
+    this.shortcutService.registerComponentActions(this.uuid, this.actionList)
   }
 
 
@@ -52,22 +63,8 @@ export class ColumnComponent {
   }
 
   onKeyPress(event: any) {
-    switch (event.key) {
-      case "i":
-        if (!this.fsService.isInputFocused) {
-          this.addInboundFlightstrip();
-        }
-        break;
-      case "o":
-        if (!this.fsService.isInputFocused) {
-          this.addOutboundFlightstrip();
-        }
-        break;
-      case "v":
-        if (!this.fsService.isInputFocused) {
-          this.addVfrFlightstrip();
-        }
-        break;
+    if (!this.fsService.isInputFocused) {
+      this.shortcutService.executeShortcut(this.uuid, event)
     }
   }
 
@@ -115,7 +112,7 @@ export class ColumnComponent {
     }
   }
 
-  dragStarted(fsId :string){
+  dragStarted(fsId: string) {
     for (let i = 0; i < this.dataService.flightstripData?.[this.uuid].flightstrips.length; i++) {
       if (this.dataService.flightstripData[this.uuid].flightstrips[i].id == fsId && this.dataService.flightstripData[this.uuid].flightstrips[i].compactMode) {
 
