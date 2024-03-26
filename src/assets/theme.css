@@ -29,6 +29,7 @@
   --app-border: #3f4b5b;
   --app-primary-outline: #ffffff;
   --app-error: #e31e18;
+  --app-error-dark: #b60904;
   --app-warning: #ffa600;
   --app-success: #7bff00;
   --app-success-secondary: #3C9E37;
@@ -215,6 +216,9 @@
   --settings-keybinding-reset-button-background-hover: var(--app-accent-secondary-hover);
   --settings-keybinding-apply-button-background: var(--app-primary);
   --settings-keybinding-apply-button-background-hover: var(--app-primary-hover);
+  --settings-keybinding-discard-button-background: var(--app-error);
+  --settings-keybinding-discard-button-background-hover: var(--app-error-dark);
+
   --settings-keybinding-input-background: var(--app-input);
   --settings-keybinding-input-border: var(--app-border);
   --settings-keybinding-input-border-recording: var(--app-error);

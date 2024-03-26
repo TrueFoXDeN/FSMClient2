@@ -67,6 +67,13 @@ td {
     }
   }
 
+  &.discard{
+    background-color: var(--settings-keybinding-discard-button-background);
+    &:hover {
+      background-color: var(--settings-keybinding-discard-button-background-hover);
+    }
+  }
+
   &.disabled {
     opacity: 50%;
 

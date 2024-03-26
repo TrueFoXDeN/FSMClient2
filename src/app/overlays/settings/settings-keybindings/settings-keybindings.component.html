@@ -12,23 +12,41 @@
       <td><span class="action-name">{{ data.displayName }}</span></td>
       <td class="inputColumns">
         <div class="flex-container">
-          <input type="text" class="input" appSettingsKeybindings [placeholder]="data.primaryShortcutString | keybindings"
-                 (click)="onInputClick(data, true)">
+          <input type="text" class="input" appSettingsKeybindings
+                 [placeholder]="data.primaryShortcutString | keybindings"
+                 (mousedown)="onInputClick(data, true)"
+                 [disabled]="inputsLocked && (!data.isPrimaryRecording)"
+                 (keydown)="onKeyInput(data, $event)"
+                 (keyup)="onKeyUp(data, true)">
 
-          <app-keybindings-button icon="rotate-ccw" class="icon reset"
-                                  [ngClass]="{'disabled' : data.isPrimaryDefault}"
-                                  (click)="setShortcutToDefault(data, true)"></app-keybindings-button>
+          @if (data.isPrimaryRecording) {
+            <app-keybindings-button icon="X" class="icon discard"
+                                    (click)="cancelRecording(data)"></app-keybindings-button>
+          } @else {
+            <app-keybindings-button icon="rotate-ccw" class="icon reset"
+                                    [ngClass]="{'disabled' : data.isPrimaryDefault || inputsLocked}"
+                                    (click)="setShortcutToDefault(data, true)"></app-keybindings-button>
+          }
           <app-keybindings-button icon="check" class="icon apply"
-                                  [ngClass]="{'disabled' : !data.isPrimaryRecording}"></app-keybindings-button>
+                                  [ngClass]="{'disabled' : !data.isPrimaryRecording || data.errorDetected}"
+                                  (click)="onApplyClick(data, true)"></app-keybindings-button>
         </div>
       </td>
       <td class="inputColumns">
         <div class="flex-container">
-          <input type="text" class="input" appSettingsKeybindings [placeholder]="data.secondaryShortcutString | keybindings"
-                 (click)="onInputClick(data, false)">
-          <app-keybindings-button icon="rotate-ccw" class="icon reset"
-                                  [ngClass]="{'disabled' : data.isSecondaryDefault}"
-                                  (click)="setShortcutToDefault(data, false)"></app-keybindings-button>
+          <input type="text" class="input" appSettingsKeybindings
+                 [placeholder]="data.secondaryShortcutString | keybindings"
+                 (mousedown)="onInputClick(data, false)"
+                 [disabled]="inputsLocked && (!data.isSecondaryRecording)"
+                 (focusout)="cancelRecording(data)">
+          @if (data.isSecondaryRecording) {
+            <app-keybindings-button icon="X" class="icon discard"
+                                    (click)="cancelRecording(data)"></app-keybindings-button>
+          } @else {
+            <app-keybindings-button icon="rotate-ccw" class="icon reset"
+                                    [ngClass]="{'disabled' : data.isSecondaryDefault}"
+                                    (click)="setShortcutToDefault(data, true)"></app-keybindings-button>
+          }
           <app-keybindings-button icon="check" class="icon apply"
                                   [ngClass]="{'disabled' : !data.isSecondaryRecording}"></app-keybindings-button>
         </div>

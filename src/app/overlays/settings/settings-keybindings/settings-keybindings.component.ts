@@ -16,7 +16,8 @@ export interface KeybindingConfig {
   isPrimaryDefault: boolean,
   isSecondaryDefault: boolean,
   isPrimaryRecording: boolean,
-  isSecondaryRecording: boolean
+  isSecondaryRecording: boolean,
+  errorDetected: boolean
 }
 
 @Component({
@@ -29,9 +30,11 @@ export interface KeybindingConfig {
 export class SettingsKeybindingsComponent {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   configData: KeybindingConfig [] = []
+  backupConfigData: KeybindingConfig [] = []
   actionNames: Map<string, string> = new Map()
   primaryConfig: Map<string, string> = new Map();
   secondaryConfig: Map<string, string> = new Map();
+  inputsLocked: boolean = false;
 
   constructor(private shortcutService: ShortcutService, private defaultShortcutService: DefaultShortcutSettingsService) {
     this.actionNames = this.shortcutService.getActionNames();
@@ -60,14 +63,81 @@ export class SettingsKeybindingsComponent {
 
 
   onInputClick(config: KeybindingConfig, isPrimary: boolean) {
+    this.inputsLocked = true;
+    this.backupConfigData = this.configData;
     let index = this.configData.indexOf(config)
     if (isPrimary) {
+      this.configData[index].primaryShortcutString = "";
       this.configData[index].isPrimaryRecording = true;
     } else {
       this.configData[index].isSecondaryRecording = true;
     }
+
   }
 
+  onKeyInput(config: KeybindingConfig, event: KeyboardEvent) {
+    console.log(event);
+    let index = this.configData.indexOf(config);
+    event.preventDefault();
+    if (event.key != "Control" && event.key != "Meta" && event.key != "Shift" && event.key != "Alt") {
+      this.configData[index].primaryShortcutString = this.shortcutService.getShortcutStringFromEvent(event);
+    } else {
+      this.configData[index].primaryShortcutString = this.shortcutService.getShortcutStringFromEvent(event, true);
+    }
+  }
+
+  onKeyUp(config: KeybindingConfig, isPrimary: boolean) {
+    let index = this.configData.indexOf(config);
+    if (isPrimary) {
+      let keyArray = this.configData[index].primaryShortcutString.split("+");
+      if (keyArray[3] === "") {
+        this.configData[index].primaryShortcutString = "";
+      } else {
+        this.configData[index].errorDetected = false;
+      }
+    } else {
+      let keyArray = this.configData[index].secondaryShortcutString.split("+");
+      if (keyArray[3] === "") {
+        this.configData[index].secondaryShortcutString = "";
+      } else {
+        this.configData[index].errorDetected = false;
+      }
+    }
+    if (this.shortcutService.getTempPrimaryConfig().has(config.primaryShortcutString) || this.shortcutService.getTempSecondaryConfig().has(config.secondaryShortcutString)) {
+      this.configData[index].errorDetected = true;
+    }
+  }
+
+  onApplyClick(config: KeybindingConfig, isPrimary: boolean) {
+    let index = this.configData.indexOf(config)
+    if (config.isPrimaryRecording && !config.errorDetected) {
+      if (isPrimary) {
+        let newShortcut = config.primaryShortcutString;
+        let action = config.actionName
+        console.log(this.shortcutService.getTempPrimaryActionKeyConfig().get(action))
+        this.shortcutService.deleteFromTempShortcutStringConfig(this.shortcutService.getTempPrimaryActionKeyConfig().get(action)!)
+        this.shortcutService.deleteSingleShortcutFromTempActionKeyConfig(action, true);
+
+        this.shortcutService.setTemporaryShortcut(action, newShortcut, true);
+      } else {
+        let newShortcut = config.secondaryShortcutString;
+        let action = config.actionName
+        this.shortcutService.deleteFromTempShortcutStringConfig(this.shortcutService.getTempSecondaryConfig().get(action)!)
+        this.shortcutService.deleteSingleShortcutFromTempActionKeyConfig(action, false);
+
+        this.shortcutService.setTemporaryShortcut(action, newShortcut, false);
+      }
+      console.log(this.shortcutService.getTempPrimaryConfig())
+      console.log(this.shortcutService.getTempPrimaryActionKeyConfig())
+      this.loadDataIntoConfig();
+      this.inputsLocked = false;
+      this.configData[index].errorDetected = false;
+      this.configData[index].isPrimaryRecording = false;
+      this.configData[index].isSecondaryRecording = false;
+    }
+
+
+  }
 
   setShortcutToDefault(config: KeybindingConfig, primary: boolean) {
     if ((config.isPrimaryDefault && primary) || (config.isSecondaryDefault && !primary)) {
@@ -99,7 +169,16 @@ export class SettingsKeybindingsComponent {
       this.shortcutService.deleteFromTempActionKeyConfig(config.actionName);
       this.shortcutService.setTemporaryShortcut(config.actionName, defaultShortcutString, false);
       this.loadDataIntoConfig();
-
     }
+  }
+
+  cancelRecording(config: KeybindingConfig) {
+
+    this.inputsLocked = false;
+    let index = this.configData.indexOf(config)
+    this.configData[index].errorDetected = false;
+    this.configData[index].isPrimaryRecording = false;
+    this.configData[index].isSecondaryRecording = false;
+    this.loadDataIntoConfig();
   }
 }

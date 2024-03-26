@@ -122,16 +122,33 @@ export class ShortcutService {
     }
   }
 
+  deleteSingleShortcutFromTempActionKeyConfig(actionKeyString: string, isPrimary: boolean) {
+    if (isPrimary) {
+      if (this.settingsService.shortcut_tempPrimaryActionKeyConfig.has(actionKeyString)) {
+        this.settingsService.shortcut_tempPrimaryActionKeyConfig.delete(actionKeyString);
+      }
+    } else {
+      if (this.settingsService.shortcut_tempSecondaryActionKeyConfig.has(actionKeyString)) {
+        this.settingsService.shortcut_tempSecondaryActionKeyConfig.delete(actionKeyString);
+      }
+    }
+  }
 
-  getShortcutStringFromEvent(key: KeyboardEvent) {
+
+  getShortcutStringFromEvent(key: KeyboardEvent, useEmptyKey: boolean = false) {
     let shortcutString = ""
-    if (key.ctrlKey) shortcutString += "ctrl";
+    if (key.ctrlKey || key.metaKey) shortcutString += "ctrl";
     shortcutString += "+";
     if (key.altKey) shortcutString += "alt";
     shortcutString += "+";
     if (key.shiftKey) shortcutString += "shift";
     shortcutString += "+";
-    shortcutString += key.key;
+    if (useEmptyKey) {
+      shortcutString += "";
+    } else {
+      shortcutString += key.key;
+    }
+
     return shortcutString;
   }
 
