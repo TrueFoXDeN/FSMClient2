@@ -53,8 +53,8 @@ export class LocalStorageHandlingService {
       if (faultyConfigMarker) {
         return this.writeAndUseDefaultConfig(true);
       } else {
-        const primaryShortcut = new Map<string, string>();
-        const secondaryShortcut = new Map<string, string>();
+        const primaryShortcut: Map<string, string> = new Map<string, string>();
+        const secondaryShortcut: Map<string, string> = new Map<string, string>();
         primaryMap.forEach((value: string, key: string) => {
           if (!primaryShortcut.has(value)) {
             primaryShortcut.set(value, key);
@@ -75,8 +75,8 @@ export class LocalStorageHandlingService {
           return {
             "primary": primaryShortcut,
             "secondary": secondaryShortcut,
-            "primaryAction": primaryAction,
-            "secondaryAction": secondaryAction
+            "primaryAction": primaryMap,
+            "secondaryAction": secondaryMap
           }
         }
       }

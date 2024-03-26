@@ -19,22 +19,34 @@ export class ShortcutService {
   }
 
 
-  setShortcut(shortcutString: string, actionName: string, type: ShortcutType) {
-    if (type === ShortcutType.PRIMARY) {
-      for (let [key, value] of this.settingsService.shortcut_primaryShortcutStringConfig) {
-        if (value === actionName) {
-          this.settingsService.shortcut_primaryShortcutStringConfig.delete(key);
-        }
-      }
-      this.settingsService.shortcut_primaryShortcutStringConfig.set(shortcutString, actionName)
+  // setTemporaryShortcut(shortcutString: string, actionName: string, type: ShortcutType) {
+  //   if (type === ShortcutType.PRIMARY) {
+  //     for (let [key, value] of this.settingsService.shortcut_primaryShortcutStringConfig) {
+  //       if (value === actionName) {
+  //         this.settingsService.shortcut_primaryShortcutStringConfig.delete(key);
+  //       }
+  //     }
+  //     this.settingsService.shortcut_primaryShortcutStringConfig.set(shortcutString, actionName)
+  //   } else {
+  //     for (let [key, value] of this.settingsService.shortcut_secondaryShortcutStringConfig) {
+  //       if (value === actionName) {
+  //         this.settingsService.shortcut_secondaryShortcutStringConfig.delete(key);
+  //       }
+  //     }
+  //     this.settingsService.shortcut_secondaryShortcutStringConfig.set(shortcutString, actionName)
+  //   }
+  // }
+
+
+  setTemporaryShortcut(actionName: string, shortcutString: string, isPrimary: boolean) {
+    if (isPrimary) {
+      this.settingsService.shortcut_tempPrimaryActionKeyConfig.set(actionName, shortcutString);
+      this.settingsService.shortcut_tempPrimaryShortcutStringConfig.set(shortcutString, actionName);
     } else {
-      for (let [key, value] of this.settingsService.shortcut_secondaryShortcutStringConfig) {
-        if (value === actionName) {
-          this.settingsService.shortcut_secondaryShortcutStringConfig.delete(key);
-        }
-      }
-      this.settingsService.shortcut_secondaryShortcutStringConfig.set(shortcutString, actionName)
+      this.settingsService.shortcut_tempSecondaryActionKeyConfig.set(actionName, shortcutString);
+      this.settingsService.shortcut_tempSecondaryShortcutStringConfig.set(shortcutString, actionName);
     }
+
   }
 
   checkIfShortcutExists(shortcutString: string) {
@@ -91,6 +103,26 @@ export class ShortcutService {
     return actionName;
   }
 
+  deleteFromTempShortcutStringConfig(shortcutString: string) {
+    if (this.settingsService.shortcut_tempPrimaryShortcutStringConfig.has(shortcutString)) {
+      this.settingsService.shortcut_tempPrimaryShortcutStringConfig.delete(shortcutString)
+    }
+
+    if (this.settingsService.shortcut_tempSecondaryShortcutStringConfig.has(shortcutString)) {
+      this.settingsService.shortcut_tempSecondaryShortcutStringConfig.delete(shortcutString)
+    }
+  }
+
+  deleteFromTempActionKeyConfig(actionKeyString: string) {
+    if (this.settingsService.shortcut_tempPrimaryActionKeyConfig.has(actionKeyString)) {
+      this.settingsService.shortcut_tempPrimaryActionKeyConfig.delete(actionKeyString);
+    }
+    if (this.settingsService.shortcut_tempSecondaryActionKeyConfig.has(actionKeyString)) {
+      this.settingsService.shortcut_tempSecondaryActionKeyConfig.delete(actionKeyString);
+    }
+  }
+
+
   getShortcutStringFromEvent(key: KeyboardEvent) {
     let shortcutString = ""
     if (key.ctrlKey) shortcutString += "ctrl";
@@ -136,6 +168,14 @@ export class ShortcutService {
 
   getTempSecondaryConfig() {
     return this.settingsService.shortcut_tempSecondaryShortcutStringConfig;
+  }
+
+  getTempPrimaryActionKeyConfig() {
+    return this.settingsService.shortcut_tempPrimaryActionKeyConfig;
+  }
+
+  getTempSecondaryActionKeyConfig() {
+    return this.settingsService.shortcut_tempSecondaryActionKeyConfig;
   }
 
 
