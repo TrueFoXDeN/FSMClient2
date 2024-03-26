@@ -32,7 +32,7 @@ export class LocalStorageHandlingService {
   validateActionKeyConfig(config: any) {
     let primaryAction = config["primary"]
     let secondaryAction = config["secondary"]
-    let checkFaultyConfigMarker = false
+    let faultyConfigMarker = false
     if (primaryAction === undefined || secondaryAction === undefined) {
       return this.writeAndUseDefaultConfig(true);
     } else {
@@ -40,17 +40,17 @@ export class LocalStorageHandlingService {
       let secondaryMap = this.objectToMap(secondaryAction)
       this.defaultShortcutConfigService.getPrimaryDefaultActionConfig().forEach((value, key) => {
         if (!primaryMap.has(key)) {
-          checkFaultyConfigMarker = true;
+          faultyConfigMarker = true;
           console.log(`${key} not found in primary config`)
         }
       });
       this.defaultShortcutConfigService.getSecondaryDefaultActionConfig().forEach((value, key) => {
         if (!secondaryMap.has(key)) {
-          checkFaultyConfigMarker = true;
+          faultyConfigMarker = true;
           console.log(`${key} not found in secondary config`)
         }
       });
-      if (checkFaultyConfigMarker) {
+      if (faultyConfigMarker) {
         return this.writeAndUseDefaultConfig(true);
       } else {
         const primaryShortcut = new Map<string, string>();
@@ -59,17 +59,17 @@ export class LocalStorageHandlingService {
           if (!primaryShortcut.has(value)) {
             primaryShortcut.set(value, key);
           } else {
-            checkFaultyConfigMarker = true;
+            faultyConfigMarker = true;
           }
         });
         secondaryMap.forEach((value: string, key: string) => {
           if (!secondaryShortcut.has(value)) {
             secondaryShortcut.set(value, key);
           } else {
-            checkFaultyConfigMarker = true;
+            faultyConfigMarker = true;
           }
         });
-        if (checkFaultyConfigMarker) {
+        if (faultyConfigMarker) {
           return this.writeAndUseDefaultConfig(true);
         } else {
           return {
