@@ -72,13 +72,22 @@ export class ShortcutService {
   }
 
 
-  getActionIdFromShortcut(shortcutString: string) {
+  getActionIdFromShortcut(shortcutString: string, useTempConfig = false) {
     let actionName;
-    if (this.settingsService.shortcut_primaryShortcutStringConfig.has(shortcutString)) {
-      actionName = this.settingsService.shortcut_primaryShortcutStringConfig.get(shortcutString);
+    if (useTempConfig) {
+      if (this.settingsService.shortcut_tempPrimaryShortcutStringConfig.has(shortcutString)) {
+        actionName = this.settingsService.shortcut_tempPrimaryShortcutStringConfig.get(shortcutString);
+      } else {
+        actionName = this.settingsService.shortcut_tempSecondaryShortcutStringConfig.get(shortcutString);
+      }
     } else {
-      actionName = this.settingsService.shortcut_secondaryShortcutStringConfig.get(shortcutString);
+      if (this.settingsService.shortcut_primaryShortcutStringConfig.has(shortcutString)) {
+        actionName = this.settingsService.shortcut_primaryShortcutStringConfig.get(shortcutString);
+      } else {
+        actionName = this.settingsService.shortcut_secondaryShortcutStringConfig.get(shortcutString);
+      }
     }
+
     return actionName;
   }
 
@@ -154,7 +163,6 @@ export class ShortcutService {
         if (value === actionName) return key;
       }
     }
-
     return ""
   }
 

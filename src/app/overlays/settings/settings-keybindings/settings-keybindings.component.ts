@@ -70,6 +70,25 @@ export class SettingsKeybindingsComponent {
 
 
   setShortcutToDefault(config: KeybindingConfig, primary: boolean) {
+    if ((config.isPrimaryDefault && primary) || (config.isSecondaryDefault && !primary)) {
+      return;
+    }
+    console.log(config);
+
+
+    if (primary) {
+      let actionName = this.shortcutService.getActionIdFromShortcut(config.primaryShortcutString, true);
+      if (actionName != "") {
+        console.log("Found other action which uses the default key");
+      }
+    } else {
+      let actionName = this.shortcutService.getActionIdFromShortcut(config.secondaryShortcutString, true);
+      if (actionName != "") {
+        console.log("Found other action which uses the default key");
+      }
+    }
+
+
     let index = this.configData.indexOf(config);
     if (primary) {
       if (!config.isPrimaryDefault) {

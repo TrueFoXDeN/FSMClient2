@@ -1,0 +1,121 @@
+import {Injectable} from '@angular/core';
+import {DefaultShortcutSettingsService} from "./default-shortcut-settings.service";
+import {SnackbarMessageService} from "./snackbar-message.service";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LocalStorageHandlingService {
+
+  constructor(private defaultShortcutConfigService: DefaultShortcutSettingsService, private snackbarService: SnackbarMessageService) {
+  }
+
+  loadShortcutConfig(): any {
+    if (localStorage.getItem("shortcutConfig") != null) {
+      let config = JSON.parse(localStorage.getItem("shortcutConfig") || '{}')
+      return this.validateActionKeyConfig(config)
+    } else {
+      return this.writeAndUseDefaultConfig(false);
+    }
+  }
+
+  writeDefaultActionKeyConfigToLocalStorage() {
+    let primaryActionConfig: Record<string, string> = this.mapToObject(this.defaultShortcutConfigService.getPrimaryDefaultActionConfig())
+    let secondaryActionConfig: Record<string, string> = this.mapToObject(this.defaultShortcutConfigService.getSecondaryDefaultActionConfig())
+    let storage = {
+      "primary": primaryActionConfig,
+      "secondary": secondaryActionConfig
+    };
+    localStorage.setItem("shortcutConfig", JSON.stringify(storage));
+  }
+
+  validateActionKeyConfig(config: any) {
+    let primaryAction = config["primary"]
+    let secondaryAction = config["secondary"]
+    let checkFaultyConfigMarker = false
+    if (primaryAction === undefined || secondaryAction === undefined) {
+      return this.writeAndUseDefaultConfig(true);
+    } else {
+      let primaryMap = this.objectToMap(primaryAction)
+      let secondaryMap = this.objectToMap(secondaryAction)
+      this.defaultShortcutConfigService.getPrimaryDefaultActionConfig().forEach((value, key) => {
+        if (!primaryMap.has(key)) {
+          checkFaultyConfigMarker = true;
+          console.log(`${key} not found in primary config`)
+        }
+      });
+      this.defaultShortcutConfigService.getSecondaryDefaultActionConfig().forEach((value, key) => {
+        if (!secondaryMap.has(key)) {
+          checkFaultyConfigMarker = true;
+          console.log(`${key} not found in secondary config`)
+        }
+      });
+      if (checkFaultyConfigMarker) {
+        return this.writeAndUseDefaultConfig(true);
+      } else {
+        const primaryShortcut = new Map<string, string>();
+        const secondaryShortcut = new Map<string, string>();
+        primaryMap.forEach((value: string, key: string) => {
+          if (!primaryShortcut.has(value)) {
+            primaryShortcut.set(value, key);
+          } else {
+            checkFaultyConfigMarker = true;
+          }
+        });
+        secondaryMap.forEach((value: string, key: string) => {
+          if (!secondaryShortcut.has(value)) {
+            secondaryShortcut.set(value, key);
+          } else {
+            checkFaultyConfigMarker = true;
+          }
+        });
+        if (checkFaultyConfigMarker) {
+          return this.writeAndUseDefaultConfig(true);
+        } else {
+          return {
+            "primary": primaryShortcut,
+            "secondary": secondaryShortcut,
+            "primaryAction": primaryAction,
+            "secondaryAction": secondaryAction
+          }
+        }
+      }
+    }
+  }
+
+  writeAndUseDefaultConfig(isError: boolean) {
+    this.writeDefaultActionKeyConfigToLocalStorage();
+    let primary = this.defaultShortcutConfigService.getPrimaryShortcutsConfig();
+    let primaryAction = this.defaultShortcutConfigService.getPrimaryDefaultActionConfig();
+    let secondary = this.defaultShortcutConfigService.getSecondaryShortcutsConfig();
+    let secondaryAction = this.defaultShortcutConfigService.getSecondaryDefaultActionConfig();
+    return {
+      "primary": primary,
+      "secondary": secondary,
+      "primaryAction": primaryAction,
+      "secondaryAction": secondaryAction
+    };
+  }
+
+  mapToObject(map
+                :
+                Map<string, string>
+  ) {
+    let obj: Record<string, string> = {};
+    map.forEach((value, key) => {
+      obj[key] = value;
+    });
+    return obj;
+  }
+
+  objectToMap(obj
+                :
+                any
+  ) {
+    const map = new Map<string, string>();
+    Object.keys(obj).forEach(key => {
+      map.set(key, obj[key]);
+    });
+    return map;
+  }
+}

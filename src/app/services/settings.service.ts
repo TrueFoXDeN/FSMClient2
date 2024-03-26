@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {DefaultShortcutSettingsService} from "./default-shortcut-settings.service";
+import {LocalStorageHandlingService} from "./local-storage-handling.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,21 +16,20 @@ export class SettingsService {
   public shortcut_secondaryActionKeyConfig: Map<string, string> = new Map();
   public shortcut_tempSecondaryActionKeyConfig: Map<string, string> = new Map();
 
-  constructor(private defaultShortcutService: DefaultShortcutSettingsService) {
-    this.loadDefaultShortcutsIntoConfig();
-    this.loadDefaultActionKeyConfig();
+  constructor(private defaultShortcutService: DefaultShortcutSettingsService, private localStorageHandler: LocalStorageHandlingService) {
+    this.loadConfig();
   }
 
-  loadDefaultShortcutsIntoConfig() {
-    this.shortcut_primaryShortcutStringConfig = this.defaultShortcutService.getPrimaryShortcutsConfig();
-    this.shortcut_secondaryShortcutStringConfig = this.defaultShortcutService.getSecondaryShortcutsConfig();
+  loadConfig() {
+    let config = this.localStorageHandler.loadShortcutConfig();
+
+    this.shortcut_primaryShortcutStringConfig = config["primary"];
+    this.shortcut_secondaryShortcutStringConfig = config["secondary"];
     this.shortcut_tempPrimaryShortcutStringConfig = this.shortcut_primaryShortcutStringConfig;
     this.shortcut_tempSecondaryShortcutStringConfig = this.shortcut_secondaryShortcutStringConfig;
-  }
 
-  loadDefaultActionKeyConfig() {
-    this.shortcut_primaryActionKeyConfig = this.defaultShortcutService.getPrimaryDefaultActionConfig();
-    this.shortcut_secondaryActionKeyConfig = this.defaultShortcutService.getSecondaryDefaultActionConfig();
+    this.shortcut_primaryActionKeyConfig = config["primaryAction"];
+    this.shortcut_secondaryActionKeyConfig = config["secondaryAction"];
     this.shortcut_tempPrimaryActionKeyConfig = this.shortcut_primaryActionKeyConfig;
     this.shortcut_tempSecondaryActionKeyConfig = this.shortcut_secondaryActionKeyConfig;
   }
