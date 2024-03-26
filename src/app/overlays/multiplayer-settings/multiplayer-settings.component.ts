@@ -10,7 +10,7 @@ import {SnackbarMessageService} from "../../services/snackbar-message.service";
 })
 export class MultiplayerSettingsComponent {
   createdRoomId: string = "";
-  enteredRoomid: string = "";
+  enteredRoomId: string = "";
   enteredName: string = "";
   createPassword: string = "";
   joinPassword: string = "";
@@ -66,7 +66,7 @@ export class MultiplayerSettingsComponent {
         this.cookieService.set('createdRoomId', this.createdRoomId)
         this.cookieService.set('createdRoomPassword', this.createPassword)
         this.multiplayerService.createdRoomId = this.createdRoomId
-        this.enteredRoomid = this.createdRoomId
+        this.enteredRoomId = this.createdRoomId
         this.joinPassword = this.createPassword
         this.isJoinDisabled = false
       },
@@ -77,17 +77,17 @@ export class MultiplayerSettingsComponent {
   }
 
   joinRoom() {
-    this.multiplayerService.existsRoom(this.createdRoomId).subscribe({
+    this.multiplayerService.existsRoom(this.enteredRoomId).subscribe({
       next: (response: any) => {
         if (response.exists) {
-          this.multiplayerService.connect(this.createdRoomId, this.joinPassword, this.enteredName)
+          this.multiplayerService.connect(this.enteredRoomId, this.joinPassword, this.enteredName)
         }else{
-          this.snackService.showMessage(`Could not connect to ${this.enteredRoomid}`, "error");
+          this.snackService.showMessage(`Could not connect to ${this.enteredRoomId}`, "error");
         }
 
       },
       error: (err) => {
-        this.snackService.showMessage(`Could not connect to ${this.enteredRoomid}`, "error");
+        this.snackService.showMessage(`Could not connect to ${this.enteredRoomId}`, "error");
       }
     })
 
