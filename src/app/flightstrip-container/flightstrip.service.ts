@@ -52,9 +52,15 @@ export class FlightstripService {
     return throwError(() => new Error('malformed callsign'))
   }
 
-  createFlightstrip(column: string, callsign: string, type: stripType) {
+  createFlightstrip(column: string, callsign: string, type: stripType, uuid = "") {
     let nextPos = this.dataService.flightstripData?.[column]?.['flightstrips'].length
-    let fs = new Flightstrip(this.util.generateUUID(), type, column, nextPos);
+    let fs: Flightstrip
+    if (uuid === "") {
+      fs = new Flightstrip(this.util.generateUUID(), type, column, nextPos);
+    } else {
+      fs = new Flightstrip(uuid, type, column, nextPos);
+    }
+
     if (callsign !== "") {
       fs.callsign = callsign
     }
