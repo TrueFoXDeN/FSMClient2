@@ -5,16 +5,18 @@ import {KeybindingsButtonComponent} from "./keybindings-button/keybindings-butto
 import {ShortcutService} from "../../../services/shortcut.service";
 import {NgClass} from "@angular/common";
 import {KeybindingsPipe} from "./keybindings.pipe";
+import {DefaultShortcutSettingsService} from "../../../services/default-shortcut-settings.service";
 
 
 export interface KeybindingConfig {
   actionName: string,
-  name: string,
-  primaryConfig: string,
-  secondaryConfig: string,
+  displayName: string,
+  primaryShortcutString: string,
+  secondaryShortcutString: string,
   isPrimaryDefault: boolean,
   isSecondaryDefault: boolean,
-  isRecording: boolean
+  isPrimaryRecording: boolean,
+  isSecondaryRecording: boolean
 }
 
 @Component({
@@ -27,28 +29,29 @@ export interface KeybindingConfig {
 export class SettingsKeybindingsComponent {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   configData: KeybindingConfig [] = []
-  names: Map<string, string> = new Map()
+  actionNames: Map<string, string> = new Map()
   primaryConfig: Map<string, string> = new Map();
   secondaryConfig: Map<string, string> = new Map();
 
-  constructor(private shortcutService: ShortcutService) {
-    this.names = this.shortcutService.getActionNames();
-    this.primaryConfig = this.shortcutService.getPrimaryConfig();
-    this.secondaryConfig = this.shortcutService.getSecondaryConfig();
+  constructor(private shortcutService: ShortcutService, private defaultShortcutService: DefaultShortcutSettingsService) {
+    this.actionNames = this.shortcutService.getActionNames();
+    this.primaryConfig = this.shortcutService.getTempPrimaryConfig();
+    this.secondaryConfig = this.shortcutService.getTempSecondaryConfig();
     this.loadDataIntoConfig();
   }
 
 
   loadDataIntoConfig() {
-    for (let key of this.names.keys()) {
+    for (let key of this.actionNames.keys()) {
       let config = {
         actionName: key,
-        name: this.names.get(key),
-        primaryConfig: this.shortcutService.findShortcutInPrimaryConfig(key),
-        secondaryConfig: this.shortcutService.findShortcutInSecondaryConfig(key),
-        isPrimaryDefault: this.shortcutService.checkIfKeyIsDefaultShortcut(key, true),
-        isSecondaryDefault: this.shortcutService.checkIfKeyIsDefaultShortcut(key, false),
-        isRecording: false
+        displayName: this.actionNames.get(key),
+        primaryShortcutString: this.shortcutService.findShortcutInPrimaryConfig(key, true),
+        secondaryShortcutString: this.shortcutService.findShortcutInSecondaryConfig(key, true),
+        isPrimaryDefault: this.defaultShortcutService.checkIfKeyIsDefaultShortcut(this.shortcutService.findShortcutInPrimaryConfig(key, true), key, true),
+        isSecondaryDefault: this.defaultShortcutService.checkIfKeyIsDefaultShortcut(this.shortcutService.findShortcutInSecondaryConfig(key, true), key, false),
+        isPrimaryRecording: false,
+        isSecondaryRecording: false
       }
       this.configData.push(<KeybindingConfig>config);
     }
@@ -56,7 +59,31 @@ export class SettingsKeybindingsComponent {
   }
 
 
-  onInputClick(config: KeybindingConfig) {
-    console.log(config);
+  onInputClick(config: KeybindingConfig, isPrimary: boolean) {
+    let index = this.configData.indexOf(config)
+    if (isPrimary) {
+      this.configData[index].isPrimaryRecording = true;
+    } else {
+      this.configData[index].isSecondaryRecording = true;
+    }
+  }
+
+
+  setShortcutToDefault(config: KeybindingConfig, primary: boolean) {
+    let index = this.configData.indexOf(config);
+    if (primary) {
+      if (!config.isPrimaryDefault) {
+        config.isPrimaryDefault = true;
+        config.primaryShortcutString = this.defaultShortcutService.getPrimaryShortcutsConfig().get(config.actionName) || "";
+        this.configData[index] = config;
+
+      }
+    } else {
+      if (!config.isSecondaryDefault) {
+        config.isSecondaryDefault = true;
+        config.secondaryShortcutString = this.defaultShortcutService.getSecondaryShortcutsConfig().get(config.actionName) || "";
+        this.configData[index] = config;
+      }
+    }
   }
 }

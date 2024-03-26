@@ -1,12 +1,9 @@
 import {Injectable} from '@angular/core';
+import {SettingsService} from "./settings.service";
 
 export enum ShortcutType {
   PRIMARY,
   SECONDARY
-}
-
-export class ShortcutObject {
-
 }
 
 
@@ -14,62 +11,40 @@ export class ShortcutObject {
   providedIn: 'root'
 })
 export class ShortcutService {
-  private primaryDefaultActionKeyConfig: Map<string, string> = new Map();
-  private secondaryDefaultActionKeyConfig: Map<string, string> = new Map();
-  private primaryShortcutsConfig: Map<string, string> = new Map();  //Map<shortcutString, ActionName>
-  private secondaryShortcutsConfig: Map<string, string> = new Map();  //Map<shortcutString, ActionName>
   private componentActions: Map<string, Map<string, Function>> = new Map(); //Map<componentID, actionMap>
   private actionNames: Map<string, string> = new Map();
 
-  constructor() {
-    this.createDefaultActionKeyMaps()
-    this.addDefaultShortcuts();
+  constructor(private settingsService: SettingsService) {
     this.insertActionNames();
   }
 
 
-  createDefaultActionKeyMaps() {
-    this.primaryDefaultActionKeyConfig.set("openSearchCallsign", "ctrl+++f");
-    this.primaryDefaultActionKeyConfig.set("abortDeletion", "+++Escape");
-    this.primaryDefaultActionKeyConfig.set("deleteFs", "+++x");
-    this.primaryDefaultActionKeyConfig.set("toggleCompact", "+++c");
-    this.primaryDefaultActionKeyConfig.set("prevStatus", "+++a");
-    this.primaryDefaultActionKeyConfig.set("nextStatus", "+++d");
-    this.primaryDefaultActionKeyConfig.set("createVfr", "+++v");
-    this.primaryDefaultActionKeyConfig.set("createOutbound", "+++o");
-    this.primaryDefaultActionKeyConfig.set("createInbound", "+++i");
-
-    this.secondaryDefaultActionKeyConfig.set("prevStatus", "+++ArrowLeft");
-    this.secondaryDefaultActionKeyConfig.set("nextStatus", "+++ArrowRight");
-  }
-
   setShortcut(shortcutString: string, actionName: string, type: ShortcutType) {
     if (type === ShortcutType.PRIMARY) {
-      for (let [key, value] of this.primaryShortcutsConfig) {
+      for (let [key, value] of this.settingsService.shortcut_primaryShortcutStringConfig) {
         if (value === actionName) {
-          this.primaryShortcutsConfig.delete(key);
+          this.settingsService.shortcut_primaryShortcutStringConfig.delete(key);
         }
       }
-      this.primaryShortcutsConfig.set(shortcutString, actionName)
+      this.settingsService.shortcut_primaryShortcutStringConfig.set(shortcutString, actionName)
     } else {
-      for (let [key, value] of this.secondaryShortcutsConfig) {
+      for (let [key, value] of this.settingsService.shortcut_secondaryShortcutStringConfig) {
         if (value === actionName) {
-          this.secondaryShortcutsConfig.delete(key);
+          this.settingsService.shortcut_secondaryShortcutStringConfig.delete(key);
         }
       }
-      this.secondaryShortcutsConfig.set(shortcutString, actionName)
+      this.settingsService.shortcut_secondaryShortcutStringConfig.set(shortcutString, actionName)
     }
   }
 
   checkIfShortcutExists(shortcutString: string) {
-    return this.primaryShortcutsConfig.has(shortcutString) || this.secondaryShortcutsConfig.has(shortcutString);
+    return this.settingsService.shortcut_primaryShortcutStringConfig.has(shortcutString) || this.settingsService.shortcut_secondaryShortcutStringConfig.has(shortcutString);
   }
 
   registerComponentActions(componentID: string, actionMap: Map<string, Function>) {
     if (!this.componentActions.has(componentID)) {
       this.componentActions.set(componentID, actionMap);
     }
-    //console.log(this.componentActions)
   }
 
   removeComponentActions(componentID: string) {
@@ -79,12 +54,14 @@ export class ShortcutService {
   }
 
   executeShortcut(componentID: string, key: KeyboardEvent) {
+
     let shortcutString = this.getShortcutStringFromEvent(key)
     const actionName = this.getActionIdFromShortcut(shortcutString)
     const componentActionMap = this.componentActions.get(componentID);
     if (actionName && componentActionMap) {
       const action = componentActionMap.get(actionName)
       if (action) {
+
         key.preventDefault();
         action();
         return true;
@@ -97,10 +74,10 @@ export class ShortcutService {
 
   getActionIdFromShortcut(shortcutString: string) {
     let actionName;
-    if (this.primaryShortcutsConfig.has(shortcutString)) {
-      actionName = this.primaryShortcutsConfig.get(shortcutString);
+    if (this.settingsService.shortcut_primaryShortcutStringConfig.has(shortcutString)) {
+      actionName = this.settingsService.shortcut_primaryShortcutStringConfig.get(shortcutString);
     } else {
-      actionName = this.secondaryShortcutsConfig.get(shortcutString);
+      actionName = this.settingsService.shortcut_secondaryShortcutStringConfig.get(shortcutString);
     }
     return actionName;
   }
@@ -118,20 +95,6 @@ export class ShortcutService {
   }
 
 //Format: ctrl+alt+shift+key
-  addDefaultShortcuts() {
-    this.primaryShortcutsConfig.set("ctrl+++f", "openSearchCallsign");
-    this.primaryShortcutsConfig.set("+++Escape", "abortDeletion");
-    this.primaryShortcutsConfig.set("+++x", "deleteFs");
-    this.primaryShortcutsConfig.set("+++c", "toggleCompact");
-    this.primaryShortcutsConfig.set("+++a", "prevStatus");
-    this.primaryShortcutsConfig.set("+++d", "nextStatus");
-    this.primaryShortcutsConfig.set("+++v", "createVfr");
-    this.primaryShortcutsConfig.set("+++o", "createOutbound");
-    this.primaryShortcutsConfig.set("+++i", "createInbound");
-
-    this.secondaryShortcutsConfig.set("+++ArrowLeft", "prevStatus");
-    this.secondaryShortcutsConfig.set("+++ArrowRight", "nextStatus");
-  }
 
 
   insertActionNames() {
@@ -151,58 +114,48 @@ export class ShortcutService {
   }
 
   getPrimaryConfig() {
-    return this.primaryShortcutsConfig;
+    return this.settingsService.shortcut_primaryShortcutStringConfig;
   }
 
   getSecondaryConfig() {
-    return this.secondaryShortcutsConfig;
+    return this.settingsService.shortcut_secondaryShortcutStringConfig;
   }
 
-  getPrimaryDefaultConfig() {
-    return this.primaryDefaultActionKeyConfig;
+  getTempPrimaryConfig() {
+    return this.settingsService.shortcut_tempPrimaryShortcutStringConfig;
   }
 
-  getSecondaryDefaultConfig() {
-    return this.secondaryDefaultActionKeyConfig;
-  }
-
-  loadDefaultShortcuts() {
-    this.primaryShortcutsConfig.clear();
-    this.secondaryShortcutsConfig.clear();
-    this.addDefaultShortcuts();
+  getTempSecondaryConfig() {
+    return this.settingsService.shortcut_tempSecondaryShortcutStringConfig;
   }
 
 
-  findShortcutInPrimaryConfig(actionName: string) {
-    for (let [key, value] of this.primaryShortcutsConfig) {
-      if (value === actionName) return key;
-    }
-    return ""
-  }
-
-  findShortcutInSecondaryConfig(actionName: string) {
-    for (let [key, value] of this.secondaryShortcutsConfig) {
-      if (value === actionName) return key;
-    }
-    return ""
-  }
-
-  checkIfKeyIsDefaultShortcut(key: string, isPrimaryKey: boolean) {
-    if (isPrimaryKey) {
-      let shortcut = this.findShortcutInPrimaryConfig(key);
-      let defaultShortcut = this.primaryDefaultActionKeyConfig.get(key)
-      if (!defaultShortcut) {
-        defaultShortcut = ""
+  findShortcutInPrimaryConfig(actionName: string, useTempConfig = false) {
+    if (useTempConfig) {
+      for (let [key, value] of this.settingsService.shortcut_tempPrimaryShortcutStringConfig) {
+        if (value === actionName) return key;
       }
-      return defaultShortcut === shortcut;
     } else {
-      let shortcut = this.findShortcutInSecondaryConfig(key);
-      let defaultShortcut = this.secondaryDefaultActionKeyConfig.get(key)
-      if (!defaultShortcut) {
-        defaultShortcut = ""
+      for (let [key, value] of this.settingsService.shortcut_primaryShortcutStringConfig) {
+        if (value === actionName) return key;
       }
-      return defaultShortcut === shortcut;
     }
+
+    return ""
+  }
+
+  findShortcutInSecondaryConfig(actionName: string, useTempConfig = false) {
+    if (useTempConfig) {
+      for (let [key, value] of this.settingsService.shortcut_tempSecondaryShortcutStringConfig) {
+        if (value === actionName) return key;
+      }
+    } else {
+      for (let [key, value] of this.settingsService.shortcut_secondaryShortcutStringConfig) {
+        if (value === actionName) return key;
+      }
+    }
+
+    return ""
   }
 
 
