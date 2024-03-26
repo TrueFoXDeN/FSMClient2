@@ -72,7 +72,6 @@ export class SettingsKeybindingsComponent {
     } else {
       this.configData[index].isSecondaryRecording = true;
     }
-
   }
 
   onKeyInput(config: KeybindingConfig, event: KeyboardEvent) {
@@ -117,14 +116,12 @@ export class SettingsKeybindingsComponent {
         console.log(this.shortcutService.getTempPrimaryActionKeyConfig().get(action))
         this.shortcutService.deleteFromTempShortcutStringConfig(this.shortcutService.getTempPrimaryActionKeyConfig().get(action)!)
         this.shortcutService.deleteSingleShortcutFromTempActionKeyConfig(action, true);
-
         this.shortcutService.setTemporaryShortcut(action, newShortcut, true);
       } else {
         let newShortcut = config.secondaryShortcutString;
         let action = config.actionName
         this.shortcutService.deleteFromTempShortcutStringConfig(this.shortcutService.getTempSecondaryConfig().get(action)!)
         this.shortcutService.deleteSingleShortcutFromTempActionKeyConfig(action, false);
-
         this.shortcutService.setTemporaryShortcut(action, newShortcut, false);
       }
       console.log(this.shortcutService.getTempPrimaryConfig())
