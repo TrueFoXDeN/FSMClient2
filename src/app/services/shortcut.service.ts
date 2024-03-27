@@ -150,7 +150,7 @@ export class ShortcutService {
     this.actionNames.set("prevStatus", "Previous status");
     this.actionNames.set("nextStatus", "Next status");
     this.actionNames.set("createVfr", "Create VFR strip");
-    this.actionNames.set("createOutbound", "Create outbound strip");
+    this.actionNames.set("createOutbound", "Create Outbound strip");
     this.actionNames.set("createInbound", "Create Inbound strip")
   }
 
