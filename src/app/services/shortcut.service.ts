@@ -105,21 +105,27 @@ export class ShortcutService {
 
   deleteFromTempShortcutStringConfig(shortcutString: string) {
     if (this.settingsService.shortcut_tempPrimaryShortcutStringConfig.has(shortcutString)) {
-      this.settingsService.shortcut_tempPrimaryShortcutStringConfig.delete(shortcutString)
+      this.settingsService.shortcut_tempPrimaryShortcutStringConfig.delete(shortcutString);
+      return 1;
     }
 
     if (this.settingsService.shortcut_tempSecondaryShortcutStringConfig.has(shortcutString)) {
-      this.settingsService.shortcut_tempSecondaryShortcutStringConfig.delete(shortcutString)
+      this.settingsService.shortcut_tempSecondaryShortcutStringConfig.delete(shortcutString);
+      return 2;
     }
+    return 0;
   }
 
   deleteFromTempActionKeyConfig(actionKeyString: string) {
     if (this.settingsService.shortcut_tempPrimaryActionKeyConfig.has(actionKeyString)) {
       this.settingsService.shortcut_tempPrimaryActionKeyConfig.delete(actionKeyString);
+      return 1;
     }
     if (this.settingsService.shortcut_tempSecondaryActionKeyConfig.has(actionKeyString)) {
       this.settingsService.shortcut_tempSecondaryActionKeyConfig.delete(actionKeyString);
+      return 2;
     }
+    return 0;
   }
 
   deleteSingleShortcutFromTempActionKeyConfig(actionKeyString: string, isPrimary: boolean) {
@@ -206,7 +212,6 @@ export class ShortcutService {
         if (value === actionName) return key;
       }
     }
-
     return ""
   }
 
