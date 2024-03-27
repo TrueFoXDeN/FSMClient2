@@ -47,4 +47,13 @@ export class SettingsService {
     this.shortcut_primaryActionKeyConfig = new Map(this.shortcut_tempPrimaryActionKeyConfig)
     this.shortcut_secondaryActionKeyConfig = new Map(this.shortcut_tempSecondaryActionKeyConfig)
   }
+
+  saveSettingsToLocalstorage() {
+    let config = {
+      "primaryAction": this.shortcut_primaryActionKeyConfig,
+      "secondaryAction": this.shortcut_secondaryActionKeyConfig
+
+    }
+    this.localStorageHandler.saveShortcutConfig(config);
+  }
 }

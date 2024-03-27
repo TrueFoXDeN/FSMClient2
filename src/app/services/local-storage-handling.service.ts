@@ -19,19 +19,29 @@ export class LocalStorageHandlingService {
     }
   }
 
+  saveShortcutConfig(config: any) {
+    let primaryShortcutConfig: Record<string, string> = this.mapToObject(config["primaryAction"]);
+    let secondaryShortcutConfig: Record<string, string> = this.mapToObject(config["secondaryAction"]);
+    let storage = {
+      "primaryAction": primaryShortcutConfig,
+      "secondaryAction": secondaryShortcutConfig
+    }
+    localStorage.setItem("shortcutConfig", JSON.stringify(storage));
+  }
+
   writeDefaultActionKeyConfigToLocalStorage() {
     let primaryActionConfig: Record<string, string> = this.mapToObject(this.defaultShortcutConfigService.getPrimaryDefaultActionConfig())
     let secondaryActionConfig: Record<string, string> = this.mapToObject(this.defaultShortcutConfigService.getSecondaryDefaultActionConfig())
     let storage = {
-      "primary": primaryActionConfig,
-      "secondary": secondaryActionConfig
+      "primaryAction": primaryActionConfig,
+      "secondaryAction": secondaryActionConfig
     };
     localStorage.setItem("shortcutConfig", JSON.stringify(storage));
   }
 
   validateActionKeyConfig(config: any) {
-    let primaryAction = config["primary"]
-    let secondaryAction = config["secondary"]
+    let primaryAction = config["primaryAction"]
+    let secondaryAction = config["secondaryAction"]
     let faultyConfigMarker = false
     if (primaryAction === undefined || secondaryAction === undefined) {
       return this.writeAndUseDefaultConfig(true);

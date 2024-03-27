@@ -44,6 +44,7 @@ export class SettingsComponent {
 
   onSaveClick() {
     this.settingsService.copyTempKeybindingsToActualConfig();
+    this.settingsService.saveSettingsToLocalstorage();
     this.settingsDialogRef.close();
   }
 
@@ -69,10 +70,24 @@ export class SettingsComponent {
     console.log(this.settingsService.shortcut_tempPrimaryShortcutStringConfig);
     console.log("Actual:")
     console.log(this.settingsService.shortcut_primaryShortcutStringConfig);
-    if (this.settingsService.shortcut_tempPrimaryShortcutStringConfig != this.settingsService.shortcut_primaryShortcutStringConfig) return true;
-    if (this.settingsService.shortcut_tempPrimaryActionKeyConfig != this.settingsService.shortcut_primaryActionKeyConfig) return true;
-    if (this.settingsService.shortcut_tempSecondaryShortcutStringConfig != this.settingsService.shortcut_secondaryShortcutStringConfig) return true;
-    if (this.settingsService.shortcut_tempSecondaryActionKeyConfig != this.settingsService.shortcut_secondaryActionKeyConfig) return true;
+    if (!this.mapsAreTheSame(this.settingsService.shortcut_tempPrimaryShortcutStringConfig, this.settingsService.shortcut_primaryShortcutStringConfig)) return true;
+    if (!this.mapsAreTheSame(this.settingsService.shortcut_tempPrimaryActionKeyConfig, this.settingsService.shortcut_primaryActionKeyConfig)) return true;
+    if (!this.mapsAreTheSame(this.settingsService.shortcut_tempSecondaryShortcutStringConfig, this.settingsService.shortcut_secondaryShortcutStringConfig)) return true;
+    if (!this.mapsAreTheSame(this.settingsService.shortcut_tempSecondaryActionKeyConfig, this.settingsService.shortcut_secondaryActionKeyConfig)) return true;
     return false;
+  }
+
+  mapsAreTheSame(map1: Map<string, string>, map2: Map<string, string>): boolean {
+    let testVal;
+    if (map1.size !== map2.size) {
+      return false;
+    }
+    for (let [key, val] of map1) {
+      testVal = map2.get(key);
+      if (testVal !== val || (testVal === undefined && !map2.has(key))) {
+        return false;
+      }
+    }
+    return true;
   }
 }
