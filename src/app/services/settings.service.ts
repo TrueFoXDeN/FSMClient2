@@ -25,12 +25,26 @@ export class SettingsService {
 
     this.shortcut_primaryShortcutStringConfig = config["primary"];
     this.shortcut_secondaryShortcutStringConfig = config["secondary"];
-    this.shortcut_tempPrimaryShortcutStringConfig = this.shortcut_primaryShortcutStringConfig;
-    this.shortcut_tempSecondaryShortcutStringConfig = this.shortcut_secondaryShortcutStringConfig;
+    this.shortcut_tempPrimaryShortcutStringConfig = new Map(this.shortcut_primaryShortcutStringConfig);
+    this.shortcut_tempSecondaryShortcutStringConfig = new Map(this.shortcut_secondaryShortcutStringConfig);
 
     this.shortcut_primaryActionKeyConfig = config["primaryAction"];
     this.shortcut_secondaryActionKeyConfig = config["secondaryAction"];
-    this.shortcut_tempPrimaryActionKeyConfig = this.shortcut_primaryActionKeyConfig;
-    this.shortcut_tempSecondaryActionKeyConfig = this.shortcut_secondaryActionKeyConfig;
+    this.shortcut_tempPrimaryActionKeyConfig = new Map(this.shortcut_primaryActionKeyConfig);
+    this.shortcut_tempSecondaryActionKeyConfig = new Map(this.shortcut_secondaryActionKeyConfig);
+  }
+
+  copyActualKeybindingsBackToTempConfig() {
+    this.shortcut_tempPrimaryShortcutStringConfig = new Map(this.shortcut_primaryShortcutStringConfig);
+    this.shortcut_tempSecondaryShortcutStringConfig = new Map(this.shortcut_secondaryShortcutStringConfig);
+    this.shortcut_tempPrimaryActionKeyConfig = new Map(this.shortcut_primaryActionKeyConfig);
+    this.shortcut_tempSecondaryActionKeyConfig = new Map(this.shortcut_secondaryActionKeyConfig);
+  }
+
+  copyTempKeybindingsToActualConfig() {
+    this.shortcut_primaryShortcutStringConfig = new Map(this.shortcut_tempPrimaryShortcutStringConfig);
+    this.shortcut_secondaryShortcutStringConfig = new Map(this.shortcut_tempSecondaryShortcutStringConfig);
+    this.shortcut_primaryActionKeyConfig = new Map(this.shortcut_tempPrimaryActionKeyConfig)
+    this.shortcut_secondaryActionKeyConfig = new Map(this.shortcut_tempSecondaryActionKeyConfig)
   }
 }

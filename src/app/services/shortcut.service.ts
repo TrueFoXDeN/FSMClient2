@@ -19,25 +19,6 @@ export class ShortcutService {
   }
 
 
-  // setTemporaryShortcut(shortcutString: string, actionName: string, type: ShortcutType) {
-  //   if (type === ShortcutType.PRIMARY) {
-  //     for (let [key, value] of this.settingsService.shortcut_primaryShortcutStringConfig) {
-  //       if (value === actionName) {
-  //         this.settingsService.shortcut_primaryShortcutStringConfig.delete(key);
-  //       }
-  //     }
-  //     this.settingsService.shortcut_primaryShortcutStringConfig.set(shortcutString, actionName)
-  //   } else {
-  //     for (let [key, value] of this.settingsService.shortcut_secondaryShortcutStringConfig) {
-  //       if (value === actionName) {
-  //         this.settingsService.shortcut_secondaryShortcutStringConfig.delete(key);
-  //       }
-  //     }
-  //     this.settingsService.shortcut_secondaryShortcutStringConfig.set(shortcutString, actionName)
-  //   }
-  // }
-
-
   setTemporaryShortcut(actionName: string, shortcutString: string, isPrimary: boolean) {
     if (isPrimary) {
       this.settingsService.shortcut_tempPrimaryActionKeyConfig.set(actionName, shortcutString);
