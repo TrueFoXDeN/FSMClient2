@@ -64,7 +64,7 @@ export class NetworkService {
   stopNetworkConnection() {
     this.isNetworkFetchActive = false;
     this.changedNetworkEmitter.next({active: false, network: this.usedNetwork})
-    this.messageService.showMessage("Network disconnected", "warning")
+    this.messageService.showMessage("Network disconnected", "warn")
     this.networkState = "default"
   }
 

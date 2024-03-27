@@ -4,6 +4,7 @@ import {NetworkMenuComponent} from "../network-menu/network-menu.component";
 import {SettingsDiscardDialogComponent} from "../settings-discard-dialog/settings-discard-dialog.component";
 import {StyleChangerService} from "../../services/style-changer.service";
 import {SettingsService} from "../../services/settings.service";
+import {SnackbarMessageService} from "../../services/snackbar-message.service";
 
 export enum SettingsTypes {
   GENERAL,
@@ -25,7 +26,7 @@ export class SettingsComponent {
   protected readonly settingItems = SettingsTypes;
   protected readonly SettingsTypes = SettingsTypes;
 
-  constructor(public dialog: MatDialog, private styleChanger: StyleChangerService, private settingsService: SettingsService, private settingsDialogRef: MatDialogRef<SettingsComponent>) {
+  constructor(public dialog: MatDialog, private styleChanger: StyleChangerService, private settingsService: SettingsService, private settingsDialogRef: MatDialogRef<SettingsComponent>, private snackService : SnackbarMessageService) {
   }
 
   onSettingClick(selector: SettingsTypes) {
@@ -46,6 +47,7 @@ export class SettingsComponent {
     this.settingsService.copyTempKeybindingsToActualConfig();
     this.settingsService.saveSettingsToLocalstorage();
     this.settingsDialogRef.close();
+    this.snackService.showMessage("Saved settings", "success");
   }
 
   openDiscardDialog() {

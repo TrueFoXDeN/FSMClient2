@@ -1,22 +1,16 @@
 import {Injectable} from '@angular/core';
-import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from "@angular/material/snack-bar";
+import {MessageService} from "primeng/api";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SnackbarMessageService {
-  private horizontalPosition: MatSnackBarHorizontalPosition = 'end';
-  private verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  constructor(private _snackBar: MatSnackBar) {
+  constructor(private messageService: MessageService) {
   }
 
   showMessage(message: string, severity: string) {
-    this._snackBar.open(message, "", {
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-      duration: 1800,
-      panelClass: [`${severity}-snackbar`],
-    });
+    this.messageService.add({severity: severity, detail: message});
+
   }
 }

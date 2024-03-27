@@ -69,7 +69,7 @@ export class ProfileSettingsComponent implements OnInit {
     let id = this.selectedProfile.id;
     delete this.dataService.profileData[`${id}`]
     this.saveProfileSettings(this.dataService.getStandardProfileID());
-    this.snackService.showMessage(`Profile ${deletedProfile.name} deleted`, "warning")
+    this.snackService.showMessage(`Profile ${deletedProfile.name} deleted`, "warn")
     this.deleteButtonActive = false;
   }
 
