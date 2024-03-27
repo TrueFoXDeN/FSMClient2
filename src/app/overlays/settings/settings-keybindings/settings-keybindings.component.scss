@@ -39,10 +39,14 @@ td {
   border: 1px solid var(--settings-keybinding-input-border);
   color: var(--settings-keybinding-input-fontcolor);
   border-radius: 5px;
+}
 
-  &:focus {
-    border-color: var(--settings-keybinding-input-border-recording);
-  }
+.recording{
+  border-color: var(--settings-keybinding-input-border-recording);
+}
+
+.error{
+  border-color: var(--settings-keybinding-input-border-error);
 }
 
 

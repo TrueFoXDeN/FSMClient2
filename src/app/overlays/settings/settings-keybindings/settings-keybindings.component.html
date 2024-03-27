@@ -17,7 +17,8 @@
                  (mousedown)="onInputClick(data, true)"
                  [disabled]="inputsLocked && (!data.isPrimaryRecording)"
                  (keydown)="onKeyInput(data, $event, true)"
-                 (keyup)="onKeyUp(data, true)">
+                 (keyup)="onKeyUp(data, true)"
+          [ngClass]="{'recording':data.isPrimaryRecording, 'error': data.errorDetected}">
 
           @if (data.isPrimaryRecording) {
             <app-keybindings-button icon="X" class="icon discard"
