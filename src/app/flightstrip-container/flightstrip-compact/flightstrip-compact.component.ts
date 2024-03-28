@@ -1,12 +1,12 @@
 import {Component, ElementRef, EventEmitter, Input, OnDestroy, Output, TemplateRef, ViewChild} from '@angular/core';
 import {
   Flightstrip,
-  triangleIconState,
-  statusArrival,
-  statusDeparture,
-  statusVfr,
-  stripType,
-  communicationIconState
+  TriangleIconState,
+  StatusArrival,
+  StatusDeparture,
+  StatusVfr,
+  StripType,
+  CommunicationIconState
 } from "../flightstrip.model";
 import {FlightstripService} from "../flightstrip.service";
 import {FlightStripCompact} from "../flightstrip-directives/flightStripCompact.directive";
@@ -22,9 +22,9 @@ export class FlightstripCompactComponent implements OnDestroy {
   @ViewChild(FlightStripCompact) fsContainerDir: any;
   //@ViewChild('menutrigger') menutrigger!: ElementRef;
   @Output("triggeredCompact") compactModeTrigger = new EventEmitter<void>()
-  stripTypes = stripType
-  triangleIconStates = triangleIconState
-  communicationIconStates = communicationIconState
+  stripTypes = StripType
+  triangleIconStates = TriangleIconState
+  communicationIconStates = CommunicationIconState
   highlightActive = false;
   status: any;
   isMouseMoving: boolean = false;
@@ -72,14 +72,14 @@ export class FlightstripCompactComponent implements OnDestroy {
 
   ngOnInit() {
     switch (this.fs.type) {
-      case stripType.OUTBOUND:
-        this.status = statusDeparture
+      case StripType.OUTBOUND:
+        this.status = StatusDeparture
         break;
-      case stripType.INBOUND:
-        this.status = statusArrival
+      case StripType.INBOUND:
+        this.status = StatusArrival
         break;
-      case stripType.VFR:
-        this.status = statusVfr
+      case StripType.VFR:
+        this.status = StatusVfr
         break;
     }
   }
@@ -151,14 +151,14 @@ export class FlightstripCompactComponent implements OnDestroy {
 
   checkStatus() {
     switch (this.fs.type) {
-      case stripType.OUTBOUND:
-        this.status = statusDeparture
+      case StripType.OUTBOUND:
+        this.status = StatusDeparture
         break;
-      case stripType.INBOUND:
-        this.status = statusArrival
+      case StripType.INBOUND:
+        this.status = StatusArrival
         break;
-      case stripType.VFR:
-        this.status = statusVfr
+      case StripType.VFR:
+        this.status = StatusVfr
         break;
     }
   }
@@ -192,5 +192,5 @@ export class FlightstripCompactComponent implements OnDestroy {
   }
 
 
-  protected readonly communicationIconState = communicationIconState;
+  protected readonly communicationIconState = CommunicationIconState;
 }

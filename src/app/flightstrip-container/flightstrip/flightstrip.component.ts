@@ -10,12 +10,12 @@ import {
 } from '@angular/core';
 import {
   Flightstrip,
-  triangleIconState,
-  statusArrival,
-  statusDeparture,
-  statusVfr,
-  stripType,
-  communicationIconState
+  TriangleIconState,
+  StatusArrival,
+  StatusDeparture,
+  StatusVfr,
+  StripType,
+  CommunicationIconState
 } from '../flightstrip.model';
 import {FlightstripService} from "../flightstrip.service";
 import {FlightStripInput} from "../flightstrip-directives/flightStripInput.directive";
@@ -38,11 +38,11 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output("prevStatus") prevStatusEvent = new EventEmitter<void>()
   subscriptionHandles: any = [];
   status: any;
-  stripTypes = stripType
+  stripTypes = StripType
   inputsDisabled = false;
   highlightActive = false;
-  triangleIconStates = triangleIconState
-  communicationIconStates = communicationIconState
+  triangleIconStates = TriangleIconState
+  communicationIconStates = CommunicationIconState
 
   constructor(private dataService: DataService, private fsService: FlightstripService, private styleChanger: StyleChangerService,
   ) {
@@ -74,14 +74,14 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
 
   checkStatus() {
     switch (this.fs.type) {
-      case stripType.OUTBOUND:
-        this.status = statusDeparture
+      case StripType.OUTBOUND:
+        this.status = StatusDeparture
         break;
-      case stripType.INBOUND:
-        this.status = statusArrival
+      case StripType.INBOUND:
+        this.status = StatusArrival
         break;
-      case stripType.VFR:
-        this.status = statusVfr
+      case StripType.VFR:
+        this.status = StatusVfr
         break;
     }
   }
@@ -106,7 +106,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   cycleTriangleState() {
-    let enumCount = Object.keys(triangleIconState).length / 2;
+    let enumCount = Object.keys(TriangleIconState).length / 2;
     let state = this.fs.triangleIconState;
     if (state < enumCount - 1) {
       state++;
@@ -118,7 +118,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   cycleCommunicationState() {
-    let enumCount = Object.keys(communicationIconState).length / 2;
+    let enumCount = Object.keys(CommunicationIconState).length / 2;
     let state = this.fs.communicationIconState;
     if (state < enumCount - 1) {
       state++;

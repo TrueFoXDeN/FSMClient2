@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {MultiplayerService} from "../../services/multiplayer.service";
 import {CookieService} from "ngx-cookie-service";
 import {SnackbarMessageService} from "../../services/snackbar-message.service";
+import {DialogRef} from "@angular/cdk/dialog";
 
 @Component({
   selector: 'app-multiplayer-settings',
@@ -10,16 +11,16 @@ import {SnackbarMessageService} from "../../services/snackbar-message.service";
 })
 export class MultiplayerSettingsComponent {
   createdRoomId: string = "";
-  enteredRoomId: string = "";
-  enteredName: string = "";
+  enteredRoomId: string = "abcde";
+  enteredName: string = "chris";
   createPassword: string = "";
-  joinPassword: string = "";
+  joinPassword: string = "test";
   isConnected: boolean = false;
   isCreateDisabled: boolean = true;
-  isJoinDisabled: boolean = true;
+  isJoinDisabled: boolean = false;
 
   constructor(private multiplayerService: MultiplayerService, private cookieService: CookieService,
-              private snackService: SnackbarMessageService) {
+              private snackService: SnackbarMessageService, private dialogRef: DialogRef) {
     if (this.multiplayerService.createdRoomId.length > 0) {
       this.createdRoomId = multiplayerService.createdRoomId
     } else {
@@ -89,7 +90,7 @@ export class MultiplayerSettingsComponent {
       error: (err) => {
         this.snackService.showMessage(`Could not connect to ${this.enteredRoomId}`, "error");
       }
-    })
-
+    });
+  this.dialogRef.close();
   }
 }

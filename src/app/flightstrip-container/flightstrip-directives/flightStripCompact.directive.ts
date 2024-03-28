@@ -1,6 +1,6 @@
 import {Directive, ElementRef, Input, OnDestroy, OnInit} from "@angular/core";
 import {CustomStyles} from "../../customStyles";
-import {Flightstrip, stripType} from "../flightstrip.model";
+import {Flightstrip, StripType} from "../flightstrip.model";
 import {StyleChangerService} from "../../services/style-changer.service";
 import {FlightstripService} from "../flightstrip.service";
 

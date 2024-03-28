@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Flightstrip, stripType} from "../flightstrip.model";
+import {Flightstrip, StripType} from "../flightstrip.model";
 import {FlightstripService} from "../flightstrip.service";
 import {DataService} from "../../services/data.service";
 import {ProximityService} from "../../overlays/proximity-settings/proximity.service";
@@ -16,8 +16,8 @@ export class ContextMenuComponent implements OnInit {
   compactIcon: string = ""
   compactText: string = ""
 
-  option1: stripType = stripType.INBOUND
-  option2: stripType = stripType.INBOUND
+  option1: StripType = StripType.INBOUND
+  option2: StripType = StripType.INBOUND
 
   constructor(private dataService: DataService, private proximityService: ProximityService, private fsService: FlightstripService) {
 
@@ -58,23 +58,23 @@ export class ContextMenuComponent implements OnInit {
 
   ngOnInit(): void {
     switch (this.fs.type) {
-      case stripType.INBOUND:
+      case StripType.INBOUND:
         this.switchOption1 = "Outbound";
         this.switchOption2 = "VFR"
-        this.option1 = stripType.OUTBOUND;
-        this.option2 = stripType.VFR;
+        this.option1 = StripType.OUTBOUND;
+        this.option2 = StripType.VFR;
         break;
-      case stripType.OUTBOUND:
+      case StripType.OUTBOUND:
         this.switchOption1 = "Inbound";
         this.switchOption2 = "VFR"
-        this.option1 = stripType.INBOUND;
-        this.option2 = stripType.VFR;
+        this.option1 = StripType.INBOUND;
+        this.option2 = StripType.VFR;
         break;
-      case stripType.VFR:
+      case StripType.VFR:
         this.switchOption1 = "Inbound";
         this.switchOption2 = "Outbound";
-        this.option1 = stripType.INBOUND;
-        this.option2 = stripType.OUTBOUND;
+        this.option1 = StripType.INBOUND;
+        this.option2 = StripType.OUTBOUND;
         break;
     }
     this.setCompactText()

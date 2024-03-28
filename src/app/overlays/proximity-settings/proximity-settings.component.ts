@@ -4,7 +4,7 @@ import {DataService} from "../../services/data.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {ProximityService} from "./proximity.service";
 import {FlightstripService} from "../../flightstrip-container/flightstrip.service";
-import {stripType} from "../../flightstrip-container/flightstrip.model";
+import {StripType} from "../../flightstrip-container/flightstrip.model";
 
 export interface DropdownOption {
   name: string,

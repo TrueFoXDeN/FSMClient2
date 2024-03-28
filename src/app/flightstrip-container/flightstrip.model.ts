@@ -2,14 +2,15 @@ export class Flightstrip {
   public columnId = "";
   public id: string = "";
   public columnPosition = 0
-  public type: stripType;
-  public triangleIconState: triangleIconState;
-  public communicationIconState: communicationIconState;
+  public type: StripType;
+  public triangleIconState: TriangleIconState;
+  public communicationIconState: CommunicationIconState;
   public callsign: string = "";
   public departureIcao: string = "";
   public arrivalIcao: string = "";
   public aircraft: string = "";
   public status: any;
+  public statusText : string = "";
   public wakeCategory: string = "";
   public flightrule: string = "";
   public altitude: string = "";
@@ -27,27 +28,30 @@ export class Flightstrip {
   public emergencyActive: boolean = false;
   public deleteActive: boolean = false;
 
-  constructor(identifier: string, type: stripType, columnId: string, columnPos : number) {
+  constructor(identifier: string, type: StripType, columnId: string, columnPos : number) {
     this.id = identifier;
     this.columnId = columnId
     this.type = type;
     this.columnPosition = columnPos;
-    this.triangleIconState = triangleIconState.INACTIVE;
-    this.communicationIconState = communicationIconState.VOICE;
+    this.triangleIconState = TriangleIconState.INACTIVE;
+    this.communicationIconState = CommunicationIconState.VOICE;
     switch (type) {
-      case stripType.INBOUND:
-        this.status = statusArrival.ARRIVING
+      case StripType.INBOUND:
+        this.status = StatusArrival.ARRIVING
+        this.statusText = StatusArrival[this.status];
         break;
-      case stripType.OUTBOUND:
-        this.status = statusDeparture.PARKED
+      case StripType.OUTBOUND:
+        this.status = StatusDeparture.PARKED
+        this.statusText = StatusDeparture[this.status];
         break;
-      case stripType.VFR:
-        this.status = statusVfr.PARKED
+      case StripType.VFR:
+        this.status = StatusVfr.PARKED;
+        this.statusText = StatusDeparture[this.status];
     }
   }
 }
 
-export enum statusDeparture {
+export enum StatusDeparture {
   PARKED,
   CLEARED,
   PUSH,
@@ -58,14 +62,14 @@ export enum statusDeparture {
   DEPARTED
 }
 
-export enum statusArrival {
+export enum StatusArrival {
   ARRIVING,
   LANDING,
   TAXI,
   PARKED
 }
 
-export enum statusVfr {
+export enum StatusVfr {
   PARKED,
   TAXI,
   CIRCUIT,
@@ -73,13 +77,13 @@ export enum statusVfr {
   ENTER
 }
 
-export enum stripType {
+export enum StripType {
   INBOUND,
   OUTBOUND,
   VFR
 }
 
-export enum triangleIconState {
+export enum TriangleIconState {
   INACTIVE,
   STANDARD,
   SUCCESS,
@@ -87,7 +91,7 @@ export enum triangleIconState {
   ERROR
 }
 
-export enum communicationIconState {
+export enum CommunicationIconState {
   VOICE,
   TEXT
 }

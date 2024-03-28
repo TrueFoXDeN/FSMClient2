@@ -39,7 +39,8 @@ export class TokenCommand implements Command {
       for (let k = 0; k < fsIDs.length; k++) {
         let fsID = fsIDs[k];
         let fsType: number = data[columnID][fsID]["type"]
-        this.fsService.createFlightstrip(columnID, "", fsType, fsID);
+        //this.fsService.createFlightstrip(columnID, "", fsType, fsID);
+        this.fsService.createFlightstipWithObject(columnID, fsID, data[columnID][fsID])
       }
     }
   }

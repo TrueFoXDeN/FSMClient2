@@ -1,6 +1,6 @@
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChild} from '@angular/core';
-import {Flightstrip, stripType} from '../flightstrip-container/flightstrip.model';
+import {Flightstrip, StripType} from '../flightstrip-container/flightstrip.model';
 import {Util} from "../util";
 import {FlightstripService} from "../flightstrip-container/flightstrip.service";
 import {FlightstripContainerComponent} from "../flightstrip-container/flightstrip-container.component";
@@ -36,15 +36,15 @@ export class ColumnComponent implements OnInit {
 
 
   addInboundFlightstrip() {
-    this.fsService.createFlightstrip(this.uuid, '', stripType.INBOUND)
+    this.fsService.createFlightstrip(this.uuid, '', StripType.INBOUND)
   }
 
   addOutboundFlightstrip() {
-    this.fsService.createFlightstrip(this.uuid, '', stripType.OUTBOUND)
+    this.fsService.createFlightstrip(this.uuid, '', StripType.OUTBOUND)
   }
 
   addVfrFlightstrip() {
-    this.fsService.createFlightstrip(this.uuid, '', stripType.VFR)
+    this.fsService.createFlightstrip(this.uuid, '', StripType.VFR)
   }
 
 

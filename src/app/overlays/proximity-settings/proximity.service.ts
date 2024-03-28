@@ -3,7 +3,7 @@ import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Airport} from "./proximity.model";
 import {NetworkType} from "../../services/network.service";
-import {stripType} from "../../flightstrip-container/flightstrip.model";
+import {StripType} from "../../flightstrip-container/flightstrip.model";
 import {FlightstripService} from "../../flightstrip-container/flightstrip.service";
 import {SnackbarMessageService} from "../../services/snackbar-message.service";
 import {ColumnService} from "../../column/column.service";
@@ -64,7 +64,7 @@ export class ProximityService {
       if (Array.isArray(v)) {
         for (const aircraft of v) {
           if (!this.flightstripService.flightStripExists(aircraft) && !this.finishedAircrafts.includes(aircraft)) {
-            this.flightstripService.createFlightstrip(inboundColumn, aircraft, stripType.INBOUND);
+            this.flightstripService.createFlightstrip(inboundColumn, aircraft, StripType.INBOUND);
             this.snackService.showMessage(`Added ${aircraft} to ${inboundColumnName}`, "info");
           }
         }
@@ -81,7 +81,7 @@ export class ProximityService {
       if (Array.isArray(v)) {
         for (const aircraft of v) {
           if (!this.flightstripService.flightStripExists(aircraft) && !this.finishedAircrafts.includes(aircraft)) {
-            this.flightstripService.createFlightstrip(outboundColumn, aircraft, stripType.OUTBOUND);
+            this.flightstripService.createFlightstrip(outboundColumn, aircraft, StripType.OUTBOUND);
             this.snackService.showMessage(`Added ${aircraft} to ${outboundColumnName}`, "info");
           }
         }
@@ -98,7 +98,7 @@ export class ProximityService {
       if (Array.isArray(v)) {
         for (const aircraft of v) {
           if (!this.flightstripService.flightStripExists(aircraft) && !this.finishedAircrafts.includes(aircraft)) {
-            this.flightstripService.createFlightstrip(vfrColumn, aircraft, stripType.VFR);
+            this.flightstripService.createFlightstrip(vfrColumn, aircraft, StripType.VFR);
             this.snackService.showMessage(`Added ${aircraft} to ${vfrColumnName}`, "info");
           }
         }

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, HostListener, Input, OnDestroy, OnInit} from '@angular/core';
-import {Flightstrip, statusArrival, statusDeparture, statusVfr, stripType} from "./flightstrip.model";
+import {Flightstrip, StatusArrival, StatusDeparture, StatusVfr, StripType} from "./flightstrip.model";
 import {HttpClient} from "@angular/common/http";
 import {NetworkService} from "../services/network.service";
 import {environment} from "../../environments/environment";
@@ -68,14 +68,14 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
 
   checkTypeBeforeStatusChange(direction: number) {
     switch (this.stripModel.type) {
-      case stripType.OUTBOUND:
-        this.setStatus(direction, statusDeparture)
+      case StripType.OUTBOUND:
+        this.setStatus(direction, StatusDeparture)
         break;
-      case stripType.INBOUND:
-        this.setStatus(direction, statusArrival)
+      case StripType.INBOUND:
+        this.setStatus(direction, StatusArrival)
         break;
-      case stripType.VFR:
-        this.setStatus(direction, statusVfr)
+      case StripType.VFR:
+        this.setStatus(direction, StatusVfr)
         break;
     }
   }
@@ -89,6 +89,7 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
       state--;
     }
     this.stripModel.status = state;
+    this.stripModel.statusText = object[state];
   }
 
 
