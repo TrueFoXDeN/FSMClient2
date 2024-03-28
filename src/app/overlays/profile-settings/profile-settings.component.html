@@ -3,11 +3,11 @@
     <div class="header" profileSettings [header]="true">
       <span>Profile Settings</span>
     </div>
-        <div class="flex-row dropdown-container">
-          <p-dropdown [options]="profiles" [(ngModel)]="selectedProfile"
-                      optionLabel="name" class="dropdown" (onChange)="onItemselect($event)"
-                     [disabled]="markForDelete"></p-dropdown>
-        </div>
+    <div class="flex-row dropdown-container">
+      <p-dropdown [options]="profiles" [(ngModel)]="selectedProfile"
+                  optionLabel="name" class="dropdown" (onChange)="onItemselect($event)"
+                  [disabled]="markForDelete"></p-dropdown>
+    </div>
     <div class="flex-row">
       <div class="input-container">
         <input type="text" class="new-profile-input" appProfileInput placeholder="New profile"
@@ -15,7 +15,8 @@
         <div class="save-button-container">
           <app-profile-settings-button icon="save" appProfileSaveButton
                                        (click)="saveProfile()"
-                                       [ngClass]="{'save-disabled': !saveButtonActive}" class="save-button"></app-profile-settings-button>
+                                       [ngClass]="{'save-disabled': !saveButtonActive}"
+                                       class="save-button"></app-profile-settings-button>
         </div>
       </div>
     </div>

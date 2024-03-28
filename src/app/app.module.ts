@@ -101,6 +101,8 @@ import {IconButtonComponent} from "./shared-components/icon-button/icon-button.c
 import {
   KeybindingsButtonComponent
 } from "./overlays/settings/settings-keybindings/keybindings-button/keybindings-button.component";
+import {ToastModule} from "primeng/toast";
+import {MessageService} from "primeng/api";
 
 @NgModule({
   declarations: [
@@ -154,51 +156,53 @@ import {
     ProximityRowButtonComponent,
     CookieDialogComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    DragDropModule,
-    MatGridListModule,
-    ScrollingModule,
-    MatSidenavModule,
-    IconsModule,
-    FormsModule,
-    MatTooltipModule,
-    MatSnackBarModule,
-    DialogModule,
-    GridsterModule,
-    MatDialogModule,
-    CdkMenuModule,
-    HttpClientModule,
-    MatMenuModule,
-    MatSelectModule,
-    NgSelectModule,
-    MatChipsModule,
-    MatIconModule,
-    MatTableModule,
-    MatCheckboxModule,
-    MatSliderModule,
-    DropdownModule,
-    InputSwitchModule,
-    SliderModule,
-    ButtonModule,
-    ProgressSpinnerModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: !isDevMode(),
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    }),
-    SettingsDirective,
-    SettingsKeybindingsComponent,
-    SettingsAtcComponent,
-    IconButtonComponent,
-    KeybindingsButtonComponent
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        DragDropModule,
+        MatGridListModule,
+        ScrollingModule,
+        MatSidenavModule,
+        IconsModule,
+        FormsModule,
+        MatTooltipModule,
+        MatSnackBarModule,
+        DialogModule,
+        GridsterModule,
+        MatDialogModule,
+        CdkMenuModule,
+        HttpClientModule,
+        MatMenuModule,
+        MatSelectModule,
+        NgSelectModule,
+        MatChipsModule,
+        MatIconModule,
+        MatTableModule,
+        MatCheckboxModule,
+        MatSliderModule,
+        DropdownModule,
+        InputSwitchModule,
+        SliderModule,
+        ButtonModule,
+        ProgressSpinnerModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000'
+        }),
+        SettingsDirective,
+        SettingsKeybindingsComponent,
+        SettingsAtcComponent,
+        IconButtonComponent,
+        KeybindingsButtonComponent,
+        ToastModule
+    ],
   providers: [
     CustomStyles,
     Util,
+    MessageService,
     {
       provide: MatDialogRef,
       useValue: {},

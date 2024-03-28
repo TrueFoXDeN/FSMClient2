@@ -221,7 +221,8 @@
 
   --settings-keybinding-input-background: var(--app-input);
   --settings-keybinding-input-border: var(--app-border);
-  --settings-keybinding-input-border-recording: var(--app-error);
+  --settings-keybinding-input-border-recording: var(--app-primary);
+  --settings-keybinding-input-border-error: var(--app-error);
   --settings-keybinding-input-fontcolor: var(--app-fontcolor);
 }
 

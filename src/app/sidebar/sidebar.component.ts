@@ -65,7 +65,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   onZoomIn() {
     if (this.styleChanger.multiplier < 2.2) {
       this.styleChanger.multiplier += 0.10;
-      this.snackService.showMessage(`Zoom set to ${Math.round(this.styleChanger.multiplier * 100)}%`, "standard")
+      this.snackService.showMessage(`Zoom set to ${Math.round(this.styleChanger.multiplier * 100)}%`, "info")
       this.styleChanger.changedSize.next();
       this.cookieService.set("zoomLevel", this.styleChanger.multiplier.toString(), {expires: 10000, sameSite: 'Lax'})
     }
@@ -74,7 +74,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   onZoomOut() {
     if (this.styleChanger.multiplier > 0.7) {
       this.styleChanger.multiplier -= 0.10;
-      this.snackService.showMessage(`Zoom set to ${Math.round(this.styleChanger.multiplier * 100)}%`, "standard")
+      this.snackService.showMessage(`Zoom set to ${Math.round(this.styleChanger.multiplier * 100)}%`, "info")
       this.styleChanger.changedSize.next();
       this.cookieService.set("zoomLevel", this.styleChanger.multiplier.toString(), {expires: 10000, sameSite: 'Lax'})
     }

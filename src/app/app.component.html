@@ -1,4 +1,12 @@
 <div class="body">
+
   <app-sidebar sidebar></app-sidebar>
   <app-horizontal-scroll class="content"></app-horizontal-scroll>
 </div>
+<p-toast [life]="2500" class="toast">
+  <ng-template let-message pTemplate="message">
+    <div class="toast-body">
+      <span>{{ message.detail }}</span>
+    </div>
+  </ng-template>
+</p-toast>

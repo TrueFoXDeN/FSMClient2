@@ -17,7 +17,8 @@ export interface KeybindingConfig {
   isSecondaryDefault: boolean,
   isPrimaryRecording: boolean,
   isSecondaryRecording: boolean,
-  errorDetected: boolean
+  primaryErrorDetected: boolean,
+  secondaryErrorDetected: boolean
 }
 
 @Component({
@@ -70,20 +71,33 @@ export class SettingsKeybindingsComponent {
       this.configData[index].primaryShortcutString = "";
       this.configData[index].isPrimaryRecording = true;
     } else {
+      this.configData[index].secondaryShortcutString = "";
       this.configData[index].isSecondaryRecording = true;
     }
-
   }
 
-  onKeyInput(config: KeybindingConfig, event: KeyboardEvent) {
+  onKeyInput(config: KeybindingConfig, event: KeyboardEvent, isPrimary: boolean) {
     console.log(event);
     let index = this.configData.indexOf(config);
     event.preventDefault();
+
     if (event.key != "Control" && event.key != "Meta" && event.key != "Shift" && event.key != "Alt") {
-      this.configData[index].primaryShortcutString = this.shortcutService.getShortcutStringFromEvent(event);
+      if (isPrimary) {
+        this.configData[index].primaryShortcutString = this.shortcutService.getShortcutStringFromEvent(event);
+      } else {
+        this.configData[index].secondaryShortcutString = this.shortcutService.getShortcutStringFromEvent(event);
+      }
+
     } else {
-      this.configData[index].primaryShortcutString = this.shortcutService.getShortcutStringFromEvent(event, true);
+      if (isPrimary) {
+        this.configData[index].primaryShortcutString = this.shortcutService.getShortcutStringFromEvent(event, true);
+      } else {
+        this.configData[index].secondaryShortcutString = this.shortcutService.getShortcutStringFromEvent(event, true);
+      }
+
     }
+
+
   }
 
   onKeyUp(config: KeybindingConfig, isPrimary: boolean) {
@@ -93,81 +107,139 @@ export class SettingsKeybindingsComponent {
       if (keyArray[3] === "") {
         this.configData[index].primaryShortcutString = "";
       } else {
-        this.configData[index].errorDetected = false;
+        this.configData[index].primaryErrorDetected = false;
       }
     } else {
       let keyArray = this.configData[index].secondaryShortcutString.split("+");
       if (keyArray[3] === "") {
         this.configData[index].secondaryShortcutString = "";
       } else {
-        this.configData[index].errorDetected = false;
+        this.configData[index].secondaryErrorDetected = false;
       }
     }
-    if (this.shortcutService.getTempPrimaryConfig().has(config.primaryShortcutString) || this.shortcutService.getTempSecondaryConfig().has(config.secondaryShortcutString)) {
-      this.configData[index].errorDetected = true;
+    if (isPrimary) {
+      if (this.shortcutService.getTempPrimaryConfig().has(config.primaryShortcutString) || this.shortcutService.getTempSecondaryConfig().has(config.primaryShortcutString)) {
+        this.configData[index].primaryErrorDetected = true;
+      }
+    } else {
+      if (this.shortcutService.getTempPrimaryConfig().has(config.secondaryShortcutString) || this.shortcutService.getTempSecondaryConfig().has(config.secondaryShortcutString)) {
+
+        this.configData[index].secondaryErrorDetected = true;
+      }
     }
+
   }
 
   onApplyClick(config: KeybindingConfig, isPrimary: boolean) {
     let index = this.configData.indexOf(config)
-    if (config.isPrimaryRecording && !config.errorDetected) {
+    if (config.isPrimaryRecording && !config.primaryErrorDetected) {
       if (isPrimary) {
         let newShortcut = config.primaryShortcutString;
         let action = config.actionName
-        console.log(this.shortcutService.getTempPrimaryActionKeyConfig().get(action))
         this.shortcutService.deleteFromTempShortcutStringConfig(this.shortcutService.getTempPrimaryActionKeyConfig().get(action)!)
         this.shortcutService.deleteSingleShortcutFromTempActionKeyConfig(action, true);
-
         this.shortcutService.setTemporaryShortcut(action, newShortcut, true);
-      } else {
+      }
+      this.inputsLocked = false;
+      this.configData[index].primaryErrorDetected = false;
+      this.configData[index].secondaryErrorDetected = false;
+      this.configData[index].isPrimaryRecording = false;
+      this.configData[index].isSecondaryRecording = false;
+      this.loadDataIntoConfig();
+    }
+
+    if (config.isSecondaryRecording && !config.secondaryErrorDetected) {
+      if (!isPrimary) {
         let newShortcut = config.secondaryShortcutString;
         let action = config.actionName
         this.shortcutService.deleteFromTempShortcutStringConfig(this.shortcutService.getTempSecondaryConfig().get(action)!)
         this.shortcutService.deleteSingleShortcutFromTempActionKeyConfig(action, false);
-
         this.shortcutService.setTemporaryShortcut(action, newShortcut, false);
       }
-      console.log(this.shortcutService.getTempPrimaryConfig())
-      console.log(this.shortcutService.getTempPrimaryActionKeyConfig())
-      this.loadDataIntoConfig();
       this.inputsLocked = false;
-      this.configData[index].errorDetected = false;
+      this.configData[index].primaryErrorDetected = false;
+      this.configData[index].secondaryErrorDetected = false;
       this.configData[index].isPrimaryRecording = false;
       this.configData[index].isSecondaryRecording = false;
+      this.loadDataIntoConfig();
     }
 
 
   }
 
-  setShortcutToDefault(config: KeybindingConfig, primary: boolean) {
-    if ((config.isPrimaryDefault && primary) || (config.isSecondaryDefault && !primary)) {
+  setShortcutToDefault(config: KeybindingConfig, isPrimary: boolean) {
+    // return if button action should not be executed
+    if ((config.isPrimaryDefault && isPrimary) || (config.isSecondaryDefault && !isPrimary)) {
       return;
     }
-    let index = this.configData.indexOf(config);
-    if (primary) {
-      let actionName = this.shortcutService.getActionIdFromShortcut(config.primaryShortcutString, true);
-      let defaultShortcutString = this.defaultShortcutService.getPrimaryDefaultActionConfig().get(config.actionName) || ""
-      if (actionName != "" && actionName != config.actionName) {
-        this.shortcutService.deleteFromTempShortcutStringConfig(defaultShortcutString)
-        this.shortcutService.deleteFromTempActionKeyConfig(actionName!)
-        console.log("Found other action which uses the default key");
+    if (isPrimary) {
+      //Load default shortcut string for given action
+      let newDefaultShortcutString = this.defaultShortcutService.getPrimaryDefaultActionConfig().get(config.actionName) || ""
+
+      //Find primary action which uses the default shortcut as its current shortcut
+      let possiblePrimaryDuplicateKeyActionName = this.shortcutService.getTempPrimaryConfig().get(newDefaultShortcutString) || "";
+
+      // If another action uses a key which is the default of this action, it will be cleared
+      if (possiblePrimaryDuplicateKeyActionName != "") {
+        this.shortcutService.deleteFromTempShortcutStringConfig(newDefaultShortcutString)
+        this.shortcutService.deleteFromTempActionKeyConfig(possiblePrimaryDuplicateKeyActionName)
+        console.log(`${possiblePrimaryDuplicateKeyActionName} has the same key as the default of ${config.actionName}`);
       }
+
+      //Find secondary action which uses the default shortcut as its current shortcut
+      let possibleSecondaryDuplicateKeyActionName = this.shortcutService.getTempSecondaryConfig().get(newDefaultShortcutString) || "";
+
+      // If another action uses a key which is the default of this action, it will be cleared
+      if (possibleSecondaryDuplicateKeyActionName != "") {
+        this.shortcutService.deleteFromTempShortcutStringConfig(newDefaultShortcutString)
+        this.shortcutService.deleteFromTempActionKeyConfig(possibleSecondaryDuplicateKeyActionName)
+        console.log(`${possibleSecondaryDuplicateKeyActionName} has the same key as the default of ${config.actionName}`);
+      }
+
+      //Delete own old shortcuts
       this.shortcutService.deleteFromTempShortcutStringConfig(config.primaryShortcutString);
-      this.shortcutService.deleteFromTempActionKeyConfig(config.actionName);
-      this.shortcutService.setTemporaryShortcut(config.actionName, defaultShortcutString, true);
+      this.shortcutService.deleteSingleShortcutFromTempActionKeyConfig(config.actionName, isPrimary);
+
+      //Set default shortcut,
+      if (newDefaultShortcutString != "") {
+        this.shortcutService.setTemporaryShortcut(config.actionName, newDefaultShortcutString, true);
+      }
+
       this.loadDataIntoConfig();
 
     } else {
-      let defaultShortcutString = this.defaultShortcutService.getSecondaryDefaultActionConfig().get(config.actionName) || "";
-      let actionName = this.shortcutService.getActionIdFromShortcut(config.secondaryShortcutString, true);
-      if (actionName != "" && actionName != config.actionName) {
-        console.log("Found other action which uses the default key");
-        this.shortcutService.deleteFromTempShortcutStringConfig(defaultShortcutString)
-        this.shortcutService.deleteFromTempActionKeyConfig(actionName!)
+      //Load default shortcut string for given action
+      let newDefaultShortcutString = this.defaultShortcutService.getSecondaryDefaultActionConfig().get(config.actionName) || ""
+
+      //Find action which uses the default shortcut as its current shortcut
+      let possiblePrimaryDuplicateKeyActionName = this.shortcutService.getTempSecondaryConfig().get(newDefaultShortcutString) || "";
+
+      // If another action uses a key which is the default of this action, it will be cleared
+      if (possiblePrimaryDuplicateKeyActionName != "") {
+        this.shortcutService.deleteFromTempShortcutStringConfig(newDefaultShortcutString)
+        this.shortcutService.deleteFromTempActionKeyConfig(possiblePrimaryDuplicateKeyActionName)
+        console.log(`${possiblePrimaryDuplicateKeyActionName} has the same key as the default of ${config.actionName}`);
       }
-      this.shortcutService.deleteFromTempShortcutStringConfig(config.primaryShortcutString);
-      this.shortcutService.deleteFromTempActionKeyConfig(config.actionName);
-      this.shortcutService.setTemporaryShortcut(config.actionName, defaultShortcutString, false);
+
+      //Find secondary action which uses the default shortcut as its current shortcut
+      let possibleSecondaryDuplicateKeyActionName = this.shortcutService.getTempSecondaryConfig().get(newDefaultShortcutString) || "";
+
+      // If another action uses a key which is the default of this action, it will be cleared
+      if (possibleSecondaryDuplicateKeyActionName != "") {
+        this.shortcutService.deleteFromTempShortcutStringConfig(newDefaultShortcutString)
+        this.shortcutService.deleteFromTempActionKeyConfig(possibleSecondaryDuplicateKeyActionName)
+        console.log(`${possibleSecondaryDuplicateKeyActionName} has the same key as the default of ${config.actionName}`);
+      }
+
+      //Delete own old shortcuts
+      this.shortcutService.deleteFromTempShortcutStringConfig(config.secondaryShortcutString);
+      this.shortcutService.deleteSingleShortcutFromTempActionKeyConfig(config.actionName, isPrimary);
+
+      //Set default shortcut
+      if (newDefaultShortcutString != "") {
+        this.shortcutService.setTemporaryShortcut(config.actionName, newDefaultShortcutString, false);
+      }
+
       this.loadDataIntoConfig();
     }
   }
@@ -176,7 +248,8 @@ export class SettingsKeybindingsComponent {
 
     this.inputsLocked = false;
     let index = this.configData.indexOf(config)
-    this.configData[index].errorDetected = false;
+    this.configData[index].primaryErrorDetected = false;
+    this.configData[index].secondaryErrorDetected = false;
     this.configData[index].isPrimaryRecording = false;
     this.configData[index].isSecondaryRecording = false;
     this.loadDataIntoConfig();

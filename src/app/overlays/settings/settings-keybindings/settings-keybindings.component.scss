@@ -15,8 +15,7 @@ td {
 
 .action-name {
   padding-left: 0.5rem;
-  width: 25rem;
-  margin-right: 12rem;
+  width: 30rem;
 }
 
 
@@ -40,10 +39,14 @@ td {
   border: 1px solid var(--settings-keybinding-input-border);
   color: var(--settings-keybinding-input-fontcolor);
   border-radius: 5px;
+}
 
-  &:focus {
-    border-color: var(--settings-keybinding-input-border-recording);
-  }
+.recording{
+  border-color: var(--settings-keybinding-input-border-recording);
+}
+
+.error{
+  border-color: var(--settings-keybinding-input-border-error);
 }
 
 

@@ -59,7 +59,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.dataService.currentProfileID = this.dataService.getStandardProfileID();
       this.messageService.showMessage("Error loading profile. Loading default. ", "error");
     } else {
-      this.messageService.showMessage(`Profile "${this.dataService.profileData[this.dataService.currentProfileID].name}" loaded`, "standard");
+      this.messageService.showMessage(`Profile "${this.dataService.profileData[this.dataService.currentProfileID].name}" loaded`, "info");
     }
   }
 
@@ -72,7 +72,7 @@ export class AppComponent implements OnInit, OnDestroy {
       try {
         this.styleChanger.multiplier = parseFloat(this.cookieService.get('zoomLevel'))
         this.styleChanger.changedSize.next()
-        this.messageService.showMessage(`Zoom set to ${Math.round(this.styleChanger.multiplier * 100)}%`, "standard")
+        this.messageService.showMessage(`Zoom set to ${Math.round(this.styleChanger.multiplier * 100)}%`, "info")
       } catch (e) {
         this.styleChanger.multiplier = 1.0
       }

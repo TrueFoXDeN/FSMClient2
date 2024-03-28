@@ -37,10 +37,11 @@
         }
       </div>
       <div class="footer">
-      <app-icon-button icon="save" class="icon save" matTooltip="Save & Exit"
-                       matTooltipPosition="above"></app-icon-button>
+        <app-icon-button icon="save" class="icon save" matTooltip="Save & Exit"
+                         matTooltipPosition="above" (click)="onSaveClick()"></app-icon-button>
         <app-icon-button icon="x" class="icon discard" matTooltip="Discard"
-                         matTooltipPosition="above"></app-icon-button>
+                         matTooltipPosition="above"
+                         (click)="onDiscardClick()"></app-icon-button>
 
       </div>
 

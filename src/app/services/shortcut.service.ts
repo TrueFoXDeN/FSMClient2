@@ -19,25 +19,6 @@ export class ShortcutService {
   }
 
 
-  // setTemporaryShortcut(shortcutString: string, actionName: string, type: ShortcutType) {
-  //   if (type === ShortcutType.PRIMARY) {
-  //     for (let [key, value] of this.settingsService.shortcut_primaryShortcutStringConfig) {
-  //       if (value === actionName) {
-  //         this.settingsService.shortcut_primaryShortcutStringConfig.delete(key);
-  //       }
-  //     }
-  //     this.settingsService.shortcut_primaryShortcutStringConfig.set(shortcutString, actionName)
-  //   } else {
-  //     for (let [key, value] of this.settingsService.shortcut_secondaryShortcutStringConfig) {
-  //       if (value === actionName) {
-  //         this.settingsService.shortcut_secondaryShortcutStringConfig.delete(key);
-  //       }
-  //     }
-  //     this.settingsService.shortcut_secondaryShortcutStringConfig.set(shortcutString, actionName)
-  //   }
-  // }
-
-
   setTemporaryShortcut(actionName: string, shortcutString: string, isPrimary: boolean) {
     if (isPrimary) {
       this.settingsService.shortcut_tempPrimaryActionKeyConfig.set(actionName, shortcutString);
@@ -105,21 +86,27 @@ export class ShortcutService {
 
   deleteFromTempShortcutStringConfig(shortcutString: string) {
     if (this.settingsService.shortcut_tempPrimaryShortcutStringConfig.has(shortcutString)) {
-      this.settingsService.shortcut_tempPrimaryShortcutStringConfig.delete(shortcutString)
+      this.settingsService.shortcut_tempPrimaryShortcutStringConfig.delete(shortcutString);
+      return 1;
     }
 
     if (this.settingsService.shortcut_tempSecondaryShortcutStringConfig.has(shortcutString)) {
-      this.settingsService.shortcut_tempSecondaryShortcutStringConfig.delete(shortcutString)
+      this.settingsService.shortcut_tempSecondaryShortcutStringConfig.delete(shortcutString);
+      return 2;
     }
+    return 0;
   }
 
   deleteFromTempActionKeyConfig(actionKeyString: string) {
     if (this.settingsService.shortcut_tempPrimaryActionKeyConfig.has(actionKeyString)) {
       this.settingsService.shortcut_tempPrimaryActionKeyConfig.delete(actionKeyString);
+      return 1;
     }
     if (this.settingsService.shortcut_tempSecondaryActionKeyConfig.has(actionKeyString)) {
       this.settingsService.shortcut_tempSecondaryActionKeyConfig.delete(actionKeyString);
+      return 2;
     }
+    return 0;
   }
 
   deleteSingleShortcutFromTempActionKeyConfig(actionKeyString: string, isPrimary: boolean) {
@@ -163,7 +150,7 @@ export class ShortcutService {
     this.actionNames.set("prevStatus", "Previous status");
     this.actionNames.set("nextStatus", "Next status");
     this.actionNames.set("createVfr", "Create VFR strip");
-    this.actionNames.set("createOutbound", "Create outbound strip");
+    this.actionNames.set("createOutbound", "Create Outbound strip");
     this.actionNames.set("createInbound", "Create Inbound strip")
   }
 
@@ -206,7 +193,6 @@ export class ShortcutService {
         if (value === actionName) return key;
       }
     }
-
     return ""
   }
 
