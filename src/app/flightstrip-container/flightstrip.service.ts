@@ -153,4 +153,14 @@ export class FlightstripService {
 
   }
 
+  getIndexInColumnByID(colID: string, fsID: string) {
+    let fsIndex = -1;
+    for (let i = 0; i < this.dataService.flightstripData[colID].flightstrips.length; i++) {
+      if (this.dataService.flightstripData[colID].flightstrips[i].id === fsID) {
+        fsIndex = i;
+      }
+    }
+    return fsIndex;
+  }
+
 }

@@ -13,12 +13,8 @@ export class DeleteFlightstripCommand implements Command {
   execute(args: string[]): void {
     let colID = args[0];
     let fsID = args[1];
-    let fsIndex = -1;
-    for (let i = 0; i < this.dataService.flightstripData[colID].flightstrips.length; i++) {
-      if (this.dataService.flightstripData[colID].flightstrips[i].id === fsID) {
-        fsIndex = i;
-      }
-    }
+
+    let fsIndex = this.fsService.getIndexInColumnByID(colID, fsID);
     if (fsIndex > -1) {
       this.dataService.flightstripData[colID].flightstrips.splice(fsIndex, 1);
     }
