@@ -24,7 +24,6 @@ export class TokenCommand implements Command {
     this.dataService.currentProfile = this.dataService.multiplayerProfile
     let data = args[1].data
     let order = args[1].order
-    console.log(args)
     const columnIDs: string[] = Object.keys(data);
     let dashboard = [];
     for (let i = 0; i < columnIDs.length; i++) {
