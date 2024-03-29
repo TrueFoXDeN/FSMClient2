@@ -146,6 +146,9 @@ export class ColumnBuilderComponent implements OnInit {
     this.dialogRef.close(mergedData)
   }
 
+  //actualColumnData: Livedata which can be altered by multiplayer
+  // columnDataAtBuilderInit: snapshot when columnbuilder is opened
+  // columnDataAtSave: Data as the user sees it in the columnbuilder
   mergeColumnData(actualColumnData: any, columnDataAtBuilderInit: any, columnBuilderDataAtSave: any) {
     const columnIdSet = new Set<string>();
     //Add all uuids to a set to get all uuids present in all versions
@@ -191,9 +194,25 @@ export class ColumnBuilderComponent implements OnInit {
       }
       columnOccurrencesArray.push(colOccurrence);
     });
+
+    //Binary states:
+    /*
+    * 1: Existed in columnDataAtInit Snapshot but was removed locally and remotely
+    * 2: was added locally
+    * 3: was removed remotely
+    * 4: was added remotely
+    * 5: was removed locally
+    * 6: was added locally and remotely (not possible)
+    * 7: No changes
+    * */
     for (let colOccurrence of columnOccurrencesArray) {
+
       //Delete column from builderSave array which was deleted remotely
-      if (colOccurrence.occurrence === 3) {
+
+      if (colOccurrence.occurrence === 2) {
+        console.log("Added Column locally");
+        //TODO Send "add_column command
+      } else if (colOccurrence.occurrence === 3) {
         let indexofDeletedCol = -1;
         for (let i = 0; i < columnBuilderDataAtSave.length; i++) {
           if (columnBuilderDataAtSave[i].uuid === colOccurrence.id) {
@@ -230,6 +249,9 @@ export class ColumnBuilderComponent implements OnInit {
           name: newColName,
           uuid: newColID
         });
+      } else if (colOccurrence.occurrence === 5) {
+        console.log("Column deleted locally");
+        //TODO send remove_column command
       }
     }
     return columnBuilderDataAtSave;
