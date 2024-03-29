@@ -95,7 +95,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(ColumnBuilderComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
       if (data != null) {
-        this.dataService.profileData[this.dataService.currentProfileID].columnStructure = data;
+        //this.dataService.profileData[this.dataService.currentProfileID].columnStructure = data;
       }
       this.dataService.profileData[this.dataService.currentProfileID].columnStructure.forEach((column: any) => {
         if (this.dataService.flightstripData[column?.['uuid']] == null) {

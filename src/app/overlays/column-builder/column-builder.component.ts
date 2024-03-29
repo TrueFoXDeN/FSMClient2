@@ -20,6 +20,11 @@ interface Safe extends GridsterConfig {
   pushDirections: PushDirections;
 }
 
+interface ColumnOccurrences {
+  id: string,
+  occurrence: number
+}
+
 @Component({
   selector: 'app-column-builder',
   templateUrl: './column-builder.component.html',
@@ -31,11 +36,13 @@ export class ColumnBuilderComponent implements OnInit {
   name = "Angular " + VERSION.major;
   options: Safe;
   dashboard: Array<GridsterItem>;
+  columnStructureBackup: any;
   currentData: any
 
   constructor(private util: Util, public dialogRef: MatDialogRef<ColumnBuilderComponent>,
-              @Inject(MAT_DIALOG_DATA) data: any, private dataService : DataService) {
+              @Inject(MAT_DIALOG_DATA) data: any, private dataService: DataService) {
     this.currentData = data
+    this.columnStructureBackup = JSON.parse(JSON.stringify(data.columnData))
     this.dashboard = data.columnData;
     this.options = {
       gridType: GridType.Fit,
@@ -122,17 +129,110 @@ export class ColumnBuilderComponent implements OnInit {
   }
 
 
-  alignColumns(){
+  alignColumns() {
     this.options.compactType = CompactType.CompactLeft
     this.changedOptions()
     this.options.compactType = CompactType.None
     this.changedOptions()
   }
+
   saveAndClose() {
-    this.dataService.profileData[this.dataService.currentProfileID].columnStructure = this.dashboard
+
+    let mergedData = this.mergeColumnData(this.dataService.profileData[this.dataService.currentProfileID].columnStructure, this.columnStructureBackup, this.dashboard);
+    this.dataService.profileData[this.dataService.currentProfileID].columnStructure = mergedData
     // let data = {"columnData": this.dashboard}
     localStorage.setItem("profileStructure", JSON.stringify(this.dataService.profileData))
-    this.dialogRef.close(this.dashboard)
+
+    this.dialogRef.close(mergedData)
+  }
+
+  mergeColumnData(actualColumnData: any, columnDataAtBuilderInit: any, columnBuilderDataAtSave: any) {
+    const columnIdSet = new Set<string>();
+    //Add all uuids to a set to get all uuids present in all versions
+
+    columnDataAtBuilderInit.forEach((value: any) => {
+      columnIdSet.add(value.uuid);
+    });
+    columnBuilderDataAtSave.forEach((value: any) => {
+      columnIdSet.add(value.uuid);
+    });
+    actualColumnData.forEach((value: any) => {
+      columnIdSet.add(value.uuid);
+    });
+
+    //Create columnOccurrencesArray with occurrences of ColID in each dataset
+    // Encoding each occurrence as a binary number (1: exists at Init, 2: exists on save, 4: exists in actual dataset)
+    let columnOccurrencesArray: ColumnOccurrences[] = []
+    columnIdSet.forEach((colID: string) => {
+      let colOccurrence: ColumnOccurrences = {id: colID, occurrence: 0};
+      colOccurrence.occurrence += columnDataAtBuilderInit.forEach((colObject: any) => {
+        return colObject.uuid == colID;
+      }) ? 1 : 0;
+
+      for (let colObject of columnDataAtBuilderInit) {
+        if (colObject.uuid === colID) {
+          colOccurrence.occurrence += 1;
+          break;
+        }
+      }
+
+      for (let colObject of columnBuilderDataAtSave) {
+        if (colObject.uuid === colID) {
+          colOccurrence.occurrence += 2;
+          break;
+        }
+      }
+
+      for (let colObject of actualColumnData) {
+        if (colObject.uuid === colID) {
+          colOccurrence.occurrence += 4;
+          break;
+        }
+      }
+      columnOccurrencesArray.push(colOccurrence);
+    });
+    for (let colOccurrence of columnOccurrencesArray) {
+      //Delete column from builderSave array which was deleted remotely
+      if (colOccurrence.occurrence === 3) {
+        let indexofDeletedCol = -1;
+        for (let i = 0; i < columnBuilderDataAtSave.length; i++) {
+          if (columnBuilderDataAtSave[i].uuid === colOccurrence.id) {
+            indexofDeletedCol = i;
+            break;
+          }
+        }
+        if (indexofDeletedCol != -1) {
+          columnBuilderDataAtSave.splice(indexofDeletedCol, 1);
+        }
+      }
+      //Add column to builderSave array which was added remotely
+      else if (colOccurrence.occurrence === 4) {
+        let newColID = "";
+        let newColName = ""
+        let maxXIndex = -1;
+        for (let i = 0; i < columnBuilderDataAtSave.length; i++) {
+          if (columnBuilderDataAtSave[i].x > maxXIndex) {
+            maxXIndex = columnBuilderDataAtSave[i].x;
+          }
+        }
+        for (let i = 0; i < actualColumnData.length; i++) {
+          if (actualColumnData[i].uuid === colOccurrence.id) {
+            newColID = actualColumnData[i].uuid;
+            newColName = actualColumnData[i].name;
+            break;
+          }
+        }
+        columnBuilderDataAtSave.push({
+          x: maxXIndex + 1,
+          y: 0,
+          cols: 1,
+          rows: 18,
+          name: newColName,
+          uuid: newColID
+        });
+      }
+    }
+    return columnBuilderDataAtSave;
   }
 
   closeWithoutSaving() {
