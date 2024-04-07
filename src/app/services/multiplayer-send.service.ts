@@ -39,7 +39,7 @@ export class MultiplayerSendService {
   processMessage(cmd: string, data: any) {
     let command = this.commands.get(cmd)
 
-    let args: any[] = [this.cookieService.get('token'), this.multiplayerService.roomId]
+    let args: any[] = [this.cookieService.get('multiplayerAuth'), this.multiplayerService.roomId]
     if (command) {
       args = args.concat(command.execute(data))
     } else {
