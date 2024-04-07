@@ -54,7 +54,7 @@ export class FlightstripService {
     return throwError(() => new Error('malformed callsign'))
   }
 
-  createFlightstrip(column: string, callsign: string, type: StripType, uuid = "", tempFs: any = undefined) {
+  createFlightstrip(column: string, callsign: string, type: StripType, uuid = "", tempFs: any = undefined, createdFromMultiplayer = false) {
     let nextPos = this.dataService.flightstripData?.[column]?.['flightstrips'].length
     let fs: Flightstrip
     if (uuid === "") {
@@ -74,7 +74,10 @@ export class FlightstripService {
           fs.airline = res.airline
           this.dataService.flightstripData?.[column]?.['flightstrips'].push(fs);
           console.log({colId: column, type: type, fsId: fs.id})
-          this.mpService.processMessage("create_flightstrip", {colId: column, type: type, fsId: fs.id});
+          if(!createdFromMultiplayer){
+            this.mpService.processMessage("create_flightstrip", {colId: column, type: type, fsId: fs.id});
+          }
+
         },
         error: (err) => {
         }
@@ -82,7 +85,10 @@ export class FlightstripService {
     } else {
       this.dataService.flightstripData?.[column]?.['flightstrips'].push(fs);
       console.log({colId: column, type: type, fsId: fs.id})
-      this.mpService.processMessage("create_flightstrip", {colId: column, type: type, fsId: fs.id});
+      if(!createdFromMultiplayer){
+        this.mpService.processMessage("create_flightstrip", {colId: column, type: type, fsId: fs.id});
+      }
+
     }
 
   }
@@ -112,7 +118,6 @@ export class FlightstripService {
     fs.statusText = flightstrip.statusText || fs.statusText;
     // fs.status = this.getFsStatusText(flightstrip.statusText, flightstrip.type);
     fs.status = flightstrip.status || fs.status;
-    console.log(flightstrip) ;
     this.dataService.flightstripData?.[column]?.['flightstrips'].push(fs);
   }
 

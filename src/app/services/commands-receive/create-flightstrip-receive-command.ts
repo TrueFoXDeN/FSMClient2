@@ -16,7 +16,7 @@ export class CreateFlightstripReceiveCommand implements CommandReceive {
     let colID = args[0];
     let fsID = args[1];
     let fsType: number = Number(args[2]);
-    this.fsService.createFlightstrip(colID, "", fsType, fsID);
+    this.fsService.createFlightstrip(colID, "", fsType, fsID, undefined, true);
   }
 
 }
