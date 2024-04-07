@@ -28,6 +28,7 @@ export class MultiplayerService {
   createdRoomId: string = "";
   multiplayerUrl = environment.multiplayerURL
   url = environment.websocketURL
+  roomId: string = ''
 
 
   constructor(private http: HttpClient, private multiplayerReceiveService: MultiplayerReceiveService) {
@@ -41,6 +42,7 @@ export class MultiplayerService {
     this.socket.onopen = () => {
       console.log('WebSocket connection established.');
       this.sendMessage('connect', [roomId, password, name])
+      this.roomId = roomId
     };
 
     this.socket.onmessage = (event) => {

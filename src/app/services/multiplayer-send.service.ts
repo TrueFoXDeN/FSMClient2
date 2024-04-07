@@ -9,6 +9,7 @@ import {GetDataSendCommand} from "./commands-send/get-data-send-command";
 import {MoveFlightstripSendCommand} from "./commands-send/move-flightstrip-send-command";
 import {DeleteColumnSendCommand} from "./commands-send/delete-column-send-command";
 import {EditFlightstripSendCommand} from "./commands-send/edit-flightstrip-send-command";
+import {CookieService} from "ngx-cookie-service";
 
 
 @Injectable({
@@ -22,7 +23,8 @@ export class MultiplayerSendService {
               private createFlightstripCommand: CreateFlightstripSendCommand, private deleteColumnCommand: DeleteColumnSendCommand,
               private deleteFlightStripCommand: DeleteFlightstripSendCommand, private editFlightStripCommand: EditFlightstripSendCommand,
               private getClientsCommand: GetClientsSendCommand,
-              private getDataCommand: GetDataSendCommand, private moveFlightstripCommand: MoveFlightstripSendCommand) {
+              private getDataCommand: GetDataSendCommand, private moveFlightstripCommand: MoveFlightstripSendCommand,
+              private cookieService: CookieService) {
 
     this.commands.set('create_column', createColumnCommand)
     this.commands.set('create_flightstrip', createFlightstripCommand)
@@ -36,9 +38,10 @@ export class MultiplayerSendService {
 
   processMessage(cmd: string, data: any) {
     let command = this.commands.get(cmd)
-    let args: any[] = []
+
+    let args: any[] = [this.cookieService.get('token'), this.multiplayerService.roomId]
     if (command) {
-      args = command.execute(data)
+      args = args.concat(command.execute(data))
     } else {
       console.log(data.cmd + ' is not implemented')
     }
