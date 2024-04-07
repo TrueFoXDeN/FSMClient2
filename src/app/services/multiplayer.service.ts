@@ -40,13 +40,12 @@ export class MultiplayerService {
 
     this.socket.onopen = () => {
       console.log('WebSocket connection established.');
-      this.sendMessage('connect', [roomId, password, name]) //TODO auslagern in receive
+      this.sendMessage('connect', [roomId, password, name])
     };
 
     this.socket.onmessage = (event) => {
       this.multiplayerReceiveService.processMessage(event.data)
       console.log(event.data)
-      // this.processMessage(event.data) //TODO auslagern in receive
     };
 
     this.socket.onclose = (event) => {
@@ -56,7 +55,6 @@ export class MultiplayerService {
     this.socket.onerror = (error) => {
       console.error('WebSocket error:', error);
     };
-    // this.websocketService.connect(roomId, password, name)
 
   }
 
@@ -69,7 +67,7 @@ export class MultiplayerService {
     return this.http.get(`${this.multiplayerUrl}/room/${roomId}`)
   }
 
-  sendMessage(cmd: string, args: string[]): void {
+  sendMessage(cmd: string, args: any[]): void {
     console.log(cmd, args)
     let msg = {cmd: cmd, args: args}
     console.log(JSON.stringify(msg))

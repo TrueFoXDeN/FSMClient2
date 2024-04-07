@@ -4,8 +4,11 @@ import {Injectable} from "@angular/core";
   providedIn: 'root'
 })
 export class GetDataSendCommand implements CommandSend {
-  execute(args: string[]): void {
-    console.log('get data')
+  constructor() {
+  }
+
+  execute(data: any): any[] {
+    return []
   }
 
 }
