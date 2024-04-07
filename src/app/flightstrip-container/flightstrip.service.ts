@@ -6,6 +6,8 @@ import {environment} from "../../environments/environment";
 import {DataService} from "../services/data.service";
 import {Util} from "../util";
 
+import {MultiplayerSendService} from "../services/multiplayer-send.service";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +23,7 @@ export class FlightstripService {
   baseURL = environment.baseURL
   changedStripPos = new Subject<{ id: string, newPosistion: number }>()
 
-  constructor(private dataService: DataService, private http: HttpClient, private util: Util) {
+  constructor(private dataService: DataService, private http: HttpClient, private util: Util, private mpService : MultiplayerSendService) {
   }
 
   findFlightStrip(callsign: string) {
@@ -71,40 +73,46 @@ export class FlightstripService {
 
           fs.airline = res.airline
           this.dataService.flightstripData?.[column]?.['flightstrips'].push(fs);
+          console.log({colId: column, type: type, fsId: fs.id})
+          this.mpService.processMessage("create_flightstrip", {colId: column, type: type, fsId: fs.id});
         },
         error: (err) => {
         }
       })
     } else {
       this.dataService.flightstripData?.[column]?.['flightstrips'].push(fs);
+      console.log({colId: column, type: type, fsId: fs.id})
+      this.mpService.processMessage("create_flightstrip", {colId: column, type: type, fsId: fs.id});
     }
+
   }
 
-  createFlightstipWithObject(column: string, uuid: string, flightstrip: any) {
+  createFlightstripWithObject(column: string, uuid: string, flightstrip: any) {
     let nextPos = this.dataService.flightstripData?.[column]?.['flightstrips'].length
     let fs: Flightstrip;
     fs = new Flightstrip(uuid, flightstrip.type, column, nextPos);
-    fs.callsign = flightstrip.callsign;
-    fs.departureIcao = flightstrip.departureIcao;
-    fs.arrivalIcao = flightstrip.arrivalIcao;
-    fs.aircraft = flightstrip.aircraft;
+    fs.callsign = flightstrip.callsign || "";
+    fs.departureIcao = flightstrip.departureIcao  || "";
+    fs.arrivalIcao = flightstrip.arrivalIcao  || "";
+    fs.aircraft = flightstrip.aircraft  || "";
 
-    fs.wakeCategory = flightstrip.wakeCategory;
-    fs.flightrule = flightstrip.flightrule;
-    fs.altitude = flightstrip.altitude;
-    fs.gate = flightstrip.gate;
-    fs.info = flightstrip.info;
-    fs.airline = flightstrip.airline;
-    fs.squawk = flightstrip.squawk;
-    fs.runway = flightstrip.runway;
-    fs.sidStar = flightstrip.sidStar;
-    fs.freeText = flightstrip.freeText;
-    fs.route = flightstrip.route;
-    fs.triangleIconState = flightstrip.triangleIconState;
-    fs.communicationIconState = flightstrip.communicationIconState;
-    fs.statusText = flightstrip.statusText;
+    fs.wakeCategory = flightstrip.wakeCategory  || "";
+    fs.flightrule = flightstrip.flightrule  || "";
+    fs.altitude = flightstrip.altitude  || "";
+    fs.gate = flightstrip.gate  || "";
+    fs.info = flightstrip.info  || "";
+    fs.airline = flightstrip.airline  || "";
+    fs.squawk = flightstrip.squawk  || "";
+    fs.runway = flightstrip.runway  || "";
+    fs.sidStar = flightstrip.sidStar  || "";
+    fs.freeText = flightstrip.freeText  || "";
+    fs.route = flightstrip.route  || "";
+    fs.triangleIconState = flightstrip.triangleIconState || fs.triangleIconState;
+    fs.communicationIconState = flightstrip.communicationIconState || fs.communicationIconState;
+    fs.statusText = flightstrip.statusText || fs.statusText;
     // fs.status = this.getFsStatusText(flightstrip.statusText, flightstrip.type);
-    fs.status = flightstrip.status;
+    fs.status = flightstrip.status || fs.status;
+    console.log(flightstrip) ;
     this.dataService.flightstripData?.[column]?.['flightstrips'].push(fs);
   }
 

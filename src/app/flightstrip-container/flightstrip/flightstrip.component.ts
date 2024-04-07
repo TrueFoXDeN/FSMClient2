@@ -14,6 +14,7 @@ import {StyleChangerService} from "../../services/style-changer.service";
 import {MatMenuTrigger} from "@angular/material/menu";
 import {DataService} from "../../services/data.service";
 import {Util} from "../../util";
+import {MultiplayerSendService} from "../../services/multiplayer-send.service";
 
 
 @Component({
@@ -38,7 +39,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   fsModelBackup: Flightstrip;
 
   constructor(private dataService: DataService, private fsService: FlightstripService, private styleChanger: StyleChangerService,
-              private util: Util) {
+              private util: Util, private mpService: MultiplayerSendService) {
     this.subscriptionHandles.push(this.fsService.changedType.subscribe((data) => {
       if (data.id == this.fs.id) {
         this.fs.type = data.type;
@@ -56,9 +57,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
         }, 8000);
       }
     }));
-    console.log(this.fs);
     this.fsModelBackup = new Flightstrip(this.util.generateUUID(), StripType.INBOUND, this.util.generateUUID(), 0);
-    console.log(this.fsModelBackup);
   }
 
   ngOnDestroy(): void {
@@ -84,7 +83,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.checkStatus()
-    this.fsModelBackup = JSON.parse(JSON.stringify(this.fsModelBackup));
+    this.fsModelBackup = JSON.parse(JSON.stringify(this.fs));
   }
 
   changeToCompactMode() {
@@ -95,7 +94,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
     this.fsService.getAirlineCallsign(icaoCode).subscribe({
       next: (response: any) => {
         this.fs.airline = response.airline
-        //TODO [MP] send fs edit
+        this.mpService.processMessage("edit_flightstrip", this.fs);
       },
       error: (err) => {
       }
@@ -113,6 +112,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.fs.triangleIconState = state;
     this.fsService.changedTriangleState.next();
+    this.mpService.processMessage("edit_flightstrip", this.fs);
   }
 
   cycleCommunicationState() {
@@ -126,6 +126,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
     this.fs.communicationIconState = state;
     this.fsService.changedCommunicationState.next();
     //TODO [MP] send fs edit
+    this.mpService.processMessage("edit_flightstrip", this.fs);
   }
 
   onSquawkChange() {
@@ -135,16 +136,47 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       this.fs.emergencyActive = false
     }
-    //TODO [MP] send fs edit
     this.onInputFocusLost()
   }
 
+
   onInputFocus() {
     this.fsService.isInputFocused = true;
+    this.fsModelBackup = JSON.parse(JSON.stringify(this.fsModelBackup));
   }
 
   onInputFocusLost() {
     this.fsService.isInputFocused = false;
+
+    let changeCount = 0;
+    changeCount += this.fsModelBackup.type != this.fs.type ? 1 : 0;
+    changeCount += this.fsModelBackup.triangleIconState != this.fs.triangleIconState ? 1 : 0;
+    changeCount += this.fsModelBackup.communicationIconState != this.fs.communicationIconState ? 1 : 0;
+    changeCount += this.fsModelBackup.callsign != this.fs.callsign ? 1 : 0;
+    changeCount += this.fsModelBackup.departureIcao != this.fs.departureIcao ? 1 : 0;
+    changeCount += this.fsModelBackup.arrivalIcao != this.fs.arrivalIcao ? 1 : 0;
+    changeCount += this.fsModelBackup.aircraft != this.fs.aircraft ? 1 : 0;
+    changeCount += this.fsModelBackup.status != this.fs.status ? 1 : 0;
+    changeCount += this.fsModelBackup.statusText != this.fs.statusText ? 1 : 0;
+    changeCount += this.fsModelBackup.wakeCategory != this.fs.wakeCategory ? 1 : 0;
+    changeCount += this.fsModelBackup.flightrule != this.fs.flightrule ? 1 : 0;
+    changeCount += this.fsModelBackup.altitude != this.fs.altitude ? 1 : 0;
+    changeCount += this.fsModelBackup.gate != this.fs.gate ? 1 : 0;
+    changeCount += this.fsModelBackup.info != this.fs.info ? 1 : 0;
+    changeCount += this.fsModelBackup.airline != this.fs.airline ? 1 : 0;
+    changeCount += this.fsModelBackup.squawk != this.fs.squawk ? 1 : 0;
+    changeCount += this.fsModelBackup.sidStar != this.fs.sidStar ? 1 : 0;
+    changeCount += this.fsModelBackup.freeText != this.fs.freeText ? 1 : 0;
+    changeCount += this.fsModelBackup.route != this.fs.route ? 1 : 0;
+    changeCount += this.fsModelBackup.emergencyActive != this.fs.emergencyActive ? 1 : 0;
+    if (changeCount > 0) {
+      console.log("Old: ")
+      console.log(this.fsModelBackup);
+      console.log("new:");
+      console.log(this.fs);
+      //TODO [MP] fs edit
+      this.mpService.processMessage("edit_flightstrip", this.fs);
+    }
   }
 
   ngAfterViewInit(): void {

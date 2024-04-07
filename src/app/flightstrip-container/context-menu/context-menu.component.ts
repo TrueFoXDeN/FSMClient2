@@ -3,6 +3,7 @@ import {Flightstrip, StripType} from "../flightstrip.model";
 import {FlightstripService} from "../flightstrip.service";
 import {DataService} from "../../services/data.service";
 import {ProximityService} from "../../overlays/proximity-settings/proximity.service";
+import {MultiplayerSendService} from "../../services/multiplayer-send.service";
 
 @Component({
   selector: 'app-context-menu',
@@ -19,20 +20,22 @@ export class ContextMenuComponent implements OnInit {
   option1: StripType = StripType.INBOUND
   option2: StripType = StripType.INBOUND
 
-  constructor(private dataService: DataService, private proximityService: ProximityService, private fsService: FlightstripService) {
+  constructor(private dataService: DataService, private proximityService: ProximityService, private fsService: FlightstripService, private mpService: MultiplayerSendService) {
 
   }
 
   finishStrip() {
     this.proximityService.finishedAircrafts.push(this.fs.callsign)
     let index = this.dataService.flightstripData[this.fs.columnId].flightstrips.indexOf(this.fs)
+    this.mpService.processMessage("delete_flightstrip", {fsId: this.fs.id, colId: this.fs.columnId});
     this.dataService.flightstripData[this.fs.columnId].flightstrips.splice(index, 1)
   }
 
   deleteStrip() {
     let index = this.dataService.flightstripData[this.fs.columnId].flightstrips.indexOf(this.fs)
+    this.mpService.processMessage("delete_flightstrip", {fsId: this.fs.id, colId: this.fs.columnId});
     this.dataService.flightstripData[this.fs.columnId].flightstrips.splice(index, 1);
-    //TODO mp send strip delete
+
   }
 
   archiveStrip() {
@@ -86,10 +89,10 @@ export class ContextMenuComponent implements OnInit {
 
   setCompactText() {
 
-    if(this.fs.compactMode){
+    if (this.fs.compactMode) {
       this.compactIcon = "maximize-2"
       this.compactText = "Expand"
-    }else{
+    } else {
       this.compactIcon = "minimize-2"
       this.compactText = "Compact"
     }

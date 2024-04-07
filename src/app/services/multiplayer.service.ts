@@ -37,8 +37,8 @@ export class MultiplayerService {
 
     this.socket.onmessage = (event) => {
       this.multiplayerConnectionService.message.next(event.data)
-      console.log('on message')
-      console.log(event.data)
+      // console.log('on message')
+      // console.log(event.data)
     };
 
     this.socket.onclose = (event) => {
@@ -62,9 +62,10 @@ export class MultiplayerService {
   }
 
   sendMessage(cmd: string, args: any[]): void {
+    console.log("Sending: ");
     console.log(cmd, args)
     let msg = {cmd: cmd, args: args}
-    console.log(JSON.stringify(msg))
+    // console.log(JSON.stringify(msg))
     this.socket.send(JSON.stringify(msg));
   }
 }

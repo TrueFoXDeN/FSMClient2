@@ -40,7 +40,7 @@ export class MultiplayerReceiveService {
     this.commands.set('move_flightstrip', moveFlightstripCommand)
     this.multiplayerConnectionService.message.subscribe({
         next: (data) => {
-          console.log('received')
+          console.log('received:')
           this.processMessage(data)
         }
       }

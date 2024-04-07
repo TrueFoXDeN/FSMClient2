@@ -6,6 +6,7 @@ import {environment} from "../../environments/environment";
 import {FlightstripService} from "./flightstrip.service";
 import {DataService} from "../services/data.service";
 import {ShortcutService} from "../services/shortcut.service";
+import {MultiplayerSendService} from "../services/multiplayer-send.service";
 
 @Component({
   selector: 'app-flightstrip-container',
@@ -21,7 +22,7 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
   actionNames: Map<string, Function> = new Map();
 
   constructor(private networkService: NetworkService, private fsService: FlightstripService, private dataService: DataService,
-              private shortcutService: ShortcutService) {
+              private shortcutService: ShortcutService, private mpService: MultiplayerSendService) {
     this.subscriptionHandles.push(
       this.networkService.networkEmitter.subscribe(() => {
         this.onCheckCallsignTrigger()
@@ -139,8 +140,10 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
     if (!this.stripModel.deleteActive) {
       this.stripModel.deleteActive = true
     } else {
-      let index = this.dataService.flightstripData[this.stripModel.columnId].flightstrips.indexOf(this.stripModel)
-      this.dataService.flightstripData[this.stripModel.columnId].flightstrips.splice(index, 1)
+      let index = this.dataService.flightstripData[this.stripModel.columnId].flightstrips.indexOf(this.stripModel);
+      this.mpService.processMessage("delete_flightstrip", {fsId: this.stripModel.id, colId: this.stripModel.columnId});
+      this.dataService.flightstripData[this.stripModel.columnId].flightstrips.splice(index, 1);
+
     }
   }
 

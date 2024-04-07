@@ -10,7 +10,7 @@ export class CreateFlightstripSendCommand implements CommandSend {
   }
 
   execute(data: any): any[] {
-    return []
+    return [data.colId, data.fsId, data.type]
   }
 
 }
