@@ -36,15 +36,18 @@ export class ColumnComponent implements OnInit {
 
 
   addInboundFlightstrip() {
-    this.fsService.createFlightstrip(this.uuid, '', StripType.INBOUND)
+    this.fsService.createFlightstrip(this.uuid, '', StripType.INBOUND);
+    //TODO mp send create_fs(Inbound)
   }
 
   addOutboundFlightstrip() {
-    this.fsService.createFlightstrip(this.uuid, '', StripType.OUTBOUND)
+    this.fsService.createFlightstrip(this.uuid, '', StripType.OUTBOUND);
+    //TODO mp send create_fs(Outbound)
   }
 
   addVfrFlightstrip() {
-    this.fsService.createFlightstrip(this.uuid, '', StripType.VFR)
+    this.fsService.createFlightstrip(this.uuid, '', StripType.VFR);
+    //TODO mp send create_fs(VFR)
   }
 
 
@@ -60,6 +63,7 @@ export class ColumnComponent implements OnInit {
       );
     }
     this.fsService.changedStripPos.next({id: event.item.data?.id, newPosistion: event.currentIndex})
+    //TODO mp send move strip
   }
 
   onKeyPress(event: any) {

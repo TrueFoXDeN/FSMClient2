@@ -1,27 +1,19 @@
+import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {
-  AfterViewInit,
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  ViewChild
-} from '@angular/core';
-import {
+  CommunicationIconState,
   Flightstrip,
-  TriangleIconState,
   StatusArrival,
   StatusDeparture,
   StatusVfr,
   StripType,
-  CommunicationIconState
+  TriangleIconState
 } from '../flightstrip.model';
 import {FlightstripService} from "../flightstrip.service";
 import {FlightStripInput} from "../flightstrip-directives/flightStripInput.directive";
 import {StyleChangerService} from "../../services/style-changer.service";
 import {MatMenuTrigger} from "@angular/material/menu";
 import {DataService} from "../../services/data.service";
+import {Util} from "../../util";
 
 
 @Component({
@@ -43,9 +35,10 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   highlightActive = false;
   triangleIconStates = TriangleIconState
   communicationIconStates = CommunicationIconState
+  fsModelBackup: Flightstrip;
 
   constructor(private dataService: DataService, private fsService: FlightstripService, private styleChanger: StyleChangerService,
-  ) {
+              private util: Util) {
     this.subscriptionHandles.push(this.fsService.changedType.subscribe((data) => {
       if (data.id == this.fs.id) {
         this.fs.type = data.type;
@@ -63,6 +56,9 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
         }, 8000);
       }
     }));
+    console.log(this.fs);
+    this.fsModelBackup = new Flightstrip(this.util.generateUUID(), StripType.INBOUND, this.util.generateUUID(), 0);
+    console.log(this.fsModelBackup);
   }
 
   ngOnDestroy(): void {
@@ -88,6 +84,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.checkStatus()
+    this.fsModelBackup = JSON.parse(JSON.stringify(this.fsModelBackup));
   }
 
   changeToCompactMode() {
@@ -95,13 +92,14 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getAirlineName(icaoCode: string) {
-      this.fsService.getAirlineCallsign(icaoCode).subscribe({
-        next: (response: any) => {
-          this.fs.airline = response.airline
-        },
-        error: (err) => {
-        }
-      });
+    this.fsService.getAirlineCallsign(icaoCode).subscribe({
+      next: (response: any) => {
+        this.fs.airline = response.airline
+        //TODO [MP] send fs edit
+      },
+      error: (err) => {
+      }
+    });
   }
 
 
@@ -127,15 +125,17 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.fs.communicationIconState = state;
     this.fsService.changedCommunicationState.next();
+    //TODO [MP] send fs edit
   }
 
   onSquawkChange() {
     if (this.fs.squawk == "7500" || this.fs.squawk == "7600" || this.fs.squawk == "7700") {
       this.fs.triangleIconState = 4
       this.fs.emergencyActive = true
-    }else{
+    } else {
       this.fs.emergencyActive = false
     }
+    //TODO [MP] send fs edit
     this.onInputFocusLost()
   }
 

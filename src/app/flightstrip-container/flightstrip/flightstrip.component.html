@@ -172,7 +172,7 @@
         <input
           type="text"
           placeholder="Status"
-          value="{{fs.statusText}}"
+          [(ngModel)]="fs.statusText"
           flightStripInput
           class="status"
           (focusin)="onInputFocus()"

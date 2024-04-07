@@ -37,7 +37,7 @@ import {
   Maximize2,
   Minimize2,
   ChevronsLeft,
-  RotateCcw
+  RotateCcw,
 } from 'angular-feather/icons';
 
 // Select some icons (use an object, not an array)

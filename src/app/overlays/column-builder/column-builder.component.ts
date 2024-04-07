@@ -12,6 +12,7 @@ import {
 import {Util} from "../../util";
 import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from "@angular/material/dialog";
 import {DataService} from "../../services/data.service";
+import {MultiplayerSendService} from "../../services/multiplayer-send.service";
 
 
 interface Safe extends GridsterConfig {
@@ -40,7 +41,7 @@ export class ColumnBuilderComponent implements OnInit {
   currentData: any
 
   constructor(private util: Util, public dialogRef: MatDialogRef<ColumnBuilderComponent>,
-              @Inject(MAT_DIALOG_DATA) data: any, private dataService: DataService) {
+              @Inject(MAT_DIALOG_DATA) data: any, private dataService: DataService, private mpSendService : MultiplayerSendService) {
     this.currentData = data
     this.columnStructureBackup = JSON.parse(JSON.stringify(data.columnData))
     this.dashboard = data.columnData;
@@ -211,7 +212,8 @@ export class ColumnBuilderComponent implements OnInit {
 
       if (colOccurrence.occurrence === 2) {
         console.log("Added Column locally");
-        //TODO Send "add_column command
+        this.mpSendService.processMessage("create_column", colOccurrence)
+
       } else if (colOccurrence.occurrence === 3) {
         let indexofDeletedCol = -1;
         for (let i = 0; i < columnBuilderDataAtSave.length; i++) {
@@ -251,7 +253,7 @@ export class ColumnBuilderComponent implements OnInit {
         });
       } else if (colOccurrence.occurrence === 5) {
         console.log("Column deleted locally");
-        //TODO send remove_column command
+        this.mpSendService.processMessage("delete_column", colOccurrence);
       }
     }
     return columnBuilderDataAtSave;

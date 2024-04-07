@@ -31,7 +31,8 @@ export class ContextMenuComponent implements OnInit {
 
   deleteStrip() {
     let index = this.dataService.flightstripData[this.fs.columnId].flightstrips.indexOf(this.fs)
-    this.dataService.flightstripData[this.fs.columnId].flightstrips.splice(index, 1)
+    this.dataService.flightstripData[this.fs.columnId].flightstrips.splice(index, 1);
+    //TODO mp send strip delete
   }
 
   archiveStrip() {
@@ -45,13 +46,15 @@ export class ContextMenuComponent implements OnInit {
         let index: number = 0
         index = this.dataService.flightstripData[this.fs.columnId].flightstrips.indexOf(this.fs)
         this.dataService.flightstripData[this.fs.columnId].flightstrips[index].type = this.option1
-        this.fsService.changedType.next({type: this.option1, id: this.fs.id})
+        this.fsService.changedType.next({type: this.option1, id: this.fs.id});
+        //TODO [MP] Check if extra command necessary
         break;
       case 2:
         let index2: number = 0;
         index2 = this.dataService.flightstripData[this.fs.columnId].flightstrips.indexOf(this.fs)
         this.dataService.flightstripData[this.fs.columnId].flightstrips[index2].type = this.option2
-        this.fsService.changedType.next({type: this.option2, id: this.fs.id})
+        this.fsService.changedType.next({type: this.option2, id: this.fs.id});
+        //TODO [MP] Check if extra command necessary
         break;
     }
   }
