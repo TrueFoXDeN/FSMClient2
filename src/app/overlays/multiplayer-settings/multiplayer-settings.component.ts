@@ -12,7 +12,7 @@ import {DialogRef} from "@angular/cdk/dialog";
 export class MultiplayerSettingsComponent {
   createdRoomId: string = "";
   enteredRoomId: string = "abcde";
-  enteredName: string = "chris";
+  enteredName: string = "laurenz";
   createPassword: string = "";
   joinPassword: string = "test";
   isConnected: boolean = false;

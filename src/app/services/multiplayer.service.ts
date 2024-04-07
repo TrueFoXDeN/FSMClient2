@@ -1,19 +1,7 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {SnackbarMessageService} from "./snackbar-message.service";
-import {CookieService} from "ngx-cookie-service";
-import {CreateFlightstripReceiveCommand} from "./commands-receive/create-flightstrip-receive-command";
-import {TokenReceiveCommand} from "./commands-receive/token-receive-command";
-import {CommandReceive} from "./commands-receive/command-receive";
-import {CreateColumnReceiveCommand} from "./commands-receive/create-column-receive-command";
-import {DeleteColumnReceiveCommand} from "./commands-receive/delete-column-receive-command";
-import {DeleteFlightstripReceiveCommand} from "./commands-receive/delete-flightstrip-receive-command";
-import {EditFlightstripReceiveCommand} from "./commands-receive/edit-flightstrip-receive-command";
-import {GetClientsReceiveCommand} from "./commands-receive/get-clients-receive-command";
-import {GetDataReceiveCommand} from "./commands-receive/get-data-receive-command";
-import {MoveFlightstripReceiveCommand} from "./commands-receive/move-flightstrip-receive-command";
-import {MultiplayerReceiveService} from "./multiplayer-receive.service";
+import {MultiplayerConnectionService} from "./multiplayer-connection.service";
 
 
 @Injectable({
@@ -31,7 +19,8 @@ export class MultiplayerService {
   roomId: string = ''
 
 
-  constructor(private http: HttpClient, private multiplayerReceiveService: MultiplayerReceiveService) {
+  constructor(private http: HttpClient,
+              private multiplayerConnectionService: MultiplayerConnectionService) {
 
   }
 
@@ -43,15 +32,18 @@ export class MultiplayerService {
       console.log('WebSocket connection established.');
       this.sendMessage('connect', [roomId, password, name])
       this.roomId = roomId
+      this.isConnected = true
     };
 
     this.socket.onmessage = (event) => {
-      this.multiplayerReceiveService.processMessage(event.data)
+      this.multiplayerConnectionService.message.next(event.data)
+      console.log('on message')
       console.log(event.data)
     };
 
     this.socket.onclose = (event) => {
       console.log('WebSocket connection closed:', event);
+      this.isConnected = false
     };
 
     this.socket.onerror = (error) => {

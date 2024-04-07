@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 import {SnackbarMessageService} from "./snackbar-message.service";
 import {CookieService} from "ngx-cookie-service";
@@ -12,6 +12,7 @@ import {GetClientsReceiveCommand} from "./commands-receive/get-clients-receive-c
 import {GetDataReceiveCommand} from "./commands-receive/get-data-receive-command";
 import {MoveFlightstripReceiveCommand} from "./commands-receive/move-flightstrip-receive-command";
 import {CommandReceive} from "./commands-receive/command-receive";
+import {MultiplayerConnectionService} from "./multiplayer-connection.service";
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,7 @@ export class MultiplayerReceiveService {
               private deleteFlightStripCommand: DeleteFlightstripReceiveCommand, private editFlightStripCommand: EditFlightstripReceiveCommand,
               private getClientsCommand: GetClientsReceiveCommand,
               private getDataCommand: GetDataReceiveCommand, private moveFlightstripCommand: MoveFlightstripReceiveCommand,
+              private multiplayerConnectionService: MultiplayerConnectionService
   ) {
     this.commands.set('token', tokenCommand)
     this.commands.set('create_column', createColumnCommand)
@@ -36,6 +38,14 @@ export class MultiplayerReceiveService {
     this.commands.set('get_clients', getClientsCommand)
     this.commands.set('get_data', getClientsCommand)
     this.commands.set('move_flightstrip', moveFlightstripCommand)
+    this.multiplayerConnectionService.message.subscribe({
+        next: (data) => {
+          console.log('received')
+          this.processMessage(data)
+        }
+      }
+    )
+
   }
 
   processMessage(data: any) {
