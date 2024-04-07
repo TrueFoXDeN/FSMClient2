@@ -39,9 +39,10 @@ export class EditFlightstripReceiveCommand implements CommandReceive {
     fs.freeText = fsData.freeText || "";
     fs.route = fsData.route || "";
     fs.triangleIconState = fsData.triangleIconState || 0;
-    fs.communicationIconState = fsData.communicationIconState|| 0;
+    fs.communicationIconState = fsData.communicationIconState || 0;
     fs.statusText = fsData.statusText || "";
     fs.status = fsData.status || 0;
+    fs.emergencyActive = fsData.emergencyActive || false;
 
   }
 
