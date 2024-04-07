@@ -1,4 +1,4 @@
-import {Command} from "./command";
+import {CommandReceive} from "./command-receive";
 import {Injectable} from "@angular/core";
 import {FlightstripService} from "../../flightstrip-container/flightstrip.service";
 import {DataService} from "../data.service";
@@ -6,7 +6,7 @@ import {DataService} from "../data.service";
 @Injectable({
   providedIn: 'root'
 })
-export class DeleteFlightstripCommand implements Command {
+export class DeleteFlightstripReceiveCommand implements CommandReceive {
   constructor(private fsService: FlightstripService, private dataService: DataService) {
   }
 

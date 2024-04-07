@@ -1,4 +1,4 @@
-import {Command} from "./command";
+import {CommandSend} from "./command-send";
 import {Injectable} from "@angular/core";
 import {DataService} from "../data.service";
 import {ColumnBuilderService} from "../column-builder.service";
@@ -6,7 +6,7 @@ import {ColumnBuilderService} from "../column-builder.service";
 @Injectable({
   providedIn: 'root'
 })
-export class CreateColumnCommand implements Command {
+export class CreateColumnSendCommand implements CommandSend {
   constructor(private dataService: DataService, private columnBuilderService: ColumnBuilderService) {
   }
 

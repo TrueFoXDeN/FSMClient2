@@ -1,11 +1,11 @@
-import {Command} from "./command";
+import {CommandReceive} from "./command-receive";
 import {Injectable} from "@angular/core";
 import {DataService} from "../data.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class DeleteColumnCommand implements Command {
+export class DeleteColumnReceiveCommand implements CommandReceive {
   constructor(private dataService: DataService) {
   }
 

@@ -3,17 +3,17 @@ import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {SnackbarMessageService} from "./snackbar-message.service";
 import {CookieService} from "ngx-cookie-service";
-import {CreateFlightstripCommand} from "./commands/create-flightstrip-command";
-import {TokenCommand} from "./commands/token-command";
-import {Command} from "./commands/command";
-import {CreateColumnCommand} from "./commands/create-column-command";
-import {DeleteColumnCommand} from "./commands/delete-column-command";
-import {DeleteFlightstripCommand} from "./commands/delete-flightstrip-command";
-import {EditFlightstripCommand} from "./commands/edit-flightstrip-command";
-import {EditStatusCommand} from "./commands/edit-status-command";
-import {GetClientsCommand} from "./commands/get-clients-command";
-import {GetDataCommand} from "./commands/get-data-command";
-import {MoveFlightstripCommand} from "./commands/move-flightstrip-command";
+import {CreateFlightstripReceiveCommand} from "./commands-receive/create-flightstrip-receive-command";
+import {TokenReceiveCommand} from "./commands-receive/token-receive-command";
+import {CommandReceive} from "./commands-receive/command-receive";
+import {CreateColumnReceiveCommand} from "./commands-receive/create-column-receive-command";
+import {DeleteColumnReceiveCommand} from "./commands-receive/delete-column-receive-command";
+import {DeleteFlightstripReceiveCommand} from "./commands-receive/delete-flightstrip-receive-command";
+import {EditFlightstripReceiveCommand} from "./commands-receive/edit-flightstrip-receive-command";
+import {GetClientsReceiveCommand} from "./commands-receive/get-clients-receive-command";
+import {GetDataReceiveCommand} from "./commands-receive/get-data-receive-command";
+import {MoveFlightstripReceiveCommand} from "./commands-receive/move-flightstrip-receive-command";
+import {MultiplayerReceiveService} from "./multiplayer-receive.service";
 
 
 @Injectable({
@@ -29,57 +29,24 @@ export class MultiplayerService {
   multiplayerUrl = environment.multiplayerURL
   url = environment.websocketURL
 
-  commands = new Map<string, Command>()
 
-  constructor(private http: HttpClient,
-              private snackService: SnackbarMessageService, private cookieService: CookieService,
-              private tokenCommand: TokenCommand, private createColumnCommand: CreateColumnCommand,
-              private createFlightstripCommand: CreateFlightstripCommand, private deleteColumnCommand: DeleteColumnCommand,
-              private deleteFlightStripCommand: DeleteFlightstripCommand, private editFlightStripCommand: EditFlightstripCommand,
-              private editStatusCommand: EditStatusCommand, private getClientsCommand: GetClientsCommand,
-              private getDataCommand: GetDataCommand, private moveFlightstripCommand: MoveFlightstripCommand,
-  ) {
-
-    this.commands.set('token', tokenCommand)
-    this.commands.set('create_column', createColumnCommand)
-    this.commands.set('create_flightstrip', createFlightstripCommand)
-    this.commands.set('delete_column', deleteColumnCommand)
-    this.commands.set('delete_flightstrip', deleteFlightStripCommand)
-    this.commands.set('edit_flightstrip', editFlightStripCommand)
-    this.commands.set('edit_status', editStatusCommand)
-    this.commands.set('get_clients', getClientsCommand)
-    this.commands.set('get_data', getClientsCommand)
-    this.commands.set('move_flightstrip', moveFlightstripCommand)
-  }
-
-
-  processMessage(data: any) {
-
-    data = JSON.parse(data)
-    console.log(data)
-
-    let cmd = this.commands.get(data.cmd)
-
-    if (cmd) {
-      cmd.execute(data.args)
-    } else {
-      console.log(data.cmd + ' is not implemented')
-    }
-
+  constructor(private http: HttpClient, private multiplayerReceiveService: MultiplayerReceiveService) {
 
   }
+
 
   connect(roomId: string, password: string, name: string) {
     this.socket = new WebSocket(this.url);
 
     this.socket.onopen = () => {
       console.log('WebSocket connection established.');
-      this.sendMessage('connect', [roomId, password, name])
+      this.sendMessage('connect', [roomId, password, name]) //TODO auslagern in receive
     };
 
     this.socket.onmessage = (event) => {
-      // console.log(event.data)
-      this.processMessage(event.data)
+      this.multiplayerReceiveService.processMessage(event.data)
+      console.log(event.data)
+      // this.processMessage(event.data) //TODO auslagern in receive
     };
 
     this.socket.onclose = (event) => {

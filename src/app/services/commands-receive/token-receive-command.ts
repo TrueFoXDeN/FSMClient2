@@ -1,4 +1,4 @@
-import {Command} from "./command";
+import {CommandReceive} from "./command-receive";
 import {SnackbarMessageService} from "../snackbar-message.service";
 import {CookieService} from "ngx-cookie-service";
 import {Injectable} from "@angular/core";
@@ -10,7 +10,7 @@ import {FlightstripService} from "../../flightstrip-container/flightstrip.servic
 @Injectable({
   providedIn: 'root'
 })
-export class TokenCommand implements Command {
+export class TokenReceiveCommand implements CommandReceive {
   constructor(private snackService: SnackbarMessageService, private cookieService: CookieService, private dataService: DataService, private columnBuilderService: ColumnBuilderService,
               private util: Util, private fsService: FlightstripService) {
   }

@@ -1,3 +1,3 @@
-export interface Command {
+export interface CommandReceive {
   execute(args: string[]): void
 }

@@ -1,9 +1,9 @@
-import {Command} from "./command";
+import {CommandReceive} from "./command-receive";
 import {Injectable} from "@angular/core";
 @Injectable({
   providedIn: 'root'
 })
-export class GetClientsCommand implements Command {
+export class GetClientsReceiveCommand implements CommandReceive {
   execute(args: string[]): void {
     console.log('get clients')
   }

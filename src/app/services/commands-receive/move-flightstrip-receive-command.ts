@@ -1,4 +1,4 @@
-import {Command} from "./command";
+import {CommandReceive} from "./command-receive";
 import {Injectable} from "@angular/core";
 import {FlightstripService} from "../../flightstrip-container/flightstrip.service";
 import {DataService} from "../data.service";
@@ -8,7 +8,7 @@ import {moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 @Injectable({
   providedIn: 'root'
 })
-export class MoveFlightstripCommand implements Command {
+export class MoveFlightstripReceiveCommand implements CommandReceive {
   constructor(private fsService: FlightstripService, private dataService: DataService) {
   }
 
