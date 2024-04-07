@@ -12,6 +12,7 @@ import {Util} from "./util";
 import {SearchcallsignService} from "./services/searchcallsign.service";
 import {StyleChangerService} from "./services/style-changer.service";
 import {ShortcutService} from "./services/shortcut.service";
+import {MultiplayerReceiveService} from "./services/multiplayer-receive.service";
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,8 @@ export class AppComponent implements OnInit, OnDestroy {
               private messageService: SnackbarMessageService, private titleService: Title,
               public dialog: MatDialog, private loggingService: LoggingService, private util: Util,
               private searchcallsignService: SearchcallsignService, private styleChanger: StyleChangerService,
-              private shortcutService: ShortcutService) {
+              private shortcutService: ShortcutService,
+              private multiplayerReceiveService: MultiplayerReceiveService) {
 
     this.titleService.setTitle(this.title + " v" + this.version);
     this.actionsmap.set("openSearchCallsign", () => this.searchcallsignService.openSearchCallsign())
