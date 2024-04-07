@@ -11,8 +11,7 @@ export class CreateColumnSendCommand implements CommandSend {
   }
 
   execute(data: any): any[] {
-
-    return []
+    return [data.id, data.name];
   }
 
 }

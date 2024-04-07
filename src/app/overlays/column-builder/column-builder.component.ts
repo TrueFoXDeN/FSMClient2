@@ -211,9 +211,14 @@ export class ColumnBuilderComponent implements OnInit {
       //Delete column from builderSave array which was deleted remotely
 
       if (colOccurrence.occurrence === 2) {
-        console.log("Added Column locally");
-        this.mpSendService.processMessage("create_column", colOccurrence)
-
+        let colName = ""
+        for (let i = 0; i < columnBuilderDataAtSave.length; i++) {
+          if (columnBuilderDataAtSave[i].uuid === colOccurrence.id) {
+            colName = columnBuilderDataAtSave[i].name;
+            break;
+          }
+        }
+        this.mpSendService.processMessage("create_column", {id: colOccurrence.id, name: colName})
       } else if (colOccurrence.occurrence === 3) {
         let indexofDeletedCol = -1;
         for (let i = 0; i < columnBuilderDataAtSave.length; i++) {
