@@ -123,18 +123,18 @@ export class FlightstripCompactComponent implements OnDestroy {
   }
 
   onMouseDown() {
-    this.isMouseDown = true
-    setTimeout(() => {
-      if (!this.isMouseMoving && this.isMouseDown) {
-        this.fsService.dragFlightstrip.next(true);
-      }
-    }, this.fsService.dragDelay - 10);
-    this.isMouseMoving = false;
+    // this.isMouseDown = true
+    // setTimeout(() => {
+    //   if (!this.isMouseMoving && this.isMouseDown) {
+    //     // this.fsService.dragFlightstrip.next(true);
+    //   }
+    // }, this.fsService.dragDelay - 10);
+    // this.isMouseMoving = false;
   }
 
   onMouseUp() {
-    this.isMouseDown = false;
-    this.fsService.dragFlightstrip.next(false);
+    // this.isMouseDown = false;
+    // this.fsService.dragFlightstrip.next(false);
   }
 
   onContextOpened() {
