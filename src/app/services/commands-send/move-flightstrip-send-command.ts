@@ -9,7 +9,20 @@ export class MoveFlightstripSendCommand implements CommandSend {
   }
 
   execute(data: any): any[] {
-    return []
+
+    return [
+      data.oldColumnId,
+      data.fsId,
+      data.newColumnId,
+      data.newPos
+    ]
   }
+
+  //
+  //    fsId: event.item.data.id,
+  //         oldColumnId: this.uuid,
+  //         newColumnId: this.uuid,
+  //         newPos: event.currentIndex,
+  //         oldPos: event.previousIndex
 
 }

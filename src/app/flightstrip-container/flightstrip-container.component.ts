@@ -90,7 +90,6 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
       state--;
     }
     this.stripModel.status = state;
-    //TODO [MP] send edit fs
     this.stripModel.statusText = object[state];
     this.mpService.processMessage("edit_flightstrip", this.stripModel)
   }
@@ -111,7 +110,6 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
             this.stripModel.flightrule = response.flightrule
             this.stripModel.route = response.route
             this.stripModel.infosPulled = true;
-            //TODO [MP] send edit fs
             this.mpService.processMessage("edit_flightstrip", this.stripModel)
           }
         },

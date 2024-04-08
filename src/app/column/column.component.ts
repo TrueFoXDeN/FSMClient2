@@ -6,6 +6,7 @@ import {FlightstripService} from "../flightstrip-container/flightstrip.service";
 import {FlightstripContainerComponent} from "../flightstrip-container/flightstrip-container.component";
 import {DataService} from "../services/data.service";
 import {ShortcutService} from "../services/shortcut.service";
+import {MultiplayerSendService} from "../services/multiplayer-send.service";
 
 @Component({
   selector: 'app-column',
@@ -23,7 +24,7 @@ export class ColumnComponent implements OnInit {
   isMouseDown: boolean = false;
   actionList: Map<string, Function> = new Map();
 
-  constructor(public dataService: DataService, private util: Util, private fsService: FlightstripService, private shortcutService: ShortcutService) {
+  constructor(public dataService: DataService, private util: Util, private fsService: FlightstripService, private shortcutService: ShortcutService, private mpService: MultiplayerSendService) {
 
   }
 
@@ -37,33 +38,44 @@ export class ColumnComponent implements OnInit {
 
   addInboundFlightstrip() {
     this.fsService.createFlightstrip(this.uuid, '', StripType.INBOUND);
-    //TODO mp send create_fs(Inbound)
   }
 
   addOutboundFlightstrip() {
     this.fsService.createFlightstrip(this.uuid, '', StripType.OUTBOUND);
-    //TODO mp send create_fs(Outbound)
   }
 
   addVfrFlightstrip() {
     this.fsService.createFlightstrip(this.uuid, '', StripType.VFR);
-    //TODO mp send create_fs(VFR)
   }
 
 
   drop(event: CdkDragDrop<[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      this.mpService.processMessage("move_flightstrip", {
+        fsId: event.item.data.id,
+        oldColumnId: this.uuid,
+        newColumnId: this.uuid,
+        newPos: event.currentIndex
+      });
     } else {
+      let prevColumnId = event.item.data.columnId;
+      let newColumnId = this.uuid;
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex,
       );
+
+      this.mpService.processMessage("move_flightstrip", {
+        fsId: event.item.data.id,
+        oldColumnId: prevColumnId,
+        newColumnId: newColumnId,
+        newPos: event.currentIndex
+      });
     }
     this.fsService.changedStripPos.next({id: event.item.data?.id, newPosistion: event.currentIndex})
-    //TODO mp send move strip
   }
 
   onKeyPress(event: any) {
