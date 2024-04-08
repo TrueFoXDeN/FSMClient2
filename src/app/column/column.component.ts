@@ -48,7 +48,7 @@ export class ColumnComponent implements OnInit {
     this.fsService.createFlightstrip(this.uuid, '', StripType.VFR);
   }
 
-
+//Emits when the user drops the item inside a container.
   drop(event: CdkDragDrop<[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -96,6 +96,7 @@ export class ColumnComponent implements OnInit {
     return this.fsService.dragDelay;
   }
 
+  //Emits when the user stops dragging an item in the container.
   dragEnded(fsId: string) {
     this.fsService.dragChange.next({id: fsId, dragEnabled: false})
   }
@@ -128,6 +129,7 @@ export class ColumnComponent implements OnInit {
     }
   }
 
+  //Emits when the user starts dragging the item.
   dragStarted(fsId: string) {
     for (let i = 0; i < this.dataService.flightstripData?.[this.uuid].flightstrips.length; i++) {
       if (this.dataService.flightstripData[this.uuid].flightstrips[i].id == fsId && this.dataService.flightstripData[this.uuid].flightstrips[i].compactMode) {
