@@ -67,10 +67,6 @@ export class FlightstripService {
       fs.callsign = callsign
     }
 
-    if(createdFromMultiplayer){
-      fs.compactMode = true;
-    }
-
     if (callsign.length >= 3) {
       this.getAirlineCallsign(callsign.substring(0, 3)).subscribe({
         next: (res: any) => {

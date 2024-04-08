@@ -23,12 +23,9 @@ export class ColumnComponent implements OnInit {
   isMouseMoving: boolean = false;
   isMouseDown: boolean = false;
   actionList: Map<string, Function> = new Map();
-  subscriptionHandles: any = [];
 
   constructor(public dataService: DataService, private util: Util, private fsService: FlightstripService, private shortcutService: ShortcutService, private mpService: MultiplayerSendService) {
-    this.subscriptionHandles.push(this.dataService.cancelFsDrag.subscribe((fsId) => {
-      this.onMouseUp(fsId);
-    }));
+
   }
 
   ngOnInit(): void {
@@ -99,14 +96,8 @@ export class ColumnComponent implements OnInit {
     return this.fsService.dragDelay;
   }
 
-  dragExited() {
-    console.log("dragExited");
-  }
-
   dragEnded(fsId: string) {
-    console.log("Drag ended");
     this.fsService.dragChange.next({id: fsId, dragEnabled: false})
-    this.dataService.draggedFsID = ""
   }
 
 
@@ -118,7 +109,6 @@ export class ColumnComponent implements OnInit {
           if (this.dataService.flightstripData[this.uuid].flightstrips[i].id == fsId && this.dataService.flightstripData[this.uuid].flightstrips[i].compactMode) {
 
             this.fsService.dragChange.next({id: fsId, dragEnabled: true})
-            this.dataService.draggedFsID = fsId;
             break;
           }
         }
@@ -128,10 +118,8 @@ export class ColumnComponent implements OnInit {
   }
 
   onMouseUp(fsId: string) {
-    console.log("On mouse up");
     this.isMouseDown = false;
     this.fsService.dragChange.next({id: fsId, dragEnabled: false})
-    this.dataService.draggedFsID = ""
   }
 
   onMouseMove(fsId: string) {
@@ -145,7 +133,6 @@ export class ColumnComponent implements OnInit {
       if (this.dataService.flightstripData[this.uuid].flightstrips[i].id == fsId && this.dataService.flightstripData[this.uuid].flightstrips[i].compactMode) {
 
         this.fsService.dragChange.next({id: fsId, dragEnabled: true})
-        this.dataService.draggedFsID = fsId;
         break;
       }
     }

@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {GridsterItem} from "angular-gridster2";
 import {Airport} from "../overlays/proximity-settings/proximity.model";
-import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -27,9 +26,6 @@ export class DataService {
     "columnStructure": [],
     "proximity": []
   }
-
-  public draggedFsID = "";
-  public cancelFsDrag : Subject<string> = new Subject<string>();
 
   public getStandardProfileID() {
     return "a6574bc2-4351-40be-b5ed-eda88ee2c06c"

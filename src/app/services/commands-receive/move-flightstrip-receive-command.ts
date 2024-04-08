@@ -22,10 +22,6 @@ export class MoveFlightstripReceiveCommand implements CommandReceive {
       console.log("Could not find flightstrip");
       return;
     }
-    if (fsID === this.dataService.draggedFsID) {
-      // this.dataService.cancelFsDrag.next(fsID);
-      console.log("Moving same fs");
-    }
     if (colId === newColId) {
       moveItemInArray(this.dataService.flightstripData[colId].flightstrips, fsIndex, newPos);
     } else {
@@ -37,7 +33,7 @@ export class MoveFlightstripReceiveCommand implements CommandReceive {
       );
     }
     this.fsService.changedStripPos.next({id: fsID, newPosistion: newPos});
-    // this.fsService.dragChange.next({id: fsID, dragEnabled: false})
+    this.fsService.dragChange.next({id: fsID, dragEnabled: false})
 
   }
 
