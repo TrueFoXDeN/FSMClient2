@@ -21,7 +21,7 @@ export class FlightstripService {
   dragChange = new Subject<{ id: string, dragEnabled: boolean }>()
   searchFlightstrip = new Subject<void>()
   baseURL = environment.baseURL
-  changedStripPos = new Subject<{ id: string, newPosistion: number }>()
+  changedStripPos = new Subject<{ id: string, newPosition: number }>()
 
   constructor(private dataService: DataService, private http: HttpClient, private util: Util, private mpService : MultiplayerSendService) {
   }

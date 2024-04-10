@@ -29,7 +29,7 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
       }),
       this.fsService.changedStripPos.subscribe((data) => {
         if (this.stripModel.id == data.id) {
-          this.stripModel.columnPosition = data.newPosistion
+          this.stripModel.columnPosition = data.newPosition
         }
       }),
       this.fsService.changedType.subscribe((data) => {

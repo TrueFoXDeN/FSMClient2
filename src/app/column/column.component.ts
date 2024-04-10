@@ -97,7 +97,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
         newPos: event.currentIndex
       });
     }
-    this.fsService.changedStripPos.next({id: event.item.data?.id, newPosistion: event.currentIndex})
+    this.fsService.changedStripPos.next({id: event.item.data?.id, newPosition: event.currentIndex})
   }
 
   onKeyPress(event: any) {
@@ -120,6 +120,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
   //Emits when the user stops dragging an item in the container.
   dragEnded(fsId: string) {
+    console.log("Drag ended");
     this.fsService.dragChange.next({id: fsId, dragEnabled: false})
   }
 
