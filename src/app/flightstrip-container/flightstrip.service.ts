@@ -18,7 +18,7 @@ export class FlightstripService {
   changedCommunicationState = new Subject<void>();
   dragFlightstrip = new Subject<boolean>()
   changedType = new Subject<{ type: StripType, id: string }>()
-  dragChange = new Subject<{ id: string, dragEnabled: boolean }>()
+  dragActive = new Subject<{ id: string, dragEnabled: boolean }>()
   searchFlightstrip = new Subject<void>()
   baseURL = environment.baseURL
   changedStripPos = new Subject<{ id: string, newPosition: number }>()

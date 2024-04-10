@@ -84,6 +84,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
     if (event.previousContainer === event.container) {
+      console.log(event.container.data);
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       this.mpService.processMessage("move_flightstrip", {
         fsId: event.item.data.id,
@@ -138,7 +139,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   dragEnded(fsId: string) {
     console.log("Drag ended");
     this.columnService.dragActive = false
-    this.fsService.dragChange.next({id: fsId, dragEnabled: false})
+    this.fsService.dragActive.next({id: fsId, dragEnabled: false})
   }
 
 
@@ -149,7 +150,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
         for (let i = 0; i < this.dataService.flightstripData?.[this.uuid].flightstrips.length; i++) {
           if (this.dataService.flightstripData[this.uuid].flightstrips[i].id == fsId && this.dataService.flightstripData[this.uuid].flightstrips[i].compactMode) {
 
-            this.fsService.dragChange.next({id: fsId, dragEnabled: true})
+            this.fsService.dragActive.next({id: fsId, dragEnabled: true})
             break;
           }
         }
@@ -160,7 +161,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onMouseUp(fsId: string) {
     this.isMouseDown = false;
-    this.fsService.dragChange.next({id: fsId, dragEnabled: false})
+    this.fsService.dragActive.next({id: fsId, dragEnabled: false})
   }
 
   onMouseMove(fsId: string) {
@@ -177,7 +178,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log(JSON.stringify(this.dataService.flightstripData));
     for (let i = 0; i < this.dataService.flightstripData?.[this.uuid].flightstrips.length; i++) {
       if (this.dataService.flightstripData[this.uuid].flightstrips[i].id == fsId && this.dataService.flightstripData[this.uuid].flightstrips[i].compactMode) {
-        this.fsService.dragChange.next({id: fsId, dragEnabled: true})
+        this.fsService.dragActive.next({id: fsId, dragEnabled: true})
         break;
       }
     }
