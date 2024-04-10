@@ -156,15 +156,19 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   dragStarted(fsId: string) {
     for (let i = 0; i < this.dataService.flightstripData?.[this.uuid].flightstrips.length; i++) {
       if (this.dataService.flightstripData[this.uuid].flightstrips[i].id == fsId && this.dataService.flightstripData[this.uuid].flightstrips[i].compactMode) {
-
         this.fsService.dragChange.next({id: fsId, dragEnabled: true})
         break;
       }
     }
   }
 
+  onDragEntered() {
+    console.log("Drag entered");
+    console.log(this.dataService.flightstripData);
+  }
+
   ngOnDestroy(): void {
-    for(let i of this.subscriptions){
+    for (let i of this.subscriptions) {
       i.unsubscribe()
     }
   }

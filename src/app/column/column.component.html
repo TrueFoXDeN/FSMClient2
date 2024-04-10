@@ -16,7 +16,7 @@
          [cdkDragStartDelay]="getDragDelay()" class="drag-item" (cdkDragEnded)="dragEnded(strip.id)"
          (mousedown)="onMouseDown(strip.id, $event)" (mouseup)="onMouseUp(strip.id)" (mousemove)="onMouseMove(strip.id)"
          (touchstart)="onMouseDown(strip.id, {button : 0})" (touchend)="onMouseUp(strip.id)"
-         (touchmove)="onMouseMove(strip.id)"
+         (touchmove)="onMouseMove(strip.id)" (cdkDragEntered)="onDragEntered()"
     >
       <app-flightstrip-container [stripModel]="strip" [colID]="uuid"></app-flightstrip-container>
     </div>
