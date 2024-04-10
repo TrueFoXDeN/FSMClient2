@@ -7,6 +7,7 @@ import {Subject} from "rxjs";
 export class ColumnService {
 
   changeDetection = new Subject<void>();
+  dragActive: boolean = false
 
   constructor(private dataService : DataService) {
   }

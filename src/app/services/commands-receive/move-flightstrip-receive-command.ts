@@ -13,7 +13,7 @@ export class MoveFlightstripReceiveCommand implements CommandReceive {
   }
 
   execute(args: string[]): void {
-    console.log(this.dataService.flightstripData)
+    console.log(JSON.stringify(this.dataService.flightstripData))
     let colId = args[0];
     let fsID = args[1];
     let newColId = args[2];
@@ -24,14 +24,19 @@ export class MoveFlightstripReceiveCommand implements CommandReceive {
       return;
     }
     if (colId === newColId) {
-      moveItemInArray(this.dataService.flightstripData[colId].flightstrips, fsIndex, newPos);
+      if (!this.columnService.dragActive) {
+        moveItemInArray(this.dataService.flightstripData[colId].flightstrips, fsIndex, newPos);
+      }
+
     } else {
+
       transferArrayItem(
         this.dataService.flightstripData[colId].flightstrips,
         this.dataService.flightstripData[newColId].flightstrips,
         fsIndex,
         newPos,
       );
+
     }
     this.fsService.changedStripPos.next({id: fsID, newPosition: newPos});
     this.fsService.dragChange.next({id: fsID, dragEnabled: false})
