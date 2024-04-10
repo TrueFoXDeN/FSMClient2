@@ -39,7 +39,7 @@ export class MoveFlightstripReceiveCommand implements CommandReceive {
 
     }
     this.fsService.changedStripPos.next({id: fsID, newPosition: newPos});
-    this.fsService.dragChange.next({id: fsID, dragEnabled: false})
+    this.fsService.dragActive.next({id: fsID, dragEnabled: false})
     this.columnService.changeDetection.next()
   }
 }

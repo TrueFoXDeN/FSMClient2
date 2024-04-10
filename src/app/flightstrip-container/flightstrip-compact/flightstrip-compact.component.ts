@@ -47,7 +47,7 @@ export class FlightstripCompactComponent implements OnDestroy {
       }
     }));
 
-    this.subscriptionHandles.push(this.fsService.dragChange.subscribe((data) => {
+    this.subscriptionHandles.push(this.fsService.dragActive.subscribe((data) => {
       if (data.id == this.fs.id) {
         this.inputsDisabled = data.dragEnabled;
        }
