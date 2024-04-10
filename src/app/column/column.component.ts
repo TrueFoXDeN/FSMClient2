@@ -82,6 +82,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log('drop event')
 
 
+
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       this.mpService.processMessage("move_flightstrip", {
@@ -93,19 +94,23 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       let prevColumnId = event.item.data.columnId;
       let newColumnId = this.uuid;
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
+      if(event.previousContainer.data[event.previousIndex]) {
+        transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex,
+        );
+        this.mpService.processMessage("move_flightstrip", {
+          fsId: event.item.data.id,
+          oldColumnId: prevColumnId,
+          newColumnId: newColumnId,
+          newPos: event.currentIndex
+        });
+      }
 
-      this.mpService.processMessage("move_flightstrip", {
-        fsId: event.item.data.id,
-        oldColumnId: prevColumnId,
-        newColumnId: newColumnId,
-        newPos: event.currentIndex
-      });
+
+
     }
     console.log(JSON.stringify(this.dataService.flightstripData));
     this.fsService.changedStripPos.next({id: event.item.data?.id, newPosition: event.currentIndex})
