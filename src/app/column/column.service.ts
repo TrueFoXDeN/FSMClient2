@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import {DataService} from "../services/data.service";
+import {Subject} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
 export class ColumnService {
+
+  changeDetection = new Subject<void>();
 
   constructor(private dataService : DataService) {
   }

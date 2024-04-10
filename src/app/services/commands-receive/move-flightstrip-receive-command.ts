@@ -2,14 +2,14 @@ import {CommandReceive} from "./command-receive";
 import {Injectable} from "@angular/core";
 import {FlightstripService} from "../../flightstrip-container/flightstrip.service";
 import {DataService} from "../data.service";
-import {Flightstrip} from "../../flightstrip-container/flightstrip.model";
 import {moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
+import {ColumnService} from "../../column/column.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoveFlightstripReceiveCommand implements CommandReceive {
-  constructor(private fsService: FlightstripService, private dataService: DataService) {
+  constructor(private fsService: FlightstripService, private dataService: DataService, private columnService: ColumnService) {
   }
 
   execute(args: string[]): void {
@@ -34,5 +34,6 @@ export class MoveFlightstripReceiveCommand implements CommandReceive {
     }
     this.fsService.changedStripPos.next({id: fsID, newPosistion: newPos});
     this.fsService.dragChange.next({id: fsID, dragEnabled: false})
+    this.columnService.changeDetection.next()
   }
 }

@@ -1,5 +1,15 @@
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input, OnDestroy,
+  OnInit,
+  Output,
+  QueryList,
+  ViewChild
+} from '@angular/core';
 import {Flightstrip, StripType} from '../flightstrip-container/flightstrip.model';
 import {Util} from "../util";
 import {FlightstripService} from "../flightstrip-container/flightstrip.service";
@@ -7,6 +17,8 @@ import {FlightstripContainerComponent} from "../flightstrip-container/flightstri
 import {DataService} from "../services/data.service";
 import {ShortcutService} from "../services/shortcut.service";
 import {MultiplayerSendService} from "../services/multiplayer-send.service";
+import {ColumnService} from "./column.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-column',
@@ -14,7 +26,7 @@ import {MultiplayerSendService} from "../services/multiplayer-send.service";
   styleUrls: ['./column.component.scss']
 })
 
-export class ColumnComponent implements OnInit {
+export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input("name") name = ""
   @Input("uuid") uuid = ""
   @Output() blurEmitter = new EventEmitter<void>();
@@ -23,8 +35,11 @@ export class ColumnComponent implements OnInit {
   isMouseMoving: boolean = false;
   isMouseDown: boolean = false;
   actionList: Map<string, Function> = new Map();
+  subscriptions: Subscription[] = [];
 
-  constructor(public dataService: DataService, private util: Util, private fsService: FlightstripService, private shortcutService: ShortcutService, private mpService: MultiplayerSendService) {
+  constructor(public dataService: DataService, private util: Util, private fsService: FlightstripService,
+              private shortcutService: ShortcutService, private mpService: MultiplayerSendService,
+              private changeDetector: ChangeDetectorRef, private columnService: ColumnService) {
 
   }
 
@@ -35,6 +50,13 @@ export class ColumnComponent implements OnInit {
     this.shortcutService.registerComponentActions(this.uuid, this.actionList)
   }
 
+  ngAfterViewInit() {
+    this.subscriptions.push(this.columnService.changeDetection.subscribe({
+      next: () => {
+        this.changeDetector.detectChanges()
+      }
+    }))
+  }
 
   addInboundFlightstrip() {
     this.fsService.createFlightstrip(this.uuid, '', StripType.INBOUND);
@@ -137,6 +159,12 @@ export class ColumnComponent implements OnInit {
         this.fsService.dragChange.next({id: fsId, dragEnabled: true})
         break;
       }
+    }
+  }
+
+  ngOnDestroy(): void {
+    for(let i of this.subscriptions){
+      i.unsubscribe()
     }
   }
 }
