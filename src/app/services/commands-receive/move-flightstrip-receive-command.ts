@@ -23,6 +23,7 @@ export class MoveFlightstripReceiveCommand implements CommandReceive {
       console.log("Could not find flightstrip");
       return;
     }
+
     if (colId === newColId) {
       if (!this.columnService.dragActive) {
         moveItemInArray(this.dataService.flightstripData[colId].flightstrips, fsIndex, newPos);
@@ -38,6 +39,8 @@ export class MoveFlightstripReceiveCommand implements CommandReceive {
       );
 
     }
+
+
     this.fsService.changedStripPos.next({id: fsID, newPosition: newPos});
     this.fsService.dragActive.next({id: fsID, dragEnabled: false})
     this.columnService.changeDetection.next()
