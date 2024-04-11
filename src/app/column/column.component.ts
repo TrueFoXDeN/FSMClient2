@@ -79,12 +79,8 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
 //Emits when the user drops the item inside a container.
   drop(event: CdkDragDrop<[]>) {
-    console.log('drop event')
-
-
-
     if (event.previousContainer === event.container) {
-      console.log(event.container.data);
+
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       this.mpService.processMessage("move_flightstrip", {
         fsId: event.item.data.id,
@@ -113,7 +109,6 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
     }
-    console.log(JSON.stringify(this.dataService.flightstripData));
     this.fsService.changedStripPos.next({id: event.item.data?.id, newPosition: event.currentIndex})
   }
 
@@ -137,7 +132,6 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
   //Emits when the user stops dragging an item in the container.
   dragEnded(fsId: string) {
-    console.log("Drag ended");
     this.columnService.dragActive = false
     this.fsService.dragActive.next({id: fsId, dragEnabled: false})
   }
@@ -173,9 +167,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   //Emits when the user starts dragging the item.
 
   dragStarted(fsId: string) {
-    console.log("Drag started");
     this.columnService.dragActive = true
-    console.log(JSON.stringify(this.dataService.flightstripData));
     for (let i = 0; i < this.dataService.flightstripData?.[this.uuid].flightstrips.length; i++) {
       if (this.dataService.flightstripData[this.uuid].flightstrips[i].id == fsId && this.dataService.flightstripData[this.uuid].flightstrips[i].compactMode) {
         this.fsService.dragActive.next({id: fsId, dragEnabled: true})
@@ -185,8 +177,6 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onDragEntered() {
-    console.log("Drag entered");
-    console.log(JSON.stringify(this.dataService.flightstripData));
   }
 
   ngOnDestroy(): void {

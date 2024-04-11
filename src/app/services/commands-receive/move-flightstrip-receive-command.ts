@@ -13,7 +13,6 @@ export class MoveFlightstripReceiveCommand implements CommandReceive {
   }
 
   execute(args: string[]): void {
-    console.log(JSON.stringify(this.dataService.flightstripData))
     let colId = args[0];
     let fsID = args[1];
     let newColId = args[2];
