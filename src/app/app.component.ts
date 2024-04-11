@@ -42,6 +42,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.loggingService.logActivity(this.dataService.uid)
   }
 
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    $event.returnValue = "Sie haben ungespeicherte Änderungen. Sind Sie sicher, dass Sie die Seite verlassen möchten?";
+  }
+
   ngOnDestroy(): void {
     this.shortcutService.removeComponentActions("app")
   }

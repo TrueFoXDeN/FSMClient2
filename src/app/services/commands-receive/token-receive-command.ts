@@ -39,7 +39,7 @@ export class TokenReceiveCommand implements CommandReceive {
         let fsID = fsIDs[k];
         let fsType: number = data[columnID][fsID]["type"]
         //this.fsService.createFlightstrip(columnID, "", fsType, fsID);
-        this.fsService.createFlightstripWithObject(columnID, fsID, data[columnID][fsID])
+        this.fsService.createFlightstripWithObject(columnID, fsID, data[columnID][fsID], true)
       }
     }
   }
