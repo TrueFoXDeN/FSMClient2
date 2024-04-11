@@ -42,6 +42,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.loggingService.logActivity(this.dataService.uid)
   }
 
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    $event.returnValue = "...";
+  }
+
   ngOnDestroy(): void {
     this.shortcutService.removeComponentActions("app")
   }

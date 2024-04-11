@@ -23,7 +23,7 @@ export class FlightstripService {
   baseURL = environment.baseURL
   changedStripPos = new Subject<{ id: string, newPosition: number }>()
 
-  constructor(private dataService: DataService, private http: HttpClient, private util: Util, private mpService : MultiplayerSendService) {
+  constructor(private dataService: DataService, private http: HttpClient, private util: Util, private mpService: MultiplayerSendService) {
   }
 
   findFlightStrip(callsign: string) {
@@ -67,7 +67,7 @@ export class FlightstripService {
       fs.callsign = callsign
     }
 
-    if(createdFromMultiplayer){
+    if (createdFromMultiplayer) {
       fs.compactMode = true;
     }
 
@@ -78,7 +78,7 @@ export class FlightstripService {
           fs.airline = res.airline
           this.dataService.flightstripData?.[column]?.['flightstrips'].push(fs);
           console.log({colId: column, type: type, fsId: fs.id})
-          if(!createdFromMultiplayer){
+          if (!createdFromMultiplayer) {
             this.mpService.processMessage("create_flightstrip", {colId: column, type: type, fsId: fs.id});
           }
 
@@ -89,7 +89,7 @@ export class FlightstripService {
     } else {
       this.dataService.flightstripData?.[column]?.['flightstrips'].push(fs);
       console.log({colId: column, type: type, fsId: fs.id})
-      if(!createdFromMultiplayer){
+      if (!createdFromMultiplayer) {
         this.mpService.processMessage("create_flightstrip", {colId: column, type: type, fsId: fs.id});
       }
 
@@ -97,31 +97,34 @@ export class FlightstripService {
 
   }
 
-  createFlightstripWithObject(column: string, uuid: string, flightstrip: any) {
+  createFlightstripWithObject(column: string, uuid: string, flightstrip: any, isCreatedByMultiplayer: boolean = false) {
     let nextPos = this.dataService.flightstripData?.[column]?.['flightstrips'].length
     let fs: Flightstrip;
     fs = new Flightstrip(uuid, flightstrip.type, column, nextPos);
     fs.callsign = flightstrip.callsign || "";
-    fs.departureIcao = flightstrip.departureIcao  || "";
-    fs.arrivalIcao = flightstrip.arrivalIcao  || "";
-    fs.aircraft = flightstrip.aircraft  || "";
+    fs.departureIcao = flightstrip.departureIcao || "";
+    fs.arrivalIcao = flightstrip.arrivalIcao || "";
+    fs.aircraft = flightstrip.aircraft || "";
 
-    fs.wakeCategory = flightstrip.wakeCategory  || "";
-    fs.flightrule = flightstrip.flightrule  || "";
-    fs.altitude = flightstrip.altitude  || "";
-    fs.gate = flightstrip.gate  || "";
-    fs.info = flightstrip.info  || "";
-    fs.airline = flightstrip.airline  || "";
-    fs.squawk = flightstrip.squawk  || "";
-    fs.runway = flightstrip.runway  || "";
-    fs.sidStar = flightstrip.sidStar  || "";
-    fs.freeText = flightstrip.freeText  || "";
-    fs.route = flightstrip.route  || "";
+    fs.wakeCategory = flightstrip.wakeCategory || "";
+    fs.flightrule = flightstrip.flightrule || "";
+    fs.altitude = flightstrip.altitude || "";
+    fs.gate = flightstrip.gate || "";
+    fs.info = flightstrip.info || "";
+    fs.airline = flightstrip.airline || "";
+    fs.squawk = flightstrip.squawk || "";
+    fs.runway = flightstrip.runway || "";
+    fs.sidStar = flightstrip.sidStar || "";
+    fs.freeText = flightstrip.freeText || "";
+    fs.route = flightstrip.route || "";
     fs.triangleIconState = flightstrip.triangleIconState || fs.triangleIconState;
     fs.communicationIconState = flightstrip.communicationIconState || fs.communicationIconState;
     fs.statusText = flightstrip.statusText || fs.statusText;
     // fs.status = this.getFsStatusText(flightstrip.statusText, flightstrip.type);
     fs.status = flightstrip.status || fs.status;
+    if (isCreatedByMultiplayer) {
+      fs.compactMode = true;
+    }
     this.dataService.flightstripData?.[column]?.['flightstrips'].push(fs);
   }
 
