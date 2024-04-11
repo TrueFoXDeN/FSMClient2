@@ -13,12 +13,14 @@ export class MoveFlightstripReceiveCommand implements CommandReceive {
   }
 
   execute(args: string[]): void {
+
     let colId = args[0];
     let fsID = args[1];
     let newColId = args[2];
     let newPos = Number(args[3]);
     let fsIndex = this.fsService.getIndexInColumnByID(colId, fsID);
     if (fsIndex === -1) {
+      //TODO resync data from server
       console.log("Could not find flightstrip");
       return;
     }
