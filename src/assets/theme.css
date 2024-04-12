@@ -169,8 +169,16 @@
   --proximity-button-add-background-hover: var(--app-success-tertiary);
 
   /*Multiplayer*/
-  --multiplayer-button-delete-outline: var(--app-error);
-  --multiplayer-button-delete-outline-hover: var(--app-error-dark);
+  --multiplayer-button-disconnect-outline: var(--app-error);
+  --multiplayer-button-disconnect-outline-hover: var(--app-error-dark);
+  --multiplayer-button-refresh-background: var(--app-accent-secondary);
+  --multiplayer-button-refresh-background-hover: var(--app-accent-secondary-hover);
+  --multiplayer-button-create-background: var(--app-primary);
+  --multiplayer-button-create-background-hover: var(--app-primary-hover);
+  --multiplayer-button-connect-background: var(--app-success-secondary);
+  --multiplayer-button-connect-background-hover: var(--app-success-tertiary);
+  --multiplayer-footer: var(--sidebar-background);
+
 
   /*Search Callsign*/
   --search-input: #2B2B2B;
