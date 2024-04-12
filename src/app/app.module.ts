@@ -104,6 +104,7 @@ import {
 import {ToastModule} from "primeng/toast";
 import {MessageService} from "primeng/api";
 import {CustomErrorHandler} from "./exceptions/CustomErrorHandler"
+import {ListboxModule} from "primeng/listbox";
 
 @NgModule({
   declarations: [
@@ -198,7 +199,8 @@ import {CustomErrorHandler} from "./exceptions/CustomErrorHandler"
         SettingsAtcComponent,
         IconButtonComponent,
         KeybindingsButtonComponent,
-        ToastModule
+        ToastModule,
+        ListboxModule
     ],
   providers: [
     CustomStyles,

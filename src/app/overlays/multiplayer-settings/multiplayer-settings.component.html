@@ -48,7 +48,7 @@
         <div class="clients-container">
           <div class="clients-header">Connected Users</div>
           <div class="clients-list">
-
+            <p-listbox [options]="clients" [(ngModel)]="selectedClient" [style]="{'width':'15rem'}" [listStyle]="{'max-height': '220px', 'overflow': 'auto'}"></p-listbox>
           </div>
         </div>
       </div>

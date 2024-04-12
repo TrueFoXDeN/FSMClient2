@@ -4,6 +4,7 @@ import {CookieService} from "ngx-cookie-service";
 import {SnackbarMessageService} from "../../services/snackbar-message.service";
 import {DialogRef} from "@angular/cdk/dialog";
 import {DataService} from "../../services/data.service";
+import {MultiplayerSendService} from "../../services/multiplayer-send.service";
 
 @Component({
   selector: 'app-multiplayer-settings',
@@ -20,14 +21,19 @@ export class MultiplayerSettingsComponent {
   isCreateDisabled: boolean = true;
   isJoinDisabled: boolean = false;
   isDisconnectDisabled: boolean = true;
+  clients :string[] = []
+  selectedClient: any;
 
   constructor(private multiplayerService: MultiplayerService, private cookieService: CookieService,
-              private snackService: SnackbarMessageService, private dialogRef: DialogRef, private dataService: DataService) {
+              private snackService: SnackbarMessageService, private dialogRef: DialogRef, private dataService: DataService,
+              private multiplayerSendService: MultiplayerSendService) {
 
     this.isConnected = multiplayerService.isConnected
     this.isCreateDisabled = multiplayerService.isCreateDisabled
     this.isJoinDisabled = multiplayerService.isJoinDisabled
     this.isDisconnectDisabled = multiplayerService.isDisconnectDisabled
+    this.clients = multiplayerService.clients
+    console.log(this.clients)
 
     if (this.multiplayerService.createdRoomId.length > 0) {
       this.createdRoomId = multiplayerService.createdRoomId
@@ -66,6 +72,10 @@ export class MultiplayerSettingsComponent {
       this.isCreateDisabled = false
       this.multiplayerService.isCreateDisabled = false
 
+    }
+
+    if(this.isConnected){
+      multiplayerSendService.processMessage('get_clients', [])
     }
   }
 

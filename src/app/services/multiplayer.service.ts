@@ -21,6 +21,7 @@ export class MultiplayerService {
   isCreateDisabled: boolean = true;
   isJoinDisabled: boolean = false;
   isDisconnectDisabled: boolean = true;
+  clients: string[] = [];
 
   constructor(private http: HttpClient,
               private multiplayerConnectionService: MultiplayerConnectionService) {

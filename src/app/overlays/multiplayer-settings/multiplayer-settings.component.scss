@@ -83,11 +83,14 @@
 .clients-container{
   width: 50%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
 }
 
 .clients-header{
   font-size: 18pt;
+  margin-bottom: 30px;
 }
 
 .button-footer {
