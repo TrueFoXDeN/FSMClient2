@@ -112,6 +112,15 @@
   }
 }
 
+.create-disabled{
+  background-color: var(--columnbuilder-button-save-background-hover);
+  cursor: not-allowed;
+
+  &:hover {
+    background-color: var(--columnbuilder-button-save-background-hover);
+  }
+}
+
 .refresh {
   background-color: var(--columnbuilder-button-discard-background);
 
@@ -119,6 +128,15 @@
     background-color: var(--columnbuilder-button-discard-background-hover);
   }
 }
+
+.refresh-disabled {
+  background-color: var(--columnbuilder-button-discard-background-hover);
+  cursor: not-allowed;
+  &:hover {
+    background-color: var(--columnbuilder-button-discard-background-hover);
+  }
+}
+
 
 .connect {
   background-color: var(--columnbuilder-button-add-background);
@@ -128,9 +146,25 @@
   }
 }
 
+.connect-disabled {
+  background-color: var(--columnbuilder-button-add-background-hover);
+  cursor: not-allowed;
+  &:hover {
+    background-color: var(--columnbuilder-button-add-background-hover);
+  }
+}
+
 .disconnect {
   background-color: var(--multiplayer-button-delete-outline);
 
+  &:hover {
+    background-color: var(--multiplayer-button-delete-outline-hover);
+  }
+}
+
+.disconnect-disabled {
+  background-color: var(--multiplayer-button-delete-outline-hover);
+  cursor: not-allowed;
   &:hover {
     background-color: var(--multiplayer-button-delete-outline-hover);
   }

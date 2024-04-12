@@ -3,6 +3,7 @@ import {MultiplayerService} from "../../services/multiplayer.service";
 import {CookieService} from "ngx-cookie-service";
 import {SnackbarMessageService} from "../../services/snackbar-message.service";
 import {DialogRef} from "@angular/cdk/dialog";
+import {DataService} from "../../services/data.service";
 
 @Component({
   selector: 'app-multiplayer-settings',
@@ -18,9 +19,16 @@ export class MultiplayerSettingsComponent {
   isConnected: boolean = false;
   isCreateDisabled: boolean = true;
   isJoinDisabled: boolean = false;
+  isDisconnectDisabled: boolean = true;
 
   constructor(private multiplayerService: MultiplayerService, private cookieService: CookieService,
-              private snackService: SnackbarMessageService, private dialogRef: DialogRef) {
+              private snackService: SnackbarMessageService, private dialogRef: DialogRef, private dataService: DataService) {
+
+    this.isConnected = multiplayerService.isConnected
+    this.isCreateDisabled = multiplayerService.isCreateDisabled
+    this.isJoinDisabled = multiplayerService.isJoinDisabled
+    this.isDisconnectDisabled = multiplayerService.isDisconnectDisabled
+
     if (this.multiplayerService.createdRoomId.length > 0) {
       this.createdRoomId = multiplayerService.createdRoomId
     } else {
@@ -39,11 +47,13 @@ export class MultiplayerSettingsComponent {
           if (!response.exists) {
             this.createdRoomId = ""
             this.isCreateDisabled = false
+            this.multiplayerService.isCreateDisabled = false
             this.multiplayerService.createdRoomId = ''
             this.cookieService.delete('createdRoomId')
             this.cookieService.delete('createdRoomPassword')
           } else {
             this.isCreateDisabled = true
+            this.multiplayerService.isCreateDisabled = true
           }
 
         },
@@ -54,43 +64,74 @@ export class MultiplayerSettingsComponent {
 
     } else {
       this.isCreateDisabled = false
+      this.multiplayerService.isCreateDisabled = false
 
     }
   }
 
   createRoom() {
-    console.log(this.createPassword)
-    this.isCreateDisabled = true;
-    this.multiplayerService.createRoom(this.createPassword).subscribe({
-      next: (response: any) => {
-        this.createdRoomId = response.id
-        this.cookieService.set('createdRoomId', this.createdRoomId)
-        this.cookieService.set('createdRoomPassword', this.createPassword)
-        this.multiplayerService.createdRoomId = this.createdRoomId
-        this.enteredRoomId = this.createdRoomId
-        this.joinPassword = this.createPassword
-        this.isJoinDisabled = false
-      },
-      error: (err) => {
 
-      }
-    });
+    if(!this.isCreateDisabled){
+      this.isCreateDisabled = true;
+      this.multiplayerService.createRoom(this.createPassword).subscribe({
+        next: (response: any) => {
+          this.createdRoomId = response.id
+          this.cookieService.set('createdRoomId', this.createdRoomId)
+          this.cookieService.set('createdRoomPassword', this.createPassword)
+          this.multiplayerService.createdRoomId = this.createdRoomId
+          this.enteredRoomId = this.createdRoomId
+          this.joinPassword = this.createPassword
+          this.isJoinDisabled = false
+          this.multiplayerService.isJoinDisabled = false
+        },
+        error: (err) => {
+
+        }
+      });
+    }
+
   }
 
   joinRoom() {
-    this.multiplayerService.existsRoom(this.enteredRoomId).subscribe({
-      next: (response: any) => {
-        if (response.exists) {
-          this.multiplayerService.connect(this.enteredRoomId, this.joinPassword, this.enteredName)
-        }else{
+    if(!this.isJoinDisabled){
+      this.multiplayerService.existsRoom(this.enteredRoomId).subscribe({
+        next: (response: any) => {
+          if (response.exists) {
+            this.multiplayerService.connect(this.enteredRoomId, this.joinPassword, this.enteredName)
+          }else{
+            this.snackService.showMessage(`Could not connect to ${this.enteredRoomId}`, "error");
+          }
+
+        },
+        error: (err) => {
           this.snackService.showMessage(`Could not connect to ${this.enteredRoomId}`, "error");
         }
+      });
+      this.isDisconnectDisabled = false
+      this.multiplayerService.isDisconnectDisabled = false
+      this.isJoinDisabled = true
+      this.multiplayerService.isJoinDisabled = true
+      this.dialogRef.close();
 
-      },
-      error: (err) => {
-        this.snackService.showMessage(`Could not connect to ${this.enteredRoomId}`, "error");
-      }
-    });
-  this.dialogRef.close();
+    }
+
+  }
+
+  disconnectRoom() {
+    if(!this.isDisconnectDisabled){
+      this.multiplayerService.disconnect()
+      this.isJoinDisabled = false
+      this.multiplayerService.isJoinDisabled = false
+      this.isDisconnectDisabled = true
+      this.multiplayerService.isDisconnectDisabled = true
+      this.dialogRef.close();
+    }
+
+  }
+
+  refreshRoom() {
+    if(this.isConnected){
+
+    }
   }
 }
