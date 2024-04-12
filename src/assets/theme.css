@@ -168,6 +168,10 @@
   --proximity-button-add-background: var(--app-success-secondary);
   --proximity-button-add-background-hover: var(--app-success-tertiary);
 
+  /*Multiplayer*/
+  --multiplayer-button-delete-outline: var(--app-error);
+  --multiplayer-button-delete-outline-hover: var(--app-error-dark);
+
   /*Search Callsign*/
   --search-input: #2B2B2B;
   --search-input-background: var(--app-input);

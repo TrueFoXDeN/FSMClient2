@@ -13,4 +13,5 @@ import {FeatherModule} from "angular-feather";
 export class IconButtonComponent {
   @Input() text = ''
   @Input() icon = ''
+  @Input() disabled: boolean = false;
 }
