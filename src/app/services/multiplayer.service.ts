@@ -12,12 +12,16 @@ export class MultiplayerService {
   // @ts-ignore
   private socket: WebSocket;
 
-  isConnected: boolean = true;
+  isConnected: boolean = false;
   createdRoomId: string = "";
   multiplayerUrl = environment.multiplayerURL
   url = environment.websocketURL
   roomId: string = ''
 
+  isCreateDisabled: boolean = true;
+  isJoinDisabled: boolean = false;
+  isDisconnectDisabled: boolean = true;
+  clients: string[] = [];
 
   constructor(private http: HttpClient,
               private multiplayerConnectionService: MultiplayerConnectionService) {
@@ -50,6 +54,10 @@ export class MultiplayerService {
       console.error('WebSocket error:', error);
     };
 
+  }
+
+  disconnect(){
+    this.socket.close();
   }
 
 

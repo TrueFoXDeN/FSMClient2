@@ -1,5 +1,5 @@
 <div class="window">
-  <div *ngIf="!isConnected" class="flex-column">
+  <div class="flex-column">
     <div class="header">
       <span>Multiplayer</span>
     </div>
@@ -12,13 +12,14 @@
               <span class="label">New room password:</span>
               <input class="input" [ngClass]="{'disabled': isCreateDisabled}" [disabled]="isCreateDisabled"
                      [(ngModel)]="createPassword">
-              <app-icon-button icon="plus" class="create-button create" matTooltip="Create room"
-                               matTooltipPosition="above" (click)="createRoom()" [disabled]="isCreateDisabled"
+              <app-icon-button icon="plus" class="create-button create"
+                               [ngClass]="{'create-disabled': isCreateDisabled}" matTooltip="Create room"
+                               matTooltipPosition="above" (click)="createRoom()"
               ></app-icon-button>
             </div>
             <div class="input-container">
               <span class="label">Created room ID:</span>
-              <span class="id" *ngIf="createdRoomId.length > 0">{{createdRoomId}}</span>
+              <span class="id" *ngIf="createdRoomId.length > 0">{{ createdRoomId }}</span>
               <span class="id" *ngIf="createdRoomId.length === 0">_____</span>
             </div>
           </div>
@@ -47,7 +48,7 @@
         <div class="clients-container">
           <div class="clients-header">Connected Users</div>
           <div class="clients-list">
-
+            <p-listbox [options]="clients" [(ngModel)]="selectedClient" [style]="{'width':'15rem'}" [listStyle]="{'max-height': '220px', 'overflow': 'auto'}"></p-listbox>
           </div>
         </div>
       </div>
@@ -56,14 +57,17 @@
       <div class="button-footer">
         <div class="left">
           <app-icon-button icon="cloud" class="footer-buttons connect" matTooltip="Connect"
-                           matTooltipPosition="above" [disabled]="isJoinDisabled"
+                           matTooltipPosition="above" [ngClass]="{'connect-disabled': isJoinDisabled}"
                            (click)="joinRoom()"></app-icon-button>
-          <app-icon-button icon="cloud-off" class="footer-buttons disconnect" matTooltip="Disconnect"
-                           matTooltipPosition="above"></app-icon-button>
+          <app-icon-button icon="cloud-off" class="footer-buttons disconnect"
+                           [ngClass]="{'disconnect-disabled': isDisconnectDisabled}"
+                           matTooltip="Disconnect"
+                           (click)="disconnectRoom()" matTooltipPosition="above"></app-icon-button>
         </div>
         <div class="right">
           <app-icon-button icon="refresh-cw" class="footer-buttons refresh" matTooltip="Sync with server"
-                           matTooltipPosition="above"></app-icon-button>
+                           [ngClass]="{'refresh-disabled': !isConnected}" matTooltipPosition="above"
+                           (click)="refreshRoom()"></app-icon-button>
         </div>
       </div>
 
