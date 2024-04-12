@@ -103,6 +103,14 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    window.addEventListener("unhandledrejection", function (event) {
+      console.warn("WARNING: Unhandled promise rejection. Shame on you! Reason: "
+        + event.reason);
+    });
+
+    window.addEventListener("rejectionhandled", function (event) {
+      console.log("Promise rejected! Reason: ");
+    });
   }
 
   @HostListener('window:keydown', ['$event'])

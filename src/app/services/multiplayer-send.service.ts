@@ -32,13 +32,13 @@ export class MultiplayerSendService {
     this.commands.set('delete_flightstrip', deleteFlightStripCommand)
     this.commands.set('edit_flightstrip', editFlightStripCommand)
     this.commands.set('get_clients', getClientsCommand)
-    this.commands.set('get_data', getClientsCommand)
+    this.commands.set('get_data', getDataCommand)
     this.commands.set('move_flightstrip', moveFlightstripCommand)
   }
 
   processMessage(cmd: string, data: any) {
+    if (!this.multiplayerService.isConnected) return;
     let command = this.commands.get(cmd)
-
     let args: any[] = [this.cookieService.get('multiplayerAuth'), this.multiplayerService.roomId]
     if (command) {
       args = args.concat(command.execute(data))
@@ -47,5 +47,4 @@ export class MultiplayerSendService {
     }
     this.multiplayerService.sendMessage(cmd, args)
   }
-
 }

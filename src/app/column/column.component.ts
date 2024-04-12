@@ -79,37 +79,43 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
 //Emits when the user drops the item inside a container.
   drop(event: CdkDragDrop<[]>) {
-    if (event.previousContainer === event.container) {
+    try {
 
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      this.mpService.processMessage("move_flightstrip", {
-        fsId: event.item.data.id,
-        oldColumnId: this.uuid,
-        newColumnId: this.uuid,
-        newPos: event.currentIndex
-      });
-    } else {
-      let prevColumnId = event.item.data.columnId;
-      let newColumnId = this.uuid;
-      if(event.previousContainer.data[event.previousIndex]) {
-        transferArrayItem(
-          event.previousContainer.data,
-          event.container.data,
-          event.previousIndex,
-          event.currentIndex,
-        );
+
+      if (event.previousContainer === event.container) {
+
+        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
         this.mpService.processMessage("move_flightstrip", {
           fsId: event.item.data.id,
-          oldColumnId: prevColumnId,
-          newColumnId: newColumnId,
+          oldColumnId: this.uuid,
+          newColumnId: this.uuid,
           newPos: event.currentIndex
         });
+      } else {
+        let prevColumnId = event.item.data.columnId;
+        let newColumnId = this.uuid;
+        if (event.previousContainer.data[event.previousIndex]) {
+          transferArrayItem(
+            event.previousContainer.data,
+            event.container.data,
+            event.previousIndex,
+            event.currentIndex,
+          );
+          this.mpService.processMessage("move_flightstrip", {
+            fsId: event.item.data.id,
+            oldColumnId: prevColumnId,
+            newColumnId: newColumnId,
+            newPos: event.currentIndex
+          });
+        }
+
+
       }
-
-
-
+      this.fsService.changedStripPos.next({id: event.item.data?.id, newPosition: event.currentIndex})
+    } catch (error) {
+      this.fsService.dragActive.next({id: event.item.data.id, dragEnabled: false})
     }
-    this.fsService.changedStripPos.next({id: event.item.data?.id, newPosition: event.currentIndex})
+
   }
 
   onKeyPress(event: any) {

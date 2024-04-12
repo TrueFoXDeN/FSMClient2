@@ -50,14 +50,14 @@ export class ContextMenuComponent implements OnInit {
         index = this.dataService.flightstripData[this.fs.columnId].flightstrips.indexOf(this.fs)
         this.dataService.flightstripData[this.fs.columnId].flightstrips[index].type = this.option1
         this.fsService.changedType.next({type: this.option1, id: this.fs.id});
-        //TODO [MP] Check if extra command necessary
+        this.mpService.processMessage("edit_flightstrip", this.fs);
         break;
       case 2:
         let index2: number = 0;
         index2 = this.dataService.flightstripData[this.fs.columnId].flightstrips.indexOf(this.fs)
         this.dataService.flightstripData[this.fs.columnId].flightstrips[index2].type = this.option2
         this.fsService.changedType.next({type: this.option2, id: this.fs.id});
-        //TODO [MP] Check if extra command necessary
+        this.mpService.processMessage("edit_flightstrip", this.fs);
         break;
     }
   }

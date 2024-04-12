@@ -126,7 +126,7 @@ export class FlightstripCompactComponent implements OnDestroy {
     this.isMouseDown = true
     setTimeout(() => {
       if (!this.isMouseMoving && this.isMouseDown) {
-        this.fsService.dragFlightstrip.next(true);
+        // this.fsService.dragFlightstrip.next(true);
       }
     }, this.fsService.dragDelay - 10);
     this.isMouseMoving = false;
@@ -134,7 +134,7 @@ export class FlightstripCompactComponent implements OnDestroy {
 
   onMouseUp() {
     this.isMouseDown = false;
-    this.fsService.dragFlightstrip.next(false);
+    // this.fsService.dragFlightstrip.next(false);
   }
 
   onContextOpened() {

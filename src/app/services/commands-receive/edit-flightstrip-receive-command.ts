@@ -26,7 +26,7 @@ export class EditFlightstripReceiveCommand implements CommandReceive {
     fs.departureIcao = fsData.departureIcao || "";
     fs.arrivalIcao = fsData.arrivalIcao || "";
     fs.aircraft = fsData.aircraft || "";
-
+    fs.type = fsData.type || fs.type;
     fs.wakeCategory = fsData.wakeCategory || "";
     fs.flightrule = fsData.flightrule || "";
     fs.altitude = fsData.altitude || "";
@@ -43,6 +43,7 @@ export class EditFlightstripReceiveCommand implements CommandReceive {
     fs.statusText = fsData.statusText || "";
     fs.status = fsData.status || 0;
     fs.emergencyActive = fsData.emergencyActive || false;
+    this.fsService.changedType.next({type: fs.type, id: fs.id});
 
   }
 
