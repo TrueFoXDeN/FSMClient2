@@ -142,7 +142,6 @@ export class MultiplayerSettingsComponent {
       this.multiplayerService.isJoinDisabled = false
       this.isDisconnectDisabled = true
       this.multiplayerService.isDisconnectDisabled = true
-      this.snackService.showMessage("Disconnected from multiplayer", "info")
       this.dialogRef.close();
     }
 
