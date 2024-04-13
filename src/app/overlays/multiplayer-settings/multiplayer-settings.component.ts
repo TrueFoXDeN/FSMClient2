@@ -13,10 +13,10 @@ import {MultiplayerSendService} from "../../services/multiplayer-send.service";
 })
 export class MultiplayerSettingsComponent {
   createdRoomId: string = "";
-  enteredRoomId: string = "abcde";
-  enteredName: string = "laurenz";
+  enteredRoomId: string = "";
+  enteredName: string = "";
   createPassword: string = "";
-  joinPassword: string = "test";
+  joinPassword: string = "";
   isConnected: boolean = false;
   isCreateDisabled: boolean = true;
   isJoinDisabled: boolean = false;
@@ -37,13 +37,19 @@ export class MultiplayerSettingsComponent {
 
     if (this.multiplayerService.createdRoomId.length > 0) {
       this.createdRoomId = multiplayerService.createdRoomId
+      this.enteredRoomId = this.createdRoomId
+
     } else {
       if (this.cookieService.check("createdRoomId")) {
+        console.log(this.cookieService.get("createdRoomId"))
         this.createdRoomId = this.cookieService.get("createdRoomId");
+        this.enteredRoomId = this.createdRoomId
       }
-      if(this.cookieService.check('createdRoomPassword')){
-        this.createPassword = this.cookieService.get('createdRoomPassword')
-      }
+
+    }
+    if(this.cookieService.check('createdRoomPassword')){
+      this.createPassword = this.cookieService.get('createdRoomPassword')
+      this.joinPassword = this.createPassword
     }
 
     if (this.createdRoomId.length > 0) {
@@ -52,6 +58,8 @@ export class MultiplayerSettingsComponent {
         next: (response: any) => {
           if (!response.exists) {
             this.createdRoomId = ""
+            this.joinPassword = ""
+            this.enteredRoomId = ""
             this.isCreateDisabled = false
             this.multiplayerService.isCreateDisabled = false
             this.multiplayerService.createdRoomId = ''
