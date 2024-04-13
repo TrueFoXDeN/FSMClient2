@@ -116,6 +116,11 @@ export class MultiplayerSettingsComponent {
         next: (response: any) => {
           if (response.exists) {
             this.multiplayerService.connect(this.enteredRoomId, this.joinPassword, this.enteredName)
+            this.isDisconnectDisabled = false
+            this.multiplayerService.isDisconnectDisabled = false
+            this.isJoinDisabled = true
+            this.multiplayerService.isJoinDisabled = true
+            this.dialogRef.close();
           }else{
             this.snackService.showMessage(`Could not connect to ${this.enteredRoomId}`, "error");
           }
@@ -125,11 +130,6 @@ export class MultiplayerSettingsComponent {
           this.snackService.showMessage(`Could not connect to ${this.enteredRoomId}`, "error");
         }
       });
-      this.isDisconnectDisabled = false
-      this.multiplayerService.isDisconnectDisabled = false
-      this.isJoinDisabled = true
-      this.multiplayerService.isJoinDisabled = true
-      this.dialogRef.close();
 
     }
 
