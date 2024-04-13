@@ -23,9 +23,12 @@ export class MultiplayerGetDataService {
     let dashboard = [];
     let foundDashboardDiff = 0;
     let liveDataMap = new Set<string>();
-    for (let i = 0; i < this.dataService.profileData; i++) {
-      liveDataMap.add(this.dataService.profileData[i].uuid);
+    for (let i = 0; i < this.dataService.profileData[this.dataService.currentProfileID].columnStructure.length; i++) {
+      liveDataMap.add(this.dataService.profileData[this.dataService.currentProfileID].columnStructure[i].uuid);
     }
+
+    console.log("Live Size:")
+    console.log(liveDataMap.size)
 
     for (let i = 0; i < columnIDs.length; i++) {
       dashboard.push({x: i, y: 0, cols: 1, rows: 18, uuid: columnIDs[i], name: data[columnIDs[i]]["name"]});
@@ -33,6 +36,8 @@ export class MultiplayerGetDataService {
         foundDashboardDiff += 1;
       }
     }
+    console.log("Server Size:")
+    console.log(dashboard.length)
 
     if (liveDataMap.size != dashboard.length) {
       foundDashboardDiff += 1;
