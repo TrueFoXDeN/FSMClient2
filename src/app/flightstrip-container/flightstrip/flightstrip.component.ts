@@ -125,7 +125,6 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.fs.communicationIconState = state;
     this.fsService.changedCommunicationState.next();
-    //TODO [MP] send fs edit
     this.mpService.processMessage("edit_flightstrip", this.fs);
   }
 
@@ -174,7 +173,6 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
       console.log(this.fsModelBackup);
       console.log("new:");
       console.log(this.fs);
-      //TODO [MP] fs edit
       this.mpService.processMessage("edit_flightstrip", this.fs);
     }
   }

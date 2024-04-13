@@ -4,12 +4,13 @@ import {FlightstripService} from "../../flightstrip-container/flightstrip.servic
 import {DataService} from "../data.service";
 import {moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {ColumnService} from "../../column/column.service";
+import {MultiplayerSendService} from "../multiplayer-send.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoveFlightstripReceiveCommand implements CommandReceive {
-  constructor(private fsService: FlightstripService, private dataService: DataService, private columnService: ColumnService) {
+  constructor(private fsService: FlightstripService, private dataService: DataService, private columnService: ColumnService, private multiplayerSendService: MultiplayerSendService) {
   }
 
   execute(args: string[]): void {
@@ -20,7 +21,7 @@ export class MoveFlightstripReceiveCommand implements CommandReceive {
     let newPos = Number(args[3]);
     let fsIndex = this.fsService.getIndexInColumnByID(colId, fsID);
     if (fsIndex === -1) {
-      //TODO resync data from server
+      this.multiplayerSendService.processMessage("get_data", [])
       console.log("Could not find flightstrip");
       return;
     }
