@@ -9,7 +9,8 @@
      tabindex="0"
      [cdkContextMenuTriggerFor]="context_menu"
      (cdkContextMenuOpened)="onContextOpened()"
-     (cdkContextMenuClosed)="onContextClosed()">
+     (cdkContextMenuClosed)="onContextClosed()"
+     (mouseleave)="onMouseLeave($event)">
   <div class="flex-container">
     <div class="flex-row">
       <input

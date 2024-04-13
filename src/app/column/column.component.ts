@@ -120,7 +120,7 @@ export class ColumnComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onKeyPress(event: any) {
     if (!this.fsService.isInputFocused) {
-      this.shortcutService.executeShortcut(this.uuid, event)
+      this.shortcutService.executeShortcut(this.uuid, event, 'column')
     }
   }
 

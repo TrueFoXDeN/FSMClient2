@@ -77,7 +77,7 @@ export class FlightstripService {
 
           fs.airline = res.airline
           this.dataService.flightstripData?.[column]?.['flightstrips'].push(fs);
-          console.log({colId: column, type: type, fsId: fs.id})
+
           if (!createdFromMultiplayer) {
             this.mpService.processMessage("create_flightstrip", {colId: column, type: type, fsId: fs.id});
           }
@@ -88,7 +88,7 @@ export class FlightstripService {
       })
     } else {
       this.dataService.flightstripData?.[column]?.['flightstrips'].push(fs);
-      console.log({colId: column, type: type, fsId: fs.id})
+
       if (!createdFromMultiplayer) {
         this.mpService.processMessage("create_flightstrip", {colId: column, type: type, fsId: fs.id});
       }
@@ -120,41 +120,12 @@ export class FlightstripService {
     fs.triangleIconState = flightstrip.triangleIconState || fs.triangleIconState;
     fs.communicationIconState = flightstrip.communicationIconState || fs.communicationIconState;
     fs.statusText = flightstrip.statusText || fs.statusText;
-    // fs.status = this.getFsStatusText(flightstrip.statusText, flightstrip.type);
     fs.status = flightstrip.status || fs.status;
     if (isCreatedByMultiplayer) {
       fs.compactMode = true;
     }
     this.dataService.flightstripData?.[column]?.['flightstrips'].push(fs);
   }
-
-
-  // getFsStatusText(givenText: string, fsType: StripType): number {
-  //   console.log(fsType);
-  //   if (fsType == StripType.INBOUND) {
-  //     console.log("Inbound");
-  //     if (Object.values(StatusArrival).includes(givenText)) {
-  //       return Object.keys(StatusArrival).splice(Object.keys(StatusArrival).length/2).indexOf(givenText);
-  //     } else {
-  //       return 0;
-  //     }
-  //   } else if (fsType == StripType.OUTBOUND) {
-  //     console.log("Outbound");
-  //     if (Object.values(StatusDeparture).includes(givenText)) {
-  //       return Object.keys(StatusDeparture).splice(Object.keys(StatusDeparture).length/2).indexOf(givenText);
-  //     } else {
-  //       return 0;
-  //     }
-  //   } else if (fsType == StripType.VFR) {
-  //     if (Object.values(StatusVfr).includes(givenText)) {
-  //       return Object.keys(StatusVfr).splice(Object.keys(StatusVfr).length/2).indexOf(givenText);
-  //     } else {
-  //       return 0;
-  //     }
-  //   }
-  //   return 0;
-  //
-  // }
 
   flightStripExists(callsign: string) {
     let currentColumnIDList: string [] = []
@@ -183,4 +154,18 @@ export class FlightstripService {
     return fsIndex;
   }
 
+  mouseEnter(id: string) {
+    let currentColumnIDList: string [] = []
+    this.dataService.profileData[this.dataService.currentProfileID].columnStructure.forEach((element: any) => {
+      currentColumnIDList.push(element.uuid)
+    });
+    for (let col of currentColumnIDList) {
+      for (let i= 0; i<this.dataService.flightstripData[col].flightstrips.length; i++) {
+
+        if (this.dataService.flightstripData[col].flightstrips[i].id !== id) {
+          this.dataService.flightstripData[col].flightstrips[i].isMouseOver = false
+        }
+      }
+    }
+  }
 }

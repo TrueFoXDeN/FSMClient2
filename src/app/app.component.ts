@@ -115,7 +115,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   @HostListener('window:keydown', ['$event'])
   keyEvent(e: KeyboardEvent) {
-    this.shortcutService.executeShortcut("app", e);
+    // console.log('column event')
+    this.shortcutService.executeShortcut("app", e, 'app');
   }
 
   abortDeletion() {

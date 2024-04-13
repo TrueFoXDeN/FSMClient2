@@ -27,6 +27,7 @@ export class Flightstrip {
   public isMarkedBySearch = false;
   public emergencyActive: boolean = false;
   public deleteActive: boolean = false;
+  public isMouseOver: boolean = false;
 
   constructor(identifier: string, type: StripType, columnId: string, columnPos : number) {
     this.id = identifier;

@@ -29,6 +29,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output("switchToCompact") compactSwitch = new EventEmitter<void>()
   @Output("nextStatus") nextStatusEvent = new EventEmitter<void>()
   @Output("prevStatus") prevStatusEvent = new EventEmitter<void>()
+  @Output("mouseLeave") mouseLeaveTrigger = new EventEmitter<any>()
   subscriptionHandles: any = [];
   status: any;
   stripTypes = StripType
@@ -205,4 +206,7 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
+  onMouseLeave($event: MouseEvent) {
+    this.mouseLeaveTrigger.emit($event)
+  }
 }

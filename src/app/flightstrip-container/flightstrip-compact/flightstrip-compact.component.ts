@@ -22,6 +22,7 @@ export class FlightstripCompactComponent implements OnDestroy {
   @ViewChild(FlightStripCompact) fsContainerDir: any;
   //@ViewChild('menutrigger') menutrigger!: ElementRef;
   @Output("triggeredCompact") compactModeTrigger = new EventEmitter<void>()
+  @Output("mouseLeave") mouseLeaveTrigger = new EventEmitter<any>()
   stripTypes = StripType
   triangleIconStates = TriangleIconState
   communicationIconStates = CommunicationIconState
@@ -193,4 +194,8 @@ export class FlightstripCompactComponent implements OnDestroy {
 
 
   protected readonly communicationIconState = CommunicationIconState;
+
+  onMouseLeave($event: MouseEvent) {
+    this.mouseLeaveTrigger.emit($event)
+  }
 }

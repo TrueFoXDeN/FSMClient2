@@ -13,6 +13,7 @@ export enum ShortcutType {
 export class ShortcutService {
   private componentActions: Map<string, Map<string, Function>> = new Map(); //Map<componentID, actionMap>
   private actionNames: Map<string, string> = new Map();
+  canFire: boolean = true;
 
   constructor(private settingsService: SettingsService) {
     this.insertActionNames();
@@ -46,17 +47,19 @@ export class ShortcutService {
     }
   }
 
-  executeShortcut(componentID: string, key: KeyboardEvent) {
-
+  executeShortcut(componentID: string, key: KeyboardEvent, trigger: string) {
     let shortcutString = this.getShortcutStringFromEvent(key)
     const actionName = this.getActionIdFromShortcut(shortcutString)
     const componentActionMap = this.componentActions.get(componentID);
-    if (actionName && componentActionMap) {
+    if (actionName && componentActionMap && this.canFire) {
       const action = componentActionMap.get(actionName)
       if (action) {
 
         key.preventDefault();
         action();
+        this.canFire = false
+        setTimeout(() => this.canFire = true, 25)
+
         return true;
       }
       return false;

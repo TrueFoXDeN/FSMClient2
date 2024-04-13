@@ -18,7 +18,6 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
   @Input("colID") columnId!: string;
   subscriptionHandles: any = [];
   baseURL = environment.baseURL
-  isMouseOver: boolean = false
   actionNames: Map<string, Function> = new Map();
 
   constructor(private networkService: NetworkService, private fsService: FlightstripService, private dataService: DataService,
@@ -120,19 +119,20 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
     }
   }
 
-
   onMouseEnter(e: MouseEvent) {
-    this.isMouseOver = true
+    this.stripModel.isMouseOver = true
+    this.fsService.mouseEnter(this.stripModel.id)
   }
 
+
   onMouseLeave(e: MouseEvent) {
-    this.isMouseOver = false
+    this.stripModel.isMouseOver = false
   }
 
   @HostListener('window:keydown', ['$event'])
   keyEvent(e: KeyboardEvent) {
-    if (this.isMouseOver && !this.fsService.isInputFocused) {
-      this.shortcutService.executeShortcut(this.stripModel.id, e);
+    if (this.stripModel.isMouseOver && !this.fsService.isInputFocused) {
+      this.shortcutService.executeShortcut(this.stripModel.id, e, 'flightstrip');
     }
   }
 

@@ -1,4 +1,4 @@
-<div class="strip" (mousedown)="onMouseDown()"
+<div class="strip" (mousedown)="onMouseDown()" (mouseleave)="onMouseLeave($event)"
      (mouseup)="onMouseUp()" (mousemove)="isMouseMoving = true" [cdkContextMenuTriggerFor]="context_menu"
      (cdkContextMenuOpened)="onContextOpened()" (dblclick)="onDoubleClick()"
      [ngClass]="{
