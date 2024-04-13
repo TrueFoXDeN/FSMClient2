@@ -34,7 +34,11 @@ export class MultiplayerGetDataService {
       }
     }
 
-    if (foundDashboardDiff) {
+    if (liveDataMap.size != dashboard.length) {
+      foundDashboardDiff += 1;
+    }
+
+    if (foundDashboardDiff > 0) {
       this.dataService.profileData[this.dataService.currentProfileID].columnStructure = dashboard
     }
 

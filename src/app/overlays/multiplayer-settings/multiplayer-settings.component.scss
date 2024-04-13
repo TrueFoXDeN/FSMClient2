@@ -116,7 +116,8 @@
 }
 
 .create-disabled{
-  background-color: var(--multiplayer-button-create-background-hover);
+  //background-color: var(--multiplayer-button-create-background-hover);
+  opacity: 0.4;
   cursor: not-allowed;
 
   &:hover {
@@ -133,7 +134,8 @@
 }
 
 .refresh-disabled {
-  background-color: var(--multiplayer-button-refresh-background-hover);
+  //background-color: var(--multiplayer-button-refresh-background-hover);
+  opacity: 0.4;
   cursor: not-allowed;
   &:hover {
     background-color: var(--multiplayer-button-refresh-background-hover);
@@ -151,6 +153,7 @@
 
 .connect-disabled {
   background-color: var(--multiplayer-button-connect-background-hover);
+  opacity: 0.4;
   cursor: not-allowed;
   &:hover {
     background-color: var(--multiplayer-button-connect-background-hover);
@@ -167,6 +170,7 @@
 
 .disconnect-disabled {
   background-color: var(--multiplayer-button-disconnect-outline-hover);
+  opacity: 0.4;
   cursor: not-allowed;
   &:hover {
     background-color: var(--multiplayer-button-disconnect-outline-hover);
