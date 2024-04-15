@@ -16,9 +16,12 @@ export class MultiplayerGetDataService {
     this.dataService.profileData[this.dataService.multiplayerProfileID] = this.dataService.multiplayerProfile
     this.dataService.currentProfile = this.dataService.multiplayerProfile
 
+
     let data = args[1].data
     let order = args[1].order
-    const columnIDs: string[] = Object.keys(data);
+    console.log("order:");
+    console.log(args);
+    const columnIDs: string[] = Object.keys(order) || [];
 
     let dashboard = [];
     let foundDashboardDiff = 0;
@@ -44,9 +47,10 @@ export class MultiplayerGetDataService {
     }
 
     if (foundDashboardDiff > 0) {
+      console.log("Found Columndiff");
       this.dataService.profileData[this.dataService.currentProfileID].columnStructure = dashboard
     }
-
+    this.dataService.flightstripData = {};
     this.columnBuilderService.columnConfigChanged.next()
     for (let i = 0; i < columnIDs.length; i++) {
       let columnID = columnIDs[i];

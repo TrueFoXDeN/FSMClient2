@@ -34,8 +34,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
   subscriptionList: any = []
   networkIcon: string = "standard";
   radarIcon: string = "radar";
+  isMultiplayerConnected = false;
 
-  constructor( private _snackBar: MatSnackBar, public dialog: MatDialog,
+  constructor(private _snackBar: MatSnackBar, public dialog: MatDialog,
               private dataService: DataService, private styleChanger: StyleChangerService, private snackService: SnackbarMessageService,
               private colBuilderService: ColumnBuilderService, public networkService: NetworkService,
               private columnBuilderService: ColumnBuilderService, private searchcallsignService: SearchcallsignService,
@@ -45,7 +46,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.subscriptionList.push(this.networkService.changedNetworkEmitter.subscribe((data) => {
       if (data.active) {
         this.networkIcon = "success";
-        if(this.proximityService.getActiveAirports().length > 0){
+        if (this.proximityService.getActiveAirports().length > 0) {
           this.radarIcon = "radar_success";
         }
       } else {
@@ -53,6 +54,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.radarIcon = "radar";
       }
     }));
+    this.subscriptionList.push(this.multiplayerService.multiplayerConnectionStatusChanged.subscribe((connectionStatus) => {
+      this.isMultiplayerConnected = connectionStatus;
+    }))
   }
 
   ngOnDestroy(): void {
@@ -119,6 +123,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   openProfileSettings() {
+    if (this.isMultiplayerConnected) return;
     const dialogConfig = new MatDialogConfig()
     dialogConfig.height = `${350 * this.styleChanger.multiplier}px`;
     dialogConfig.width = `${350 * this.styleChanger.multiplier}px`;
@@ -135,15 +140,16 @@ export class SidebarComponent implements OnInit, OnDestroy {
     dialogConfig.width = `80vw`;
     const dialogRef = this.dialog.open(ProximitySettingsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
-      if(this.proximityService.getActiveAirports().length > 0 && this.networkService.getIsNetworkFetchActive()){
+      if (this.proximityService.getActiveAirports().length > 0 && this.networkService.getIsNetworkFetchActive()) {
         this.radarIcon = "radar_success"
-      }else{
+      } else {
         this.radarIcon = "radar"
       }
     });
   }
 
   openMultiplayerSettings() {
+
     const dialogConfig = new MatDialogConfig()
     dialogConfig.height = `63vh`;
     dialogConfig.width = `45vw`;

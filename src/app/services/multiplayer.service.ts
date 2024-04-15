@@ -3,6 +3,7 @@ import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {MultiplayerConnectionService} from "./multiplayer-connection.service";
 import {SnackbarMessageService} from "./snackbar-message.service";
+import {Subject} from "rxjs";
 
 
 @Injectable({
@@ -24,6 +25,8 @@ export class MultiplayerService {
   isDisconnectDisabled: boolean = true;
   clients: string[] = [];
 
+  multiplayerConnectionStatusChanged: Subject<boolean> = new Subject<boolean>();
+
   constructor(private http: HttpClient,
               private multiplayerConnectionService: MultiplayerConnectionService, private snackMessage: SnackbarMessageService,) {
 
@@ -38,6 +41,7 @@ export class MultiplayerService {
       this.sendMessage('connect', [roomId, password, name])
       this.roomId = roomId
       this.isConnected = true
+      this.multiplayerConnectionStatusChanged.next(true);
     };
 
     this.socket.onmessage = (event) => {
@@ -50,6 +54,7 @@ export class MultiplayerService {
       console.log('WebSocket connection closed:', event);
       this.snackMessage.showMessage("Connection closed", "info");
       this.isConnected = false
+      this.multiplayerConnectionStatusChanged.next(false);
     };
 
     this.socket.onerror = (error) => {

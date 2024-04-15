@@ -109,7 +109,7 @@ export class HorizontalScrollComponent implements OnInit, OnDestroy {
 
   loadConfig() {
     this.dashboard = this.dataService.profileData[this.dataService.currentProfileID].columnStructure;
-    this.dataService.flightstripData = {}
+
     this.dataService.profileData[this.dataService.currentProfileID].columnStructure.forEach((column: any) => {
       if (this.dataService.flightstripData[column?.['uuid']] == null) {
         this.dataService.flightstripData[column?.['uuid']] = {name: column?.['name'], flightstrips: []}

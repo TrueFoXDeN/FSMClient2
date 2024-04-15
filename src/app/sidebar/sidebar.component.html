@@ -1,9 +1,11 @@
 <div class="sidebar">
   <div class="top-buttons">
-    <app-sidebar-button-png icon="tower"  class="icon-button default" matTooltip="Profile Settings"
-                            matTooltipPosition="right" (click)="openProfileSettings()"></app-sidebar-button-png>
+    <app-sidebar-button-png icon="tower" class="icon-button default" matTooltip="Profile Settings"
+                            matTooltipPosition="right" (click)="openProfileSettings()"
+                            [ngClass]="{'disabled': isMultiplayerConnected}"
+    ></app-sidebar-button-png>
     <app-sidebar-button icon="columns" (click)="openColumnbuilder()" class="icon-button default"
-                        matTooltip="Columns" matTooltipPosition="right" ></app-sidebar-button>
+                        matTooltip="Columns" matTooltipPosition="right"></app-sidebar-button>
     <app-sidebar-button icon="wifi" class="icon-button" matTooltip="Networks"
                         matTooltipPosition="right"
                         (click)="openNetworkMenu()"
@@ -14,9 +16,10 @@
     ></app-sidebar-button>
     <app-sidebar-button-png icon="{{radarIcon}}" class="radar default" matTooltip="Proximity Settings"
                             matTooltipPosition="right" (click)="openProximitySettings()"></app-sidebar-button-png>
-    <app-sidebar-button icon="users" (click)="openMultiplayerSettings()" class="icon-button default" matTooltip="Multiplayer"
+    <app-sidebar-button icon="users" (click)="openMultiplayerSettings()" class="icon-button default"
+                        matTooltip="Multiplayer"
                         matTooltipPosition="right"
-                        ></app-sidebar-button>
+    ></app-sidebar-button>
     <app-sidebar-button icon="search" class="icon-button default" matTooltip="Search Callsign"
                         matTooltipPosition="right"
                         (click)="openSearchCallsign()"></app-sidebar-button>
@@ -29,12 +32,12 @@
                         matTooltipPosition="right"></app-sidebar-button>
     <app-sidebar-button icon="bar-chart-2" class="icon-button default disabled" matTooltip="Statistics"
                         matTooltipPosition="right"
-                        ></app-sidebar-button>
+    ></app-sidebar-button>
     <app-sidebar-button icon="settings" class="icon-button default" matTooltip="Settings"
                         matTooltipPosition="right" (click)="openAppSettings()"
-                        ></app-sidebar-button>
+    ></app-sidebar-button>
     <app-sidebar-button icon="help-circle" class="icon-button default disabled" matTooltip="Help"
                         matTooltipPosition="right"
-                        ></app-sidebar-button>
+    ></app-sidebar-button>
   </div>
 </div>
