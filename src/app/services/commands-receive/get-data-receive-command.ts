@@ -14,7 +14,7 @@ export class GetDataReceiveCommand implements CommandReceive {
   execute(args: string[]): void {
 
     this.multiplayerGetDataService.execute(args);
-    this.snackBarService.showMessage("Synced with server", "success")
+    this.snackBarService.showMessage("Synced with server", "info")
 
   }
 }

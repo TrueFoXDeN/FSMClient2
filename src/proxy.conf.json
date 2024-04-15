@@ -2,6 +2,7 @@
   "/api/*": {
     "target": "http://192.168.10.14:5002",
     "secure": false,
-    "changeOrigin": true
+    "changeOrigin": true,
+    "logLevel": "debug"
   }
 }
