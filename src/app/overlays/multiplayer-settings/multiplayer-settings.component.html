@@ -7,6 +7,10 @@
 
       <div class="column-container">
         <div class="multipayer-container">
+          <div class="room-header-wrapper">
+            <div class="room-header">Create a room:</div>
+          </div>
+
           <div class="create-container">
             <div class="input-container">
               <span class="label">New room password:</span>
@@ -27,8 +31,12 @@
           <div class="multiplayer-seperator">
 
           </div>
+          <div class="room-header-wrapper">
+            <div class="room-header">Connect to a room:</div>
+          </div>
 
           <div class="join-container">
+
             <div class="input-container">
               <span class="label">Room ID:</span>
               <input class="input" (input)="isJoinDisabled = enteredRoomId.length != 5" [(ngModel)]="enteredRoomId">
@@ -46,9 +54,10 @@
 
         </div>
         <div class="clients-container">
-          <div class="clients-header">Connected Users</div>
+          <div class="clients-header">Connected Users:</div>
           <div class="clients-list">
-            <p-listbox [options]="clients" [(ngModel)]="selectedClient" [style]="{'width':'15rem'}" [listStyle]="{'max-height': '220px', 'overflow': 'auto'}"></p-listbox>
+            <p-listbox [options]="clients" [(ngModel)]="selectedClient" [style]="{'width':'15rem'}"
+                       [listStyle]="{'max-height': '220px', 'overflow': 'auto'}"></p-listbox>
           </div>
         </div>
       </div>
