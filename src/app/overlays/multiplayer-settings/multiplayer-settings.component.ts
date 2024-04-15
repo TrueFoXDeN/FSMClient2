@@ -5,6 +5,7 @@ import {SnackbarMessageService} from "../../services/snackbar-message.service";
 import {DialogRef} from "@angular/cdk/dialog";
 import {DataService} from "../../services/data.service";
 import {MultiplayerSendService} from "../../services/multiplayer-send.service";
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 
 @Component({
   selector: 'app-multiplayer-settings',
@@ -21,8 +22,7 @@ export class MultiplayerSettingsComponent {
   isCreateDisabled: boolean = true;
   isJoinDisabled: boolean = false;
   isDisconnectDisabled: boolean = true;
-  clients :string[] = []
-  selectedClient: any;
+  clients: string[] = []
 
   constructor(private multiplayerService: MultiplayerService, private cookieService: CookieService,
               private snackService: SnackbarMessageService, private dialogRef: DialogRef, private dataService: DataService,
@@ -47,7 +47,7 @@ export class MultiplayerSettingsComponent {
       }
 
     }
-    if(this.cookieService.check('createdRoomPassword')){
+    if (this.cookieService.check('createdRoomPassword')) {
       this.createPassword = this.cookieService.get('createdRoomPassword')
       this.joinPassword = this.createPassword
     }
@@ -82,14 +82,14 @@ export class MultiplayerSettingsComponent {
 
     }
 
-    if(this.isConnected){
+    if (this.isConnected) {
       multiplayerSendService.processMessage('get_clients', [])
     }
   }
 
   createRoom() {
 
-    if(!this.isCreateDisabled){
+    if (!this.isCreateDisabled) {
       this.isCreateDisabled = true;
       this.multiplayerService.createRoom(this.createPassword).subscribe({
         next: (response: any) => {
@@ -111,7 +111,7 @@ export class MultiplayerSettingsComponent {
   }
 
   joinRoom() {
-    if(!this.isJoinDisabled){
+    if (!this.isJoinDisabled) {
       this.multiplayerService.existsRoom(this.enteredRoomId).subscribe({
         next: (response: any) => {
           if (response.exists) {
@@ -121,7 +121,7 @@ export class MultiplayerSettingsComponent {
             this.isJoinDisabled = true
             this.multiplayerService.isJoinDisabled = true
             this.dialogRef.close();
-          }else{
+          } else {
             this.snackService.showMessage(`Could not connect to ${this.enteredRoomId}`, "error");
           }
 
@@ -136,7 +136,7 @@ export class MultiplayerSettingsComponent {
   }
 
   disconnectRoom() {
-    if(!this.isDisconnectDisabled){
+    if (!this.isDisconnectDisabled) {
       this.multiplayerService.disconnect()
       this.isJoinDisabled = false
       this.multiplayerService.isJoinDisabled = false
@@ -148,8 +148,8 @@ export class MultiplayerSettingsComponent {
   }
 
   refreshRoom() {
-    if(this.isConnected){
-    this.multiplayerSendService.processMessage("get_data", [])
+    if (this.isConnected) {
+      this.multiplayerSendService.processMessage("get_data", [])
     }
   }
 }
