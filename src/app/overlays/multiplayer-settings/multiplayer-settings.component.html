@@ -1,92 +1,83 @@
 <div class="window">
-  <div class="flex-column">
-    <div class="header">
-      <span>Multiplayer</span>
+  <div class="header">
+    <span>Multiplayer</span>
+  </div>
+  <div class="content">
+
+    <div class="column-container">
+      <div class="multipayer-container">
+        <div class="room-header-wrapper">
+          <div class="room-header">Create a room:</div>
+        </div>
+
+        <div class="create-container">
+          <div class="input-container">
+            <span class="label">Password <br>(optional):</span>
+            <input class="input" [ngClass]="{'disabled': isCreateDisabled}" [disabled]="isCreateDisabled"
+                   [(ngModel)]="createPassword">
+            <app-icon-button icon="plus" class="create-button create"
+                             [ngClass]="{'create-disabled': isCreateDisabled}" matTooltip="Create room"
+                             matTooltipPosition="above" (click)="createRoom()"
+            ></app-icon-button>
+          </div>
+          <div class="input-container">
+            <span class="label">Created room ID:</span>
+            <span class="id" *ngIf="createdRoomId.length > 0">{{ createdRoomId }}</span>
+            <span class="id" *ngIf="createdRoomId.length === 0">_____</span>
+          </div>
+        </div>
+
+        <div class="multiplayer-seperator">
+
+        </div>
+        <div class="room-header-wrapper">
+          <div class="room-header">Connect to a room:</div>
+        </div>
+
+        <div class="join-container">
+
+          <div class="input-container">
+            <span class="label">Room ID:</span>
+            <input class="input" (input)="isJoinDisabled = enteredRoomId.length != 5" [(ngModel)]="enteredRoomId">
+          </div>
+          <div class="input-container">
+            <span class="label">Password:</span>
+            <input class="input" [(ngModel)]="joinPassword">
+          </div>
+          <div class="input-container">
+            <span class="label">Username:</span>
+            <input class="input" [(ngModel)]="enteredName">
+          </div>
+        </div>
+
+
+      </div>
+      <div class="clients-container">
+        <div class="clients-header">Connected Users:</div>
+        <p-scrollPanel [style]="{ width: '100%', height: '325px' }">
+          <div class="clients-list">
+            @for (client of clients; track client) {
+              <div class="client-list-item">{{ client }}</div>
+            }
+          </div>
+        </p-scrollPanel>
+      </div>
     </div>
-    <div class="content">
-
-      <div class="column-container">
-        <div class="multipayer-container">
-          <div class="room-header-wrapper">
-            <div class="room-header">Create a room:</div>
-          </div>
-
-          <div class="create-container">
-            <div class="input-container">
-              <span class="label">Password <br>(optional):</span>
-              <input class="input" [ngClass]="{'disabled': isCreateDisabled}" [disabled]="isCreateDisabled"
-                     [(ngModel)]="createPassword">
-              <app-icon-button icon="plus" class="create-button create"
-                               [ngClass]="{'create-disabled': isCreateDisabled}" matTooltip="Create room"
-                               matTooltipPosition="above" (click)="createRoom()"
-              ></app-icon-button>
-            </div>
-            <div class="input-container">
-              <span class="label">Created room ID:</span>
-              <span class="id" *ngIf="createdRoomId.length > 0">{{ createdRoomId }}</span>
-              <span class="id" *ngIf="createdRoomId.length === 0">_____</span>
-            </div>
-          </div>
-
-          <div class="multiplayer-seperator">
-
-          </div>
-          <div class="room-header-wrapper">
-            <div class="room-header">Connect to a room:</div>
-          </div>
-
-          <div class="join-container">
-
-            <div class="input-container">
-              <span class="label">Room ID:</span>
-              <input class="input" (input)="isJoinDisabled = enteredRoomId.length != 5" [(ngModel)]="enteredRoomId">
-            </div>
-            <div class="input-container">
-              <span class="label">Password:</span>
-              <input class="input" [(ngModel)]="joinPassword">
-            </div>
-            <div class="input-container">
-              <span class="label">Username:</span>
-              <input class="input" [(ngModel)]="enteredName">
-            </div>
-          </div>
-
-
-        </div>
-        <div class="clients-container">
-          <div class="clients-header">Connected Users:</div>
-          <p-scrollPanel [style]="{ width: '100%', height: '325px' }">
-            <div class="clients-list">
-              @for (client of clients; track client) {
-                <div class="client-list-item">{{ client }}</div>
-              }
-            </div>
-
-
-          </p-scrollPanel>
-
-
-        </div>
-      </div>
-
-
-      <div class="button-footer">
-        <div class="left">
-          <app-icon-button icon="cloud" class="footer-buttons connect" matTooltip="Connect"
-                           matTooltipPosition="above" [ngClass]="{'connect-disabled': isJoinDisabled}"
-                           (click)="joinRoom()"></app-icon-button>
-          <app-icon-button icon="cloud-off" class="footer-buttons disconnect"
-                           [ngClass]="{'disconnect-disabled': isDisconnectDisabled}"
-                           matTooltip="Disconnect"
-                           (click)="disconnectRoom()" matTooltipPosition="above"></app-icon-button>
-        </div>
-        <div class="right">
-          <app-icon-button icon="refresh-cw" class="footer-buttons refresh" matTooltip="Sync with server"
-                           [ngClass]="{'refresh-disabled': !isConnected}" matTooltipPosition="above"
-                           (click)="refreshRoom()"></app-icon-button>
-        </div>
-      </div>
-
+  </div>
+  <div class="button-footer">
+    <div class="left">
+      <app-icon-button icon="cloud" class="footer-buttons connect" matTooltip="Connect"
+                       matTooltipPosition="above" [ngClass]="{'connect-disabled': isJoinDisabled}"
+                       (click)="joinRoom()"></app-icon-button>
+      <app-icon-button icon="cloud-off" class="footer-buttons disconnect"
+                       [ngClass]="{'disconnect-disabled': isDisconnectDisabled}"
+                       matTooltip="Disconnect"
+                       (click)="disconnectRoom()" matTooltipPosition="above"></app-icon-button>
+    </div>
+    <div class="right">
+      <app-icon-button icon="refresh-cw" class="footer-buttons refresh" matTooltip="Sync with server"
+                       [ngClass]="{'refresh-disabled': !isConnected}" matTooltipPosition="above"
+                       (click)="refreshRoom()"></app-icon-button>
     </div>
   </div>
 </div>

@@ -6,15 +6,13 @@
   box-sizing: border-box;
   outline: none;
   overflow: hidden;
-}
 
-.flex-column {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
-  height: 100%;
 }
+
 
 .header {
   outline: none;
