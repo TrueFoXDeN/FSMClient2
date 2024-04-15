@@ -145,7 +145,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   openMultiplayerSettings() {
     const dialogConfig = new MatDialogConfig()
-    dialogConfig.height = `60vh`;
+    dialogConfig.height = `63vh`;
     dialogConfig.width = `45vw`;
     const dialogRef = this.dialog.open(MultiplayerSettingsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
