@@ -51,7 +51,7 @@ export class MultiplayerService {
     };
 
     this.socket.onclose = (event) => {
-      console.log('WebSocket connection closed:', event);
+      // console.log('WebSocket connection closed:', event);
       this.snackMessage.showMessage("Connection closed", "info");
       this.isConnected = false
       this.multiplayerConnectionStatusChanged.next(false);
@@ -77,8 +77,8 @@ export class MultiplayerService {
   }
 
   sendMessage(cmd: string, args: any[]): void {
-    console.log("Sending: ");
-    console.log(cmd, args)
+    // console.log("Sending: ");
+    // console.log(cmd, args)
     let msg = {cmd: cmd, args: args}
     // console.log(JSON.stringify(msg))
     this.socket.send(JSON.stringify(msg));

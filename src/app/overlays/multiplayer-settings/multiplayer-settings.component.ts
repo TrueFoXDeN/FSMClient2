@@ -40,7 +40,7 @@ export class MultiplayerSettingsComponent {
 
     } else {
       if (this.cookieService.check("createdRoomId")) {
-        console.log(this.cookieService.get("createdRoomId"))
+        // console.log(this.cookieService.get("createdRoomId"))
         this.createdRoomId = this.cookieService.get("createdRoomId");
         this.enteredRoomId = this.createdRoomId
       }

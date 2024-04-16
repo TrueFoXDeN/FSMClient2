@@ -170,10 +170,10 @@ export class FlightstripComponent implements OnInit, AfterViewInit, OnDestroy {
     changeCount += this.fsModelBackup.route != this.fs.route ? 1 : 0;
     changeCount += this.fsModelBackup.emergencyActive != this.fs.emergencyActive ? 1 : 0;
     if (changeCount > 0) {
-      console.log("Old: ")
-      console.log(this.fsModelBackup);
-      console.log("new:");
-      console.log(this.fs);
+      // console.log("Old: ")
+      // console.log(this.fsModelBackup);
+      // console.log("new:");
+      // console.log(this.fs);
       this.mpService.processMessage("edit_flightstrip", this.fs);
     }
   }

@@ -22,7 +22,7 @@ export class MoveFlightstripReceiveCommand implements CommandReceive {
     let fsIndex = this.fsService.getIndexInColumnByID(colId, fsID);
     if (fsIndex === -1) {
       this.multiplayerSendService.processMessage("get_data", [])
-      console.log("Could not find flightstrip");
+      // console.log("Could not find flightstrip");
       return;
     }
 

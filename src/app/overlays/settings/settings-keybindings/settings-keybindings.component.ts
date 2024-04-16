@@ -77,7 +77,6 @@ export class SettingsKeybindingsComponent {
   }
 
   onKeyInput(config: KeybindingConfig, event: KeyboardEvent, isPrimary: boolean) {
-    console.log(event);
     let index = this.configData.indexOf(config);
     event.preventDefault();
 
@@ -183,7 +182,6 @@ export class SettingsKeybindingsComponent {
       if (possiblePrimaryDuplicateKeyActionName != "") {
         this.shortcutService.deleteFromTempShortcutStringConfig(newDefaultShortcutString)
         this.shortcutService.deleteFromTempActionKeyConfig(possiblePrimaryDuplicateKeyActionName)
-        console.log(`${possiblePrimaryDuplicateKeyActionName} has the same key as the default of ${config.actionName}`);
       }
 
       //Find secondary action which uses the default shortcut as its current shortcut
@@ -193,7 +191,7 @@ export class SettingsKeybindingsComponent {
       if (possibleSecondaryDuplicateKeyActionName != "") {
         this.shortcutService.deleteFromTempShortcutStringConfig(newDefaultShortcutString)
         this.shortcutService.deleteFromTempActionKeyConfig(possibleSecondaryDuplicateKeyActionName)
-        console.log(`${possibleSecondaryDuplicateKeyActionName} has the same key as the default of ${config.actionName}`);
+        // console.log(`${possibleSecondaryDuplicateKeyActionName} has the same key as the default of ${config.actionName}`);
       }
 
       //Delete own old shortcuts
@@ -218,7 +216,7 @@ export class SettingsKeybindingsComponent {
       if (possiblePrimaryDuplicateKeyActionName != "") {
         this.shortcutService.deleteFromTempShortcutStringConfig(newDefaultShortcutString)
         this.shortcutService.deleteFromTempActionKeyConfig(possiblePrimaryDuplicateKeyActionName)
-        console.log(`${possiblePrimaryDuplicateKeyActionName} has the same key as the default of ${config.actionName}`);
+        // console.log(`${possiblePrimaryDuplicateKeyActionName} has the same key as the default of ${config.actionName}`);
       }
 
       //Find secondary action which uses the default shortcut as its current shortcut
@@ -228,7 +226,7 @@ export class SettingsKeybindingsComponent {
       if (possibleSecondaryDuplicateKeyActionName != "") {
         this.shortcutService.deleteFromTempShortcutStringConfig(newDefaultShortcutString)
         this.shortcutService.deleteFromTempActionKeyConfig(possibleSecondaryDuplicateKeyActionName)
-        console.log(`${possibleSecondaryDuplicateKeyActionName} has the same key as the default of ${config.actionName}`);
+        // console.log(`${possibleSecondaryDuplicateKeyActionName} has the same key as the default of ${config.actionName}`);
       }
 
       //Delete own old shortcuts

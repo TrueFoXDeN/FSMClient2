@@ -14,6 +14,8 @@ import {MoveFlightstripReceiveCommand} from "./commands-receive/move-flightstrip
 import {CommandReceive} from "./commands-receive/command-receive";
 import {MultiplayerConnectionService} from "./multiplayer-connection.service";
 import {ErrorCommand} from "./commands-receive/error-command";
+import {ConnectReceiveCommand} from "./commands-receive/connect-receive-command";
+import {RoomClosedCommand} from "./commands-receive/room-closed-command";
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +31,8 @@ export class MultiplayerReceiveService {
               private getClientsCommand: GetClientsReceiveCommand,
               private getDataCommand: GetDataReceiveCommand, private moveFlightstripCommand: MoveFlightstripReceiveCommand,
               private errorCommand: ErrorCommand,
+              private connectReceiveCommand: ConnectReceiveCommand,
+              private roomClosedCommand: RoomClosedCommand,
               private multiplayerConnectionService: MultiplayerConnectionService
   ) {
     this.commands.set('token', tokenCommand)
@@ -41,9 +45,11 @@ export class MultiplayerReceiveService {
     this.commands.set('get_data', getDataCommand)
     this.commands.set('move_flightstrip', moveFlightstripCommand)
     this.commands.set('error', errorCommand)
+    this.commands.set('connect', connectReceiveCommand)
+    this.commands.set('room_closed', roomClosedCommand)
     this.multiplayerConnectionService.message.subscribe({
         next: (data) => {
-          console.log('received:')
+          // console.log('received:')
           this.processMessage(data)
         }
       }
@@ -53,7 +59,7 @@ export class MultiplayerReceiveService {
   processMessage(data: any) {
 
     data = JSON.parse(data)
-    console.log(data)
+    // console.log(data)
 
     let cmd = this.commands.get(data.cmd)
 

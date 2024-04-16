@@ -10,7 +10,7 @@ export class EditFlightstripSendCommand implements CommandSend {
   }
 
   execute(data: any): any[] {
-    console.log(data)
+    // console.log(data)
     return [data.columnId, data.id, data]
   }
 

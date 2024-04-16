@@ -51,13 +51,13 @@ export class LocalStorageHandlingService {
       this.defaultShortcutConfigService.getPrimaryDefaultActionConfig().forEach((value, key) => {
         if (!primaryMap.has(key)) {
           faultyConfigMarker = true;
-          console.log(`${key} not found in primary config`)
+          // console.log(`${key} not found in primary config`)
         }
       });
       this.defaultShortcutConfigService.getSecondaryDefaultActionConfig().forEach((value, key) => {
         if (!secondaryMap.has(key)) {
           faultyConfigMarker = true;
-          console.log(`${key} not found in secondary config`)
+          // console.log(`${key} not found in secondary config`)
         }
       });
       if (faultyConfigMarker) {

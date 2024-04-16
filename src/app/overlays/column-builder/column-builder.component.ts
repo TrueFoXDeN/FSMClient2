@@ -257,7 +257,7 @@ export class ColumnBuilderComponent implements OnInit {
           uuid: newColID
         });
       } else if (colOccurrence.occurrence === 5) {
-        console.log("Column deleted locally");
+        // console.log("Column deleted locally");
         this.mpSendService.processMessage("delete_column", colOccurrence);
       }
     }

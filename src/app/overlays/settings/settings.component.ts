@@ -34,7 +34,7 @@ export class SettingsComponent {
   }
 
   onDiscardClick() {
-    console.log(this.checkForSettingsDifferences())
+    // console.log(this.checkForSettingsDifferences())
     if (this.checkForSettingsDifferences()) {
 
       this.openDiscardDialog();
@@ -58,20 +58,20 @@ export class SettingsComponent {
     const dialogRef = this.dialog.open(SettingsDiscardDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((discard) => {
       if (discard) {
-        console.log("discard");
+        // console.log("discard");
         this.settingsService.copyActualKeybindingsBackToTempConfig();
         this.settingsDialogRef.close();
       } else {
-        console.log("cancel");
+        // console.log("cancel");
       }
     });
   }
 
   checkForSettingsDifferences() {
-    console.log("Temp:")
-    console.log(this.settingsService.shortcut_tempPrimaryShortcutStringConfig);
-    console.log("Actual:")
-    console.log(this.settingsService.shortcut_primaryShortcutStringConfig);
+    // console.log("Temp:")
+    // console.log(this.settingsService.shortcut_tempPrimaryShortcutStringConfig);
+    // console.log("Actual:")
+    // console.log(this.settingsService.shortcut_primaryShortcutStringConfig);
     if (!this.mapsAreTheSame(this.settingsService.shortcut_tempPrimaryShortcutStringConfig, this.settingsService.shortcut_primaryShortcutStringConfig)) return true;
     if (!this.mapsAreTheSame(this.settingsService.shortcut_tempPrimaryActionKeyConfig, this.settingsService.shortcut_primaryActionKeyConfig)) return true;
     if (!this.mapsAreTheSame(this.settingsService.shortcut_tempSecondaryShortcutStringConfig, this.settingsService.shortcut_secondaryShortcutStringConfig)) return true;

@@ -19,8 +19,8 @@ export class MultiplayerGetDataService {
 
     let data = args[1].data
     let order = args[1].order
-    console.log("order:");
-    console.log(args);
+    // console.log("order:");
+    // console.log(args);
     const columnIDs: string[] = Object.keys(order) || [];
 
     let dashboard = [];
@@ -30,8 +30,8 @@ export class MultiplayerGetDataService {
       liveDataMap.add(this.dataService.profileData[this.dataService.currentProfileID].columnStructure[i].uuid);
     }
 
-    console.log("Live Size:")
-    console.log(liveDataMap.size)
+    // console.log("Live Size:")
+    // console.log(liveDataMap.size)
 
     for (let i = 0; i < columnIDs.length; i++) {
       dashboard.push({x: i, y: 0, cols: 1, rows: 18, uuid: columnIDs[i], name: data[columnIDs[i]]["name"]});
@@ -39,15 +39,15 @@ export class MultiplayerGetDataService {
         foundDashboardDiff += 1;
       }
     }
-    console.log("Server Size:")
-    console.log(dashboard.length)
+    // console.log("Server Size:")
+    // console.log(dashboard.length)
 
     if (liveDataMap.size != dashboard.length) {
       foundDashboardDiff += 1;
     }
 
     if (foundDashboardDiff > 0) {
-      console.log("Found Columndiff");
+      // console.log("Found Columndiff");
       this.dataService.profileData[this.dataService.currentProfileID].columnStructure = dashboard
     }
     this.dataService.flightstripData = {};
