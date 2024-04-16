@@ -1,6 +1,7 @@
 {
   "name": "fsm",
   "version": "0.2.0",
+
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0 --proxy-config src/proxy.conf.json",
