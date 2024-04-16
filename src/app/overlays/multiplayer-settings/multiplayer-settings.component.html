@@ -38,7 +38,8 @@
 
           <div class="input-container">
             <span class="label">Room ID:</span>
-            <input class="input" (input)="isJoinDisabled = enteredRoomId.length != 5" [(ngModel)]="enteredRoomId">
+            <input class="input" (input)="isJoinDisabled = enteredRoomId.length != 5 || enteredName.length == 0"
+                   [(ngModel)]="enteredRoomId">
           </div>
           <div class="input-container">
             <span class="label">Password:</span>
@@ -46,7 +47,8 @@
           </div>
           <div class="input-container">
             <span class="label">Username:</span>
-            <input class="input" [(ngModel)]="enteredName">
+            <input class="input" (input)="isJoinDisabled = enteredRoomId.length != 5 || enteredName.length == 0"
+                   [(ngModel)]="enteredName">
           </div>
         </div>
 

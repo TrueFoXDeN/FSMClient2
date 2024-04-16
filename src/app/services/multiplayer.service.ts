@@ -21,7 +21,7 @@ export class MultiplayerService {
   roomId: string = ''
 
   isCreateDisabled: boolean = true;
-  isJoinDisabled: boolean = false;
+  isJoinDisabled: boolean = true;
   isDisconnectDisabled: boolean = true;
   clients: string[] = [];
 

@@ -5,7 +5,7 @@ import {SnackbarMessageService} from "../../services/snackbar-message.service";
 import {DialogRef} from "@angular/cdk/dialog";
 import {DataService} from "../../services/data.service";
 import {MultiplayerSendService} from "../../services/multiplayer-send.service";
-import { ScrollPanelModule } from 'primeng/scrollpanel';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
 
 @Component({
   selector: 'app-multiplayer-settings',
@@ -20,7 +20,7 @@ export class MultiplayerSettingsComponent {
   joinPassword: string = "";
   isConnected: boolean = false;
   isCreateDisabled: boolean = true;
-  isJoinDisabled: boolean = false;
+  isJoinDisabled: boolean = true;
   isDisconnectDisabled: boolean = true;
   clients: string[] = []
 
@@ -33,7 +33,6 @@ export class MultiplayerSettingsComponent {
     this.isJoinDisabled = multiplayerService.isJoinDisabled
     this.isDisconnectDisabled = multiplayerService.isDisconnectDisabled
     this.clients = multiplayerService.clients
-    console.log(this.clients)
 
     if (this.multiplayerService.createdRoomId.length > 0) {
       this.createdRoomId = multiplayerService.createdRoomId
@@ -72,7 +71,7 @@ export class MultiplayerSettingsComponent {
 
         },
         error: (err) => {
-
+          this.snackService.showMessage("Connection to room failed", "error");
         }
       })
 
@@ -103,7 +102,7 @@ export class MultiplayerSettingsComponent {
           this.multiplayerService.isJoinDisabled = false
         },
         error: (err) => {
-
+          this.snackService.showMessage("Failed to create room", "error");
         }
       });
     }
