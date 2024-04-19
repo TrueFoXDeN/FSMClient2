@@ -19,6 +19,7 @@
     <app-sidebar-button icon="users" (click)="openMultiplayerSettings()" class="icon-button default"
                         matTooltip="Multiplayer"
                         matTooltipPosition="right"
+                        [ngClass]="{'success': this.multiplayerService.isConnected}"
     ></app-sidebar-button>
     <app-sidebar-button icon="search" class="icon-button default" matTooltip="Search Callsign"
                         matTooltipPosition="right"

@@ -22,9 +22,9 @@ export class MultiplayerSettingsComponent {
   isCreateDisabled: boolean = true;
   isJoinDisabled: boolean = true;
   isDisconnectDisabled: boolean = true;
-  clients: string[] = []
 
-  constructor(private multiplayerService: MultiplayerService, private cookieService: CookieService,
+
+  constructor(protected multiplayerService: MultiplayerService, private cookieService: CookieService,
               private snackService: SnackbarMessageService, private dialogRef: DialogRef, private dataService: DataService,
               private multiplayerSendService: MultiplayerSendService) {
 
@@ -32,7 +32,6 @@ export class MultiplayerSettingsComponent {
     this.isCreateDisabled = multiplayerService.isCreateDisabled
     this.isJoinDisabled = multiplayerService.isJoinDisabled
     this.isDisconnectDisabled = multiplayerService.isDisconnectDisabled
-    this.clients = multiplayerService.clients
 
     if (this.multiplayerService.createdRoomId.length > 0) {
       this.createdRoomId = multiplayerService.createdRoomId
@@ -51,8 +50,11 @@ export class MultiplayerSettingsComponent {
       this.joinPassword = this.createPassword
     }
 
-    if (this.createdRoomId.length > 0) {
+    if (this.cookieService.check("multiplayerUsername")) {
+      this.enteredName = this.cookieService.get('multiplayerUsername');
+    }
 
+    if (this.createdRoomId.length > 0) {
       this.multiplayerService.existsRoom(this.createdRoomId).subscribe({
         next: (response: any) => {
           if (!response.exists) {
@@ -119,6 +121,7 @@ export class MultiplayerSettingsComponent {
             this.multiplayerService.isDisconnectDisabled = false
             this.isJoinDisabled = true
             this.multiplayerService.isJoinDisabled = true
+            this.cookieService.set('multiplayerUsername', this.enteredName);
             this.dialogRef.close();
           } else {
             this.snackService.showMessage(`Could not connect to ${this.enteredRoomId}`, "error");
@@ -141,9 +144,9 @@ export class MultiplayerSettingsComponent {
       this.multiplayerService.isJoinDisabled = false
       this.isDisconnectDisabled = true
       this.multiplayerService.isDisconnectDisabled = true
+      this.multiplayerService.clients = [];
       this.dialogRef.close();
     }
-
   }
 
   refreshRoom() {

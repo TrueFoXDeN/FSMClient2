@@ -40,7 +40,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
               private dataService: DataService, private styleChanger: StyleChangerService, private snackService: SnackbarMessageService,
               private colBuilderService: ColumnBuilderService, public networkService: NetworkService,
               private columnBuilderService: ColumnBuilderService, private searchcallsignService: SearchcallsignService,
-              private multiplayerService: MultiplayerService,
+              protected multiplayerService: MultiplayerService,
               private proximityService: ProximityService, private cookieService: CookieService) {
 
     this.subscriptionList.push(this.networkService.changedNetworkEmitter.subscribe((data) => {
