@@ -39,7 +39,7 @@
           <div class="input-container">
             <span class="label">Room ID:</span>
             <input class="input" (input)="isJoinDisabled = enteredRoomId.length != 5 || enteredName.length == 0"
-                   [(ngModel)]="enteredRoomId">
+                   [(ngModel)]="enteredRoomId" (ngModelChange)="enteredRoomId = $event.toUpperCase()">
           </div>
           <div class="input-container">
             <span class="label">Password:</span>
