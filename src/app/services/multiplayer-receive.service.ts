@@ -61,7 +61,7 @@ export class MultiplayerReceiveService {
   processMessage(data: any) {
 
     data = JSON.parse(data)
-    // console.log(data)
+    console.log(data)
 
     let cmd = this.commands.get(data.cmd)
 

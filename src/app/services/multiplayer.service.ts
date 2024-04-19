@@ -38,6 +38,7 @@ export class MultiplayerService {
 
     this.socket.onopen = () => {
       console.log('WebSocket connection established.');
+      console.log([roomId, password, name]);
       this.sendMessage('connect', [roomId, password, name])
       this.roomId = roomId
       this.isConnected = true
