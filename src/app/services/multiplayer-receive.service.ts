@@ -16,6 +16,7 @@ import {MultiplayerConnectionService} from "./multiplayer-connection.service";
 import {ErrorCommand} from "./commands-receive/error-command";
 import {ConnectReceiveCommand} from "./commands-receive/connect-receive-command";
 import {RoomClosedCommand} from "./commands-receive/room-closed-command";
+import {UserDisconnectReceiveCommand} from "./commands-receive/user-disconnect-receive-command";
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class MultiplayerReceiveService {
               private errorCommand: ErrorCommand,
               private connectReceiveCommand: ConnectReceiveCommand,
               private roomClosedCommand: RoomClosedCommand,
-              private multiplayerConnectionService: MultiplayerConnectionService
+              private multiplayerConnectionService: MultiplayerConnectionService, private userDisconnectedCommand: UserDisconnectReceiveCommand
   ) {
     this.commands.set('token', tokenCommand)
     this.commands.set('create_column', createColumnCommand)
@@ -47,6 +48,7 @@ export class MultiplayerReceiveService {
     this.commands.set('error', errorCommand)
     this.commands.set('connect', connectReceiveCommand)
     this.commands.set('room_closed', roomClosedCommand)
+    this.commands.set('user_disconnect', userDisconnectedCommand)
     this.multiplayerConnectionService.message.subscribe({
         next: (data) => {
           // console.log('received:')
