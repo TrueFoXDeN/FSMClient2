@@ -55,6 +55,8 @@ export class FlightstripService {
   }
 
   createFlightstrip(column: string, callsign: string, type: StripType, uuid = "", tempFs: any = undefined, createdFromMultiplayer = false) {
+    // console.log(`Created Flightstrip: ${column}, ${callsign}, ${type}`);
+
     let nextPos = this.dataService.flightstripData?.[column]?.['flightstrips'].length
     let fs: Flightstrip
     if (uuid === "") {
@@ -160,7 +162,7 @@ export class FlightstripService {
       currentColumnIDList.push(element.uuid)
     });
     for (let col of currentColumnIDList) {
-      for (let i= 0; i<this.dataService.flightstripData[col].flightstrips.length; i++) {
+      for (let i = 0; i < this.dataService.flightstripData[col].flightstrips.length; i++) {
 
         if (this.dataService.flightstripData[col].flightstrips[i].id !== id) {
           this.dataService.flightstripData[col].flightstrips[i].isMouseOver = false

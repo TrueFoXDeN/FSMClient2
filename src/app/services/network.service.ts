@@ -43,8 +43,6 @@ export class NetworkService {
             if(this.errorCount > 2){
               this.triggerError()
             }
-
-
           }
         })
       }
@@ -58,7 +56,6 @@ export class NetworkService {
     this.changedNetworkEmitter.next({active: true, network: this.usedNetwork})
     this.messageService.showMessage(`Network connected: ${NetworkType[this.usedNetwork]}`, "success")
     this.networkState = "success"
-
   }
 
   stopNetworkConnection() {

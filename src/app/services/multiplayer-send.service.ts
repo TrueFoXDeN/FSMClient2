@@ -46,5 +46,7 @@ export class MultiplayerSendService {
       console.log(data.cmd + ' is not implemented')
     }
     this.multiplayerService.sendMessage(cmd, args)
+    // console.log(cmd);
+    // console.log(args);
   }
 }

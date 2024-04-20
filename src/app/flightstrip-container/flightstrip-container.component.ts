@@ -99,16 +99,18 @@ export class FlightstripContainerComponent implements OnInit, OnDestroy {
     if (!this.stripModel.infosPulled && this.stripModel.callsign != "") {
       this.fsService.getFlightstripByCallsign(this.stripModel.callsign, network).subscribe({
         next: (response: any) => {
+          // console.log(response);
           if (response.success) {
-            this.stripModel.callsign = response.callsign
-            this.stripModel.squawk = response.squawk
-            this.stripModel.departureIcao = response.departure
-            this.stripModel.arrivalIcao = response.arrival
-            this.stripModel.aircraft = response.aircraft
-            this.stripModel.wakeCategory = response.wake
-            this.stripModel.flightrule = response.flightrule
-            this.stripModel.route = response.route
+            this.stripModel.callsign = response.callsign.toString()
+            this.stripModel.squawk = response.squawk.toString()
+            this.stripModel.departureIcao = response.departure.toString()
+            this.stripModel.arrivalIcao = response.arrival.toString()
+            this.stripModel.aircraft = response.aircraft.toString()
+            this.stripModel.wakeCategory = response.wake.toString()
+            this.stripModel.flightrule = response.flightrule.toString()
+            this.stripModel.route = response.route.toString()
             this.stripModel.infosPulled = true;
+            // console.log(this.stripModel);
             this.mpService.processMessage("edit_flightstrip", this.stripModel)
           }
         },
