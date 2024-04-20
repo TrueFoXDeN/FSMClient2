@@ -20,7 +20,6 @@ export class MultiplayerSettingsComponent {
   joinPassword: string = "";
   isConnected: boolean = false;
   isCreateDisabled: boolean = true;
-  isJoinDisabled: boolean = true;
   isDisconnectDisabled: boolean = true;
 
 
@@ -30,7 +29,6 @@ export class MultiplayerSettingsComponent {
 
     this.isConnected = multiplayerService.isConnected
     this.isCreateDisabled = multiplayerService.isCreateDisabled
-    this.isJoinDisabled = multiplayerService.isJoinDisabled
     this.isDisconnectDisabled = multiplayerService.isDisconnectDisabled
 
     if (this.multiplayerService.createdRoomId.length > 0) {
@@ -45,6 +43,8 @@ export class MultiplayerSettingsComponent {
       }
 
     }
+
+
     if (this.cookieService.check('createdRoomPassword')) {
       this.createPassword = this.cookieService.get('createdRoomPassword')
       this.joinPassword = this.createPassword
@@ -86,6 +86,13 @@ export class MultiplayerSettingsComponent {
     if (this.isConnected) {
       multiplayerSendService.processMessage('get_clients', [])
     }
+
+    if(this.enteredName.length>0 && this.enteredRoomId.length == 5){
+      this.multiplayerService.isJoinDisabled = false;
+    }else{
+      this.multiplayerService.isJoinDisabled = true;
+    }
+
   }
 
   createRoom() {
@@ -100,8 +107,6 @@ export class MultiplayerSettingsComponent {
           this.multiplayerService.createdRoomId = this.createdRoomId
           this.enteredRoomId = this.createdRoomId
           this.joinPassword = this.createPassword
-          this.isJoinDisabled = false
-          this.multiplayerService.isJoinDisabled = false
         },
         error: (err) => {
           this.snackService.showMessage("Failed to create room", "error");
@@ -112,14 +117,13 @@ export class MultiplayerSettingsComponent {
   }
 
   joinRoom() {
-    if (!this.isJoinDisabled) {
+    if (!this.multiplayerService.isJoinDisabled) {
       this.multiplayerService.existsRoom(this.enteredRoomId).subscribe({
         next: (response: any) => {
           if (response.exists) {
             this.multiplayerService.connect(this.enteredRoomId, this.joinPassword, this.enteredName)
             this.isDisconnectDisabled = false
             this.multiplayerService.isDisconnectDisabled = false
-            this.isJoinDisabled = true
             this.multiplayerService.isJoinDisabled = true
             this.cookieService.set('multiplayerUsername', this.enteredName);
             this.dialogRef.close();
@@ -140,7 +144,6 @@ export class MultiplayerSettingsComponent {
   disconnectRoom() {
     if (!this.isDisconnectDisabled) {
       this.multiplayerService.disconnect()
-      this.isJoinDisabled = false
       this.multiplayerService.isJoinDisabled = false
       this.isDisconnectDisabled = true
       this.multiplayerService.isDisconnectDisabled = true

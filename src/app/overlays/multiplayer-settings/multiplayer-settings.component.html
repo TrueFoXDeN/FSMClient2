@@ -38,7 +38,7 @@
 
           <div class="input-container">
             <span class="label">Room ID:</span>
-            <input class="input" (input)="isJoinDisabled = enteredRoomId.length != 5 || enteredName.length == 0"
+            <input class="input" (input)="this.multiplayerService.isJoinDisabled = enteredRoomId.length != 5 || enteredName.length == 0"
                    [(ngModel)]="enteredRoomId" (ngModelChange)="enteredRoomId = $event.toUpperCase()">
           </div>
           <div class="input-container">
@@ -47,7 +47,7 @@
           </div>
           <div class="input-container">
             <span class="label">Username:</span>
-            <input class="input" (input)="isJoinDisabled = enteredRoomId.length != 5 || enteredName.length == 0"
+            <input class="input" (input)="this.multiplayerService.isJoinDisabled = enteredRoomId.length != 5 || enteredName.length == 0"
                    [(ngModel)]="enteredName">
           </div>
         </div>
@@ -69,7 +69,7 @@
   <div class="button-footer">
     <div class="left">
       <app-icon-button icon="cloud" class="footer-buttons connect" matTooltip="Connect"
-                       matTooltipPosition="above" [ngClass]="{'connect-disabled': isJoinDisabled}"
+                       matTooltipPosition="above" [ngClass]="{'connect-disabled': this.multiplayerService.isJoinDisabled}"
                        (click)="joinRoom()"></app-icon-button>
       <app-icon-button icon="cloud-off" class="footer-buttons disconnect"
                        [ngClass]="{'disconnect-disabled': isDisconnectDisabled}"
