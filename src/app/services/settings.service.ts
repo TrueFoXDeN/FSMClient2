@@ -16,6 +16,9 @@ export class SettingsService {
   public shortcut_secondaryActionKeyConfig: Map<string, string> = new Map();
   public shortcut_tempSecondaryActionKeyConfig: Map<string, string> = new Map();
 
+  public playSoundWhenAddingFlightstripViaProximity = false;
+  public addFlightstripSoundVolume: number = 0.5;
+
   constructor(private defaultShortcutService: DefaultShortcutSettingsService, private localStorageHandler: LocalStorageHandlingService) {
     this.loadConfig();
   }
@@ -52,7 +55,6 @@ export class SettingsService {
     let config = {
       "primaryAction": this.shortcut_primaryActionKeyConfig,
       "secondaryAction": this.shortcut_secondaryActionKeyConfig
-
     }
     this.localStorageHandler.saveShortcutConfig(config);
   }
