@@ -1,11 +1,11 @@
 <div class="window">
   <mat-sidenav-container class="example-container">
-    <mat-sidenav mode="side" opened class="navbar">
+    <mat-sidenav mode="side" opened class="navbar" disableClose>
       <div class="flex-container">
         <div class="navbar-item header">
           <span appSettings [header]="true">Settings</span>
         </div>
-        <div class="navbar-item item" (click)="onSettingClick(SettingsTypes.GENERAL)"
+        <div class="navbar-item disabled item"
              [ngClass]="{'selected' : settingsSelector === SettingsTypes.GENERAL}">
           <span appSettings>General</span>
         </div>
@@ -14,12 +14,12 @@
           <span
             appSettings>Keybindings</span>
         </div>
-        <div class="navbar-item item" (click)="onSettingClick(SettingsTypes.ATC_FREQS)"
+        <div class="navbar-item disabled item"
              [ngClass]="{'selected' : settingsSelector === SettingsTypes.ATC_FREQS}">
           <span
             appSettings>ATC Frequencies</span>
         </div>
-        <div class="navbar-item item" (click)="onSettingClick(SettingsTypes.MULTIPLAYER)"
+        <div class="navbar-item disabled item"
              [ngClass]="{'selected' : settingsSelector === SettingsTypes.MULTIPLAYER}">
           <span appSettings>Multiplayer</span>
         </div>
